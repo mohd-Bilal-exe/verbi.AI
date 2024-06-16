@@ -7,6 +7,21 @@ const genAI = new GoogleGenerativeAI("AIzaSyA3kJyE6wCBi7mf81rKxhwROlo-Q5HCEgU");
 // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 const Gemini = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+const rememberMe = (sessionId, name, nickname, about) => {
+    if (!sessions[sessionId]) {
+        sessions[sessionId] = { history: [] };
+    }
+console.log("session is  ", sessionId)
+    sessions[sessionId].userDetails = { name, nickname, about };
+
+    sessions[sessionId].history.push({
+        role: "user",
+        parts: [{ text: `Remember the My name is ${name}, nickname is ${nickname}, and about is ${about}.  Remember to address me with my name` }]
+    });
+};
+
+
+
 const sessions = {};
 
 // Refactored chat function to be used in a front-end context
@@ -68,4 +83,4 @@ const grammarCheck = async (inputText) => {
         return "Grammar check error occurred. Please try again later.";
     }
 }
-export { chat, translate, grammarCheck };
+export { chat, translate, grammarCheck, rememberMe };

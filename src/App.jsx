@@ -4,10 +4,22 @@ import GrammarPage from "./pages/grammarPage";
 import Navbar from "./components/Navbar";
 import ProfilePage from "./pages/profilePage";
 import { AnimatePresence } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import LoginPage from "./pages/loginPage";
+import { useEffect } from "react";
+import { fetchUser } from "./Redux/Actions";
+import { rememberMe } from "./Api/aiApi";
+
+
 
 function App() {
+  const dispatch = useDispatch();
   const isDarkMode = useSelector(state => state.darkMode);
+  const userDetails = useSelector(state => state.userDetails);
+  useEffect(() => {
+    dispatch(fetchUser());
+    userDetails&& rememberMe(userDetails.password, userDetails.username, userDetails.nickname, userDetails.about)
+  }, [userDetails,dispatch]);
   return (
     <AnimatePresence>
       <BrowserRouter>
@@ -17,7 +29,7 @@ function App() {
             <Route path="/chat" element={<ChatPage />} />
             <Route path="/grammarcheck" element={<GrammarPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/login" element={<div className="w-screen h-screen grid place-content-center text-7xl"> login page</div>} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
 
           <Navbar />

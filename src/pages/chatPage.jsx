@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { chat } from "../Api/aiApi";
+import { useEffect, useState } from "react";
+import { chat, grammarCheck, rememberMe } from "../Api/aiApi";
 import Markdown from 'react-markdown';
 import { motion } from "framer-motion";
 import { useForm } from 'react-hook-form';
@@ -7,9 +7,14 @@ import { useSelector } from "react-redux";
 
 export default function ChatPage() {
   const isDarkMode = useSelector(state => state.darkMode);
+  const email = useSelector(state => state.userDetails.password);
+  console.log("state from chat", email)
+  useEffect(()=>{
+    setSessionId(email)
+  },[email])
   const { register, handleSubmit } = useForm();
   const [response, setResponse] = useState("");
-  const [sessionId, setSessionId] = useState("unique-session-id");
+  const [sessionId, setSessionId] = useState("");
   const [opacity, setOpacity] = useState(0);
 
   const handleSendMessage = async (data) => {
@@ -100,7 +105,7 @@ export default function ChatPage() {
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500  hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Send
             </button>
