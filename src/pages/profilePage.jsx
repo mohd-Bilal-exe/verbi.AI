@@ -22,9 +22,10 @@ export default function ProfilePage() {
   return (
     <motion.section
       key={"ProfilePage"}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, }}
+      animate={{ opacity: 1,}}
+      exit={{ opacity: 0, }}
+      transition={{duration:0.5, type:"spring"}}
       className={`w-screen h-screen ${isDarkMode ? 'bg-bg1 text-text1' : 'text-bg1'}`}
     >
       {user&& <div className="container mx-auto px-4 py-8">

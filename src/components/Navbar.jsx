@@ -145,7 +145,7 @@ export default function Navbar() {
                     type: "spring",
                     duration: 0.5,
                   }}
-                  className={`absolute bottom-0 w-16 h-1 rounded-full ${
+                  className={`absolute bottom-0 w-20 h-1 rounded-full ${
                     isDarkMode
                       ? "bg-gradient-to-r from-DarkAccentBluelt to-DarkAccentBluedk shadow-[0px_-5px_25px_#4cc9f0] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
                       : "bg-gradient-to-r from-LightAccentBluelt/60 to-LightAccentBluedk/60 shadow-[0px_-5px_25px_#3f37c9]"

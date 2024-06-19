@@ -7,54 +7,47 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-#response {
-  @apply ml-3 transition-opacity duration-500 ease-in-out;
-  opacity: 1;
-}
-
-#response.fade-in {
-  opacity: 1;
-}
-
-#response h2 {
+#responseParent h2 {
   @apply text-2xl font-bold text-gray-100; /* Dark text color for headings */
 }
 
-#response p {
-  @apply text-base leading-6 mb-4 text-gray-300; /* Light gray text color */
+#responseParent p {
+  @apply text-base leading-6 mb-4 text-gray-100; /* Light gray text color */
 }
 
-#response strong {
-  @apply font-bold text-gray-400; /* Gray text color for strong tags */
+#responseParent strong {
+  @apply font-bold text-lg text-gray-400; /* Gray text color for strong tags */
 }
 
-#response ul {
-  @apply list-disc ml-4 mb-4 text-gray-400; /* Gray text color for lists */
+#responseParent ul {
+  @apply list-disc text-lg ml-4 mb-4 text-gray-400; /* Gray text color for lists */
 }
 
-#response ol {
-  @apply list-decimal ml-4 mb-4 text-gray-400; /* Gray text color for ordered lists */
+#responseParent ol {
+  @apply list-decimal text-lg ml-4 mb-4 text-gray-400; /* Gray text color for ordered lists */
 }
 
-#response li {
-  @apply mb-2 text-gray-400; /* Gray text color for list items */
+#responseParent li {
+  @apply mb-2 text-sm text-gray-100; /* Gray text color for list items */
 }
 
-#response a {
+#responseParent a {
   @apply text-blue-500 no-underline; /* Blue links */
 }
 
-#response a:hover {
+#responseParent a:hover {
   @apply underline; /* Underline on hover for links */
 }
 
-#response .tips {
+#responseParent .tips {
   @apply bg-gray-800 p-2 rounded; /* Dark background for tips */
 }
 
-#response .tips li {
+#responseParent .tips li {
   @apply mb-2 text-gray-300; /* Light gray text color for tip list items */
 }
+
+
 .playfair{
   font-family: "Playfair Display", serif;
 }

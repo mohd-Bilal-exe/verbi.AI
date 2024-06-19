@@ -1,12 +1,32 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 
+
 // Access your API key as an environment variable
 const genAI = new GoogleGenerativeAI("AIzaSyA3kJyE6wCBi7mf81rKxhwROlo-Q5HCEgU");
 
 // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 const Gemini = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+// ToDo - check chunks input
+
+/*const chunkzRes = async (sessionId, prompt) => {
+    try {
+        // Use streaming with text-only input
+        const result = await Gemini.generateContentStream(prompt);
+        let text = '';
+        for await (const chunk of result.stream) {
+            const chunkText = chunk.text();
+            console.log(chunkText,"\n");
+            text += chunkText;
+        }
+        console.log(text);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+chunkzRes(1, "a mango shake recipe ")*/
 const rememberMe = (sessionId, name, nickname, about) => {
     if (!sessions[sessionId]) {
         sessions[sessionId] = { history: [] };
@@ -62,9 +82,10 @@ const chat = async (sessionId, message) => {
 
 const translate = async (inputText, lang) => {
     try {
-        const prompt = `Translate the text into ${lang}: ${inputText}`;
+        const prompt = `Translate the text: "${inputText}" into ${lang} `;
+        console
         const result = await Gemini.generateContent(prompt);
-        const response = await result.response;
+        const response = await result.response.text();
         return response;
     } catch (error) {
         console.error(error);

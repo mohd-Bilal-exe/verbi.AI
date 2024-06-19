@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +19,11 @@ export default function LoginPage() {
 
   return (
     <motion.section
+    key={"GrammarPage"}
+      initial={{ opacity: 0, }}
+      animate={{ opacity: 1,}}
+      exit={{ opacity: 0, }}
+      transition={{duration:0.5, type:"spring"}}
       className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-sm backdrop-brightness-25 flex justify-center items-center marker: ${isDarkMode ? 'bg-bg1/10 text-black' : 'text-bg1'}`}
     >
       <form
