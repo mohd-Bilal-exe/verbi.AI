@@ -76,7 +76,7 @@ const TranslatePage = () => {
           name="before"
           value={ipText}
           onChange={(e) => setIpText(e.target.value)}
-          className="w-full h-full smartphone: p-2 px-3 text-lg rounded-lg bg-transparent border resize-none overflow-y-auto"
+          className="w-full h-full smartphone: p-2 px-3 pt-14 text-lg rounded-lg bg-transparent border resize-none overflow-y-auto"
         ></textarea>
       </div>
       <div

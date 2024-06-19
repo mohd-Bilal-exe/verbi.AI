@@ -32,6 +32,7 @@ const DropDown = ({ setSelectedLang }) => {
         <motion.ul
           initial={wrapperVariants.closed}
           variants={wrapperVariants}
+          
           style={{ originY: "top", translateX: "-50%" }}
           className="flex flex-col gap-1 p-1.5 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-36 overflow-hidden"
         >
@@ -121,6 +122,12 @@ Option.propTypes = {
 export default DropDown;
 
 const wrapperVariants = {
+    whileHover:{
+            scaleX:1
+    },
+    whileHoverNot:{
+        scaleX:0.1
+},
   open: {
     scaleY: 1,
     transition: {
