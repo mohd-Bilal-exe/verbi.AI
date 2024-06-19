@@ -9,7 +9,7 @@ import Markdown from "react-markdown";
 const TranslatePage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
   const [ipText, setIpText] = useState("Add Text to translate");
-  const [opText, setOpText] = useState("Translated text will appear here");
+  const [opText, setOpText] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedLang, setSelectedLang] = useState("english");
 
@@ -35,6 +35,24 @@ const TranslatePage = () => {
     animate: { opacity: 1, y: 0 },
   }), []);
 
+  // Memoize Markdown component to prevent unnecessary re-renders
+  const MemoizedMarkdown = useMemo(() => {
+    return (
+      <Markdown
+        key={opText} // Ensure key changes only when opText changes
+        components={{
+          p: (props) => <motion.p variants={fadeInUpVariants} {...props} />,
+          h1: (props) => <motion.h1 variants={fadeInUpVariants} {...props} />,
+          h2: (props) => <motion.h2 variants={fadeInUpVariants} {...props} />,
+          h3: (props) => <motion.h3 variants={fadeInUpVariants} {...props} />,
+          li: (props) => <motion.li variants={fadeInUpVariants} {...props} />,
+        }}
+      >
+        {opText}
+      </Markdown>
+    );
+  }, [opText, fadeInUpVariants]);
+
   return (
     <motion.div
       key="TranslatePage"
@@ -42,7 +60,9 @@ const TranslatePage = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={`w-screen h-screen flex flex-row smartphone:flex-col-reverse smartphone:pb-32 ${isDarkMode ? "text-white" : "text-bg1"}`}
+      className={`w-screen h-screen flex flex-row smartphone:flex-col-reverse smartphone:pb-32 ${
+        isDarkMode ? "text-white" : "text-bg1"
+      }`}
     >
       <div className="relative w-screen h-1/2 laptop:w-1/2 laptop:h-full text-2xl p-6 pb-20 smartphone:p-2">
         <motion.div
@@ -59,7 +79,10 @@ const TranslatePage = () => {
           className="w-full h-full smartphone: p-2 px-3 text-lg rounded-lg bg-transparent border resize-none overflow-y-auto"
         ></textarea>
       </div>
-      <div id="translateButton" className="h-full smartphone:h-fit flex items-center justify-center pb-10 smartphone:p-0">
+      <div
+        id="translateButton"
+        className="h-full smartphone:h-fit flex items-center justify-center pb-10 smartphone:p-0"
+      >
         <motion.span
           className="bg-gradient-to-br from-DarkAccentBluelt to-DarkAccentBluedk p-0.5 rounded-full"
           animate={loading ? { rotate: 360 } : { rotate: 0 }}
@@ -85,22 +108,11 @@ const TranslatePage = () => {
           animate="animate"
           className="w-full h-full p-2 px-3 text-lg rounded-lg bg-transparent border resize-none overflow-y-auto smartphone:p-2"
         >
-          <Markdown
-            key={opText}
-            components={{
-              p: (props) => <motion.p variants={fadeInUpVariants} {...props} />,
-              h1: (props) => <motion.h1 variants={fadeInUpVariants} {...props} />,
-              h2: (props) => <motion.h2 variants={fadeInUpVariants} {...props} />,
-              h3: (props) => <motion.h3 variants={fadeInUpVariants} {...props} />,
-              li: (props) => <motion.li variants={fadeInUpVariants} {...props} />,
-            }}
-          >
-            {opText}
-          </Markdown>
+          {opText && MemoizedMarkdown}
         </motion.div>
       </div>
     </motion.div>
   );
-}
+};
 
 export default TranslatePage;

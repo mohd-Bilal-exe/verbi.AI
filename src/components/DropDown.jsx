@@ -7,6 +7,7 @@ const DropDown = ({ setSelectedLang }) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage]=useState("Select Language");
   const languages = [
+    { code: "English", name: "English" },
     { code: "Hindi", name: "Hindi" },
     { code: "Urdu", name: "Urdu" },
     { code: "Arabic", name: "Arabic" },
