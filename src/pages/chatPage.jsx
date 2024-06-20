@@ -1,123 +1,100 @@
-import { useEffect, useState } from "react";
-import { chat } from "../Api/aiApi";
-import Markdown from 'react-markdown';
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { useForm } from 'react-hook-form';
-import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { currentChat } from "../Redux/Actions";
+import TextMarkdown from "../components/TextMarkdown";
+import { chat } from "../Api/aiApi";
+import { ArrowUp } from "@phosphor-icons/react";
 
 export default function ChatPage() {
-  const isDarkMode = useSelector(state => state.darkMode);
-  const password = useSelector(state => state.userDetails.password); // Corrected from password to email
-  const { register, handleSubmit } = useForm();
-  const [response, setResponse] = useState("");
-  const [sessionId, setSessionId] = useState("");
-  const [opacity, setOpacity] = useState(0);
+  const isDarkMode = useSelector((state) => state.darkMode);
+  const chatHistory = useSelector((state) => state.currentChat);
+  const password = useSelector((state) => state.userDetails.password);
+  const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
+  const chatBoxRef = useRef(null);
 
-  useEffect(() => {
-    setSessionId(password);
-  }, [password]); // Added dependency array with email
-
-  const handleSendMessage = async (data) => {
-    setResponse("");
-    setOpacity(0);
-    try {
-      const result = await chat(sessionId, data.inputValue);
-      if (result.error) {
-        console.error("Chat Error:", result.error);
-        setResponse(result.text);
-      } else {
-        console.log(result.text);
-        setResponse(result.text);
-        setTimeout(() => {
-          console.log(opacity)
-          setOpacity(1);
-        }, 1000);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setResponse("Something went wrong!!");
+  const scrollToBottom = () => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
     }
   };
 
-  const staggerVariants = {
-    initial: { opacity: 0 },
-    animate: {
-      opacity: opacity,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatHistory]);
+console.log()
+  const handleSendMessage = async (data) => {
+    try {
+      const userMessage = {
+        role: "user",
+        text: data.inputValue,
+        timestamp: Date.now(),
+      };
+      dispatch(currentChat(password, userMessage));
 
-  const fadeInUpVariants = {
-    initial: { opacity: 0, y: -20 },
-    animate: { opacity: 1, y: 0 },
+      const result = await chat(password, data.inputValue);
+
+      const aiMessage = {
+        role: "model",
+        text: result.text,
+        timestamp: Date.now(),
+      };
+      dispatch(currentChat(password, aiMessage));
+
+      if (result.error) {
+        console.error("Chat Error:", result.error);
+      }
+
+      reset();
+      scrollToBottom();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
     <motion.div
       key="chatPage"
-      initial={{ opacity: 0, }}
-      animate={{ opacity: 1,}}
-      exit={{ opacity: 0, }}
-      transition={{duration:0.5, type:"spring"}}
-      className={`w-screen h-screen py-9 flex flex-col items-center justify-center ${isDarkMode ? 'bg-bg1/10 text-white' : 'text-bg1'}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, type: "spring" }}
+      className={`w-full h-screen pt-5 laptop:py-4 smartphone:-mb-2 flex flex-col items-center ${
+        isDarkMode ? "bg-bg1/10 text-white" : "text-bg1"
+      }`}
     >
-      <div className="bg-black/50 rounded-xl min-h-96 w-11/12 shadow-md">
-        <motion.div
-          id="response"
-          className="-4 mb-4 border-b"
-          variants={staggerVariants}
-          initial="initial"
-          animate="animate"
-        >
-          {response && (
-            <div className="response-content">
-              <p className="text-sm font-semibold">Response:</p>
-              <div id="responseParent" className="h-full overflow-y-auto open-sans">
-                <Markdown
-                  key={response}
-                  components={{
-                    p: (props) => (
-                      <motion.p variants={fadeInUpVariants} {...props} />
-                    ),
-                    h1: (props) => (
-                      <motion.h1 variants={fadeInUpVariants} {...props} />
-                    ),
-                    h2: (props) => (
-                      <motion.h2 variants={fadeInUpVariants} {...props} />
-                    ),
-                    h3: (props) => (
-                      <motion.h3 variants={fadeInUpVariants} {...props} />
-                    ),
-                    li: (props) => (
-                      <motion.li variants={fadeInUpVariants} {...props} />
-                    ),
-                  }}
-                >
-                  {response}
-                </Markdown>
-              </div>
-            </div>
-          )}
-        </motion.div>
+      <div
+        id="chatBox"
+        ref={chatBoxRef}
+        className="w-11/12 h-4/5 flex flex-col overflow-y-auto"
+      >
+        {chatHistory &&
+          chatHistory.map((message) => (
+            <TextMarkdown
+              key={message.chat.timestamp} 
+              keys={message.chat.timestamp}
+              role={message.chat.role}
+              plainText={message.chat.text}
+            />
+          ))}
       </div>
-      <div className="form-container fixed bottom-10 left-1/2 transform -translate-x-1/2 w-full max-w-lg px-8 pb-8">
-        <form onSubmit={handleSubmit(handleSendMessage)} className="w-full">
-          <div className="flex items-center">
+
+      <div className="flex justify-center item-center w-full laptop:max-w-lg px-3">
+        <form onSubmit={handleSubmit(handleSendMessage)} className={`w-full h-full flex rounded-full p-2 ${isDarkMode ? "bg-lightBg2/10 text-bg2" : "bg-bg3/10"} `}>
             <input
               type="text"
-              {...register('inputValue')}
+              {...register("inputValue")}
               placeholder="Type your message..."
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline mr-4 bg-gray-800"
+              className={` w-full h-full bg-transparent rounded-full mx-1 outline-none ${isDarkMode ? "placeholder:text-lightBg1 placeholder:pl-2 pl-2 text-lightBg1 caret-DarkAccentBluedk" : "placeholder:text-bg2 placeholder:pl-2 text-g1 caret-LightAccentBluedk"}`}
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className={`w-10 h-9.5 flex justify-center items-center p-1 rounded-full ${isDarkMode ? "bg-lightBg1 text-bg2" : "bg-bg3/20"}`}
             >
-              Send
+              <ArrowUp size={"100%"} weight="bold" />
             </button>
-          </div>
         </form>
       </div>
     </motion.div>

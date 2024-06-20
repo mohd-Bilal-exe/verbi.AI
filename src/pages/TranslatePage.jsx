@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Swap } from "@phosphor-icons/react";
 import { translate } from "../Api/aiApi";
 import DropDown from "../components/DropDown";
-import Markdown from "react-markdown";
+import TextMardown from "../components/TextMarkdown";
 
 const TranslatePage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -13,94 +13,26 @@ const TranslatePage = () => {
   const [loading, setLoading] = useState(false);
   const [selectedLang, setSelectedLang] = useState("english");
   const [customInstructions, setCustomInstructions] = useState("");
-
+  
   const handleTranslate = async () => {
-    setLoading(true);
-    const response = await translate(ipText, selectedLang, customInstructions);
-    setOpText(response);
-    setIpText(""); // Clear the input text area
-    setCustomInstructions(""); // Clear the custom instructions
-    setLoading(false);
+    setLoading(true); // Set loading state to true
+    try {
+      // Call the translate API with input text, selected language, and custom instructions
+      const response = await translate(ipText, selectedLang, customInstructions);
+      // Update the UI with the translated text
+      setOpText(response);
+      setIpText(""); // Clear the input text area
+      setCustomInstructions(""); // Clear the custom instructions
+    } catch (error) {
+      console.error("Error during translation:", error); // Log any errors that occur
+      // Handle error appropriately, e.g., display an error message
+    } finally {
+      setLoading(false); // Set loading state to false
+    }
   };
-
-  const staggerVariants = useMemo(() => ({
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: { staggerChildren: 0.3 },
-    },
-  }), []);
-
-  const fadeInUpVariants = useMemo(() => ({
-    initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }), []);
-
   const MemoizedMarkdown = useMemo(() => (
-    <Markdown
-      key={opText}
-      components={{
-        p: (props) => (
-          <motion.p
-            variants={fadeInUpVariants}
-            className={`text-base mb-2 open-sans ${isDarkMode ? "text-lightBg1" : "text-gray-800"}`}
-            {...props}
-          />
-        ),
-        h1: (props) => (
-          <motion.h1
-            variants={fadeInUpVariants}
-            className={`text-3xl font-bold mb-4 playfair ${isDarkMode ? "text-lightBg1" : "text-gray-900"}`}
-            {...props}
-          />
-        ),
-        h2: (props) => (
-          <motion.h2
-            variants={fadeInUpVariants}
-            className={`text-2xl font-semibold mb-3 montserrat ${isDarkMode ? "text-lightBg1" : "text-gray-800"}`}
-            {...props}
-          />
-        ),
-        h3: (props) => (
-          <motion.h3
-            variants={fadeInUpVariants}
-            className={`text-xl font-medium mb-2 montserrat ${isDarkMode ? "text-lightBg1" : "text-gray-700"}`}
-            {...props}
-          />
-        ),
-        ul: (props) => (
-          <motion.ul
-            className={`list-disc list-inside mb-4 ${isDarkMode ? "text-lightBg1" : "text-gray-800"}`}
-            variants={staggerVariants}
-            {...props}
-          />
-        ),
-        ol: (props) => (
-          <motion.ol
-            className={`list-decimal list-inside mb-4 ${isDarkMode ? "text-lightBg1" : "text-gray-800"}`}
-            variants={staggerVariants}
-            {...props}
-          />
-        ),
-        li: (props) => (
-          <motion.li
-            className={`text-sm mb-1 ml-4 open-sans ${isDarkMode ? "text-lightBg1" : "text-gray-600"}`}
-            variants={fadeInUpVariants}
-            {...props}
-          />
-        ),
-        strong: (props) => (
-          <motion.strong
-            variants={fadeInUpVariants}
-            className={`text-base font-bold montserrat ${isDarkMode ? "text-lightBg1" : "text-gray-800"}`}
-            {...props}
-          />
-        ),
-      }}
-    >
-      {opText}
-    </Markdown>
-  ), [opText, fadeInUpVariants, staggerVariants, isDarkMode]);
+    <TextMardown plainText={opText} />
+  ), [opText]);
 
   return (
     <motion.div

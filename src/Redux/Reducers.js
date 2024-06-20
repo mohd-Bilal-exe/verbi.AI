@@ -4,13 +4,21 @@ import {
   ADD_USER,
   IS_LOGIN,
   LOGOUT_USER,
-  CHANGE_USER
-} from './Actions';
+  CHANGE_USER,
+  ADD_TRANSLATION,
+  GLOBAL_HISTORY,
+  CHAT_HISTORY,
+  CURRENT_CHAT,
+} from "./Actions";
 
 const initialState = {
   darkMode: true,
   isLoggedIn: false,
-  userDetails: {}, // Initialize as an empty object
+  userDetails: {},
+  chatHistory: [],
+  currentChat:[],
+  translationHistory: [],
+  globalHistory: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -45,12 +53,63 @@ const userReducer = (state = initialState, action) => {
         },
       };
     case LOGOUT_USER:
-      localStorage.removeItem('userDetails');
+      localStorage.removeItem("userDetails");
       return {
         ...state,
         isLoggedIn: false,
         userDetails: {}, // Update userDetails to empty object
       };
+    case ADD_TRANSLATION:
+      return {
+        ...state,
+        translationHistory: [...state.translationHistory, action.payload],
+      };
+    case GLOBAL_HISTORY:
+      return {
+        ...state,
+        globalHistory: [...state.globalHistory, action.payload],
+      };
+      case CURRENT_CHAT:
+        return {
+          ...state,
+          currentChat: [...state.currentChat, {
+            sessionID: action.payload.sessionID, 
+            chat: { role:action.payload.chatObject.role, text: action.payload.chatObject.text, timestamp: action.payload.chatObject.timestamp,}}],
+        };
+
+    case CHAT_HISTORY: {
+      // Find the existing session in chatHistory
+      const existingSessionIndex = state.chatHistory.findIndex(
+        (session) => session.sessionID === action.payload.sessionID
+      );
+      if (existingSessionIndex !== -1) {
+        // Update the history of the existing session
+        return {
+          ...state,
+          chatHistory: [
+            ...state.chatHistory.slice(0, existingSessionIndex),
+            {
+              sessionID: action.payload.sessionID,
+              history: action.payload.history,
+            },
+            ...state.chatHistory.slice(existingSessionIndex + 1),
+          ],
+        };
+      } else {
+        // Create a new session object
+        return {
+          ...state,
+          chatHistory: [
+            ...state.chatHistory,
+            {
+              sessionID: action.payload.sessionID,
+              history: action.payload.history,
+            },
+          ],
+        };
+      }
+    }
+
     default:
       return state;
   }

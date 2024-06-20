@@ -10,6 +10,7 @@ import LoginPage from "./pages/loginPage";
 import { useEffect } from "react";
 import { fetchUser } from "./Redux/Actions";
 import { rememberMe } from "./Api/aiApi";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,13 +32,13 @@ function App() {
       <BrowserRouter>
         <div className={`background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${isDarkMode ? 'bg-bg3 text-white' : 'text-bg1'}`}>
           <Routes>
-            <Route path="/" element={<TranslatePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/chat" element={<ChatPage />} />
             <Route path="/grammarcheck" element={<GrammarPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/translate" element={<TranslatePage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
-
           <Navbar />
         </div>
       </BrowserRouter>
