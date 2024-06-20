@@ -6,48 +6,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-#responseParent h2 {
-  @apply text-2xl font-bold text-gray-100; /* Dark text color for headings */
-}
-
-#responseParent p {
-  @apply text-base leading-6 mb-4 text-gray-100; /* Light gray text color */
-}
-
-#responseParent strong {
-  @apply font-bold text-lg text-gray-400; /* Gray text color for strong tags */
-}
-
-#responseParent ul {
-  @apply list-disc text-lg ml-4 mb-4 text-gray-400; /* Gray text color for lists */
-}
-
-#responseParent ol {
-  @apply list-decimal text-lg ml-4 mb-4 text-gray-400; /* Gray text color for ordered lists */
-}
-
-#responseParent li {
-  @apply mb-2 text-sm text-gray-100; /* Gray text color for list items */
-}
-
-#responseParent a {
-  @apply text-blue-500 no-underline; /* Blue links */
-}
-
-#responseParent a:hover {
-  @apply underline; /* Underline on hover for links */
-}
-
-#responseParent .tips {
-  @apply bg-gray-800 p-2 rounded; /* Dark background for tips */
-}
-
-#responseParent .tips li {
-  @apply mb-2 text-gray-300; /* Light gray text color for tip list items */
-}
-
-
 .playfair{
   font-family: "Playfair Display", serif;
 }

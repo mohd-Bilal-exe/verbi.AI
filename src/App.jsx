@@ -29,7 +29,7 @@ function App() {
   return (
     <AnimatePresence>
       <BrowserRouter>
-        <div className={`background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${isDarkMode ? 'bg-bg1 text-white' : 'text-bg1'}`}>
+        <div className={`background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${isDarkMode ? 'bg-bg3 text-white' : 'text-bg1'}`}>
           <Routes>
             <Route path="/" element={<TranslatePage />} />
             <Route path="/chat" element={<ChatPage />} />

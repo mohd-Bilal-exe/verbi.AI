@@ -21,7 +21,7 @@ const DropDown = ({ setSelectedLang }) => {
       <motion.div animate={open ? "open" : "closed"} className="relative">
         <button
           onClick={() => setOpen((pv) => !pv)}
-          className="w-36 flex items-center justify-between gap-2 smartphone:gap-1 px-3 py-2 rounded-md text-indigo-50 bg-indigo-500 hover:bg-indigo-500 transition-colors"
+          className="w-36 flex items-center justify-between gap-2 smartphone:gap-1 opacity-45 hover:opacity-100 transition-all px-3 py-2 rounded-lg text-indigo-50 bg-indigo-500 hover:bg-indigo-500"
         >
           <span className="font-medium text-xs">{message}</span>
           <motion.span variants={iconVariants}>
@@ -32,7 +32,6 @@ const DropDown = ({ setSelectedLang }) => {
         <motion.ul
           initial={wrapperVariants.closed}
           variants={wrapperVariants}
-          
           style={{ originY: "top", translateX: "-50%" }}
           className="flex flex-col gap-1 p-1.5 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-36 overflow-hidden"
         >

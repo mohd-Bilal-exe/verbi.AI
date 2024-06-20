@@ -20,12 +20,14 @@ export default {
         desktop: "1920px",
       },
       colors: {
-        bg1: "#121212", // Dark mode background 1, darker and warmer
-        bg2: "#1a1a1a", // Dark mode background 2, darker and warmer
-        bg3: "#262626", // Dark mode background 3, darker and warmer
-        lightBg1: "#f5f5f5", // Light mode background 1
-        lightBg2: "#e0e0e0", // Light mode background 2
-        lightBg3: "#cccccc", // Light mode background 3
+        bg1: "#1c1c1c", // Slightly lighter dark background
+        bg2: "#2a2a2a", // Medium dark background
+        bg3: "#333333", // Lightest dark background
+        
+        // Light mode backgrounds
+        lightBg1: "#ffffff", // Lightest background
+        lightBg2: "#f2f2f2", // Medium light background
+        lightBg3: "#e6e6e6", // Darkest light background
         
         // Accent colors
         LightAccentBluelt:"#4361ee",

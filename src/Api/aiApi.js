@@ -80,9 +80,9 @@ const chat = async (sessionId, message) => {
     }
 };
 
-const translate = async (inputText, lang) => {
+const translate = async (inputText, lang, customInstructions) => {
     try {
-        const prompt = `Translate the text: "${inputText}" into ${lang} `;
+        const prompt = `Translate the text: "${inputText}" into ${lang} ${customInstructions&&"and"} ${customInstructions}`;
         console
         const result = await Gemini.generateContent(prompt);
         const response = await result.response.text();
