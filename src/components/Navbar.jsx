@@ -44,7 +44,7 @@ const listItems = [
         />
       </svg>
     ),
-    path: "/",
+    path: "/translate",
   },
   {
     id: 3,
@@ -92,13 +92,15 @@ const listItems = [
 
 export default function Navbar() {
   const isDarkMode = useSelector((state) => state.darkMode);
-  const [selected, setSelected] = useState(location.pathname); 
+  const [selected, setSelected] = useState(location.pathname);
 
   return (
     <div
       id="container"
-      className={`fixed bottom-0 w-screen h-fit flex items-center justify-center montserrat ${
-        isDarkMode ? " text-white" : "bg-bg3/10 text-bg1"
+      className={`fixed border-t bottom-0 w-screen h-fit flex items-center justify-center montserrat ${
+        isDarkMode
+          ? "bg-foreground/10 border-border text-copy"
+          : "bg-foregroundLight border-borderLight text-copyLight"
       }`}
     >
       <ul
@@ -121,8 +123,8 @@ export default function Navbar() {
                   selected !== listItem.path
                     ? "translate-y-1 "
                     : isDarkMode
-                    ? "text-DarkAccentBluedk scale-110"
-                    : "text-LightAccentBluelt/60 scale-110"
+                    ? "text-primary-light scale-110"
+                    : "text-primary-dark scale-110"
                 } hover:scale-105 transition-all ease-in-out duration-500`}
               >
                 {listItem.ico}
@@ -133,7 +135,7 @@ export default function Navbar() {
                     ? "translate-y-0"
                     : "translate-y-10"
                 } transition-all ease-in-out duration-500 ${
-                  isDarkMode ? "text-white" : "text-black"
+                  isDarkMode ? "text-primary-content" : "text-primary-content"
                 }`}
               >
                 {listItem.title}
@@ -147,8 +149,8 @@ export default function Navbar() {
                   }}
                   className={`absolute bottom-0 w-20 h-1 rounded-full ${
                     isDarkMode
-                      ? "bg-gradient-to-r from-DarkAccentBluelt to-DarkAccentBluedk shadow-[0px_-5px_25px_#4cc9f0] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
-                      : "bg-gradient-to-r from-LightAccentBluelt/60 to-LightAccentBluedk/60 shadow-[0px_-5px_25px_#3f37c9]"
+                      ? "bg-gradient-to-r from-primary-light/60 to-primary-light shadow-[0px_-5px_25px_#9b69f1] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
+                      : "bg-gradient-to-r from-primary-dark/60 to-primary-light shadow-[0px_-5px_25px_#7c3aed]"
                   } transition-opacity duration-500`}
                 />
               )}

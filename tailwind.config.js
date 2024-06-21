@@ -7,7 +7,7 @@ export default {
         5000: "5000ms",
       },
       letterSpacing: {
-        tightest:"-0.07em",
+        tightest: "-0.07em",
         widestestcum: ".18em",
         widestest: ".28em",
         zaydawide: ".35em",
@@ -20,26 +20,39 @@ export default {
         desktop: "1920px",
       },
       colors: {
-        bg1: "#1c1c1c", // Slightly lighter dark background
-        bg2: "#2a2a2a", // Medium dark background
-        bg3: "#333333", // Lightest dark background
-        
-        // Light mode backgrounds
-        lightBg1: "#ffffff", // Lightest background
-        lightBg2: "#f2f2f2", // Medium light background
-        lightBg3: "#e6e6e6", // Darkest light background
-        
-        // Accent colors
-        LightAccentBluelt:"#4361ee",
-        LightAccentBluedk:"#3f37c9",
-        DarkAccentBluelt:"#4cc9f0",
-        DarkAccentBluedk:"#4361ee",
-        
-        // Text colors
-        darkHeading: "#FFFFFF", // Dark mode heading text color
-        darkMainContent: "#CCCCCC", // Dark mode miscellaneous text color
-        lightHeading: "#000000", // Light mode heading text color
-        lightMainContent: "#333333",  // Light mode miscellaneous text color
+        primary: "#7c3aed",
+        "primary-content": "#ffffff",
+        "primary-dark": "#5f14e0",
+        "primary-light": "#9b69f1",
+
+        secondary: "#ed3a51",
+        "secondary-content": "#ffffff",
+        "secondary-dark": "#e0142f",
+        "secondary-light": "#f1697a",
+
+        backgroundLight: "#efeff1",
+        foregroundLight: "#fbfbfb",
+        borderLight: "#dedde2",
+
+        copyLight: "#252329",
+        "copy-lightLt": "#645e6e",
+        "copy-lighterLt": "#8a8495",
+
+        background: "#19181b",
+        foreground: "#252329",
+        border: "#3e3b45",
+
+        copy: "#fbfbfb",
+        "copy-light": "#d8d6dc",
+        "copy-lighter": "#a49fac",
+
+        success: "#3aed3a",
+        warning: "#eded3a",
+        error: "#ed3a3a",
+
+        "success-content": "#032503",
+        "warning-content": "#252503",
+        "error-content": "#ffffff",
       },
       dropShadow: {
         "text-sm": "1px 1px 1px rgba(0,0,0.60)",
@@ -82,51 +95,60 @@ export default {
       },
     },
     animation: {
-      'pencil-body1': 'pencilBody1 3s linear infinite',
-      'pencil-body2': 'pencilBody2 3s linear infinite',
-      'pencil-body3': 'pencilBody3 3s linear infinite',
-      'pencil-eraser': 'pencilEraser 3s linear infinite',
-      'pencil-eraser-skew': 'pencilEraserSkew 3s ease-in-out infinite',
-      'pencil-point': 'pencilPoint 3s linear infinite',
-      'pencil-rotate': 'pencilRotate 3s linear infinite',
-      'pencil-stroke': 'pencilStroke 3s linear infinite',
+      "pencil-body1": "pencilBody1 3s linear infinite",
+      "pencil-body2": "pencilBody2 3s linear infinite",
+      "pencil-body3": "pencilBody3 3s linear infinite",
+      "pencil-eraser": "pencilEraser 3s linear infinite",
+      "pencil-eraser-skew": "pencilEraserSkew 3s ease-in-out infinite",
+      "pencil-point": "pencilPoint 3s linear infinite",
+      "pencil-rotate": "pencilRotate 3s linear infinite",
+      "pencil-stroke": "pencilStroke 3s linear infinite",
     },
     keyframes: {
       pencilBody1: {
-        '0%, 100%': { strokeDashoffset: '351.86', transform: 'rotate(-90deg)' },
-        '50%': { strokeDashoffset: '150.8', transform: 'rotate(-225deg)' },
+        "0%, 100%": { strokeDashoffset: "351.86", transform: "rotate(-90deg)" },
+        "50%": { strokeDashoffset: "150.8", transform: "rotate(-225deg)" },
       },
       pencilBody2: {
-        '0%, 100%': { strokeDashoffset: '406.84', transform: 'rotate(-90deg)' },
-        '50%': { strokeDashoffset: '174.36', transform: 'rotate(-225deg)' },
+        "0%, 100%": { strokeDashoffset: "406.84", transform: "rotate(-90deg)" },
+        "50%": { strokeDashoffset: "174.36", transform: "rotate(-225deg)" },
       },
       pencilBody3: {
-        '0%, 100%': { strokeDashoffset: '296.88', transform: 'rotate(-90deg)' },
-        '50%': { strokeDashoffset: '127.23', transform: 'rotate(-225deg)' },
+        "0%, 100%": { strokeDashoffset: "296.88", transform: "rotate(-90deg)" },
+        "50%": { strokeDashoffset: "127.23", transform: "rotate(-225deg)" },
       },
       pencilEraser: {
-        '0%, 100%': { transform: 'rotate(-45deg) translate(49px,0)' },
-        '50%': { transform: 'rotate(0deg) translate(49px,0)' },
+        "0%, 100%": { transform: "rotate(-45deg) translate(49px,0)" },
+        "50%": { transform: "rotate(0deg) translate(49px,0)" },
       },
       pencilEraserSkew: {
-        '0%, 32.5%, 67.5%, 100%': { transform: 'skewX(0)' },
-        '35%, 65%': { transform: 'skewX(-4deg)' },
-        '37.5%, 62.5%': { transform: 'skewX(8deg)' },
-        '40%, 45%, 50%, 55%, 60%': { transform: 'skewX(-15deg)' },
-        '42.5%, 47.5%, 52.5%, 57.5%': { transform: 'skewX(15deg)' },
+        "0%, 32.5%, 67.5%, 100%": { transform: "skewX(0)" },
+        "35%, 65%": { transform: "skewX(-4deg)" },
+        "37.5%, 62.5%": { transform: "skewX(8deg)" },
+        "40%, 45%, 50%, 55%, 60%": { transform: "skewX(-15deg)" },
+        "42.5%, 47.5%, 52.5%, 57.5%": { transform: "skewX(15deg)" },
       },
       pencilPoint: {
-        '0%, 100%': { transform: 'rotate(-90deg) translate(49px,-30px)' },
-        '50%': { transform: 'rotate(-225deg) translate(49px,-30px)' },
+        "0%, 100%": { transform: "rotate(-90deg) translate(49px,-30px)" },
+        "50%": { transform: "rotate(-225deg) translate(49px,-30px)" },
       },
       pencilRotate: {
-        from: { transform: 'translate(100px,100px) rotate(0)' },
-        to: { transform: 'translate(100px,100px) rotate(720deg)' },
+        from: { transform: "translate(100px,100px) rotate(0)" },
+        to: { transform: "translate(100px,100px) rotate(720deg)" },
       },
       pencilStroke: {
-        '0%': { strokeDashoffset: '439.82', transform: 'translate(100px,100px) rotate(-113deg)' },
-        '50%': { strokeDashoffset: '164.93', transform: 'translate(100px,100px) rotate(-113deg)' },
-        '75%, 100%': { strokeDashoffset: '439.82', transform: 'translate(100px,100px) rotate(112deg)' },
+        "0%": {
+          strokeDashoffset: "439.82",
+          transform: "translate(100px,100px) rotate(-113deg)",
+        },
+        "50%": {
+          strokeDashoffset: "164.93",
+          transform: "translate(100px,100px) rotate(-113deg)",
+        },
+        "75%, 100%": {
+          strokeDashoffset: "439.82",
+          transform: "translate(100px,100px) rotate(112deg)",
+        },
       },
     },
   },
