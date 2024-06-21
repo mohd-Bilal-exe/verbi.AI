@@ -135,7 +135,7 @@ export default function Navbar() {
                     ? "translate-y-0"
                     : "translate-y-10"
                 } transition-all ease-in-out duration-500 ${
-                  isDarkMode ? "text-primary-content" : "text-primary-content"
+                  isDarkMode ? "text-copy" : " text-copyLight"
                 }`}
               >
                 {listItem.title}

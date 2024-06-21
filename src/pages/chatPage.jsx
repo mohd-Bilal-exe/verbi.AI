@@ -98,7 +98,7 @@ export default function ChatPage() {
           className={`w-full h-full backdrop-blur flex rounded-full border p-2 ${
             isDarkMode
               ? "bg-foregroundLight/10 border-primary-light"
-              : "bg-background/10 text-background"
+              : "bg-background/10 border-primary-dark text-background"
           } `}
         >
           <input
