@@ -40,7 +40,7 @@ export default function ChatPage() {
     try {
       const userMessage = {
         role: "user",
-        text: `${data.inputValue}.`,
+        text: `${data.inputValue} \n`,
         timestamp: formatTime(Date.now()),
       };
       dispatch(currentChat(password, userMessage));
