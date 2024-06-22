@@ -124,7 +124,7 @@ export default function ChatPage() {
                 initial={{ rotate: 0 }}
                 animate={{ rotate: 360 }}
                 exit={{ rotate: 0 }}
-                transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
                 className={` w-full h-full `}
               >
                 <ArrowUp size={"95%"} weight="bold" />
