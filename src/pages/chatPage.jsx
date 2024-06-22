@@ -121,6 +121,7 @@ export default function ChatPage() {
           >
             {!isLoading ? (
             <motion.span
+              key="arrow"
                 initial={{ rotate: 0 }}
                 animate={{ rotate: 360 }}
                 exit={{ rotate: 0 }}
@@ -131,6 +132,7 @@ export default function ChatPage() {
               </motion.span>
             ) : (
               <motion.span
+                key="circle"
                 initial={{ rotate: 0 }}
                 animate={{ rotate: 360 }}
                 exit={{ rotate: 0 }}
