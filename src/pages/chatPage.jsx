@@ -120,7 +120,15 @@ export default function ChatPage() {
             }`}
           >
             {!isLoading ? (
-              <ArrowUp size={"95%"} weight="bold" />
+            <motion.span
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                exit={{ rotate: 0 }}
+                transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
+                className={` w-full h-full `}
+              >
+                <ArrowUp size={"95%"} weight="bold" />
+              </motion.span>
             ) : (
               <motion.span
                 initial={{ rotate: 0 }}
