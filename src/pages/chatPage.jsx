@@ -40,7 +40,7 @@ export default function ChatPage() {
     try {
       const userMessage = {
         role: "user",
-        text: `${data.inputValue}.`,
+        text: `${data.inputValue} \n`,
         timestamp: formatTime(Date.now()),
       };
       dispatch(currentChat(password, userMessage));
@@ -121,9 +121,19 @@ export default function ChatPage() {
           >
             <AnimatePresence>
               {!isLoading ? (
-                <ArrowUp size={"95%"} weight="bold" />
+                <motion.span
+                  key="arrow"
+                  initial={{ rotate: 180 }}
+                  animate={{ rotate: 0 }}
+                  exit={{ rotate: 180 }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  className={` w-full h-full `}
+                >
+                  <ArrowUp size={"95%"} weight="bold" />
+                </motion.span>
               ) : (
                 <motion.span
+                  key="circle"
                   initial={{ rotate: 0 }}
                   animate={{ rotate: 360 }}
                   exit={{ rotate: 0 }}
