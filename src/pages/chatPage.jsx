@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { currentChat } from "../Redux/Actions";
@@ -101,14 +101,14 @@ export default function ChatPage() {
               : "bg-background/10 border-primary-dark text-background"
           } `}
         >
-          <input
+          <textarea
             type="text"
             {...register("inputValue")}
             placeholder="Type your message..."
-            className={` w-full h-full bg-transparent  rounded-full mx-1 outline-none ${
+            className={` w-full h-full bg-transparent placeholder:pl-2 pl-2 pr-1 mx-1 outline-none ${
               isDarkMode
-                ? "placeholder:text-copy-lighterLt placeholder:pl-2 pl-2 text-copy-light caret-secondary"
-                : "placeholder:text-background placeholder:pl-2 pl-2 text-foreground caret-secondary"
+                ? "placeholder:text-copy-lighterLt  text-copy-light caret-secondary"
+                : "placeholder:text-background  text-foreground caret-secondary"
             }`}
           />
           <button
@@ -119,19 +119,25 @@ export default function ChatPage() {
                 : "bg-foreground/60 text-copy"
             }`}
           >
-            {!isLoading ? (
-              <ArrowUp size={"95%"} weight="bold" />
-            ) : (
-              <motion.span
-                initial={{ rotate: 0 }}
-                animate={{ rotate: 360 }}
-                exit={{ rotate: 0 }}
-                transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
-                className={` `}
-              >
-                <CircleNotch size={"100%"} weight="duotone" />
-              </motion.span>
-            )}
+            <AnimatePresence>
+              {!isLoading ? (
+                <ArrowUp size={"95%"} weight="bold" />
+              ) : (
+                <motion.span
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: 360 }}
+                  exit={{ rotate: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className={` `}
+                >
+                  <CircleNotch size={"100%"} weight="duotone" />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
         </form>
       </div>

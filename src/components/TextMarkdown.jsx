@@ -23,7 +23,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
       className={`h-fit ${
         role === "user"
           ? "place-self-end laptop:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
-          : "place-self-start w-3/5 smartphone:max-w-96  smartphone:min-w-72  my-3 p-3"
+          : "place-self-start w-3/5 smartphone:w-11/12  my-3 p-3"
       } ${
         isDarkMode
           ? role === "user"
