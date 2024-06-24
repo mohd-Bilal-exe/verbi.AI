@@ -140,7 +140,7 @@ export default function ChatPage() {
                   transition={{
                     duration: 0.5,
                     repeat: Infinity,
-                    ease: "linear",
+                    ease: "easeInOut",
                   }}
                   className={` `}
                 >
