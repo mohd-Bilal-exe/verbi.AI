@@ -119,35 +119,33 @@ export default function ChatPage() {
                 : "bg-foreground/60 text-copy"
             }`}
           >
-            <AnimatePresence>
-              {!isLoading ? (
-                <motion.span
-                  key="arrow"
-                  initial={{ rotate: 180 }}
-                  animate={{ rotate: 0 }}
-                  exit={{ rotate: 180 }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                  className={` w-full h-full `}
-                >
-                  <ArrowUp size={"95%"} weight="bold" />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="circle"
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  exit={{ rotate: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className={` `}
-                >
-                  <CircleNotch size={"100%"} weight="duotone" />
-                </motion.span>
-              )}
-            </AnimatePresence>
+            {!isLoading ? (
+              <motion.span
+                key="arrow"
+                initial={{ rotate: 180 }}
+                animate={{ rotate: 0 }}
+                exit={{ rotate: 180 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className={` w-full h-full `}
+              >
+                <ArrowUp size={"95%"} weight="bold" />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="circle"
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                exit={{ rotate: 0 }}
+                transition={{
+                  duration: 0.3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className={` `}
+              >
+                <CircleNotch size={"100%"} weight="duotone" />
+              </motion.span>
+            )}
           </button>
         </form>
       </div>
