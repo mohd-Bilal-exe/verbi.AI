@@ -101,11 +101,11 @@ export default function ChatPage() {
               : "bg-background/10 border-primary-dark text-background"
           } `}
         >
-          <textarea
+          <input
             type="text"
             {...register("inputValue")}
             placeholder="Type your message..."
-            className={` w-full h-full bg-transparent placeholder:pl-2 pl-2 pr-1 mx-1 outline-none ${
+            className={` w-full h-full bg-transparent   placeholder:pl-2 pl-2 pr-1 mx-1 outline-none ${
               isDarkMode
                 ? "placeholder:text-copy-lighterLt  text-copy-light caret-secondary"
                 : "placeholder:text-background  text-foreground caret-secondary"
