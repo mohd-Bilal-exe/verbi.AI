@@ -101,7 +101,7 @@ export default function ChatPage() {
               : "bg-background/10 border-primary-dark text-background"
           } `}
         >
-          <textarea
+          <input
             type="text"
             {...register("inputValue")}
             placeholder="Type your message..."
@@ -119,7 +119,7 @@ export default function ChatPage() {
                 : "bg-foreground/60 text-copy"
             }`}
           >
-            <AnimatePresence>
+            <>
               {!isLoading ? (
                 <motion.span
                   key="arrow"
@@ -147,7 +147,7 @@ export default function ChatPage() {
                   <CircleNotch size={"100%"} weight="duotone" />
                 </motion.span>
               )}
-            </AnimatePresence>
+            </>
           </button>
         </form>
       </div>
