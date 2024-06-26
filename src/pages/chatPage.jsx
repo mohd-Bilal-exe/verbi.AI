@@ -101,7 +101,7 @@ export default function ChatPage() {
               : "bg-background/10 border-primary-dark text-background"
           } `}
         >
-          <textarea
+          <input
             type="text"
             {...register("inputValue")}
             placeholder="Type your message..."
@@ -120,33 +120,35 @@ export default function ChatPage() {
                 : "bg-foreground/60 text-copy"
             }`}
           >
-            {!isLoading ? (
-              <motion.span
-                key="arrow"
-                initial={{ rotate: 180 }}
-                animate={{ rotate: 0 }}
-                exit={{ rotate: 180 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className={` w-full h-full `}
-              >
-                <ArrowUp size={"95%"} weight="bold" />
-              </motion.span>
-            ) : (
-              <motion.span
-                key="circle"
-                initial={{ rotate: 0 }}
-                animate={{ rotate: 360 }}
-                exit={{ rotate: 0 }}
-                transition={{
-                  duration: 0.3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className={` `}
-              >
-                <CircleNotch size={"100%"} weight="duotone" />
-              </motion.span>
-            )}
+            <>
+              {!isLoading ? (
+                <motion.span
+                  key="arrow"
+                  initial={{ rotate: 180 }}
+                  animate={{ rotate: 0 }}
+                  exit={{ rotate: 180 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  className={` w-full h-full `}
+                >
+                  <ArrowUp size={"95%"} weight="bold" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="circle"
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: 360 }}
+                  exit={{ rotate: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className={` `}
+                >
+                  <CircleNotch size={"100%"} weight="duotone" />
+                </motion.span>
+              )}
+            </>
           </button>
         </form>
       </div>
