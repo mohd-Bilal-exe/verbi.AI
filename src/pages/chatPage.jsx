@@ -92,30 +92,31 @@ export default function ChatPage() {
           ))}
       </div>
 
-      <div className="flex  fixed h-14  bottom-16 justify-center item-center w-full laptop:max-w-lg px-3">
+      <div className="flex  fixed  h-fit  bottom-16 justify-center item-center w-full laptop:max-w-lg px-3">
         <form
           onSubmit={handleSubmit(handleSendMessage)}
-          className={`w-full h-full backdrop-blur flex rounded-full border p-2 ${
+          className={`w-full h-fit backdrop-blur flex rounded-full border p-2 ${
             isDarkMode
               ? "bg-foregroundLight/10 border-primary-light"
               : "bg-background/10 border-primary-dark text-background"
           } `}
         >
-          <input
+          <textarea
             type="text"
             {...register("inputValue")}
             placeholder="Type your message..."
-            className={` w-full h-full bg-transparent   placeholder:pl-2 pl-2 pr-1 mx-1 outline-none ${
+            className={`resize-none w-full h-fit bg-transparent  placeholder:py-1.5 placeholder:pl-2 pl-2 pr-1 mx-1 outline-none flex items-center justify-start ${
               isDarkMode
-                ? "placeholder:text-copy-lighterLt  text-copy-light caret-secondary"
-                : "placeholder:text-background  text-foreground caret-secondary"
+                ? "placeholder:text-copy-lighterLt text-copy-light caret-secondary"
+                : "placeholder:text-background text-foreground caret-secondary"
             }`}
           />
+
           <button
             type="submit"
             className={`w-11 h-9.5 flex justify-center items-center p-1 rounded-full ${
               isDarkMode
-                ? "bg-foregroundLight text-background "
+                ? "bg-foregroundLight text-copyLight "
                 : "bg-foreground/60 text-copy"
             }`}
           >

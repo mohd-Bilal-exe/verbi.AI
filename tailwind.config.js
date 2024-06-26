@@ -30,14 +30,6 @@ export default {
         "secondary-dark": "#e0142f",
         "secondary-light": "#f1697a",
 
-        backgroundLight: "#efeff1",
-        foregroundLight: "#fbfbfb",
-        borderLight: "#dedde2",
-
-        copyLight: "#252329",
-        "copy-lightLt": "#645e6e",
-        "copy-lighterLt": "#8a8495",
-
         background: "#19181b",
         foreground: "#252329",
         border: "#3e3b45",
@@ -53,6 +45,14 @@ export default {
         "success-content": "#032503",
         "warning-content": "#252503",
         "error-content": "#ffffff",
+
+        backgroundLight: "#efeff1",
+        foregroundLight: "#fbfbfb",
+        borderLight: "#dedde2",
+
+        copyLight: "#252329",
+        "Lightcopy-light": "#645e6e",
+        "Lightcopy-lighter": "#8a8495",
       },
       dropShadow: {
         "text-sm": "1px 1px 1px rgba(0,0,0.60)",

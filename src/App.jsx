@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ChatPage from "./pages/chatPage";
 import GrammarPage from "./pages/grammarPage";
 import Navbar from "./components/Navbar";
@@ -47,6 +47,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/translate" element={<TranslatePage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/home" element={<Navigate to="/" />} />
           </Routes>
           <Navbar />
         </div>
