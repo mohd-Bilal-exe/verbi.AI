@@ -16,7 +16,7 @@ const initialState = {
   isLoggedIn: false,
   userDetails: {},
   chatHistory: [],
-  currentChat:[],
+  currentChat: [],
   translationHistory: [],
   globalHistory: [],
 };
@@ -53,7 +53,7 @@ const userReducer = (state = initialState, action) => {
         },
       };
     case LOGOUT_USER:
-      localStorage.removeItem("userDetails");
+      localStorage.removeItem("persist:root"); // Clear the persisted state
       return {
         ...state,
         isLoggedIn: false,
@@ -69,13 +69,21 @@ const userReducer = (state = initialState, action) => {
         ...state,
         globalHistory: [...state.globalHistory, action.payload],
       };
-      case CURRENT_CHAT:
-        return {
-          ...state,
-          currentChat: [...state.currentChat, {
-            sessionID: action.payload.sessionID, 
-            chat: { role:action.payload.chatObject.role, text: action.payload.chatObject.text, timestamp: action.payload.chatObject.timestamp,}}],
-        };
+    case CURRENT_CHAT:
+      return {
+        ...state,
+        currentChat: [
+          ...state.currentChat,
+          {
+            sessionID: action.payload.sessionID,
+            chat: {
+              role: action.payload.chatObject.role,
+              text: action.payload.chatObject.text,
+              timestamp: action.payload.chatObject.timestamp,
+            },
+          },
+        ],
+      };
 
     case CHAT_HISTORY: {
       // Find the existing session in chatHistory

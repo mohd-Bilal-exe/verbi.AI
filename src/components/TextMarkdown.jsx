@@ -4,6 +4,17 @@ import Markdown from "react-markdown";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
+function formatTime(timestamp) {
+  const date = new Date(timestamp);
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  const strMinutes = minutes < 10 ? "0" + minutes : minutes;
+  return hours + ":" + strMinutes + ampm;
+}
+
 const TextMarkdown = React.memo(({ keys, role, plainText }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
 
@@ -23,7 +34,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
       className={`h-fit ${
         role === "user"
           ? "place-self-end laptop:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
-          : "place-self-start w-3/5 smartphone:w-11/12  my-3 p-3"
+          : "place-self-start w-11/12 smartphone:w-11/12  my-3 p-3"
       } ${
         isDarkMode
           ? role === "user"
@@ -38,9 +49,11 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
       animate="animate"
     >
       {role === "user" ? (
-        <p className="relative flex flex-row min-h-5  my-1 ml-3 mr-2">
-          <span className={`w-full`}>{plainText} </span>
-          <span className={`scale-75 text-xs place-self-end`}>{keys} </span>
+        <p className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2">
+          <span className={`w-4/5 overflow-x-auto`}>{plainText} </span>
+          <span className={`w-fit scale-75 text-xs place-self-end`}>
+            {formatTime(keys)}
+          </span>
         </p>
       ) : (
         <div className={`flex flex-col`}>
@@ -132,7 +145,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
             {plainText}
           </Markdown>
           <span className={`-mb-2 -ml-1 scale-75 text-xs place-self-start`}>
-            {keys}
+            {formatTime(keys)}
           </span>
         </div>
       )}

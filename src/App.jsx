@@ -37,7 +37,9 @@ function App() {
       <BrowserRouter>
         <div
           className={`background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${
-            isDarkMode ? "bg-background text-white" : "bg-backgroundLight"
+            isDarkMode
+              ? "bg-background scrollbar-dark"
+              : "bg-backgroundLight scrollbar-custom"
           }`}
         >
           <Routes>

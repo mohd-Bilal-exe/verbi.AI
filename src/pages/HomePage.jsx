@@ -30,7 +30,7 @@ export default function HomePage() {
     <motion.section className="w-screen h-screen px-2 flex flex-col">
       <div
         id="optionsContainer"
-        className="w-full laptop:px-20 laptop:py-5 desktop:px-20 smartphone:px-5 smartphone:py-10 h-4/5 bg-blue-400 grid grid-cols-2 gap-4"
+        className="w-full laptop:px-20 laptop:py-5 desktop:px-20 smartphone:px-5 smartphone:py-10 h-1/2 bg-blue-400 grid grid-cols-2 gap-4"
       >
         {gridItems.map((gridItem) => (
           <Link

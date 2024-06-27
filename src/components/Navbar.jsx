@@ -87,13 +87,16 @@ const Navbar = () => {
               onClick={() => setSelected(listItem.path)}
             >
               <span
+                key={listItem.id}
                 className={`h-7 w-7 ${
                   selected !== listItem.path
                     ? "translate-y-1 "
                     : isDarkMode
                     ? "text-primary-light scale-110"
                     : "text-primary-dark scale-110"
-                }  hover:scale-105 transition-all ease-in-out duration-500`}
+                }  hover:scale-105  ${
+                  listItem.id === 1 ? "transition-colors" : "transition-all"
+                } ease-in-out duration-500`}
               >
                 {listItem.id === 1 ? dynamicIcon : listItem.ico}
               </span>
@@ -102,7 +105,7 @@ const Navbar = () => {
                   selected === listItem.path
                     ? "translate-y-0"
                     : "translate-y-10"
-                } transition-all ease-in-out duration-500 ${
+                } transition-all ease-in-out duration-700 ${
                   isDarkMode ? "text-copy" : "text-copyLight"
                 }`}
               >

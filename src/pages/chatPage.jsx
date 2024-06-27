@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { currentChat } from "../Redux/Actions";
@@ -13,7 +13,11 @@ export default function ChatPage() {
   const password = useSelector((state) => state.userDetails.password);
   const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
+  const [text, setText] = useState("");
 
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+  };
   const dispatch = useDispatch();
   const chatBoxRef = useRef(null);
 
@@ -26,31 +30,23 @@ export default function ChatPage() {
   useEffect(() => {
     scrollToBottom();
   }, [chatHistory]);
-  function formatTime(timestamp) {
-    const date = new Date(timestamp);
-    let hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    const strMinutes = minutes < 10 ? "0" + minutes : minutes;
-    return hours + ":" + strMinutes + ampm;
-  }
+
   const handleSendMessage = async (data) => {
     try {
       const userMessage = {
         role: "user",
         text: `${data.inputValue} \n`,
-        timestamp: formatTime(Date.now()),
+        timestamp: Date.now(),
       };
       dispatch(currentChat(password, userMessage));
+      setText("");
       setIsLoading(true);
       const result = await chat(password, data.inputValue);
       setIsLoading(false);
       const aiMessage = {
         role: "model",
         text: result.text,
-        timestamp: formatTime(Date.now()),
+        timestamp: Date.now(),
       };
       dispatch(currentChat(password, aiMessage));
 
@@ -79,7 +75,7 @@ export default function ChatPage() {
       <div
         id="chatBox"
         ref={chatBoxRef}
-        className="w-11/12 h-full mb-32  flex flex-col overflow-y-auto"
+        className="w-11/12 laptop:w-1/2  h-full mb-32  flex flex-col overflow-y-auto"
       >
         {chatHistory &&
           chatHistory.map((message) => (
@@ -95,26 +91,31 @@ export default function ChatPage() {
       <div className="flex  fixed  h-fit  bottom-16 justify-center item-center w-full laptop:max-w-lg px-3">
         <form
           onSubmit={handleSubmit(handleSendMessage)}
-          className={`w-full h-fit backdrop-blur flex rounded-full border p-2 ${
+          className={`w-full h-fit backdrop-blur flex items-center ${
+            text.length > 20 ? "rounded-2xl" : "rounded-full"
+          } border p-2 ${
             isDarkMode
               ? "bg-foregroundLight/10 border-primary-light"
               : "bg-background/10 border-primary-dark text-background"
           } `}
         >
-          <input
+          <textarea
             type="text"
             {...register("inputValue")}
             placeholder="Type your message..."
-            className={`resize-none w-full h-fit bg-transparent  placeholder:py-1.5 placeholder:pl-2 pl-2 pr-1 mx-1 outline-none flex items-center justify-start ${
+            className={`resize-none w-full ${
+              text.length > 20 ? "h-fit" : "h-8"
+            } bg-transparent  placeholder:py- placeholder:pl-1  pl-2 pr-1 mx-1 outline-none flex items-center justify-start ${
               isDarkMode
-                ? "placeholder:text-copy-lighterLt text-copy-light caret-secondary"
-                : "placeholder:text-background text-foreground caret-secondary"
+                ? "placeholder:text-copy-lighter text-copy-light caret-secondary"
+                : "placeholder:text-copyLight text-foreground caret-secondary"
             }`}
+            onChange={handleTextChange}
           />
 
           <button
             type="submit"
-            className={`w-11 h-9.5 flex justify-center items-center p-1 rounded-full ${
+            className={`w-8 h-8 flex justify-center items-center p-1 rounded-full ${
               isDarkMode
                 ? "bg-foregroundLight text-copyLight "
                 : "bg-foreground/60 text-copy"
@@ -128,7 +129,7 @@ export default function ChatPage() {
                   animate={{ rotate: 0 }}
                   exit={{ rotate: 180 }}
                   transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className={` w-full h-full `}
+                  className={` w-10 h-10 grid place-content-center`}
                 >
                   <ArrowUp size={"95%"} weight="bold" />
                 </motion.span>
@@ -143,7 +144,7 @@ export default function ChatPage() {
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className={` `}
+                  className={`w-10 h-10 grid place-content-center `}
                 >
                   <CircleNotch size={"100%"} weight="duotone" />
                 </motion.span>
