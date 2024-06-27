@@ -5,7 +5,9 @@
 - Features AI chat, AI grammatical checks, AI translation with custom prompts, and a beautifully animated UI.
 - Experience seamless communication and language support.
 
-[Visit Verbi.ai](https://www.verbi.ai)
+# CURRENTLY UNDER DEVELOPMENT
+
+[Visit Verbi.ai](https://verbiai.netlify.app/)
 
 ## Technologies Used
 
@@ -26,7 +28,7 @@
 
 To run this project locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/verbi.ai.git`
+1. Clone the repository: `git clone https://github.com/bghub-c/verbi.AI.git`
 2. Navigate into the project directory: `cd verbi.ai`
 3. Install dependencies: `npm install`
 4. Start the development server: `npm start`
