@@ -1,7 +1,7 @@
 # Verbi.ai
 
 - Built with ReactJS, Redux, Tailwind CSS, and Framer Motion.
-- Utilizes Google Generative AI Gemini for API calls and text generation.
+- Utilizes Google Generative AI Gemini API for content generation.
 - Features AI chat, AI grammatical checks, AI translation with custom prompts, and a beautifully animated UI.
 - Experience seamless communication and language support.
 
