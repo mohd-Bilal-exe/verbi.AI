@@ -1,8 +1,40 @@
-# React + Vite
+# Verbi.ai
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Built with ReactJS, Redux, Tailwind CSS, and Framer Motion.
+- Utilizes Google Generative AI Gemini API for content generation.
+- Features AI chat, AI grammatical checks, AI translation with custom prompts, and a beautifully animated UI.
+- Experience seamless communication and language support.
 
-Currently, two official plugins are available:
+[Visit Verbi.ai](https://www.verbi.ai)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+
+- **ReactJS**: A JavaScript library for building user interfaces.
+- **Redux**: A predictable state container for JavaScript apps.
+- **Tailwind CSS**: A utility-first CSS framework for creating custom designs quickly.
+- **Framer Motion**: A library for creating fluid animations and transitions in React applications.
+- **Google Generative AI Gemini**: For API calls and text generation.
+
+## Features
+
+- **AI Chat**: Seamless AI-powered chat functionality.
+- **AI Grammatical Check**: Accurate grammatical corrections and suggestions using AI.
+- **AI Translation with Custom Prompts**: Customizable AI translation allowing prompts such as "do not change the tone of the sentence."
+- **Beautifully Animated UI**: Stylish and responsive design with smooth animations.
+
+## Installation
+
+To run this project locally, follow these steps:
+
+1. Clone the repository: `git clone https://github.com/your-username/verbi.ai.git`
+2. Navigate into the project directory: `cd verbi.ai`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm start`
+
+## Feedback
+
+Your feedback is invaluable to us. If you have any suggestions or just want to say hi, feel free to reach out!
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
