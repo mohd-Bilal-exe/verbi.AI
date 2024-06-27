@@ -1,6 +1,11 @@
 # Verbi.ai
 
-Explore Verbi.ai, built with ReactJS, Redux, Tailwind CSS, and Framer Motion. Using Google Generative AI Gemini, it features AI chat, grammatical checks, AI translation with custom prompts, and a beautiful UI with animations. Experience seamless communication and language support.
+- Built with ReactJS, Redux, Tailwind CSS, and Framer Motion.
+- Utilizes Google Generative AI Gemini for API calls and text generation.
+- Features AI chat, AI grammatical checks, AI translation with custom prompts, and a beautifully animated UI.
+- Experience seamless communication and language support.
+
+[Visit Verbi.ai](https://www.verbi.ai)
 
 ## Technologies Used
 
@@ -13,9 +18,9 @@ Explore Verbi.ai, built with ReactJS, Redux, Tailwind CSS, and Framer Motion. Us
 ## Features
 
 - **AI Chat**: Seamless AI-powered chat functionality.
-- **AI Grammatical Checks**: Accurate grammatical corrections and suggestions.
-- **AI Translation with Custom Prompts**: Customizable AI translation for various languages.
-- **Beautiful UI**: Stylish and responsive design with smooth animations.
+- **AI Grammatical Check**: Accurate grammatical corrections and suggestions using AI.
+- **AI Translation with Custom Prompts**: Customizable AI translation allowing prompts such as "do not change the tone of the sentence."
+- **Beautifully Animated UI**: Stylish and responsive design with smooth animations.
 
 ## Installation
 
@@ -33,5 +38,3 @@ Your feedback is invaluable to us. If you have any suggestions or just want to s
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-
-[Visit Verbi.ai](https://www.verbi.ai)
