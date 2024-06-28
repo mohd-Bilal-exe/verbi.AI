@@ -31,7 +31,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
 
   return (
     <motion.div
-      className={`h-fit ${
+      className={`h-fit text-wrap  ${
         role === "user"
           ? "place-self-end laptop:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
           : "place-self-start w-11/12 smartphone:w-11/12  my-3 p-3"
@@ -50,7 +50,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
     >
       {role === "user" ? (
         <p className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2">
-          <span className={`w-4/5 overflow-x-auto`}>{plainText} </span>
+          <span className={`w-4/5 text-wrap`}>{plainText} </span>
           <span className={`w-fit scale-75 text-xs place-self-end`}>
             {formatTime(keys)}
           </span>

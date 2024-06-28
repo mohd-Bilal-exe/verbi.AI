@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { currentChat } from "../Redux/Actions";
 import TextMarkdown from "../components/TextMarkdown";
@@ -12,14 +11,14 @@ export default function ChatPage() {
   const chatHistory = useSelector((state) => state.currentChat);
   const password = useSelector((state) => state.userDetails.password);
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
   const [text, setText] = useState("");
+  const textAreaRef = useRef(null);
+  const dispatch = useDispatch();
+  const chatBoxRef = useRef(null);
 
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
-  const dispatch = useDispatch();
-  const chatBoxRef = useRef(null);
 
   const scrollToBottom = () => {
     if (chatBoxRef.current) {
@@ -31,17 +30,24 @@ export default function ChatPage() {
     scrollToBottom();
   }, [chatHistory]);
 
-  const handleSendMessage = async (data) => {
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "15px";
+      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+    }
+  }, [text]);
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault(); // Prevent default form submission
     try {
       const userMessage = {
         role: "user",
-        text: `${data.inputValue} \n`,
+        text: `${text} \n`,
         timestamp: Date.now(),
       };
       dispatch(currentChat(password, userMessage));
-      setText("");
       setIsLoading(true);
-      const result = await chat(password, data.inputValue);
+      const result = await chat(password, text);
       setIsLoading(false);
       const aiMessage = {
         role: "model",
@@ -54,10 +60,11 @@ export default function ChatPage() {
         console.error("Chat Error:", result.error);
       }
 
-      reset();
-      scrollToBottom();
+      setText(""); // Clear the input field after sending message
+      //scrollToBottom();
     } catch (error) {
       console.error("Error:", error);
+      setIsLoading(false);
     }
   };
 
@@ -68,14 +75,14 @@ export default function ChatPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={`w-full h-screen pt-5 laptop:py-4  flex flex-col items-center ${
+      className={`w-full h-screen pt-5 laptop:py-1 flex flex-col items-center ${
         isDarkMode ? "bg-bg1/10 text-white" : "text-bg1"
       }`}
     >
       <div
         id="chatBox"
         ref={chatBoxRef}
-        className="w-11/12 laptop:w-1/2  h-full mb-32  flex flex-col overflow-y-auto"
+        className="scroll-smooth overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden px-2"
       >
         {chatHistory &&
           chatHistory.map((message) => (
@@ -87,70 +94,48 @@ export default function ChatPage() {
             />
           ))}
       </div>
-
-      <div className="flex  fixed  h-fit  bottom-16 justify-center item-center w-full laptop:max-w-lg px-3">
+      <div className="fixed bottom-16 w-full flex justify-center items-center">
         <form
-          onSubmit={handleSubmit(handleSendMessage)}
-          className={`w-full h-fit backdrop-blur flex items-center ${
-            text.length > 20 ? "rounded-2xl" : "rounded-full"
-          } border p-2 ${
+          onSubmit={handleSendMessage}
+          className={`flex items-center justify-between p-2 rounded-full h-fit w-full mx-3 overflow-hidden ${
             isDarkMode
               ? "bg-foregroundLight/10 border-primary-light"
               : "bg-background/10 border-primary-dark text-background"
-          } `}
+          }`}
         >
           <textarea
-            type="text"
-            {...register("inputValue")}
+            ref={textAreaRef}
             placeholder="Type your message..."
-            className={`resize-none w-full ${
-              text.length > 20 ? "h-fit" : "h-8"
-            } bg-transparent  placeholder:py- placeholder:pl-1  pl-2 pr-1 mx-1 outline-none flex items-center justify-start ${
+            className={`bg-transparent outline-none w-11/12 my-1 ml-4 pl-2 text-clip resize-none placeholder:pl-1 placeholder:py- overflow-y-auto ${
               isDarkMode
                 ? "placeholder:text-copy-lighter text-copy-light caret-secondary"
                 : "placeholder:text-copyLight text-foreground caret-secondary"
             }`}
             onChange={handleTextChange}
+            value={text}
           />
-
-          <button
+          <motion.button
+            disabled={isLoading}
             type="submit"
-            className={`w-8 h-8 flex justify-center items-center p-1 rounded-full ${
+            className={`w-12 h-12 flex justify-center items-center smartphone:h-11 place-self-center ${
               isDarkMode
-                ? "bg-foregroundLight text-copyLight "
+                ? "bg-foregroundLight text-copyLight"
                 : "bg-foreground/60 text-copy"
-            }`}
+            } rounded-full`}
+            initial={isLoading ? { rotate: 0 } : { rotate: 180 }}
+            animate={isLoading ? { rotate: 360 } : { rotate: 0 }}
+            transition={{
+              duration: 0.5,
+              ease: "easeInOut",
+              repeat: isLoading ? Infinity : 0,
+            }}
           >
-            <>
-              {!isLoading ? (
-                <motion.span
-                  key="arrow"
-                  initial={{ rotate: 180 }}
-                  animate={{ rotate: 0 }}
-                  exit={{ rotate: 180 }}
-                  transition={{ duration: 0.25, ease: "easeInOut" }}
-                  className={` w-10 h-10 grid place-content-center`}
-                >
-                  <ArrowUp size={"95%"} weight="bold" />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="circle"
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  exit={{ rotate: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className={`w-10 h-10 grid place-content-center `}
-                >
-                  <CircleNotch size={"100%"} weight="duotone" />
-                </motion.span>
-              )}
-            </>
-          </button>
+            {isLoading ? (
+              <CircleNotch className="w-9 h-9" weight="duotone" />
+            ) : (
+              <ArrowUp className="w-9 h-9" weight="bold" />
+            )}
+          </motion.button>
         </form>
       </div>
     </motion.div>
