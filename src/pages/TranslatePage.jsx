@@ -76,15 +76,17 @@ const TranslatePage = () => {
           />
         </div>
         <div
-          className={`w-1/6 bg-${
-            isDarkMode ? "gray-700" : "white"
-          } h-1/6 lg:h-4/5 flex items-center justify-center`}
+          className={`w-1/6 ${
+            isDarkMode ? "" : ""
+          } h-1/6  flex items-center justify-center`}
         >
           <button
             onClick={handleTranslate}
-            className={`w-12 h-12 p-1 bg-blue-500 text-white rounded-full flex justify-center items-center ${
-              loading ? "cursor-not-allowed" : "cursor-pointer"
-            }`}
+            className={`w-12 h-12 p-1  text-white rounded-full flex justify-center items-center${
+              isDarkMode
+                ? "bg-blue-800/30 placeholder:text-copy-light"
+                : "bg-blue-500/30 placeholder:text-Lightcopy-light"
+            } ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
             disabled={loading}
           >
             <motion.span
@@ -96,11 +98,7 @@ const TranslatePage = () => {
                 ease: "easeInOut",
                 repeat: loading ? Infinity : 0,
               }}
-              className={`w-12 h-12 flex justify-center items-center ${
-                isDarkMode
-                  ? "bg-foreground/30 placeholder:text-copy-light"
-                  : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-              }`}
+              className={`w-12 h-12 flex justify-center items-center `}
               key="icooons"
             >
               <TranslateIcon2 className="w-9 h-9" />
