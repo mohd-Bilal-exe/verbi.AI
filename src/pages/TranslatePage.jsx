@@ -12,7 +12,7 @@ const TranslatePage = () => {
   const [ipText, setIpText] = useState("");
   const [opText, setOpText] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selectedLang, setSelectedLang] = useState("english");
+  const [selectedLang, setSelectedLang] = useState("English");
   const [customInstructions, setCustomInstructions] = useState("");
 
   const handleTranslate = async () => {
@@ -72,7 +72,7 @@ const TranslatePage = () => {
             type="text"
             placeholder="Add your custom instructions"
             onChange={(e) => setCustomInstructions(e.target.value)}
-            className={`w-full placeholder:pl-2   border-t border-copy-lighter p-0.5 outline-none ${
+            className={`w-full placeholder:pl-2 pl-2  border-t border-copy-lighter p-0.5 outline-none ${
               isDarkMode
                 ? "bg-foreground/30 placeholder:text-copy-light"
                 : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
@@ -111,6 +111,7 @@ const TranslatePage = () => {
           <SelectDropdown
             selectedLang={selectedLang}
             setSelectedLang={setSelectedLang}
+            isDropdownOpenn={!loading}
           />
         </div>
         <div

@@ -4,11 +4,13 @@ import {
   ArrowCircleLeft,
   ArrowCircleRight,
   CaretCircleDown,
+  Check,
+  CheckFat,
 } from "@phosphor-icons/react";
 import { useSelector } from "react-redux";
 import { getLanguagesWithFlags } from "../Api/langAPI";
 
-const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
+const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpenn }) => {
   const [langList, setLanglist] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // Adjust this number based on your preference
@@ -18,9 +20,8 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
       const response = await getLanguagesWithFlags();
       setLanglist(response);
     };
-
     fetchLanguages();
-  }, []);
+  }, [isDropdownOpenn]);
 
   const isDarkMode = useSelector((state) => state.darkMode);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -115,6 +116,14 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
                     !isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
                   }`}
                 />
+                <button
+                  className={`${
+                    !isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
+                  }`}
+                  onClick={() => setIsDropdownOpen(false)}
+                >
+                  <Check weight="duotone" size={25} />
+                </button>
               </div>
               <button
                 onClick={handleNextPage}

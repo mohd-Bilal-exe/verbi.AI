@@ -28,7 +28,7 @@ const TextMarkdownTranslate = ({ plainText }) => {
               key={keyCounter++}
               variants={fadeInUpVariants}
               className={`text-base mb-2 open-sans ${
-                isDarkMode ? "text-lightBg1" : "text-lightMainContent"
+                isDarkMode ? "text-copy" : "text-copyLight"
               }`}
               {...props}
             />
@@ -88,7 +88,7 @@ const TextMarkdownTranslate = ({ plainText }) => {
               key={keyCounter++}
               variants={fadeInUpVariants}
               className={`text-sm mb-1 ml-4 open-sans ${
-                isDarkMode ? "text-lightBg1" : "text-gray-600"
+                isDarkMode ? "text-copy-light" : "text-copyLight"
               }`}
               {...props}
             />
@@ -97,8 +97,8 @@ const TextMarkdownTranslate = ({ plainText }) => {
             <motion.strong
               key={keyCounter++}
               variants={fadeInUpVariants}
-              className={`text-lg tracking-widest m-1 font-bold montserrat ${
-                isDarkMode ? "text-white" : "text-lightHeading/70"
+              className={`text-lg tracking-wide m-1 font-bold montserrat ${
+                isDarkMode ? "text-copy" : "text-copyLight"
               }`}
               {...props}
             />

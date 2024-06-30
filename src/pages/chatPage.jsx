@@ -22,7 +22,7 @@ export default function ChatPage() {
 
   const scrollToBottom = () => {
     if (chatBoxRef.current) {
-      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight - 500;
     }
   };
 
@@ -119,7 +119,7 @@ export default function ChatPage() {
             type="submit"
             className={` ${
               isLoading ? "cursor-not-allowed" : "cursor-pointer"
-            }  w-11 h-10 grid place-content-center smartphone:h-11 place-self-center transition-colors ${
+            }  w-11 h-10 grid place-content-center place-self-center transition-colors ${
               isDarkMode
                 ? "bg-foregroundLight hover:bg-foregroundLight/70  text-copyLight"
                 : "bg-foreground/60 hover:bg-foreground/70 text-copy"
@@ -129,7 +129,7 @@ export default function ChatPage() {
               initial={isLoading ? { rotate: 0 } : { rotate: 0 }}
               animate={isLoading ? { rotate: 360 } : { rotate: 0 }}
               transition={{
-                duration: isLoading ? 0.5 : 1.2,
+                duration: !isLoading ? 0.5 : 0.8,
                 ease: "easeInOut",
                 repeat: isLoading ? Infinity : 0,
               }}

@@ -49,12 +49,17 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
       animate="animate"
     >
       {role === "user" ? (
-        <p className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2">
+        <motion.p
+          key={`${keys}user`}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+          className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2"
+        >
           <span className={`w-4/5 text-wrap`}>{plainText} </span>
           <span className={`w-fit scale-75 text-xs place-self-end`}>
             {formatTime(keys)}
           </span>
-        </p>
+        </motion.p>
       ) : (
         <div className={`flex flex-col`}>
           <Markdown
@@ -114,7 +119,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <motion.ol
                   key={keys++}
                   className={`list-decimal list-inside mb-4 ${
-                    isDarkMode ? "text-lightBg1" : "text-gray-800"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   variants={fadeInUpVariants}
                   {...props}
@@ -124,7 +129,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <motion.li
                   key={`${keys++}a`}
                   className={`text-sm mb-1 ml-4 open-sans ${
-                    isDarkMode ? "text-lightBg1" : "text-gray-600"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   variants={fadeInUpVariants}
                   {...props}
@@ -135,7 +140,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-lg tracking-widest m-1 font-bold montserrat ${
-                    isDarkMode ? "text-white" : "text-lightHeading/70"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   {...props}
                 />
