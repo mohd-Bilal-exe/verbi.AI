@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CaretCircleDown } from "@phosphor-icons/react";
+import {
+  ArrowCircleLeft,
+  ArrowCircleRight,
+  CaretCircleDown,
+} from "@phosphor-icons/react";
 import { useSelector } from "react-redux";
-
-const languages = [
-  "English",
-  "Spanish",
-  "French",
-  "German",
-  "Chinese",
-  "Hindi",
-];
+import { getLanguagesWithFlags } from "../Api/langAPI";
 
 const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
+  const [langList, setLanglist] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6; // Adjust this number based on your preference
+
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      const response = await getLanguagesWithFlags();
+      setLanglist(response);
+    };
+
+    fetchLanguages();
+  }, []);
+
   const isDarkMode = useSelector((state) => state.darkMode);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -25,6 +34,17 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
     setIsDropdownOpen(false);
   };
 
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentLangList = langList.slice(startIndex, startIndex + itemsPerPage);
+  console.log(currentLangList);
   return (
     <div className="relative w-fit">
       <button
@@ -51,19 +71,55 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
             className={`absolute w-60 -start-2/3 smartphone:-start-14 z-10 mt-1 backdrop-blur backdrop-brightness-75  rounded-md shadow-lg`}
           >
             <div className="grid place-content-center  grid-cols-2 gap-1 p-2 auto-rows-min">
-              {languages.map((language) => (
+              {currentLangList.map((languageList, index) => (
                 <button
-                  key={language}
-                  onClick={() => handleLanguageSelect(language)}
-                  className={`p-2 w-fit text-center rounded-md hover:bg-neutral-600 ${
-                    selectedLang === language
+                  key={index}
+                  onClick={() => handleLanguageSelect(languageList.language)}
+                  className={`p-2 flex items-center gap-1 w-fit text-center rounded-md hover:bg-neutral-600 ${
+                    selectedLang === languageList.language
                       ? "bg-blue-800/30 text-copy-light"
                       : ""
                   } transition-all duration-300 `}
                 >
-                  {language}
+                  <span>
+                    <img
+                      src={languageList.flag}
+                      alt={languageList.language}
+                      className={`h-3`}
+                    />
+                  </span>
+                  <span className={`text-xs h-4 text-balance overflow-hidden`}>
+                    {languageList.language}{" "}
+                  </span>
                 </button>
               ))}
+            </div>
+            <div className="flex justify-between">
+              <button
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+                className={`rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 ${
+                  currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
+                }`}
+              >
+                <ArrowCircleLeft size={25} weight="duotone" />
+              </button>
+              <h1>
+                Page {currentPage}/{Math.ceil(langList.length / itemsPerPage)}{" "}
+              </h1>
+              <button
+                onClick={handleNextPage}
+                disabled={
+                  currentPage === Math.ceil(langList.length / itemsPerPage)
+                }
+                className={`rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 ${
+                  currentPage === Math.ceil(langList.length / itemsPerPage)
+                    ? "cursor-not-allowed"
+                    : "cursor-pointer"
+                }`}
+              >
+                <ArrowCircleRight size={25} weight="duotone" />
+              </button>
             </div>
           </motion.div>
         )}

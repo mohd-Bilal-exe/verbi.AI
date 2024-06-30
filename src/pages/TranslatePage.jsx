@@ -1,10 +1,11 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { translate } from "../Api/aiApi";
 import TextMarkdownTranslate from "../components/TextMarkdownTranslate";
 import { TranslateIcon2 } from "../components/SvgIcons";
 import SelectDropdown from "../components/SelectDropdown";
+import { getLanguagesWithFlags } from "../Api/langAPI";
 
 const TranslatePage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -30,7 +31,9 @@ const TranslatePage = () => {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    getLanguagesWithFlags();
+  }, []);
   const MemoizedMarkdown = useMemo(
     () => <TextMarkdownTranslate plainText={opText} />,
     [opText]
@@ -51,7 +54,7 @@ const TranslatePage = () => {
         className={`w-full h-full flex flex-col justify-start items-start lg:flex-row gap-1 pt-16 smartphone:pt-5  px-3`}
       >
         <div
-          className={`w-full flex flex-col border border-copy-lighter shadow-lg  rounded-xl smartphone:h-2/5 h-3/4 overflow-hidden`}
+          className={`w-full flex flex-col border border-copy-lighter shadow-lg  rounded-xl smartphone:h-1/3 h-3/4 overflow-hidden`}
         >
           <textarea
             name="ipText"
