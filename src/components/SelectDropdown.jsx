@@ -49,9 +49,9 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
     <div className="relative w-fit">
       <button
         onClick={toggleDropdown}
-        className={`w-11/12 m-2 px-2 py-1 rounded-lg ${
+        className={`w-11/12 min-w-32 m-2 px-2 py-1 rounded-lg ${
           !isDarkMode ? "bg-foreground/30" : "bg-foregroundLight/30"
-        } flex justify-center items-center`}
+        } flex justify-between items-center`}
       >
         <span>{selectedLang}</span>
         <CaretCircleDown
@@ -68,7 +68,7 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`absolute w-60 -start-2/3 smartphone:-start-14 z-10 mt-1 backdrop-blur backdrop-brightness-75  rounded-md shadow-lg`}
+            className={`absolute w-60 -start-1/3 smartphone:-start-10 z-10 mt-1 backdrop-blur backdrop-brightness-75  rounded-md shadow-lg`}
           >
             <div className="grid place-content-center  grid-cols-2 gap-1 p-2 auto-rows-min">
               {currentLangList.map((languageList, index) => (
@@ -94,7 +94,7 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
                 </button>
               ))}
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between my-1">
               <button
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
@@ -104,9 +104,18 @@ const SelectDropdown = ({ selectedLang, setSelectedLang }) => {
               >
                 <ArrowCircleLeft size={25} weight="duotone" />
               </button>
-              <h1>
-                Page {currentPage}/{Math.ceil(langList.length / itemsPerPage)}{" "}
-              </h1>
+              <div className={` flex justify-center`}>
+                <input
+                  type="text"
+                  placeholder="Custom language"
+                  onChange={(e) => {
+                    setSelectedLang(e.target.value);
+                  }}
+                  className={`w-3/4 outline-none placeholder:pl-1 pl-1 rounded-sm ${
+                    !isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
+                  }`}
+                />
+              </div>
               <button
                 onClick={handleNextPage}
                 disabled={
