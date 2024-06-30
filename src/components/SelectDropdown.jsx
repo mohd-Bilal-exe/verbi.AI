@@ -5,12 +5,12 @@ import {
   ArrowCircleRight,
   CaretCircleDown,
   Check,
-  CheckFat,
 } from "@phosphor-icons/react";
 import { useSelector } from "react-redux";
 import { getLanguagesWithFlags } from "../Api/langAPI";
+import PropTypes from "prop-types";
 
-const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpenn }) => {
+const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
   const [langList, setLanglist] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // Adjust this number based on your preference
@@ -21,18 +21,18 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpenn }) => {
       setLanglist(response);
     };
     fetchLanguages();
-  }, [isDropdownOpenn]);
+  }, [isDropdownOpen]);
 
   const isDarkMode = useSelector((state) => state.darkMode);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpenState, setIsDropdownOpenState] = useState(false);
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpenState(!isDropdownOpenState);
   };
 
   const handleLanguageSelect = (language) => {
     setSelectedLang(language);
-    setIsDropdownOpen(false);
+    setIsDropdownOpenState(false);
   };
 
   const handleNextPage = () => {
@@ -57,14 +57,14 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpenn }) => {
         <span>{selectedLang}</span>
         <CaretCircleDown
           className={`ml-2 transform transition-transform ${
-            isDropdownOpen ? "rotate-180" : "rotate-0"
+            isDropdownOpenState ? "rotate-180" : "rotate-0"
           } ease-in-out duration-300`}
           size={20}
           weight="duotone"
         />
       </button>
       <AnimatePresence>
-        {isDropdownOpen && (
+        {isDropdownOpenState && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpenn }) => {
                   className={`${
                     !isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
                   }`}
-                  onClick={() => setIsDropdownOpen(false)}
+                  onClick={() => setIsDropdownOpenState(false)}
                 >
                   <Check weight="duotone" size={25} />
                 </button>
@@ -144,6 +144,12 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpenn }) => {
       </AnimatePresence>
     </div>
   );
+};
+
+SelectDropdown.propTypes = {
+  selectedLang: PropTypes.string.isRequired,
+  setSelectedLang: PropTypes.func.isRequired,
+  isDropdownOpen: PropTypes.bool.isRequired,
 };
 
 export default SelectDropdown;

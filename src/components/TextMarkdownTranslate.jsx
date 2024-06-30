@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Markdown from "react-markdown";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const TextMarkdownTranslate = ({ plainText }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -110,5 +111,7 @@ const TextMarkdownTranslate = ({ plainText }) => {
     </motion.div>
   );
 };
-
+TextMarkdownTranslate.propTypes = {
+  plainText: PropTypes.string.isRequired,
+};
 export default TextMarkdownTranslate;
