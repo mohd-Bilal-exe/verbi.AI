@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { translate } from "../Api/aiApi";
 import TextMarkdownTranslate from "../components/TextMarkdownTranslate";
 import { TranslateIcon2 } from "../components/SvgIcons";
+import SelectDropdown from "../components/SelectDropdown";
 
 const TranslatePage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -47,10 +48,10 @@ const TranslatePage = () => {
       }`}
     >
       <div
-        className={`w-full h-full flex flex-col lg:flex-row gap-2 py-5 lg:pt-14 lg:pb-14 px-3`}
+        className={`w-full h-full flex flex-col justify-start items-start lg:flex-row gap-1 pt-16 smartphone:pt-5  px-3`}
       >
         <div
-          className={`w-full flex flex-col border border-copy-lighter shadow-lg  rounded-xl  h-fit lg:h-3/4 overflow-hidden`}
+          className={`w-full flex flex-col border border-copy-lighter shadow-lg  rounded-xl smartphone:h-2/5 h-3/4 overflow-hidden`}
         >
           <textarea
             name="ipText"
@@ -76,13 +77,13 @@ const TranslatePage = () => {
           />
         </div>
         <div
-          className={`w-1/6 ${
+          className={`w-1/6 h-3/4 smartphone:w-full smartphone:h-fit smartphone:py-4  ${
             isDarkMode ? "" : ""
-          } h-1/6  flex items-center justify-center`}
+          } h-1/6  flex flex-col smartphone:flex-row-reverse  gap-4 items-center justify-center`}
         >
           <button
             onClick={handleTranslate}
-            className={`w-12 h-12 p-1  text-white rounded-full flex justify-center items-center${
+            className={`w-12 h-12 p-1 text-white rounded-full flex justify-center items-center ${
               isDarkMode
                 ? "bg-blue-800/30 placeholder:text-copy-light"
                 : "bg-blue-500/30 placeholder:text-Lightcopy-light"
@@ -104,11 +105,17 @@ const TranslatePage = () => {
               <TranslateIcon2 className="w-9 h-9" />
             </motion.span>
           </button>
+          <SelectDropdown
+            selectedLang={selectedLang}
+            setSelectedLang={setSelectedLang}
+          />
         </div>
         <div
-          className={`w-full bg-${
-            isDarkMode ? "gray-700" : "white"
-          } h-4/5 lg:h-3/4`}
+          className={`w-full  smartphone:w-full smartphone:h-2/5  scroll-smooth  border border-copy-lighter shadow-lg  rounded-xl p-2 overflow-y-auto  ${
+            isDarkMode
+              ? "bg-foreground/30 placeholder:text-copy-light"
+              : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
+          } border h-3/4`}
         >
           {MemoizedMarkdown}
         </div>

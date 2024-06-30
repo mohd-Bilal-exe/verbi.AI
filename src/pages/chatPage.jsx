@@ -82,7 +82,7 @@ export default function ChatPage() {
       <div
         id="chatBox"
         ref={chatBoxRef}
-        className="scroll-smooth overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden px-2"
+        className="scroll-smooth overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
       >
         {chatHistory &&
           chatHistory.map((message) => (
@@ -94,7 +94,7 @@ export default function ChatPage() {
             />
           ))}
       </div>
-      <div className="fixed bottom-16 w-full flex justify-center items-center">
+      <div className="fixed bottom-16 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
           className={`flex items-center justify-between p-2 rounded-full h-fit w-full mx-3 overflow-hidden ${
@@ -114,28 +114,33 @@ export default function ChatPage() {
             onChange={handleTextChange}
             value={text}
           />
-          <motion.button
+          <button
             disabled={isLoading}
             type="submit"
-            className={`w-12 h-12 flex justify-center items-center smartphone:h-11 place-self-center ${
+            className={` ${
+              isLoading ? "cursor-not-allowed" : "cursor-pointer"
+            }  w-11 h-10 grid place-content-center smartphone:h-11 place-self-center transition-colors ${
               isDarkMode
-                ? "bg-foregroundLight text-copyLight"
-                : "bg-foreground/60 text-copy"
+                ? "bg-foregroundLight hover:bg-foregroundLight/70  text-copyLight"
+                : "bg-foreground/60 hover:bg-foreground/70 text-copy"
             } rounded-full`}
-            initial={isLoading ? { rotate: 0 } : { rotate: 180 }}
-            animate={isLoading ? { rotate: 360 } : { rotate: 0 }}
-            transition={{
-              duration: 0.5,
-              ease: "easeInOut",
-              repeat: isLoading ? Infinity : 0,
-            }}
           >
-            {isLoading ? (
-              <CircleNotch className="w-9 h-9" weight="duotone" />
-            ) : (
-              <ArrowUp className="w-9 h-9" weight="bold" />
-            )}
-          </motion.button>
+            <motion.span
+              initial={isLoading ? { rotate: 0 } : { rotate: 0 }}
+              animate={isLoading ? { rotate: 360 } : { rotate: 0 }}
+              transition={{
+                duration: isLoading ? 0.5 : 1.2,
+                ease: "easeInOut",
+                repeat: isLoading ? Infinity : 0,
+              }}
+            >
+              {isLoading ? (
+                <CircleNotch className="w-8 h-8" weight="bold" />
+              ) : (
+                <ArrowUp className="w-8 h-8" weight="bold" />
+              )}
+            </motion.span>
+          </button>
         </form>
       </div>
     </motion.div>

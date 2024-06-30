@@ -122,7 +122,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
               ),
               li: ({ ...props }) => (
                 <motion.li
-                  key={`${keys++}`}
+                  key={`${keys++}a`}
                   className={`text-sm mb-1 ml-4 open-sans ${
                     isDarkMode ? "text-lightBg1" : "text-gray-600"
                   }`}
