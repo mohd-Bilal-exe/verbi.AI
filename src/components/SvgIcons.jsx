@@ -32,8 +32,7 @@ export const ChatIcon = () => {
       animate="animate"
       exit="exit"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 26 30"
-      className={"translate-x-0.5"}
+      viewBox="0 0 29 24"
     >
       <g fill="none">
         <path
@@ -43,9 +42,8 @@ export const ChatIcon = () => {
         <path
           stroke="currentColor"
           strokeLinecap="round"
-          strokeWidth={1.5}
+          strokeWidth={1.15}
           d="M8 9h8m-8 3.5h5.5"
-          opacity={0.5}
         ></path>
       </g>
     </motion.svg>

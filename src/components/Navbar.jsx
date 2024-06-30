@@ -96,7 +96,9 @@ const Navbar = () => {
                     : "text-primary-dark scale-110"
                 }  hover:scale-105  ${
                   listItem.id === 1 ? "transition-colors" : "transition-all"
-                } ease-in-out duration-500`}
+                }
+                ${listItem.title === "chat" ? "translate-x-1" : ""}
+                ease-in-out duration-500`}
               >
                 {listItem.id === 1 ? dynamicIcon : listItem.ico}
               </span>
