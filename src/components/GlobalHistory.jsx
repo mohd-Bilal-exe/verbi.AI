@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import TextMarkdownTranslate from "./TextMarkdownTranslate";
 import { deleteHistory } from "../Redux/Actions";
+import { ClearIcon, ExpandIcon } from "./SvgIcons";
+import { Broom, Resize } from "@phosphor-icons/react";
 
 export default function GlobalHistory() {
   const globalHistory = useSelector((state) => state.globalHistory);
@@ -28,7 +30,7 @@ export default function GlobalHistory() {
       layout
       className={` backdrop-blur-lg   ${
         isExpanded
-          ? "w-full h-4/5 absolute bottom-0 left-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl backdrop-brightness-75"
+          ? "w-full h-4/5 absolute bottom-0 left-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl backdrop-brightness-50"
           : "w-11/12 h-2/5 overflow-hidden rounded-t-2xl "
       }  py-5 border-t flex flex-col justify-start items-center gap-2 ${
         isDarkMode
@@ -40,19 +42,30 @@ export default function GlobalHistory() {
         {" "}
         <button
           onClick={handleClearHistory}
-          className={`self-end ml-4 mb-2 ${
+          className={`group w-fit h-8 flex justify-center items-center self-end ml-4 mb-2 ${
             isDarkMode ? "text-white" : "text-black"
           }`}
         >
-          Clear History
+          Clear History <ClearIcon />
         </button>
         <button
-          className={`self-end mr-4 mb-2 ${
+          className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 ${
             isDarkMode ? "text-white" : "text-black"
           }`}
           onClick={handleExpandClick}
         >
-          {isExpanded ? "Collapse" : "See All"}
+          {isExpanded ? (
+            "Collapse"
+          ) : (
+            <>
+              {"Expand "}
+              <Resize
+                className={`group-hover:scale-110 mx-1 group-hover:text-blue-500 transition-all duration-300`}
+                size={20}
+                weight="duotone"
+              />
+            </>
+          )}
         </button>
       </div>
       <div
@@ -133,7 +146,11 @@ export default function GlobalHistory() {
             </motion.div>
           ))
         ) : (
-          <p>No history available</p>
+          <p
+            className={`text-lg ${isDarkMode ? "text-copy" : "text-copyLight"}`}
+          >
+            No history available
+          </p>
         )}
       </div>
     </motion.section>

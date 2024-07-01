@@ -66,7 +66,7 @@ const Navbar = () => {
       id="container"
       className={`fixed backdrop-blur-lg border-t bottom-0 w-screen h-fit flex items-center justify-center montserrat ${
         isDarkMode
-          ? "bg-foreground/60 border-border text-copy"
+          ? "bg-foreground/60 laptop:bg-foreground border-border text-copy"
           : "bg-foregroundLight border-borderLight text-copyLight"
       }`}
     >
