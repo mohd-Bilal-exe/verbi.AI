@@ -9,6 +9,7 @@ import {
   GLOBAL_HISTORY,
   CHAT_HISTORY,
   CURRENT_CHAT,
+  DELETE_HISTORY,
 } from "./Actions";
 
 const initialState = {
@@ -57,7 +58,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
-        userDetails: {}, // Update userDetails to empty object
+        userDetails: {},
+        chatHistory: [],
+        currentChat: [],
+        translationHistory: [],
+        globalHistory: [],
       };
     case ADD_TRANSLATION:
       return {
@@ -84,7 +89,11 @@ const userReducer = (state = initialState, action) => {
           },
         ],
       };
-
+    case DELETE_HISTORY:
+      return {
+        ...state,
+        globalHistory: [],
+      };
     case CHAT_HISTORY: {
       // Find the existing session in chatHistory
       const existingSessionIndex = state.chatHistory.findIndex(

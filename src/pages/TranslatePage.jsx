@@ -35,7 +35,7 @@ const TranslatePage = () => {
       dispatch(addTranslations(translationObj));
       dispatch(
         globalHistory({
-          type: "Translations",
+          type: "Translation",
           id: `${ipText}${Date.now()}`,
           values: {
             translatedTo: selectedLang,

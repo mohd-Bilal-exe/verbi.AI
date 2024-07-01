@@ -29,7 +29,7 @@ const GrammarPage = () => {
       };
       dispatch(
         globalHistory({
-          type: "GrammarChecks",
+          type: "Grammar Check",
           id: `${ipText}${Date.now()}`,
           values: grammarObj,
         })

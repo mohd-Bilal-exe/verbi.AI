@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import GlobalHistory from "../components/GlobalHistory";
 
 export default function HomePage() {
   const gridItems = [
@@ -8,29 +9,29 @@ export default function HomePage() {
       title: "Grammar Check",
       content: "grammarCheckContent",
       path: "/grammarcheck",
-      classes: "bg-yellow-500 col-span-2",
+      classes: "bg-gradient-to-br from-yellow-400 to-orange-500 col-span-2",
     },
     {
       id: 2,
       title: "Translate",
       content: "translateContent",
       path: "/translate",
-      classes: "bg-green-500",
+      classes: "bg-gradient-to-br from-green-400 to-teal-500",
     },
     {
       id: 3,
       title: "Chat",
       content: "chatContent",
       path: "/chat",
-      classes: "bg-blue-500 w-full",
+      classes: "bg-gradient-to-br from-blue-500 to-purple-600 w-full",
     },
   ];
 
   return (
-    <motion.section className="w-screen h-screen px-2 flex flex-col">
+    <motion.section className="w-screen h-screen relative overflow-x-hidden px-1 flex flex-col items-center">
       <div
         id="optionsContainer"
-        className="w-full laptop:px-20 laptop:py-5 desktop:px-20 smartphone:px-5 smartphone:py-10 h-1/2 bg-blue-400 grid grid-cols-2 gap-4"
+        className="w-full h-3/5 laptop:px-20 laptop:py-5 desktop:px-20 smartphone:px-3 smartphone:py-5  grid grid-cols-2 gap-2"
       >
         {gridItems.map((gridItem) => (
           <Link
@@ -44,9 +45,7 @@ export default function HomePage() {
           </Link>
         ))}
       </div>
-      <div id="recentContainer" className="w-full ">
-        Recent Container Content
-      </div>
+      <GlobalHistory />
     </motion.section>
   );
 }

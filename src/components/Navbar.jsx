@@ -64,9 +64,9 @@ const Navbar = () => {
   return (
     <div
       id="container"
-      className={`fixed border-t bottom-0 w-screen h-fit flex items-center justify-center montserrat ${
+      className={`fixed backdrop-blur-lg border-t bottom-0 w-screen h-fit flex items-center justify-center montserrat ${
         isDarkMode
-          ? "bg-foreground/10 border-border text-copy"
+          ? "bg-foreground/60 border-border text-copy"
           : "bg-foregroundLight border-borderLight text-copyLight"
       }`}
     >
@@ -92,8 +92,8 @@ const Navbar = () => {
                   selected !== listItem.path
                     ? "translate-y-1 "
                     : isDarkMode
-                    ? "text-primary-light scale-110"
-                    : "text-primary-dark scale-110"
+                    ? "text-copy scale-110"
+                    : "text-copyLight scale-110"
                 }  hover:scale-105  ${
                   listItem.id === 1 ? "transition-colors" : "transition-all"
                 }
@@ -132,8 +132,8 @@ const Navbar = () => {
                   }}
                   className={`absolute bottom-0 w-20 h-1 rounded-full ${
                     isDarkMode
-                      ? "bg-gradient-to-r from-primary-light/60 to-primary-light shadow-[0px_-5px_25px_#9b69f1] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
-                      : "bg-gradient-to-r from-primary-dark/60 to-primary-light shadow-[0px_-5px_25px_#7c3aed]"
+                      ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_25px_#ffffff] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
+                      : "bg-copyLight shadow-[0px_-5px_20px_#252329] laptop:shadow-[0px_-2px_30px_#252329]"
                   } transition-opacity duration-500`}
                 />
               )}
