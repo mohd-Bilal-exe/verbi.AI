@@ -15,6 +15,7 @@ export default function ChatPage() {
   const textAreaRef = useRef(null);
   const dispatch = useDispatch();
   const chatBoxRef = useRef(null);
+  //const [currentSesh, setCurrentSesh] = useState([]);
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -45,8 +46,11 @@ export default function ChatPage() {
         text: `${text} \n`,
         timestamp: Date.now(),
       };
+
+      //setCurrentSesh((prevSesh) => [...prevSesh, userMessage]);
       dispatch(currentChat(password, userMessage));
       setIsLoading(true);
+
       const result = await chat(password, text);
       setIsLoading(false);
       const aiMessage = {
@@ -54,20 +58,18 @@ export default function ChatPage() {
         text: result.text,
         timestamp: Date.now(),
       };
+      //setCurrentSesh((prevSesh) => [...prevSesh, aiMessage]);
       dispatch(currentChat(password, aiMessage));
 
       if (result.error) {
         console.error("Chat Error:", result.error);
       }
-
       setText(""); // Clear the input field after sending message
-      //scrollToBottom();
     } catch (error) {
       console.error("Error:", error);
       setIsLoading(false);
     }
   };
-
   return (
     <motion.div
       key="chatPage"
@@ -85,9 +87,9 @@ export default function ChatPage() {
         className="scroll-smooth overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
       >
         {chatHistory &&
-          chatHistory.map((message) => (
+          chatHistory.map((message, index) => (
             <TextMarkdown
-              key={message.chat.timestamp}
+              key={index}
               keys={message.chat.timestamp}
               role={message.chat.role}
               plainText={message.chat.text}

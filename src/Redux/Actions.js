@@ -6,52 +6,32 @@ export const IS_LOGIN = "IS_LOGIN";
 export const CHANGE_USER = "CHANGE_USER"; // New action type
 export const LOGOUT_USER = "LOGOUT_USER";
 export const ADD_TRANSLATION = "ADD_TRANSLATION";
-export const GLOBAL_HISTORY ="GLOBAL_HISTORY";
+export const GLOBAL_HISTORY = "GLOBAL_HISTORY";
 export const CHAT_HISTORY = "CHAT_HISTORY";
 export const CURRENT_CHAT = "CURRENT_CHAT";
-export const addChatHistory = (sessionID,history) => ({
+export const addChatHistory = (sessionID, history) => ({
   type: CHAT_HISTORY,
-  payload: {sessionID, history}
-})
+  payload: { sessionID, history },
+});
 export const currentChat = (sessionID, chatObject) => {
   return {
     type: CURRENT_CHAT,
     payload: { sessionID, chatObject },
   };
-}
+};
 export const darkMode = (isOn) => ({
   type: DARK_MODE,
   payload: { isOn },
 });
-export const fetchTask = () => ({
-  
-})
+export const fetchTask = () => ({});
 export const globalHistory = (history) => ({
   type: GLOBAL_HISTORY,
-  payload: history //should be predefined object with history fileds like type, time and info object.
-})
+  payload: history, //should be predefined object with history fileds like type, time and info object.
+});
 export const addTranslations = (translations) => ({
   type: ADD_TRANSLATION,
   payload: translations, //SHOULD BE PREDEFINED OBJECT WITH TRANSLATIONS
 });
-export const fetchUser = () => {
-  return async (dispatch) => {
-    try {
-      const retrievedString = localStorage.getItem("userDetails");
-
-      const retrievedObject = JSON.parse(retrievedString) || {
-        isLoggedIn: false,
-        userDetails: null,
-      };
-      dispatch({
-        type: FETCH_USER,
-        payload: { userDetails: retrievedObject, isLoggedIn: true },
-      });
-    } catch (error) {
-      console.error("Error fetching user:", error);
-    }
-  };
-};
 
 export const addUser = (username, nickname, email, password) => {
   return (dispatch) => {
@@ -60,9 +40,7 @@ export const addUser = (username, nickname, email, password) => {
 
       // Dispatch the action to update the global state
       dispatch({ type: ADD_USER, payload: newUser });
-
-      // Update local storage with the new user
-      localStorage.setItem("userDetails", JSON.stringify(newUser));
+      dispatch({ type: IS_LOGIN, payload: { isLoggedIn: true } });
     } catch (error) {
       console.error("Error adding user:", error);
     }

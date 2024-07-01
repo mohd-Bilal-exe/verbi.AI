@@ -77,9 +77,12 @@ const translate = async (inputText, lang, customInstructions) => {
   }
 };
 
-const grammarCheck = async (inputText) => {
+const grammarCheck = async (inputText, customInstructions) => {
   try {
-    const prompt = `Check the grammar of the following text and provide corrections if any:\n${inputText}`;
+    const prompt = `Check the grammar of the following text and provide corrections if any: ${inputText} \n \n ${
+      customInstructions &&
+      `answer according to the following instructions : ${customInstructions}`
+    } `;
     const result = await Gemini.generateContent(prompt);
     const correctedText = await result.response.text();
     return correctedText;

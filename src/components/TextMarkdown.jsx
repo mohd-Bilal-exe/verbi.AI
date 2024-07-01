@@ -3,21 +3,11 @@ import { motion } from "framer-motion";
 import Markdown from "react-markdown";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
-
-function formatTime(timestamp) {
-  const date = new Date(timestamp);
-  let hours = date.getHours();
-  const minutes = date.getMinutes();
-  const ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  const strMinutes = minutes < 10 ? "0" + minutes : minutes;
-  return hours + ":" + strMinutes + ampm;
-}
+import formatTime from "../utilities/dateString";
 
 const TextMarkdown = React.memo(({ keys, role, plainText }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
-
+  const formatTimefunc = (keys) => formatTime(keys);
   const parentVariants = {
     animate: {
       transition: { staggerChildren: 0.3 },
@@ -57,7 +47,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
         >
           <span className={`w-4/5 text-wrap`}>{plainText} </span>
           <span className={`w-fit scale-75 text-xs place-self-end`}>
-            {formatTime(keys)}
+            {formatTimefunc(keys)}
           </span>
         </motion.p>
       ) : (

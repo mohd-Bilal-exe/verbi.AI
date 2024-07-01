@@ -45,7 +45,6 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentLangList = langList.slice(startIndex, startIndex + itemsPerPage);
-  console.log(currentLangList);
   return (
     <div className="relative w-fit">
       <button
@@ -149,7 +148,7 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
 SelectDropdown.propTypes = {
   selectedLang: PropTypes.string.isRequired,
   setSelectedLang: PropTypes.func.isRequired,
-  isDropdownOpen: PropTypes.bool.isRequired,
+  isDropdownOpen: PropTypes.bool,
 };
 
 export default SelectDropdown;

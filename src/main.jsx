@@ -15,7 +15,7 @@ import { PersistGate } from "redux-persist/integration/react";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["currentChat", "chatHistory"], // Add reducers here that you don't want to persist
+  blacklist: [""], // Added reducers here that I don't want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, userReducer);

@@ -5,21 +5,15 @@ import Navbar from "./components/Navbar";
 import ProfilePage from "./pages/profilePage";
 import TranslatePage from "./pages/TranslatePage";
 import { AnimatePresence } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import LoginPage from "./pages/loginPage";
 import { useEffect } from "react";
-import { fetchUser } from "./Redux/Actions";
 import { rememberMe } from "./Api/aiApi";
 import HomePage from "./pages/HomePage";
 
 function App() {
-  const dispatch = useDispatch();
   const isDarkMode = useSelector((state) => state.darkMode);
   const userDetails = useSelector((state) => state.userDetails);
-
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
 
   useEffect(() => {
     if (userDetails) {

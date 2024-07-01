@@ -1,11 +1,13 @@
 import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { translate } from "../Api/aiApi";
 import TextMarkdownTranslate from "../components/TextMarkdownTranslate";
 import { TranslateIcon2 } from "../components/SvgIcons";
 import SelectDropdown from "../components/SelectDropdown";
 import { getLanguagesWithFlags } from "../Api/langAPI";
+import formatTime from "../utilities/dateString";
+import { addTranslations, globalHistory } from "../Redux/Actions";
 
 const TranslatePage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -14,7 +16,8 @@ const TranslatePage = () => {
   const [loading, setLoading] = useState(false);
   const [selectedLang, setSelectedLang] = useState("English");
   const [customInstructions, setCustomInstructions] = useState("");
-
+  const dispatch = useDispatch();
+  const formatTimefunc = (keys) => formatTime(keys);
   const handleTranslate = async () => {
     setLoading(true);
     try {
@@ -24,6 +27,22 @@ const TranslatePage = () => {
         customInstructions
       );
       setOpText(response);
+      const translationObj = {
+        ipText: ipText,
+        time: formatTimefunc(Date.now()),
+        opText: response,
+      };
+      dispatch(addTranslations(translationObj));
+      dispatch(
+        globalHistory({
+          type: "Translations",
+          id: `${ipText}${Date.now()}`,
+          values: {
+            translatedTo: selectedLang,
+            translationObj,
+          },
+        })
+      );
     } catch (error) {
       console.error("Error during translation:", error);
       // Handle error appropriately
