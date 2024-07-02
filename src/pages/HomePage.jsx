@@ -13,6 +13,8 @@ export default function HomePage() {
       content: "Fine-tune your sentences with precision. ",
       path: "/grammarcheck",
       linkClasses: "col-span-2",
+      imgSrc: "/grammar1.png",
+      imgClass: " w-40 h-40 smartphone:size-48 my-auto  self-end ",
       classes: `bg-gradient-to-br  ${
         isDarkMode
           ? "from-yellow-400 to-orange-500"
@@ -25,6 +27,8 @@ export default function HomePage() {
       content: "Transalte to any language with ease. ",
       path: "/translate",
       linkClasses: "",
+      imgSrc: "/tra.png",
+      imgClass: " w-24 h-24 my-auto mr-4 smartphone:mb-4 self-end ",
       classes: `bg-gradient-to-br  ${
         isDarkMode ? "from-green-400 to-teal-500" : "from-green-300 to-teal-400"
       }`,
@@ -36,7 +40,7 @@ export default function HomePage() {
       path: "/chat",
       linkClasses: "",
       imgSrc: "/chat.png",
-      imgClass: " w-32 h-32 self-end ",
+      imgClass: " w-32 h-32 my-auto self-end ",
       classes: `bg-gradient-to-br ${
         isDarkMode ? "from-accent2 to-accent2lt" : "from-blue-400 to-accent2lt"
       }`,
@@ -97,7 +101,7 @@ export default function HomePage() {
               </div>
               <div
                 id="illustration"
-                className={`flex smartphone:absolute bottom-0 right-1 group-hover:scale-125 transition-all duration-300`}
+                className={`flex smartphone:absolute bottom-0 right-1 group-hover:scale-110 transition-all duration-300`}
               >
                 <img
                   className={gridItem.imgClass}
