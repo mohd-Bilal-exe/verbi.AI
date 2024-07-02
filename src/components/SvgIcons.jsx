@@ -201,22 +201,80 @@ export const EverythingIcon = ({ isDarkMode }) => {
 };
 export const ClearIcon = () => {
   return (
-    <svg
+    <m.svg
+      key="ClearIcon"
+      variants={variants}
+      initial="initial"
+      animate="animate"
+      className={`w-4 h-4 group-hover:scale-110 mx-1`}
       xmlns="http://www.w3.org/2000/svg"
-      className={`w-4 h-4 mx-1 group-hover:scale-110 transition-all duration-300 group-hover:text-red-600 `}
-      viewBox="0 0 256 256"
+      viewBox="0 0 48 48"
     >
-      <g fill="currentColor">
-        <path
-          d="m160 168l-48 48H66.75l-30.06-30.06a16 16 0 0 1 0-22.63L96 104Z"
-          opacity={0.2}
-        ></path>
-        <path d="M225 80.4L183.6 39a24 24 0 0 0-33.94 0L31 157.66a24 24 0 0 0 0 33.94l30.06 30.06a8 8 0 0 0 5.68 2.34H216a8 8 0 0 0 0-16h-84.7l93.7-93.66a24 24 0 0 0 0-33.94M108.68 208H70.05l-27.72-27.72a8 8 0 0 1 0-11.31L96 115.31L148.69 168Zm105-105L160 156.69L107.31 104L161 50.34a8 8 0 0 1 11.32 0l41.38 41.38a8 8 0 0 1 0 11.31Z"></path>
-      </g>
-    </svg>
+      <defs>
+        <mask id="ipTClearFormat0">
+          <g fill="none" stroke="#fff">
+            <path
+              fill="#262626"
+              strokeLinejoin="round"
+              strokeWidth={3.05}
+              d="M44.782 24.17L31.918 7.1L14.135 20.5L27.5 37l3.356-2.336z"
+            ></path>
+            <path
+              strokeLinejoin="round"
+              strokeWidth={3.05}
+              d="m27.5 37l-3.839 3.075l-10.563-.001l-2.6-3.45l-6.433-8.536L14.5 20.225"
+            ></path>
+            <path
+              strokeLinecap="round"
+              strokeWidth={2.35}
+              d="M13.206 40.072h31.36"
+            ></path>
+          </g>
+        </mask>
+      </defs>
+      <path
+        fill="currentColor"
+        d="M0 0h48v48H0z"
+        mask="url(#ipTClearFormat0)"
+      ></path>
+    </m.svg>
   );
 };
-
+export const CollapseIcon = () => {
+  return (
+    <m.svg
+      key="CollapseIcon"
+      variants={variants}
+      initial="initial"
+      animate="animate"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 36 36"
+      className={`w-4 h-4 group-hover:scale-110 mx-1 group-hover:text-blue-200 transition-all duration-300`}
+    >
+      <rect
+        width={32}
+        height={8}
+        x={2}
+        y={22}
+        fill="currentColor"
+        className="clr-i-solid clr-i-solid-path-1"
+        rx={1}
+        ry={1}
+      ></rect>
+      <path
+        fill="currentColor"
+        d="m18 20.7l-5.79-5.79a1 1 0 0 1 0-1.41a1 1 0 0 1 1.41 0L18 17.87l4.38-4.37a1 1 0 0 1 1.41 0a1 1 0 0 1 0 1.41Z"
+        className="clr-i-solid clr-i-solid-path-2"
+      ></path>
+      <path
+        fill="currentColor"
+        d="m18 14.5l-5.79-5.79a1 1 0 0 1 0-1.42a1 1 0 0 1 1.41 0L18 11.67l4.38-4.38a1 1 0 0 1 1.41 0a1 1 0 0 1 0 1.42Z"
+        className="clr-i-solid clr-i-solid-path-3"
+      ></path>
+      <path fill="none" d="M0 0h36v36H0z"></path>
+    </m.svg>
+  );
+};
 export const ExpandIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">

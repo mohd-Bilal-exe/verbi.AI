@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, m } from "framer-motion";
 import TextMarkdownTranslate from "./TextMarkdownTranslate";
 import { deleteHistory } from "../Redux/Actions";
-import { ClearIcon } from "./SvgIcons";
+import { ClearIcon, CollapseIcon } from "./SvgIcons";
 import { Resize } from "@phosphor-icons/react";
 
 export default function GlobalHistory() {
@@ -52,23 +52,36 @@ export default function GlobalHistory() {
           : "bg-foreground/30 border-copyLight/20"
       }`}
     >
-      <div className={`w-full flex justify-between`}>
+      <div
+        className={`w-full flex justify-between ${
+          isDarkMode ? "text-white" : "text-copy"
+        }`}
+      >
         <button
+          disabled={globalHistory.length === 0}
           onClick={handleClearHistory}
-          className={`group w-fit h-8 flex justify-center items-center self-end ml-4 mb-2 ${
-            isDarkMode ? "text-white" : "text-black"
+          className={`group w-fit h-8 flex justify-center items-center self-end ml-4 mb-2 p-2 rounded-lg  transition-all duration-300 ${
+            isExpanded ? "bg-black/20" : ""
+          } ${
+            globalHistory.length === 0
+              ? "cursor-not-allowed"
+              : "cursor-pointer hover:text-red-500"
           }`}
         >
           Clear History <ClearIcon />
         </button>
         <button
-          className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 ${
-            isDarkMode ? "text-white" : "text-black"
-          }`}
+          disabled={globalHistory.length === 0}
+          className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 p-2 rounded-lg  ${
+            isExpanded ? "bg-black/20" : ""
+          } `}
           onClick={() => handleExpandClick(!isExpanded)}
         >
           {isExpanded ? (
-            "Collapse"
+            <>
+              {"Collapse"}
+              <CollapseIcon />
+            </>
           ) : (
             <>
               {"Expand "}
@@ -163,11 +176,7 @@ export default function GlobalHistory() {
             </m.div>
           ))
         ) : (
-          <p
-            className={`text-lg ${isDarkMode ? "text-copy" : "text-copyLight"}`}
-          >
-            No history available
-          </p>
+          <p className={`text-2xl text-copy`}>No history available</p>
         )}
       </div>
     </m.section>
