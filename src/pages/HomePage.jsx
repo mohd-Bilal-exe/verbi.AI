@@ -1,34 +1,48 @@
 import { Link } from "react-router-dom";
 import { m } from "framer-motion";
 import GlobalHistory from "../components/GlobalHistory";
+import { useSelector } from "react-redux";
+import { ArrowCircleRight } from "@phosphor-icons/react";
 
 export default function HomePage() {
+  const isDarkMode = useSelector((state) => state.darkMode);
   const gridItems = [
     {
       id: 1,
       title: "Grammar Check",
-      content: "grammarCheckContent",
+      content: "Fine-tune your sentences with precision. ",
       path: "/grammarcheck",
       linkClasses: "col-span-2",
-      classes: "bg-gradient-to-br from-yellow-400 to-orange-500 ",
+      classes: `bg-gradient-to-br  ${
+        isDarkMode
+          ? "from-yellow-400 to-orange-500"
+          : "from-yellow-200 to-orange-300"
+      }`,
     },
     {
       id: 2,
       title: "Translate",
-      content: "translateContent",
+      content: "Transalte to any language with ease. ",
       path: "/translate",
       linkClasses: "",
-      classes: "bg-gradient-to-br from-green-400 to-teal-500",
+      classes: `bg-gradient-to-br  ${
+        isDarkMode ? "from-green-400 to-teal-500" : "from-green-300 to-teal-400"
+      }`,
     },
     {
       id: 3,
       title: "Chat",
-      content: "chatContent",
+      content: "Have a conversations with Gemini. ✨",
       path: "/chat",
       linkClasses: "",
-      classes: "bg-gradient-to-br from-blue-500 to-purple-600 w-full",
+      imgSrc: "/chat.png",
+      imgClass: " w-32 h-32 self-end ",
+      classes: `bg-gradient-to-br ${
+        isDarkMode ? "from-accent2 to-accent2lt" : "from-blue-400 to-accent2lt"
+      }`,
     },
   ];
+
   const parentVariants = {
     initial: {
       opacity: 0.5,
@@ -62,14 +76,35 @@ export default function HomePage() {
           <Link
             key={gridItem.id}
             to={gridItem.path}
-            className={`w-full h-full ${gridItem.linkClasses} `}
+            className={`relative w-full h-full ${gridItem.linkClasses} `}
           >
             <m.div
               variants={fadeInUpVariants}
               to={gridItem.path}
-              className={`w-full h-full text-center rounded-xl  ${gridItem.classes}`}
+              className={`group w-full h-full flex flex-row justify-between rounded-xl  ${gridItem.classes}`}
             >
-              {gridItem.title}
+              <div id="texts" className={`w-fit flex flex-col text-2xl mt-10`}>
+                <h1 className={`ml-5`}>{gridItem.title}</h1>
+                <h2
+                  className={`flex items-center smartphone:items-start smartphone:flex-col ml-6 w-fit smartphone:w-3/5 text-sm group-hover:translate-x-5 transition-transform duration-300`}
+                >
+                  {gridItem.content}
+                  <ArrowCircleRight
+                    className={`group-hover:-rotate-45 group-hover:translate-x-4 group-hover:scale-125 h-7 w-7 transition-transform duration-300 `}
+                    weight="duotone"
+                  />
+                </h2>
+              </div>
+              <div
+                id="illustration"
+                className={`flex smartphone:absolute bottom-0 right-1 group-hover:scale-125 transition-all duration-300`}
+              >
+                <img
+                  className={gridItem.imgClass}
+                  src={gridItem.imgSrc}
+                  alt=""
+                />
+              </div>
             </m.div>
           </Link>
         ))}

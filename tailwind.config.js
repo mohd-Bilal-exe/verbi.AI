@@ -20,15 +20,8 @@ export default {
         desktop: "1920px",
       },
       colors: {
-        primary: "#7c3aed",
-        "primary-content": "#ffffff",
-        "primary-dark": "#5f14e0",
-        "primary-light": "#9b69f1",
-
-        secondary: "#ed3a51",
-        "secondary-content": "#ffffff",
-        "secondary-dark": "#e0142f",
-        "secondary-light": "#f1697a",
+        accent2: "#4361ee",
+        accent2lt: "#4895ef",
 
         background: "#19181b",
         foreground: "#252329",
