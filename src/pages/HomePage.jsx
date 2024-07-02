@@ -106,7 +106,7 @@ export default function HomePage() {
                 <img
                   className={gridItem.imgClass}
                   src={gridItem.imgSrc}
-                  alt=""
+                  loading="lazy"
                 />
               </div>
             </m.div>
