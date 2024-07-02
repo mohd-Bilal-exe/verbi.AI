@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useSelector } from "react-redux";
 
 // Extracted SVG icons
@@ -76,7 +76,7 @@ const Navbar = () => {
         }`}
       >
         {listItems.map((listItem) => (
-          <motion.li
+          <m.li
             key={listItem.id}
             layout
             className="group w-1/4 flex justify-center items-center"
@@ -122,7 +122,7 @@ const Navbar = () => {
                   : null}
               </h1>
               {selected === listItem.path && (
-                <motion.div
+                <m.div
                   layout
                   layoutId="underline"
                   transition={{
@@ -138,7 +138,7 @@ const Navbar = () => {
                 />
               )}
             </Link>
-          </motion.li>
+          </m.li>
         ))}
       </ul>
     </div>

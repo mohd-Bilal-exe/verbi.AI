@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { currentChat } from "../Redux/Actions";
 import TextMarkdown from "../components/TextMarkdown";
@@ -71,7 +71,7 @@ export default function ChatPage() {
     }
   };
   return (
-    <motion.div
+    <m.div
       key="chatPage"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -127,7 +127,7 @@ export default function ChatPage() {
                 : "bg-foreground/60 hover:bg-foreground/70 text-copy"
             } rounded-full`}
           >
-            <motion.span
+            <m.span
               initial={isLoading ? { rotate: 0 } : { rotate: 0 }}
               animate={isLoading ? { rotate: 360 } : { rotate: 0 }}
               transition={{
@@ -141,10 +141,10 @@ export default function ChatPage() {
               ) : (
                 <ArrowUp className="w-8 h-8" weight="bold" />
               )}
-            </motion.span>
+            </m.span>
           </button>
         </form>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

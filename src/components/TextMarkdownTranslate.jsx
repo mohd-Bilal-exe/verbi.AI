@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Markdown from "react-markdown";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
@@ -7,26 +7,35 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
 
   const parentVariants = {
+    initial: {
+      opacity: 0,
+    },
     animate: {
-      transition: { staggerChildren: 0.3 },
+      opacity: 1,
+      transition: { staggerChildren: history ? 0.1 : 0.3 },
     },
   };
 
   const fadeInUpVariants = {
     initial: { opacity: 0, y: 10 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: history ? 0.1 : 0.5 },
+    },
   };
 
-  // Counter for generating unique keys
-  let keyCounter = 0;
-
   return (
-    <motion.div variants={parentVariants} className="w-full h-full">
+    <m.div
+      variants={parentVariants}
+      initial="initial"
+      animate="animate"
+      className="w-full h-full"
+    >
       <Markdown
         components={{
           p: ({ ...props }) => (
-            <motion.p
-              key={keyCounter++}
+            <m.p
               variants={fadeInUpVariants}
               className={`text-base mb-2 open-sans ${
                 isDarkMode
@@ -39,8 +48,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             />
           ),
           h1: ({ ...props }) => (
-            <motion.h1
-              key={keyCounter++}
+            <m.h1
               variants={fadeInUpVariants}
               className={`text-3xl font-bold mb-4 playfair ${
                 isDarkMode
@@ -53,8 +61,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             />
           ),
           h2: ({ ...props }) => (
-            <motion.h2
-              key={keyCounter++}
+            <m.h2
               variants={fadeInUpVariants}
               className={`text-2xl font-semibold mb-3 montserrat ${
                 isDarkMode
@@ -67,8 +74,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             />
           ),
           h3: ({ ...props }) => (
-            <motion.h3
-              key={keyCounter++}
+            <m.h3
               variants={fadeInUpVariants}
               className={`text-xl font-medium mb-2 montserrat ${
                 isDarkMode
@@ -81,8 +87,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             />
           ),
           ul: ({ ...props }) => (
-            <motion.ul
-              key={keyCounter++}
+            <m.ul
               variants={fadeInUpVariants}
               className={`list-disc list-inside mb-4 ${
                 isDarkMode
@@ -95,8 +100,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             />
           ),
           ol: ({ ...props }) => (
-            <motion.ol
-              key={keyCounter++}
+            <m.ol
               variants={fadeInUpVariants}
               className={`list-decimal list-inside mb-4 ${
                 isDarkMode
@@ -109,8 +113,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             />
           ),
           li: ({ ...props }) => (
-            <motion.li
-              key={keyCounter++}
+            <m.li
               variants={fadeInUpVariants}
               className={`text-sm mb-1 ml-4 open-sans ${
                 isDarkMode
@@ -123,8 +126,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             />
           ),
           strong: ({ ...props }) => (
-            <motion.strong
-              key={keyCounter++}
+            <m.strong
               variants={fadeInUpVariants}
               className={`text-lg tracking-wide m-1 font-bold montserrat ${
                 isDarkMode
@@ -140,7 +142,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
       >
         {plainText}
       </Markdown>
-    </motion.div>
+    </m.div>
   );
 };
 

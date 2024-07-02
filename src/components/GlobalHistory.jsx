@@ -1,45 +1,58 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import TextMarkdownTranslate from "./TextMarkdownTranslate";
 import { deleteHistory } from "../Redux/Actions";
-import { ClearIcon, ExpandIcon } from "./SvgIcons";
-import { Broom, Resize } from "@phosphor-icons/react";
+import { ClearIcon } from "./SvgIcons";
+import { Resize } from "@phosphor-icons/react";
 
 export default function GlobalHistory() {
   const globalHistory = useSelector((state) => state.globalHistory);
   const dispatch = useDispatch();
   const isDarkMode = useSelector((state) => state.darkMode);
   const [isExpanded, setIsExpanded] = useState(false);
-  console.log(globalHistory);
+  const [expandedItems, setExpandedItems] = useState({});
+
   const handleClearHistory = () => {
     dispatch(deleteHistory());
   };
-  const handleExpandClick = () => {
-    setIsExpanded((prevState) => !prevState);
+
+  const handleExpandClick = (state) => {
+    setIsExpanded(state);
   };
+
   const handleExpandClickDiv = (id) => {
-    setIsExpanded((prevState) => ({
+    setExpandedItems((prevState) => ({
       ...prevState,
       [id]: !prevState[id],
     }));
   };
+
   return (
-    <motion.section
-      transition={{ duration: 0.5, ease: "easeInOut", type: "spring" }}
+    <m.section
+      key={"GlobalHistory"}
       layout
-      className={` backdrop-blur-lg   ${
+      initial={{ y: 250, opacity: 0 }}
+      animate={
         isExpanded
-          ? "w-full h-4/5 absolute bottom-0 left-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl backdrop-brightness-50"
-          : "w-11/12 h-2/5 overflow-hidden rounded-t-2xl "
-      }  py-5 border-t flex flex-col justify-start items-center gap-2 ${
+          ? { y: 0, opacity: 1, height: "90vh", width: "100%" }
+          : { y: 0, opacity: 1, height: "30vh", width: "90%" }
+      }
+      transition={{
+        duration: 0.5,
+        type: "spring",
+      }}
+      className={`backdrop-blur-lg transition-transform ${
+        isExpanded
+          ? "absolute bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl backdrop-brightness-50"
+          : "overflow-hidden rounded-t-2xl"
+      } py-5 border-t flex flex-col justify-start items-center gap-2 ${
         isDarkMode
           ? "bg-foregroundLight/10 border-copy/20"
           : "bg-foreground/30 border-copyLight/20"
       }`}
     >
       <div className={`w-full flex justify-between`}>
-        {" "}
         <button
           onClick={handleClearHistory}
           className={`group w-fit h-8 flex justify-center items-center self-end ml-4 mb-2 ${
@@ -52,7 +65,7 @@ export default function GlobalHistory() {
           className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 ${
             isDarkMode ? "text-white" : "text-black"
           }`}
-          onClick={handleExpandClick}
+          onClick={() => handleExpandClick(!isExpanded)}
         >
           {isExpanded ? (
             "Collapse"
@@ -73,17 +86,20 @@ export default function GlobalHistory() {
       >
         {globalHistory && globalHistory.length > 0 ? (
           globalHistory.map((history) => (
-            <motion.div
-              key={history.id}
+            <m.div
+              key={`${history.id}-${history.type}`}
               className={`w-11/12 flex flex-col justify-start rounded-lg p-2 cursor-pointer ${
                 isDarkMode ? "bg-foregroundLight/60" : "bg-foregroundLight/60"
               }`}
-              onClick={() => handleExpandClickDiv(history.id)}
+              onClick={() => {
+                handleExpandClick(true);
+                handleExpandClickDiv(history.id);
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <span className={`w-full  text-2xl`}>
+              <span className={`w-full text-2xl`}>
                 {history.type}
                 {history.values.translatedTo && (
                   <span className={`mx-3 text-sm`}>
@@ -97,15 +113,16 @@ export default function GlobalHistory() {
                 )}
               </span>
               <AnimatePresence>
-                {isExpanded[history.id] && (
-                  <motion.span
+                {expandedItems[history.id] && (
+                  <m.span
+                    key={history.id}
                     className={`w-full flex flex-col`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.5, type: "spring" }}
                   >
-                    <div key="input" className={` p-3`}>
+                    <div key="input" className={`p-3`}>
                       {history.type === "Translation" ? (
                         <>
                           <span className={`my-1 font-semibold`}>
@@ -117,7 +134,7 @@ export default function GlobalHistory() {
                         history.values.ipText
                       )}
                     </div>
-                    <div key="output" className={` p-3`}>
+                    <div key="output" className={`p-3`}>
                       {history.type === "Translation" ? (
                         <>
                           <span className={`my-1 font-semibold`}>
@@ -140,10 +157,10 @@ export default function GlobalHistory() {
                         </>
                       )}
                     </div>
-                  </motion.span>
+                  </m.span>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </m.div>
           ))
         ) : (
           <p
@@ -153,6 +170,6 @@ export default function GlobalHistory() {
           </p>
         )}
       </div>
-    </motion.section>
+    </m.section>
   );
 }

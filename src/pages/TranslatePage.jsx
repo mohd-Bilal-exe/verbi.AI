@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { translate } from "../Api/aiApi";
 import TextMarkdownTranslate from "../components/TextMarkdownTranslate";
@@ -59,7 +59,7 @@ const TranslatePage = () => {
   );
 
   return (
-    <motion.div
+    <m.div
       key="TranslatePage"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -112,7 +112,7 @@ const TranslatePage = () => {
             } ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
             disabled={loading}
           >
-            <motion.span
+            <m.span
               initial={{ rotate: 0 }}
               animate={loading ? { rotate: 360 } : { rotate: 0 }}
               transition={{
@@ -125,7 +125,7 @@ const TranslatePage = () => {
               key="icooons"
             >
               <TranslateIcon2 className="w-9 h-9" />
-            </motion.span>
+            </m.span>
           </button>
           <SelectDropdown
             selectedLang={selectedLang}
@@ -143,7 +143,7 @@ const TranslatePage = () => {
           {MemoizedMarkdown}
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 };
 

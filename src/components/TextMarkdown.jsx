@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Markdown from "react-markdown";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
@@ -9,7 +9,11 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
   const formatTimefunc = (keys) => formatTime(keys);
   const parentVariants = {
+    initial: {
+      opacity: 0.5,
+    },
     animate: {
+      opacity: 1,
       transition: { staggerChildren: 0.3 },
     },
   };
@@ -20,7 +24,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
   };
 
   return (
-    <motion.div
+    <m.div
       className={`h-fit text-wrap  ${
         role === "user"
           ? "place-self-end laptop:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
@@ -39,7 +43,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
       animate="animate"
     >
       {role === "user" ? (
-        <motion.p
+        <m.p
           key={`${keys}user`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
@@ -49,14 +53,14 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
           <span className={`w-fit scale-75 text-xs place-self-end`}>
             {formatTimefunc(keys)}
           </span>
-        </motion.p>
+        </m.p>
       ) : (
         <div className={`flex flex-col`}>
           <Markdown
             key={keys}
             components={{
               p: ({ ...props }) => (
-                <motion.p
+                <m.p
                   variants={fadeInUpVariants}
                   key={keys++}
                   className={`text-base mb-2 open-sans ${
@@ -66,7 +70,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 />
               ),
               h1: ({ ...props }) => (
-                <motion.h1
+                <m.h1
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-3xl font-bold mb-4 playfair ${
@@ -76,7 +80,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 />
               ),
               h2: ({ ...props }) => (
-                <motion.h2
+                <m.h2
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-2xl font-semibold mb-3 montserrat ${
@@ -86,7 +90,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 />
               ),
               h3: ({ ...props }) => (
-                <motion.h3
+                <m.h3
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-xl font-medium mb-2 montserrat ${
@@ -96,7 +100,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 />
               ),
               ul: ({ ...props }) => (
-                <motion.ul
+                <m.ul
                   key={keys++}
                   className={`list-disc list-inside mb-4 ${
                     isDarkMode ? "text-lightBg1" : "text-gray-800"
@@ -106,7 +110,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 />
               ),
               ol: ({ ...props }) => (
-                <motion.ol
+                <m.ol
                   key={keys++}
                   className={`list-decimal list-inside mb-4 ${
                     isDarkMode ? "text-copy" : "text-copyLight"
@@ -116,7 +120,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 />
               ),
               li: ({ ...props }) => (
-                <motion.li
+                <m.li
                   key={`${keys++}a`}
                   className={`text-sm mb-1 ml-4 open-sans ${
                     isDarkMode ? "text-copy" : "text-copyLight"
@@ -126,7 +130,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 />
               ),
               strong: ({ ...props }) => (
-                <motion.strong
+                <m.strong
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-lg tracking-widest m-1 font-bold montserrat ${
@@ -144,7 +148,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
           </span>
         </div>
       )}
-    </motion.div>
+    </m.div>
   );
 });
 

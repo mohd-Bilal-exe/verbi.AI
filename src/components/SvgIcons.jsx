@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import PropTypes from "prop-types";
 const variants = {
   initial: {
@@ -25,7 +25,7 @@ const variants = {
 
 export const ChatIcon = () => {
   return (
-    <motion.svg
+    <m.svg
       key="chatIcon"
       variants={variants}
       initial="initial"
@@ -46,13 +46,13 @@ export const ChatIcon = () => {
           d="M8 9h8m-8 3.5h5.5"
         ></path>
       </g>
-    </motion.svg>
+    </m.svg>
   );
 };
 
 export const TranslateIcon = () => {
   return (
-    <motion.svg
+    <m.svg
       key="TranslateIcon"
       variants={variants}
       initial="initial"
@@ -65,12 +65,12 @@ export const TranslateIcon = () => {
         fill="currentColor"
         d="M3.385 5.997a6.07 6.07 0 0 1 4.576-.467h.001c1.232.362 1.906 1.11 2.237 1.94c.3.754.3 1.536.3 1.99v5.79a.75.75 0 0 1-1.5 0v-.3a9 9 0 0 1-.396.222c-.952.505-2.327 1.018-3.757.761c-1.584-.285-2.576-1.595-2.8-2.952c-.229-1.38.316-2.937 1.902-3.697c1.44-.69 2.99-.628 4.122-.427c.342.061.653.136.923.211c-.013-.351-.055-.71-.188-1.042c-.166-.417-.491-.83-1.264-1.056a4.57 4.57 0 0 0-3.431.34a.75.75 0 0 1-.725-1.313m4.423 4.337c-.986-.175-2.175-.194-3.212.303c-.891.427-1.208 1.27-1.07 2.1c.141.854.741 1.568 1.586 1.72c.938.169 1.947-.164 2.788-.61a8 8 0 0 0 1.098-.702v-2.507a8.4 8.4 0 0 0-1.19-.304m8.677-3.296a.75.75 0 0 1 .476.948c-.09.27-.185.61-.271.94c.948-.088 1.87-.226 2.638-.406a.75.75 0 1 1 .343 1.46c-.973.229-2.152.392-3.336.481q-.164.818-.257 1.5a6 6 0 0 1 1.672-.238a.75.75 0 0 1 1.5.027l-.003.222a4.04 4.04 0 0 1 2.504 2.423a3.98 3.98 0 0 1-.154 3.128c-.496 1.025-1.44 1.894-2.827 2.427a.75.75 0 0 1-.538-1.4c1.083-.416 1.708-1.046 2.015-1.68a2.48 2.48 0 0 0 .097-1.954a2.55 2.55 0 0 0-1.278-1.399a7.63 7.63 0 0 1-2.285 4.047q.086.197.17.424a.75.75 0 1 1-1.423.478a4.7 4.7 0 0 1-1.24.474c-.72.155-1.557.099-2.13-.486c-.865-.886-.818-2.277-.204-3.442c.477-.908 1.323-1.77 2.538-2.413c.06-.614.157-1.298.3-2.064c-.654.014-1.28.002-1.844-.037a.75.75 0 0 1 .102-1.496c.622.042 1.331.05 2.067.024c.116-.472.272-1.067.42-1.512a.75.75 0 0 1 .948-.476m-2.058 7.372c-.546.413-.92.87-1.146 1.3c-.444.843-.289 1.45-.05 1.695c.055.057.258.172.742.068c.345-.074.672-.202.977-.373a8 8 0 0 1-.386-1.373a9 9 0 0 1-.137-1.317m1.755 1.66a6.65 6.65 0 0 0 1.413-2.848a4.7 4.7 0 0 0-1.328.25a8 8 0 0 0-.34.12a8.6 8.6 0 0 0 .113 1.867q.062.338.142.611"
       ></path>
-    </motion.svg>
+    </m.svg>
   );
 };
 export const GrammarCheckIcon = () => {
   return (
-    <motion.svg
+    <m.svg
       key="GrammarCheckIcon"
       variants={variants}
       initial="initial"
@@ -87,12 +87,12 @@ export const GrammarCheckIcon = () => {
         strokeWidth={1.35}
         d="M14 9a3 3 0 1 0 6 0a3 3 0 0 0-6 0M4 12V7a3 3 0 1 1 6 0v5M4 9h6m10-3v6M4 16h12M4 20h6m4 0l2 2l5-5"
       ></path>
-    </motion.svg>
+    </m.svg>
   );
 };
 export const GrammarCheckIcon2 = () => {
   return (
-    <motion.svg
+    <m.svg
       key="GrammarCheckIcon2"
       variants={variants}
       initial="initial"
@@ -105,12 +105,12 @@ export const GrammarCheckIcon2 = () => {
         fill="currentColor"
         d="M2.5 5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h6.883a1.5 1.5 0 0 1-.373-.99V11zm0 3h6.377l-1 1H2.5a.5.5 0 0 1 0-1M14 7a.5.5 0 0 1 .496.439l.098.791a2.5 2.5 0 0 0 2.176 2.176l.791.098a.5.5 0 0 1 0 .992l-.791.098a2.5 2.5 0 0 0-2.176 2.176l-.098.791a.5.5 0 0 1-.992 0l-.098-.791a2.5 2.5 0 0 0-2.176-2.176l-.791-.098a.5.5 0 0 1 0-.992l.791-.098a2.5 2.5 0 0 0 2.176-2.176l.098-.791A.5.5 0 0 1 14 7m0 2.597A3.5 3.5 0 0 1 12.597 11c.593.322 1.08.81 1.403 1.403c.322-.593.81-1.08 1.403-1.403A3.5 3.5 0 0 1 14 9.597m-2.147 3.55a.5.5 0 0 1 0 .707l-4 3.996a.5.5 0 0 1-.706-.707l3.999-3.997a.5.5 0 0 1 .707 0"
       ></path>
-    </motion.svg>
+    </m.svg>
   );
 };
 export const HomeIcon = () => {
   return (
-    <motion.svg
+    <m.svg
       key="HomeIcon"
       variants={variants}
       initial="initial"
@@ -136,12 +136,12 @@ export const HomeIcon = () => {
         fill="currentColor"
         rx={0.5}
       ></rect>
-    </motion.svg>
+    </m.svg>
   );
 };
 export const ProfileIcon = () => {
   return (
-    <motion.svg
+    <m.svg
       key="ProfileIcon"
       variants={variants}
       initial="initial"
@@ -170,12 +170,12 @@ export const ProfileIcon = () => {
           strokeWidth={2}
         ></circle>
       </g>
-    </motion.svg>
+    </m.svg>
   );
 };
 export const EverythingIcon = ({ isDarkMode }) => {
   return (
-    <motion.svg
+    <m.svg
       key="EverythingIcon"
       variants={variants}
       initial="initial"
@@ -196,7 +196,7 @@ export const EverythingIcon = ({ isDarkMode }) => {
         ></path>
         <path d="M80 40a40 40 0 1 0 40 40a40 40 0 0 0-40-40m0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24m96 16a40 40 0 1 0-40-40a40 40 0 0 0 40 40m0-64a24 24 0 1 1-24 24a24 24 0 0 1 24-24m-96 80a40 40 0 1 0 40 40a40 40 0 0 0-40-40m0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24m136-24a8 8 0 0 1-8 8h-24v24a8 8 0 0 1-16 0v-24h-24a8 8 0 0 1 0-16h24v-24a8 8 0 0 1 16 0v24h24a8 8 0 0 1 8 8"></path>
       </g>
-    </motion.svg>
+    </m.svg>
   );
 };
 export const ClearIcon = () => {

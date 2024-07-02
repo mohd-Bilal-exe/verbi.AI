@@ -1,30 +1,41 @@
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { rememberMe } from "../Api/aiApi";
 
 export default function LoginPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const isDarkMode = useSelector(state => state.darkMode);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const isDarkMode = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Get the navigate function
 
-  const onSubmit = data => {
+  const onSubmit = (data) => {
     dispatch(addUser(data.username, data.nickname, data.email, data.password));
-    rememberMe(data.password, data.username, data.nickname,"im a software engineer")
-    navigate("/profile"); 
+    rememberMe(
+      data.password,
+      data.username,
+      data.nickname,
+      "im a software engineer"
+    );
+    navigate("/profile");
   };
 
   return (
-    <motion.section
-    key={"GrammarPage"}
-      initial={{ opacity: 0, }}
-      animate={{ opacity: 1,}}
-      exit={{ opacity: 0, }}
-      transition={{duration:0.5, type:"spring"}}
-      className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-sm backdrop-brightness-25 flex justify-center items-center marker: ${isDarkMode ? 'bg-bg1/10 text-black' : 'text-bg1'}`}
+    <m.section
+      key={"GrammarPage"}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, type: "spring" }}
+      className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-sm backdrop-brightness-25 flex justify-center items-center marker: ${
+        isDarkMode ? "bg-bg1/10 text-black" : "text-bg1"
+      }`}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -40,7 +51,11 @@ export default function LoginPage() {
             {...register("username", { required: "Username is required" })}
             className="w-full p-2 border border-gray-300 rounded"
           />
-          {errors.username && <span className="text-red-500 text-sm">{errors.username.message}</span>}
+          {errors.username && (
+            <span className="text-red-500 text-sm">
+              {errors.username.message}
+            </span>
+          )}
         </div>
 
         <div className="mb-4">
@@ -50,7 +65,11 @@ export default function LoginPage() {
             {...register("password", { required: "Password is required" })}
             className="w-full p-2 border border-gray-300 rounded"
           />
-          {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+          {errors.password && (
+            <span className="text-red-500 text-sm">
+              {errors.password.message}
+            </span>
+          )}
         </div>
 
         <div className="mb-4">
@@ -69,7 +88,9 @@ export default function LoginPage() {
             {...register("email", { required: "Email is required" })}
             className="w-full p-2 border border-gray-300 rounded"
           />
-          {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+          {errors.email && (
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
+          )}
         </div>
 
         <button
@@ -79,6 +100,6 @@ export default function LoginPage() {
           Submit
         </button>
       </form>
-    </motion.section>
+    </m.section>
   );
 }
