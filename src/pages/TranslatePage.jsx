@@ -3,11 +3,11 @@ import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { translate } from "../Api/aiApi";
 import TextMarkdownTranslate from "../components/TextMarkdownTranslate";
-import { TranslateIcon2 } from "../components/SvgIcons";
 import SelectDropdown from "../components/SelectDropdown";
 import { getLanguagesWithFlags } from "../Api/langAPI";
 import formatTime from "../utilities/dateString";
 import { addTranslations, globalHistory } from "../Redux/Actions";
+import DoButton from "../components/DoButton";
 
 const TranslatePage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -103,30 +103,16 @@ const TranslatePage = () => {
             isDarkMode ? "" : ""
           } h-1/6  flex flex-col smartphone:flex-row-reverse  gap-4 items-center justify-center`}
         >
-          <button
-            onClick={handleTranslate}
-            className={`w-12 h-12 p-1 text-white rounded-full flex justify-center items-center ${
+          <DoButton
+            loading={loading}
+            func={handleTranslate}
+            text="Translate"
+            classes={`bg-gradient-to-br  ${
               isDarkMode
-                ? "bg-blue-800/30 placeholder:text-copy-light"
-                : "bg-blue-500/30 placeholder:text-Lightcopy-light"
-            } ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
-            disabled={loading}
-          >
-            <m.span
-              initial={{ rotate: 0 }}
-              animate={loading ? { rotate: 360 } : { rotate: 0 }}
-              transition={{
-                duration: 0.5,
-                type: "spring",
-                ease: "easeInOut",
-                repeat: loading ? Infinity : 0,
-              }}
-              className={`w-12 h-12 flex justify-center items-center `}
-              key="icooons"
-            >
-              <TranslateIcon2 className="w-9 h-9" />
-            </m.span>
-          </button>
+                ? "from-green-400 to-teal-500"
+                : "from-green-300 to-teal-400"
+            }`}
+          />
           <SelectDropdown
             selectedLang={selectedLang}
             setSelectedLang={setSelectedLang}

@@ -90,9 +90,13 @@ export default function HomePage() {
               className={`group w-full h-full flex flex-row justify-between rounded-xl  ${gridItem.classes}`}
             >
               <div id="texts" className={`w-fit flex flex-col text-2xl mt-10`}>
-                <h1 className={`ml-5`}>{gridItem.title}</h1>
+                <h1
+                  className={`group-hover:translate-x-2 transition-transform duration-300 ml-5 montserrat tracking-wider font-medium`}
+                >
+                  {gridItem.title}
+                </h1>
                 <h2
-                  className={`flex items-center smartphone:items-start smartphone:flex-col ml-6 w-fit smartphone:w-3/5 text-sm group-hover:translate-x-5 transition-transform duration-300`}
+                  className={`open-sans font-medium  flex items-center smartphone:items-start smartphone:flex-col ml-6 w-fit smartphone:w-3/5 text-sm group-hover:translate-x-5 transition-transform duration-300`}
                 >
                   {gridItem.content}
                   <ArrowCircleRight

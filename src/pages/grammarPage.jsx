@@ -2,11 +2,11 @@ import { useState, useMemo, useEffect } from "react";
 import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import TextMarkdownTranslate from "../components/TextMarkdownTranslate";
-import { GrammarCheckIcon } from "../components/SvgIcons";
 import { getLanguagesWithFlags } from "../Api/langAPI";
 import formatTime from "../utilities/dateString";
 import { globalHistory } from "../Redux/Actions";
 import { grammarCheck } from "../Api/aiApi";
+import DoButton from "../components/DoButton";
 
 const GrammarPage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -16,7 +16,6 @@ const GrammarPage = () => {
   const [customInstructions, setCustomInstructions] = useState("");
   const dispatch = useDispatch();
   const formatTimefunc = (keys) => formatTime(keys);
-
   const handleGrammarCheck = async () => {
     setLoading(true);
     try {
@@ -96,39 +95,30 @@ const GrammarPage = () => {
             isDarkMode ? "" : ""
           } h-1/6  flex flex-col smartphone:flex-row-reverse  gap-4 items-center justify-center`}
         >
-          <button
-            onClick={handleGrammarCheck}
-            className={`w-12 h-12 p-1 text-white rounded-md flex justify-center items-center ${
+          <DoButton
+            loading={loading}
+            func={handleGrammarCheck}
+            classes={`bg-gradient-to-br  ${
               isDarkMode
-                ? "bg-blue-800/30 placeholder:text-copy-light"
-                : "bg-blue-500/30 placeholder:text-Lightcopy-light"
-            } ${loading ? "cursor-not-allowed" : "cursor-pointer"}`}
-            disabled={loading}
-          >
-            <m.span
-              initial={{ rotate: 0 }}
-              animate={loading ? { rotate: 360 } : { rotate: 0 }}
-              transition={{
-                duration: 0.5,
-                type: "spring",
-                ease: "easeInOut",
-                repeat: loading ? Infinity : 0,
-              }}
-              className={`w-12 h-12 flex justify-center items-center `}
-              key="icon"
-            >
-              <GrammarCheckIcon className="w-9 h-9" />
-            </m.span>
-          </button>
+                ? "from-yellow-400 to-orange-500"
+                : "from-yellow-200 to-orange-300"
+            }`}
+            text="Check Now"
+          />
         </div>
+
         <div
-          className={`w-full  smartphone:w-full smartphone:h-2/5  scroll-smooth  border border-copy-lighter shadow-lg  rounded-xl p-2 overflow-y-auto  ${
-            isDarkMode
-              ? "bg-foreground/30 placeholder:text-copy-light"
-              : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-          } border h-3/4`}
+          className={`relative w-full h-3/4 smartphone:w-full smartphone:h-2/5`}
         >
-          {MemoizedMarkdown}
+          <m.div
+            className={`w-full h-full scroll-smooth z-30 backdrop-blur border border-copy-lighter shadow-lg rounded-xl p-2 overflow-y-auto ${
+              isDarkMode
+                ? "bg-foreground/10 placeholder:text-copy-light"
+                : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
+            }`}
+          >
+            {MemoizedMarkdown}
+          </m.div>
         </div>
       </div>
     </m.div>

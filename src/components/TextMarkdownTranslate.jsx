@@ -24,7 +24,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
       transition: { duration: history ? 0.1 : 0.5 },
     },
   };
-
+  var key = Math.random();
   return (
     <m.div
       variants={parentVariants}
@@ -36,6 +36,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
         components={{
           p: ({ ...props }) => (
             <m.p
+              key={key++}
               variants={fadeInUpVariants}
               className={`text-base mb-2 open-sans ${
                 isDarkMode
@@ -49,6 +50,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ),
           h1: ({ ...props }) => (
             <m.h1
+              key={key++}
               variants={fadeInUpVariants}
               className={`text-3xl font-bold mb-4 playfair ${
                 isDarkMode
@@ -62,6 +64,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ),
           h2: ({ ...props }) => (
             <m.h2
+              key={key++}
               variants={fadeInUpVariants}
               className={`text-2xl font-semibold mb-3 montserrat ${
                 isDarkMode
@@ -75,6 +78,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ),
           h3: ({ ...props }) => (
             <m.h3
+              key={key++}
               variants={fadeInUpVariants}
               className={`text-xl font-medium mb-2 montserrat ${
                 isDarkMode
@@ -88,6 +92,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ),
           ul: ({ ...props }) => (
             <m.ul
+              key={key++}
               variants={fadeInUpVariants}
               className={`list-disc list-inside mb-4 ${
                 isDarkMode
@@ -101,6 +106,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ),
           ol: ({ ...props }) => (
             <m.ol
+              key={key++}
               variants={fadeInUpVariants}
               className={`list-decimal list-inside mb-4 ${
                 isDarkMode
@@ -114,6 +120,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ),
           li: ({ ...props }) => (
             <m.li
+              key={key++}
               variants={fadeInUpVariants}
               className={`text-sm mb-1 ml-4 open-sans ${
                 isDarkMode
@@ -127,6 +134,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ),
           strong: ({ ...props }) => (
             <m.strong
+              key={key++}
               variants={fadeInUpVariants}
               className={`text-lg tracking-wide m-1 font-bold montserrat ${
                 isDarkMode
@@ -135,6 +143,19 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
                     : "text-light"
                   : "text-dark"
               }`}
+              {...props}
+            />
+          ),
+          a: ({ ...props }) => (
+            <m.a
+              key={key++}
+              target="_blank"
+              className={`underline ${
+                isDarkMode
+                  ? "text-blue-100 bg-blue-500/50 p-1 rounded"
+                  : "text-blue-500"
+              }`}
+              variants={fadeInUpVariants}
               {...props}
             />
           ),

@@ -28,77 +28,65 @@ export default function LoginPage() {
 
   return (
     <m.section
-      key={"GrammarPage"}
+      key={"LoginPage"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-sm backdrop-brightness-25 flex justify-center items-center marker: ${
+      className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-sm backdrop-brightness-25 flex justify-center items-center ${
         isDarkMode ? "bg-bg1/10 text-black" : "text-bg1"
       }`}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white p-6 rounded shadow-md"
-        style={{ width: "300px" }}
+        className="bg-white p-6 rounded shadow-md flex flex-row gap-4"
+        style={{ width: "400px" }}
       >
-        <h2 className="text-2xl mb-4">Login</h2>
+        <input
+          type="text"
+          {...register("username", { required: "Username is required" })}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        {errors.username && (
+          <span className="text-red-500 text-sm">
+            {errors.username.message}
+          </span>
+        )}
+        <input
+          type="password"
+          {...register("password", { required: "Password is required" })}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        {errors.password && (
+          <span className="text-red-500 text-sm">
+            {errors.password.message}
+          </span>
+        )}
+        <input
+          type="text"
+          {...register("nickname")}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        <input
+          type="email"
+          {...register("email", { required: "Email is required" })}
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+        {errors.email && (
+          <span className="text-red-500 text-sm">{errors.email.message}</span>
+        )}
 
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Username</label>
-          <input
-            type="text"
-            {...register("username", { required: "Username is required" })}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          {errors.username && (
-            <span className="text-red-500 text-sm">
-              {errors.username.message}
-            </span>
-          )}
+        <div>
+          <button type="sumbit">Submit</button>
         </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Password</label>
-          <input
-            type="password"
-            {...register("password", { required: "Password is required" })}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
-          )}
+        <div className="mt-4 flex justify-between">
+          <button className="w-1/2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+            Back
+          </button>
+          <button className="w-1/2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+            Next
+          </button>
         </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Nickname</label>
-          <input
-            type="text"
-            {...register("nickname")}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-bold mb-2">Email</label>
-          <input
-            type="email"
-            {...register("email", { required: "Email is required" })}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-          {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
-          )}
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        >
-          Submit
-        </button>
       </form>
     </m.section>
   );

@@ -36,15 +36,19 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
   };
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    setCurrentPage((prevPage) =>
+      Math.min(prevPage + 1, Math.ceil(langList.length / itemsPerPage))
+    );
   };
 
   const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => prevPage - 1);
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentLangList = langList.slice(startIndex, startIndex + itemsPerPage);
+  const endIndex = startIndex + itemsPerPage;
+  const currentLangList = langList.slice(startIndex, endIndex);
+  console.log;
   return (
     <div className="relative w-fit">
       <button
@@ -68,16 +72,20 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className={`absolute w-60 -start-1/3 smartphone:-start-10 z-10 mt-1 backdrop-blur backdrop-brightness-75  rounded-md shadow-lg`}
+            className={`absolute w-60 -start-1/3 smartphone:-start-10 z-10 mt-1 backdrop-blur backdrop-brightness-75 rounded-md shadow-lg`}
           >
-            <div className="grid place-content-center  grid-cols-2 gap-1 p-2 auto-rows-min">
+            <div className="grid place-content-center grid-cols-2 gap-1 p-2 auto-rows-min">
               {currentLangList.map((languageList, index) => (
                 <button
                   key={index}
                   onClick={() => handleLanguageSelect(languageList.language)}
-                  className={`p-2 flex items-center gap-1 w-fit text-center rounded-md hover:bg-neutral-600 ${
+                  className={`p-2 flex items-center gap-1 w-fit text-center rounded-md hover:bg-neutral-600 bg-gradient-to-br ${
                     selectedLang === languageList.language
-                      ? "bg-blue-800/30 text-copy-light"
+                      ? `${
+                          isDarkMode
+                            ? "from-green-400/10 to-teal-500/10"
+                            : "from-green-300/10 to-teal-400/10"
+                        }`
                       : ""
                   } transition-all duration-300 `}
                 >
@@ -86,6 +94,7 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
                       src={languageList.flag}
                       alt={languageList.language}
                       className={`h-3`}
+                      loading="lazy"
                     />
                   </span>
                   <span className={`text-xs h-4 text-balance overflow-hidden`}>
@@ -98,25 +107,27 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
               <button
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
-                className={`rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 ${
+                className={`rounded-full bg-green-400/60 text-black hover:bg-teal-500/60 transition-all duration-300 ${
                   currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
               >
                 <ArrowCircleLeft size={25} weight="duotone" />
               </button>
-              <div className={` flex justify-center`}>
+              <div className={`flex justify-center w-3/4`}>
                 <input
                   type="text"
                   placeholder="Custom language"
                   onChange={(e) => {
                     setSelectedLang(e.target.value);
                   }}
-                  className={`w-3/4 outline-none placeholder:pl-1 pl-1 rounded-sm ${
-                    !isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
+                  className={`w-full outline-none pl-1 rounded-l-md ${
+                    !isDarkMode
+                      ? "bg-foreground/10 placeholder:text-copyLight"
+                      : "bg-foregroundLight/10 placeholder:text-copy"
                   }`}
                 />
                 <button
-                  className={`${
+                  className={` rounded-r-md ${
                     !isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
                   }`}
                   onClick={() => setIsDropdownOpenState(false)}
@@ -129,7 +140,7 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
                 disabled={
                   currentPage === Math.ceil(langList.length / itemsPerPage)
                 }
-                className={`rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 ${
+                className={`rounded-full bg-green-400/60 text-black hover:bg-teal-500/60 transition-all duration-300 ${
                   currentPage === Math.ceil(langList.length / itemsPerPage)
                     ? "cursor-not-allowed"
                     : "cursor-pointer"

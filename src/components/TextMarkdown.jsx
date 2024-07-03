@@ -32,11 +32,11 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
       } ${
         isDarkMode
           ? role === "user"
-            ? "bg-primary-dark/60"
+            ? "bg-accent2/80"
             : "bg-foreground"
           : role === "user"
-          ? "bg-primary-light text-copy"
-          : "bg-foreground/10" // Default light mode background color
+          ? "bg-accent2lt text-copy"
+          : "bg-foreground/10"
       } rounded-md`}
       variants={parentVariants}
       initial="initial"
@@ -136,6 +136,19 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   className={`text-lg tracking-widest m-1 font-bold montserrat ${
                     isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
+                  {...props}
+                />
+              ),
+              a: ({ ...props }) => (
+                <m.a
+                  key={keys++}
+                  target="_blank"
+                  className={`underline ${
+                    isDarkMode
+                      ? "text-blue-100 bg-blue-500/50 p-1 rounded"
+                      : "text-blue-500"
+                  }`}
+                  variants={fadeInUpVariants}
                   {...props}
                 />
               ),
