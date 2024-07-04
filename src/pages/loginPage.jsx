@@ -1,4 +1,4 @@
-import { AnimatePresence, m } from "framer-motion";
+import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
@@ -52,17 +52,33 @@ export default function LoginPage() {
     {
       id: "username",
       component: (
-        <div className="w-full h-full px-6 flex flex-col justify-center">
+        <div className="group w-full h-full px-6 flex flex-col justify-center">
           <div className="w-full flex flex-col gap-1 mb-6">
-            <h1 className="text-4xl font-bold text-gray-800">
-              Hii! I&apos;m Gemini.
+            <h1
+              className={`text-4xl font-bold ${
+                isDarkMode ? "text-copy" : " text-copyLight"
+              } `}
+            >
+              Hii! I&apos;m{" "}
+              <span className=" overflow-hidden bg-gradient-to-br from-blue-300 from-10% via-purple-300  to-red-300  transition-all duration-700 text-transparent bg-clip-text">
+                Gemini
+              </span>
+              .
             </h1>
-            <h1 className="text-lg text-gray-600">
+            <h2
+              className={`text-lg ml-2 tracking-tight ${
+                isDarkMode ? "text-copy-light" : "text-Lightcopy-light"
+              }`}
+            >
               As your first task, tell me stuff about you..
-            </h1>
-            <h2 className="text-gray-600">
-              Let&apos;s start by telling me your name
             </h2>
+            <h3
+              className={`text-lg ml-2 tracking-tighter ${
+                isDarkMode ? "text-copy-light" : "text-Lightcopy-light"
+              }`}
+            >
+              Let&apos;s start by telling me your name
+            </h3>
           </div>
           <input
             type="text"
@@ -82,7 +98,11 @@ export default function LoginPage() {
       component: (
         <div className="w-full h-full px-6 flex flex-col justify-center">
           <div>
-            <h1 className="text-xl font-semibold text-gray-800">
+            <h1
+              className={`text-xl font-bold ${
+                isDarkMode ? "text-copy" : " text-copyLight"
+              }`}
+            >
               Well, great! Nice to {'"see"'} you {username}
             </h1>
             <h2 className="text-gray-600">
@@ -106,7 +126,11 @@ export default function LoginPage() {
       id: "about",
       component: (
         <div className="w-full h-full px-6 flex flex-col justify-center">
-          <h1 className="text-xl font-semibold text-gray-800">
+          <h1
+            className={`text-xl font-bold ${
+              isDarkMode ? "text-copy" : " text-copyLight"
+            }`}
+          >
             Sure thing! I&apos;ll call you {nickname}
           </h1>
           <h2 className="text-gray-600">
@@ -128,7 +152,11 @@ export default function LoginPage() {
       component: (
         <div className="w-full h-full px-6 flex flex-col justify-center">
           <div className="w-full text-white">
-            <h1 className="text-xl font-semibold text-gray-800">
+            <h1
+              className={`text-xl font-bold ${
+                isDarkMode ? "text-copy" : " text-copyLight"
+              }`}
+            >
               As the last step {nickname}
             </h1>
             <h2 className="text-gray-600">Select what you want</h2>
@@ -168,10 +196,10 @@ export default function LoginPage() {
       } `}
     >
       <div
-        className={`relative rounded-lg w-1/2 h-[422px] smartphone:w-full  overflow-hidden flex ${
+        className={`relative rounded-lg w-1/2 h-[422px] smartphone:w-full  overflow-hidden flex bg-gradient-to-br ${
           isDarkMode
-            ? "bg-foregroundLight/10 text-copy"
-            : "bg-foreground/10 text-copyLight"
+            ? "from-foregroundLight/30 to-foregroundLight/20  text-copyLight"
+            : "from-foreground/30 to-foreground/20 text-copyLight"
         } `}
       >
         <m.div
