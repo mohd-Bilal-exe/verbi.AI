@@ -48,7 +48,6 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentLangList = langList.slice(startIndex, endIndex);
-  console.log;
   return (
     <div className="relative w-fit">
       <button
@@ -97,9 +96,14 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
                       loading="lazy"
                     />
                   </span>
-                  <span className={`text-xs h-4 text-balance overflow-hidden`}>
+                  <m.span
+                    key={index + "text"}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className={`text-xs h-4 text-balance overflow-hidden`}
+                  >
                     {languageList.language}{" "}
-                  </span>
+                  </m.span>
                 </button>
               ))}
             </div>

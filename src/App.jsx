@@ -18,10 +18,12 @@ function App() {
   useEffect(() => {
     if (userDetails) {
       rememberMe(
-        userDetails.password,
+        userDetails.id,
         userDetails.username,
         userDetails.nickname,
-        userDetails.about
+        userDetails.about,
+        userDetails.tone,
+        userDetails.nature
       );
     }
   }, [userDetails]);

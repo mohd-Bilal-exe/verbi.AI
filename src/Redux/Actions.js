@@ -34,10 +34,10 @@ export const addTranslations = (translations) => ({
   payload: translations, //SHOULD BE PREDEFINED OBJECT WITH TRANSLATIONS
 });
 
-export const addUser = (username, nickname, email, password) => {
+export const addUser = (id, username, nickname, about, tone, nature) => {
   return (dispatch) => {
     try {
-      const newUser = { username, nickname, email, password };
+      const newUser = { id, username, nickname, about, tone, nature };
 
       // Dispatch the action to update the global state
       dispatch({ type: ADD_USER, payload: newUser });

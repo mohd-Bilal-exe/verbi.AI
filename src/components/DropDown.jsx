@@ -1,27 +1,33 @@
 import PropTypes from "prop-types";
-import { CaretDown, CheckCircle } from "@phosphor-icons/react";
+import { CaretDown } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const DropDown = ({ setSelectedLang }) => {
+const DropDown = ({ setSelected, title }) => {
   const [open, setOpen] = useState(false);
-  const [message, setMessage]=useState("Select Language");
-  const languages = [
-    { code: "English", name: "English" },
-    { code: "Hindi", name: "Hindi" },
-    { code: "Urdu", name: "Urdu" },
-    { code: "Arabic", name: "Arabic" },
-    { code: "Spanish", name: "Spanish" },
-    { code: "Japanese", name: "Japanese" },
-    { code: "Custom", name: "customLang" },
-  ];
+  const [message, setMessage] = useState(title);
+  const Lists =
+    title === "tone"
+      ? [
+          { code: "professional", name: "💼 Professional " },
+          { code: "casual", name: "😊 Casual " },
+          { code: "formal", name: "🎩 Formal " },
+          { code: "friendly", name: "😄 Friendly " },
+        ]
+      : [
+          { code: "funny", name: "😄 Funny " },
+          { code: "sarcastic", name: "😏 Sarcastic " },
+          { code: "witty", name: "😄 Witty " },
+          { code: "humorous", name: "😆 Humorous " },
+        ];
 
   return (
-    <div className="">
+    <div className="w-fit h-fit">
       <motion.div animate={open ? "open" : "closed"} className="relative">
         <button
+          type="button" // Set type to "button" to prevent form submission
           onClick={() => setOpen((pv) => !pv)}
-          className="w-36 flex items-center justify-between gap-2 smartphone:gap-1 opacity-45 hover:opacity-100 transition-all px-3 py-2 rounded-lg text-indigo-50 bg-indigo-500 hover:bg-indigo-500"
+          className="w-36 flex items-center justify-between gap-2 smartphone:gap-1 opacity-45 hover:opacity-100 transition-all px-3 py-2 rounded-lg text-indigo-50 bg-indigo-500 hover:bg-indigo-600"
         >
           <span className="font-medium text-xs">{message}</span>
           <motion.span variants={iconVariants}>
@@ -31,17 +37,19 @@ const DropDown = ({ setSelectedLang }) => {
 
         <motion.ul
           initial={wrapperVariants.closed}
+          animate={open ? "open" : "closed"}
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-50%" }}
           className="flex flex-col gap-1 p-1.5 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-36 overflow-hidden"
         >
-          {languages.map((language) => (
+          {Lists.map((item) => (
             <Option
-              key={language.code}
+              key={item.code}
               setOpen={setOpen}
-              setSelectedLang={setSelectedLang}
+              setSelected={setSelected}
               setMessage={setMessage}
-              text={language.name}
+              text={item.name}
+              code={item.code}
             />
           ))}
         </motion.ul>
@@ -50,70 +58,31 @@ const DropDown = ({ setSelectedLang }) => {
   );
 };
 
-const Option = ({ text, setSelectedLang,setMessage, setOpen }) => {
-    const handleCustomLangSubmit = (e) => {
-        e.preventDefault();
-        const customLang = e.target.elements.customLang.value.trim();
-        if (customLang) {
-          setSelectedLang(customLang);
-          setMessage(customLang)
-          setOpen(false);
-        }
-      };
+const Option = ({ text, code, setSelected, setMessage, setOpen }) => {
   return (
     <motion.li
       variants={itemVariants}
       onClick={() => {
-        setSelectedLang(text);
-        if(text !== "customLang") setOpen(false)
+        setSelected(code);
         setMessage(text);
+        setOpen(false);
       }}
-      className="flex items-center gap-2 w-full  text-xs font-medium whitespace-nowrap rounded-md hover:bg-indigo-100 text-slate-700 hover:text-indigo-500 transition-colors cursor-pointer"
+      className="flex items-center gap-2 w-full text-xs font-medium whitespace-nowrap rounded-md hover:bg-indigo-100 text-slate-700 hover:text-indigo-500 transition-colors cursor-pointer"
     >
-      {text !== "customLang" ? (
-        <>
-          <motion.div
-            key={"divDots"}
-            className="w-1 h-1 m-1 rounded-full bg-DarkAccentBluedk"
-            variants={actionIconVariants}
-          ></motion.div>
-          <span
-            className="w-ful m-2 text-xs"
-            onClick={() => {
-              setOpen(false);
-            }}
-          >
-            {text}
-          </span>
-        </>
-      ) : (
-        <>
-          <form className="ml-1 flex items-center w-full" onSubmit={handleCustomLangSubmit}>
-            <input
-              name="customLang"
-              className="w-4/5 h-full outline-none rounded-sm placeholder:text-xs focus:outline-DarkAccentBluedk border border-gray-300"
-              placeholder="Custom Language"
-            />
-            <button
-              type="submit"
-              className="rounded-full mx-auto flex  text-xs bg-indigo-500 text-white hover:bg-indigo-600 transition-colors"
-            >
-               <CheckCircle size={18} weight="duotone" />
-            </button>
-          </form>
-        </>
-      )}
+      <span>{text}</span>
     </motion.li>
   );
 };
 
 DropDown.propTypes = {
-  setSelectedLang: PropTypes.func.isRequired,
+  setSelected: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 Option.propTypes = {
   text: PropTypes.string.isRequired,
-  setSelectedLang: PropTypes.func.isRequired,
+  code: PropTypes.string.isRequired,
+  setSelected: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
   setOpen: PropTypes.func.isRequired,
 };
@@ -121,12 +90,6 @@ Option.propTypes = {
 export default DropDown;
 
 const wrapperVariants = {
-    whileHover:{
-            scaleX:1
-    },
-    whileHoverNot:{
-        scaleX:0.1
-},
   open: {
     scaleY: 1,
     transition: {
@@ -163,9 +126,4 @@ const itemVariants = {
       when: "afterChildren",
     },
   },
-};
-
-const actionIconVariants = {
-  open: { scale: 1, y: 0 },
-  closed: { scale: 0, y: -7 },
 };

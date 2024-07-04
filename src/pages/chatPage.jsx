@@ -9,7 +9,7 @@ import { ArrowUp, CircleNotch } from "@phosphor-icons/react";
 export default function ChatPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
   const chatHistory = useSelector((state) => state.currentChat);
-  const password = useSelector((state) => state.userDetails.password);
+  const id = useSelector((state) => state.userDetails.id);
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState("");
   const textAreaRef = useRef(null);
@@ -48,10 +48,10 @@ export default function ChatPage() {
       };
 
       //setCurrentSesh((prevSesh) => [...prevSesh, userMessage]);
-      dispatch(currentChat(password, userMessage));
+      dispatch(currentChat(id, userMessage));
       setIsLoading(true);
 
-      const result = await chat(password, text);
+      const result = await chat(id, text);
       setIsLoading(false);
       const aiMessage = {
         role: "model",
@@ -59,7 +59,7 @@ export default function ChatPage() {
         timestamp: Date.now(),
       };
       //setCurrentSesh((prevSesh) => [...prevSesh, aiMessage]);
-      dispatch(currentChat(password, aiMessage));
+      dispatch(currentChat(id, aiMessage));
 
       if (result.error) {
         console.error("Chat Error:", result.error);

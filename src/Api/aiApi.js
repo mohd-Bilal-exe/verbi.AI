@@ -9,18 +9,28 @@ const Gemini = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const sessions = {};
 
 // Function to remember user details in a session
-const rememberMe = (sessionId, name, nickname, about) => {
+const rememberMe = (sessionId, username, nickname, about, tone, nature) => {
   if (!sessions[sessionId]) {
     sessions[sessionId] = { history: [] };
   }
-  console.log("session is ", sessionId);
-  sessions[sessionId].userDetails = { name, nickname, about };
 
+  console.log("session is ", sessionId);
+
+  sessions[sessionId].userDetails = { username, nickname, about, tone, nature };
+
+  const literrallyMe = `Remember that my name is ${username}, 
+  but you should address me as ${nickname}. 
+  Here is a bit about me: ${about}. 
+  When responding to me, make sure to use a ${tone} tone. 
+  Additionally, keep in mind that I prefer to be interacted with a ${nature} manner.`;
+  console.log(tone);
+  console.log(nature);
+  console.log(literrallyMe);
   sessions[sessionId].history.push({
     role: "user",
     parts: [
       {
-        text: `Remember that my name is ${name}, nickname is ${nickname}, and about is ${about}. Remember to address me with my name`,
+        text: literrallyMe,
       },
     ],
   });
@@ -37,7 +47,7 @@ const chat = async (sessionId, message) => {
     if (!sessions[sessionId]) {
       sessions[sessionId] = { history: [] };
     }
-
+    console.log(sessions);
     let chatHistory = sessions[sessionId].history;
     const chatSession = await Gemini.startChat({
       history: chatHistory,
