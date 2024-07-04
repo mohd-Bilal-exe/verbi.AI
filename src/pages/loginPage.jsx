@@ -56,36 +56,37 @@ export default function LoginPage() {
           <div className="w-full flex flex-col gap-1 mb-6">
             <h1
               className={`text-4xl font-bold ${
-                isDarkMode ? "text-copy" : " text-copyLight"
-              } `}
+                isDarkMode ? "text-copy" : "text-copyLight"
+              }`}
             >
               Hii! I&apos;m{" "}
-              <span className=" overflow-hidden bg-gradient-to-br from-blue-300 from-10% via-purple-300  to-red-300  transition-all duration-700 text-transparent bg-clip-text">
+              <span className=" overflow-hidden bg-gradient-to-br from-blue-300 from-10% via-purple-300 to-red-300 transition-all duration-700 text-transparent bg-clip-text">
                 Gemini
               </span>
               .
             </h1>
             <h2
-              className={`text-lg ml-2 tracking-tight ${
+              className={`text-lg ml-1 tracking-tight ${
                 isDarkMode ? "text-copy-light" : "text-Lightcopy-light"
               }`}
             >
               As your first task, tell me stuff about you..
             </h2>
             <h3
-              className={`text-lg ml-2 tracking-tighter ${
+              className={`text-lg ml-1 group-hover:translate-x-2 transition-all  tracking-tighter ${
                 isDarkMode ? "text-copy-light" : "text-Lightcopy-light"
               }`}
             >
-              Let&apos;s start by telling me your name
+              Let&apos;s start by telling me your name.
             </h3>
           </div>
           <input
             type="text"
             required
             value={username}
+            placeholder="Start Typing in your name"
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-fit bg-transparent p-2 outline-none border-b border-copy placeholder:text-copy-light text-copy"
           />
           {errors.username && (
             <span className="text-red-500 text-sm">{errors.username}</span>
@@ -100,7 +101,7 @@ export default function LoginPage() {
           <div>
             <h1
               className={`text-xl font-bold ${
-                isDarkMode ? "text-copy" : " text-copyLight"
+                isDarkMode ? "text-copy" : "text-copyLight"
               }`}
             >
               Well, great! Nice to {'"see"'} you {username}
@@ -114,7 +115,7 @@ export default function LoginPage() {
             type="text"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border-b border-copy placeholder-text-copy-light text-copy outline-none"
           />
           {errors.nickname && (
             <span className="text-red-500 text-sm">{errors.nickname}</span>
@@ -128,7 +129,7 @@ export default function LoginPage() {
         <div className="w-full h-full px-6 flex flex-col justify-center">
           <h1
             className={`text-xl font-bold ${
-              isDarkMode ? "text-copy" : " text-copyLight"
+              isDarkMode ? "text-copy" : "text-copyLight"
             }`}
           >
             Sure thing! I&apos;ll call you {nickname}
@@ -139,7 +140,7 @@ export default function LoginPage() {
           <textarea
             value={about}
             onChange={(e) => setAbout(e.target.value)}
-            className="resize-none w-full p-2 border border-gray-300 rounded"
+            className="resize-none w-full p-2 border-b border-copy placeholder-text-copy-light text-copy outline-none"
           />
           {errors.about && (
             <span className="text-red-500 text-sm">{errors.about}</span>
@@ -154,7 +155,7 @@ export default function LoginPage() {
           <div className="w-full text-white">
             <h1
               className={`text-xl font-bold ${
-                isDarkMode ? "text-copy" : " text-copyLight"
+                isDarkMode ? "text-copy" : "text-copyLight"
               }`}
             >
               As the last step {nickname}
