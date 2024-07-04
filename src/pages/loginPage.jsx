@@ -115,7 +115,7 @@ export default function LoginPage() {
             type="text"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
-            className="w-full p-2 border-b border-copy placeholder-text-copy-light text-copy outline-none"
+            className="w-fit bg-transparent p-2 outline-none border-b border-copy placeholder:text-copy-light text-copy"
           />
           {errors.nickname && (
             <span className="text-red-500 text-sm">{errors.nickname}</span>
@@ -140,10 +140,10 @@ export default function LoginPage() {
           <textarea
             value={about}
             onChange={(e) => setAbout(e.target.value)}
-            className="resize-none w-full p-2 border-b border-copy placeholder-text-copy-light text-copy outline-none"
+            className="w-full resize-none bg-transparent p-2 outline-none border-b border-copy placeholder:text-copy-light text-copy"
           />
           {errors.about && (
-            <span className="text-red-500 text-sm">{errors.about}</span>
+            <span className="text-red-400 mt-1 text-sm">{errors.about}</span>
           )}
         </div>
       ),
@@ -239,7 +239,7 @@ export default function LoginPage() {
             className="px-4 py-2 bg-gray-500 text-white rounded disabled:opacity-50"
             disabled={currentStep === 0}
           >
-            Prev
+            Prev{currentStep}
           </button>
           <button
             onClick={currentStep === steps.length - 1 ? onSubmit : handleNext}

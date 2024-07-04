@@ -45,7 +45,7 @@ export default function GlobalHistory() {
       className={`backdrop-blur-lg transition-transform ${
         isExpanded
           ? "absolute bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl backdrop-brightness-50"
-          : "bottom-0 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
+          : "absolute bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
       } pt-5 border-t flex flex-col justify-start items-center gap-2 ${
         isDarkMode
           ? "bg-foregroundLight/10 border-copy/20"
