@@ -2,7 +2,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Access your API key as an environment variable
 const genAI = new GoogleGenerativeAI("AIzaSyA3kJyE6wCBi7mf81rKxhwROlo-Q5HCEgU");
-
+const generationConfig = {
+  temperature: 1.5,
+  topP: 0.95,
+  topK: 50,
+  maxOutputTokens: 8192,
+  responseMimeType: "text/plain",
+};
 // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 const Gemini = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -51,9 +57,7 @@ const chat = async (sessionId, message) => {
     let chatHistory = sessions[sessionId].history;
     const chatSession = await Gemini.startChat({
       history: chatHistory,
-      generationConfig: {
-        maxOutputTokens: 5000,
-      },
+      generationConfig,
     });
 
     const msg = message || "Hi"; // Default message if none provided

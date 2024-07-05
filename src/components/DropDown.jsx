@@ -6,28 +6,29 @@ import { useState } from "react";
 const DropDown = ({ setSelected, title }) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(title);
+
   const Lists =
     title === "tone"
       ? [
-          { code: "professional", name: "💼 Professional " },
-          { code: "casual", name: "😊 Casual " },
-          { code: "formal", name: "🎩 Formal " },
-          { code: "friendly", name: "😄 Friendly " },
+          { code: "professional", name: "💼 Professional" },
+          { code: "casual", name: "😊 Casual" },
+          { code: "friendly", name: "😄 Friendly" },
+          { code: "informative", name: "🧐 Informative" },
         ]
       : [
-          { code: "funny", name: "😄 Funny " },
-          { code: "sarcastic", name: "😏 Sarcastic " },
-          { code: "witty", name: "😄 Witty " },
-          { code: "humorous", name: "😆 Humorous " },
+          { code: "sarcastic", name: "😏 Sarcastic" },
+          { code: "witty", name: "😄 Witty" },
+          { code: "thoughtful", name: "🤔 Thoughtful" },
+          { code: "creative", name: "🌟 Creative" },
         ];
 
   return (
-    <div className="w-fit h-fit">
+    <div className="w-fit h-fit relative">
       <motion.div animate={open ? "open" : "closed"} className="relative">
         <button
           type="button" // Set type to "button" to prevent form submission
           onClick={() => setOpen((pv) => !pv)}
-          className="w-36 flex items-center justify-between gap-2 smartphone:gap-1 opacity-45 hover:opacity-100 transition-all px-3 py-2 rounded-lg text-indigo-50 bg-indigo-500 hover:bg-indigo-600"
+          className="w-32 flex items-center justify-between gap-1 transition-all px-2 py-2 rounded-lg text-copyLight bg-gradient-to-br from-copy to-copy-light"
         >
           <span className="font-medium text-xs">{message}</span>
           <motion.span variants={iconVariants}>
@@ -40,7 +41,7 @@ const DropDown = ({ setSelected, title }) => {
           animate={open ? "open" : "closed"}
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-50%" }}
-          className="flex flex-col gap-1 p-1.5 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] w-36 overflow-hidden"
+          className="grid grid-cols-2 place-content-center p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%]  w-48 h-fit"
         >
           {Lists.map((item) => (
             <Option
@@ -67,7 +68,7 @@ const Option = ({ text, code, setSelected, setMessage, setOpen }) => {
         setMessage(text);
         setOpen(false);
       }}
-      className="flex items-center gap-2 w-full text-xs font-medium whitespace-nowrap rounded-md hover:bg-indigo-100 text-slate-700 hover:text-indigo-500 transition-colors cursor-pointer"
+      className="flex items-center justify-center p-2 w-fit text-xs font-medium whitespace-nowrap rounded-md hover:bg-indigo-100 text-slate-700 hover:text-indigo-500 transition-colors cursor-pointer"
     >
       <span>{text}</span>
     </motion.li>
