@@ -16,7 +16,7 @@ function App() {
   const userDetails = useSelector((state) => state.userDetails);
 
   useEffect(() => {
-    if (userDetails) {
+    if (Object.keys(userDetails).length > 0) {
       rememberMe(
         userDetails.id,
         userDetails.username,
@@ -40,7 +40,16 @@ function App() {
             }`}
           >
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/"
+                element={
+                  Object.keys(userDetails).length > 0 ? (
+                    <HomePage />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                }
+              />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/grammarcheck" element={<GrammarPage />} />
               <Route path="/profile" element={<ProfilePage />} />

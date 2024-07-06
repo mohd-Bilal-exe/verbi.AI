@@ -71,7 +71,7 @@ const Navbar = () => {
       }`}
     >
       <ul
-        className={`flex justify-between items-center px-5 pt-2 gap-1 w-screen desktop:w-3/4 laptop:w-3/4 backdrop-blur ${
+        className={`flex justify-between items-center px-5 pt-2 gap-1 w-screen desktop:w-3/4 laptop:w-3/4 backdrop-blur transform-gpu  ${
           isDarkMode ? " bg-lightBg2/10" : "bg-bg3/10"
         }`}
       >
@@ -134,7 +134,7 @@ const Navbar = () => {
                     isDarkMode
                       ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_25px_#ffffff] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
                       : "bg-copyLight shadow-[0px_-5px_20px_#252329] laptop:shadow-[0px_-2px_30px_#252329]"
-                  } transition-opacity duration-500`}
+                  } transition-opacity duration-500 transform-gpu`}
                 />
               )}
             </Link>

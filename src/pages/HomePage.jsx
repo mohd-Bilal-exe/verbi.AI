@@ -51,32 +51,23 @@ export default function HomePage() {
 
   const parentVariants = {
     initial: {
-      opacity: 0.5,
+      opacity: 0,
     },
     animate: {
       opacity: 1,
-      transition: { staggerChildren: 0.25, delayChildren: 0.6, type: "spring" },
-    },
-  };
-
-  const fadeInUpVariants = {
-    initial: { opacity: 0, y: 15 },
-    animate: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, type: "spring", ease: "easeInOut" },
+      transition: {
+        duration: 0.5,
+      },
     },
   };
   return (
-    <m.section
-      variants={parentVariants}
-      initial="initial"
-      animate="animate"
-      className="w-screen h-screen relative overflow-x-hidden px-1 flex flex-col items-center"
-    >
-      <div
+    <m.section className="w-screen h-screen relative overflow-x-hidden px-1 flex flex-col items-center">
+      <m.div
+        variants={parentVariants}
+        initial="initial"
+        animate="animate"
         id="optionsContainer"
-        className="w-full h-3/5 laptop:px-20 laptop:py-5 desktop:px-20 smartphone:px-3 smartphone:py-5  grid grid-cols-2 gap-2"
+        className="w-full h-3/5 laptop:px-20 laptop:py-5 desktop:px-20 smartphone:px-3 smartphone:py-5  grid grid-cols-2 gap-2 transform-gpu"
       >
         {gridItems.map((gridItem) => (
           <Link
@@ -85,22 +76,21 @@ export default function HomePage() {
             className={`relative w-full h-full ${gridItem.linkClasses} `}
           >
             <m.div
-              variants={fadeInUpVariants}
               to={gridItem.path}
               className={`group w-full h-full flex flex-row justify-between rounded-xl  ${gridItem.classes}`}
             >
               <div id="texts" className={`w-fit flex flex-col text-2xl mt-10`}>
                 <h1
-                  className={`group-hover:translate-x-2 transition-transform duration-300 ml-5 montserrat tracking-wider font-medium`}
+                  className={`group-hover:translate-x-2 transition-transform duration-300 ml-5 montserrat tracking-wider font-medium transform-gpu`}
                 >
                   {gridItem.title}
                 </h1>
                 <h2
-                  className={`open-sans font-medium  flex items-center smartphone:items-start smartphone:flex-col ml-6 w-fit smartphone:w-3/5 text-sm group-hover:translate-x-5 transition-transform duration-300`}
+                  className={`open-sans font-medium  flex items-center smartphone:items-start smartphone:flex-col ml-6 w-fit smartphone:w-3/5 text-sm group-hover:translate-x-5 transition-transform duration-300 transform-gpu`}
                 >
                   {gridItem.content}
                   <ArrowCircleRight
-                    className={`group-hover:-rotate-45 group-hover:translate-x-4 group-hover:scale-125 h-7 w-7 transition-transform duration-300 `}
+                    className={`group-hover:-rotate-45 group-hover:translate-x-4 group-hover:scale-125 h-7 w-7 transition-transform duration-300 transform-gpu`}
                     weight="duotone"
                   />
                 </h2>
@@ -118,7 +108,7 @@ export default function HomePage() {
             </m.div>
           </Link>
         ))}
-      </div>
+      </m.div>
       <GlobalHistory />
     </m.section>
   );

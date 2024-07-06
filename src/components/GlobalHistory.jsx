@@ -32,19 +32,20 @@ export default function GlobalHistory() {
     <m.section
       key={"GlobalHistory"}
       layout
-      initial={{ y: 250, opacity: 0 }}
+      initial={{ y: 200, opacity: 0 }}
       animate={
         isExpanded
           ? { y: 0, opacity: 1, height: "90vh", width: "100%" }
           : { y: 0, opacity: 1, height: "30vh", width: "90%" }
       }
       transition={{
+        delay: isExpanded ? 0 : 0.6,
         duration: 0.5,
         type: "spring",
       }}
-      className={`backdrop-blur-lg transition-transform ${
+      className={`backdrop-blur-lg transition-transform backdrop-brightness-50 ${
         isExpanded
-          ? "absolute bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl backdrop-brightness-50"
+          ? "absolute bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
           : "absolute bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
       } pt-5 border-t flex flex-col justify-start items-center gap-2 ${
         isDarkMode
@@ -66,13 +67,13 @@ export default function GlobalHistory() {
             globalHistory.length === 0
               ? "cursor-not-allowed"
               : "cursor-pointer hover:text-red-500"
-          }`}
+          } text-sm open-sans`}
         >
           Clear History <ClearIcon />
         </button>
         <button
           disabled={globalHistory.length === 0}
-          className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 p-2 rounded-lg  ${
+          className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 p-2 rounded-lg open-sans ${
             isExpanded ? "bg-black/20" : ""
           } `}
           onClick={() => handleExpandClick(!isExpanded)}
@@ -176,7 +177,9 @@ export default function GlobalHistory() {
             </m.div>
           ))
         ) : (
-          <p className={`text-2xl text-copy`}>No history available</p>
+          <p className={`text-2xl text-copy montserrat tracking-tight my-auto`}>
+            No history available
+          </p>
         )}
       </div>
     </m.section>

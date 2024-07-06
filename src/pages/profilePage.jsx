@@ -19,6 +19,36 @@ export default function ProfilePage() {
     navigate("/login");
   };
 
+  const sections = [
+    {
+      id: "profile",
+      attributes: [
+        {
+          name: user.username,
+          avatar: user.Avatar,
+        },
+      ],
+    },
+    {
+      id: "otherInfo",
+      attributes: [
+        {
+          nicknme: user.nickname,
+          about: user.about,
+        },
+      ],
+    },
+    {
+      id: "Preferences",
+      attributes: [
+        {
+          tone: user.tone,
+          nature: user.nature,
+        },
+      ],
+    },
+  ];
+  console.log(sections);
   return (
     <m.section
       key={"ProfilePage"}
@@ -27,32 +57,10 @@ export default function ProfilePage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
       className={`w-screen h-screen ${
-        isDarkMode ? "bg-bg1 text-text1" : "text-bg1"
+        isDarkMode ? "bg-bg1 text-copy" : "text-copyLight"
       }`}
     >
-      {user && (
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold mb-4">Profile Page</h1>
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <p className="text-xl font-semibold">{user.username}</p>
-              <p className="text-lg">{user.email}</p>
-            </div>
-            <button
-              className="px-4 py-2 rounded-md text-sm font-medium uppercase bg-accent1 text-white shadow-md hover:bg-accent2 focus:outline-none"
-              onClick={toggleDarkMode}
-            >
-              {isDarkMode ? "Dark Mode on" : "Light Mode on"}
-            </button>
-          </div>
-          <button
-            className="px-4 py-2 rounded-md text-sm font-medium uppercase bg-red-500 text-white shadow-md hover:bg-red-600 focus:outline-none"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        </div>
-      )}
+      <button onClick={handleLogout}>logount</button>
     </m.section>
   );
 }

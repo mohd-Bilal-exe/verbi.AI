@@ -99,7 +99,9 @@ export default function ChatPage() {
       <div className="fixed bottom-16 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
-          className={`flex items-center justify-between p-2 rounded-full h-fit w-full mx-3 overflow-hidden ${
+          className={`flex items-center justify-between p-2 ${
+            text.length > 35 ? "rounded-3xl" : "rounded-full"
+          } h-fit w-full mx-3 overflow-hidden transition-all ${
             isDarkMode
               ? "bg-foregroundLight/10 border-primary-light"
               : "bg-background/10 border-primary-dark text-background"
@@ -110,9 +112,10 @@ export default function ChatPage() {
             placeholder="Type your message..."
             className={`bg-transparent outline-none w-11/12 my-1 ml-4 pl-2 text-clip resize-none placeholder:pl-1 placeholder:py- overflow-y-auto ${
               isDarkMode
-                ? "placeholder:text-copy-lighter text-copy-light caret-secondary"
-                : "placeholder:text-copyLight text-foreground caret-secondary"
-            }`}
+                ? "placeholder:text-copy-lighter text-copy-light caret-accent2lt"
+                : "placeholder:text-copyLight text-foreground caret-accent2"
+            }
+            `}
             onChange={handleTextChange}
             value={text}
           />
