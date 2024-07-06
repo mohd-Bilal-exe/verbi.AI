@@ -72,7 +72,7 @@ const chat = async (sessionId, message) => {
     console.error(error);
     return {
       error: error.message,
-      text: "An error occurred. Please try again later.",
+      text: "An error occurred. Please refresh the page and try again.",
     };
   }
 };
