@@ -17,6 +17,7 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
   const [about, setAbout] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [tone, setTone] = useState("");
   const [nature, setNature] = useState("");
   const [errors, setErrors] = useState({});
@@ -44,7 +45,7 @@ export default function LoginPage() {
     (e) => {
       e.preventDefault();
       if (validateStep()) {
-        dispatch(addUser(id, username, nickname, about, tone, nature));
+        dispatch(addUser(id, username, nickname, about, avatar, tone, nature));
         rememberMe(id, username, nickname, about, tone, nature);
         navigate("/profile");
       }
@@ -56,10 +57,40 @@ export default function LoginPage() {
       username,
       nickname,
       about,
+      avatar,
       tone,
       nature,
       navigate,
     ]
+  );
+  const emojis = useMemo(
+    () => [
+      "😊",
+      "😀",
+      "😎",
+      "😒",
+      "😘",
+      "😜",
+      "😄",
+      "😁",
+      "😂",
+      "😢",
+      "😡",
+      "🤔",
+      "🤗",
+      "😷",
+      "🤠",
+      "😇",
+      "🤓",
+      "😈",
+      "🤖",
+      "🦄",
+      "🐱",
+      "🐶",
+      "🐼",
+      "🐨",
+    ],
+    []
   );
 
   const steps = useMemo(
@@ -67,7 +98,10 @@ export default function LoginPage() {
       {
         id: "username",
         component: (
-          <div className="group w-full h-full px-6 flex flex-col justify-center">
+          <div
+            key={"gemma3"}
+            className="group w-full h-full px-6 flex flex-col justify-center"
+          >
             <div className="w-full flex flex-col gap-1 mb-6 text-copy">
               <h1 className="text-4xl smartphone:text-3xl font-bold ">
                 Hey there! I&apos;m{" "}
@@ -122,10 +156,13 @@ export default function LoginPage() {
       {
         id: "nickname",
         component: (
-          <div className="group w-full h-full px-6 flex flex-col justify-center transition-all text-white">
+          <div
+            key={"sweet"}
+            className="group w-full h-full px-6 flex flex-col justify-center transition-all text-white"
+          >
             <div>
               <m.h1
-                key={"sweet"}
+                key={"sweet2"}
                 initial={{ x: -50, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -166,11 +203,59 @@ export default function LoginPage() {
         ),
       },
       {
+        id: "avatar",
+        component: (
+          <div
+            key={"avatar"}
+            className="group w-full h-full px-6 flex flex-col justify-center text-white"
+          >
+            <m.h1
+              key={"avatar1"}
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className={`text`}
+            >
+              Let&apos;s gowwwwwwww!
+            </m.h1>
+            <h1 className="text-2xl font-bold ">
+              Okay, so {nickname}. {avatar}
+            </h1>
+            <h2 className="text-sm smartphone:text-xs group-hover:translate-x-1 transition-all tracking-tighter mb-6">
+              Choose an avatar 🚀
+            </h2>
+            <div
+              className={`w-full h-32 grid grid-cols-8 smartphone:grid-cols-6  bg-black/20 p-2 overflow-y-auto rounded-2xl text-4xl `}
+            >
+              {emojis.map((emoji, index) => {
+                return (
+                  <span
+                    key={index}
+                    onClick={() => {
+                      setAvatar(emojis[index]);
+                    }}
+                    className={`smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${
+                      avatar === emojis[index] && "backdrop-brightness-150"
+                    }  p-1 rounded-xl transition-all cursor-pointer`}
+                  >
+                    {emoji}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        ),
+      },
+
+      {
         id: "about",
         component: (
-          <div className="group w-full h-full px-6 flex flex-col justify-center text-white">
+          <div
+            key={"awsm"}
+            className="group w-full h-full px-6 flex flex-col justify-center text-white"
+          >
             <m.h1
-              key={"awsm"}
+              key={"awsm4"}
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.3 }}
@@ -200,7 +285,10 @@ export default function LoginPage() {
       {
         id: "Miscellaneous",
         component: (
-          <div className="w-full h-full px-6 flex flex-col justify-center text-white group ">
+          <div
+            key={"misc"}
+            className="w-full h-full px-6 flex flex-col justify-center text-white group "
+          >
             <div className="w-full text-white">
               <h1 className="text-xl font-bold text-white">
                 Last step, {nickname}! 🏁
@@ -217,16 +305,16 @@ export default function LoginPage() {
         ),
       },
     ],
-    [username, nickname, about, errors]
+    [username, nickname, about, errors, emojis, avatar]
   );
   const sidebar = useMemo(
     () => (
       <div
         className={`absolute right-1 w-2 h-full flex flex-col justify-center gap-1`}
       >
-        {[0, 1, 2, 3].map((step) => (
+        {[0, 1, 2, 3, 4].map((step, index) => (
           <m.div
-            key={step}
+            key={index}
             layout
             className={`w-1 h-1 mx-auto rounded-full transition-all ease-in-out ${
               currentStep === step ? "my-1 " : ""
