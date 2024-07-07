@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { darkMode, logoutUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { Moon, Sun } from "@phosphor-icons/react";
-import { EditIcon } from "../components/SvgIcons";
+import { ArrowDown, EditIcon } from "../components/SvgIcons";
 import EditModal from "../components/EditModal";
 
 export default function ProfilePage() {
@@ -85,25 +85,137 @@ export default function ProfilePage() {
     </section>
   );
 
-  const otherInfoSection = (
-    <section key="otherInfo" className="my-8">
-      <div className="flex flex-col">
-        <span className="text-lg font-semibold">Nickname: {user.nickname}</span>
-        <p className="text-base"></p>
-        <span className="text-lg font-semibold">About: {user.about}</span>
-        <p className="text-base"></p>
-      </div>
-    </section>
-  );
+  const OtherInfoSection = () => {
+    const [isNicknameExpanded, setIsNicknameExpanded] = useState(false);
+    const [isAboutExpanded, setIsAboutExpanded] = useState(false);
 
-  const preferencesSection = (
-    <section key="preferences" className="my-8">
-      <div className="flex flex-col">
-        <span className="text-lg font-semibold">Tone: {user.tone}</span>
-        <span className="text-lg font-semibold">Nature: {user.nature}</span>
-      </div>
-    </section>
-  );
+    const toggleNicknameExpand = () => {
+      setIsNicknameExpanded(!isNicknameExpanded);
+    };
+
+    const toggleAboutExpand = () => {
+      setIsAboutExpanded(!isAboutExpanded);
+    };
+
+    return (
+      <section
+        key="otherInfo"
+        className={`my-8 rounded-xl bg-gradient-to-tl ${
+          isDarkMode
+            ? "from-foreground to-Lightcopy-lighter/30"
+            : "from-foreground/10 to-foreground/20"
+        }`}
+      >
+        <div className="flex flex-col p-3">
+          <div className={`my-1 `}>
+            <span
+              onClick={toggleNicknameExpand}
+              className={`flex justify-between items-center`}
+            >
+              <h2 className="text-lg font-semibold cursor-pointer">Nickname</h2>
+              <span
+                className={`mx-2 ${
+                  isNicknameExpanded ? "rotate-90" : ""
+                } transition-all`}
+              >
+                <ArrowDown />
+              </span>
+            </span>
+            {isNicknameExpanded && (
+              <span className="text-xs">{user.nickname}</span>
+            )}
+          </div>
+          <div
+            className={`w-11/12 h-[1px] mx-3 bg-black/10 place-self-center`}
+          ></div>
+          <div className="my-1 ">
+            <span
+              onClick={toggleAboutExpand}
+              className={`flex justify-between items-center`}
+            >
+              <h2 className="text-lg font-semibold cursor-pointer">About</h2>
+              <span
+                className={`mx-2 ${
+                  isAboutExpanded ? "rotate-90" : ""
+                } transition-all`}
+              >
+                <ArrowDown />{" "}
+              </span>
+            </span>
+            {isAboutExpanded && (
+              <span className=" text-xs">
+                {user.about == ""
+                  ? "Wopsie! You havent added an About yet "
+                  : user.about}
+              </span>
+            )}
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  const PreferencesSection = () => {
+    const [isToneExpanded, setIsToneExpanded] = useState(false);
+    const [isNatureExpanded, setIsNatureExpanded] = useState(false);
+
+    const toggleToneExpand = () => {
+      setIsToneExpanded(!isToneExpanded);
+    };
+
+    const toggleNatureExpand = () => {
+      setIsNatureExpanded(!isNatureExpanded);
+    };
+
+    return (
+      <section
+        key="preferences"
+        className={`my-8 rounded-xl bg-gradient-to-tl ${
+          isDarkMode
+            ? "from-foreground to-Lightcopy-lighter/30"
+            : "from-foreground/10 to-foreground/20"
+        }`}
+      >
+        <div className="flex flex-col p-3">
+          <div className={`my-1 `}>
+            <span
+              onClick={toggleToneExpand}
+              className={`flex justify-between items-center`}
+            >
+              <h2 className="text-lg font-semibold cursor-pointer">Tone</h2>
+              <span
+                className={`mx-2 ${
+                  isToneExpanded ? "rotate-90" : ""
+                } transition-all`}
+              >
+                <ArrowDown />
+              </span>
+            </span>
+            {isToneExpanded && <span className="text-xs">{user.tone}</span>}
+          </div>
+          <div
+            className={`w-11/12 h-[1px] mx-3 bg-black/10 place-self-center`}
+          ></div>
+          <div className="my-1 ">
+            <span
+              onClick={toggleNatureExpand}
+              className={`flex justify-between items-center`}
+            >
+              <h2 className="text-lg font-semibold cursor-pointer">Nature</h2>
+              <span
+                className={`mx-2 ${
+                  isNatureExpanded ? "rotate-90" : ""
+                } transition-all`}
+              >
+                <ArrowDown />
+              </span>
+            </span>
+            {isNatureExpanded && <span className="text-xs">{user.nature}</span>}
+          </div>
+        </div>
+      </section>
+    );
+  };
 
   return (
     <m.section
@@ -112,14 +224,14 @@ export default function ProfilePage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={`w-screen h-screen px-5 pt-4 ${
+      className={`w-screen h-screen flex justify-center px-5 pt-4 ${
         isDarkMode ? "text-copy" : "text-copyLight"
       }`}
     >
-      <div className="w-full h-full">
+      <div className="w-3/4 h-full">
         {profileSection}
-        {otherInfoSection}
-        {preferencesSection}
+        <OtherInfoSection />
+        <PreferencesSection />
         <button
           onClick={handleLogout}
           className="mt-9 p-2 border-2 border-red-500 rounded-lg text-red-500 text-sm hover:bg-red-500/20"
