@@ -3,12 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { darkMode, logoutUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { Moon, Sun } from "@phosphor-icons/react";
+import { EditIcon } from "../components/SvgIcons";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetails);
   const isDarkMode = useSelector((state) => state.darkMode);
   const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate("edit");
+  };
 
   const toggleDarkMode = () => {
     dispatch(darkMode(!isDarkMode));
@@ -45,7 +50,7 @@ export default function ProfilePage() {
           </h2>
         </div>
       </div>
-      <div className={`flex flex-col justify-start items-start`}>
+      <div className={`flex flex-col justify-between items-start`}>
         <button
           onClick={toggleDarkMode}
           className={`overflow-hidden  p-1.5 rounded-full w-10 h-10 border ${
@@ -62,6 +67,12 @@ export default function ProfilePage() {
             <Moon size={"100%"} className={`pb-0.5`} weight="duotone" />
             <Sun size={"100%"} weight="duotone" />{" "}
           </span>
+        </button>
+        <button
+          onClick={handleEdit}
+          className={` flex justify-center items-center  p-1.5 rounded-full w-10 h-10 hover:text-blue-500  transition-all`}
+        >
+          <EditIcon />
         </button>
       </div>
     </section>
