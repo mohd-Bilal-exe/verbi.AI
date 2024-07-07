@@ -2,6 +2,7 @@ import { m } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { darkMode, logoutUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
+import { Moon, Sun } from "@phosphor-icons/react";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
@@ -19,25 +20,49 @@ export default function ProfilePage() {
   };
 
   const profileSection = (
-    <section key="profile" className="my-8">
-      <div className="flex items-center gap-10">
+    <section
+      key="profile"
+      className={`flex justify-between my-8  p-4 rounded-xl bg-gradient-to-tl ${
+        isDarkMode
+          ? "from-foreground to-Lightcopy-lighter/30"
+          : "from-foreground/10 to-foreground/20"
+      }`}
+    >
+      <div className="flex items-center gap-4">
         <span
           className={`w-28 h-28 border border-double rounded-full grid place-content-center text-7xl ${
             isDarkMode
               ? "bg-foregroundLight/20 border-yellow-600"
-              : "bg-foreground/80"
+              : "bg-foreground/50 border-yellow-600"
           }`}
         >
           {user.avatar}
         </span>
-        <div className="flex flex-col justify-end">
-          <h1 className="montserrat text-5xl tracking-tight">
-            {user.username}
-          </h1>
-          <h2 className="open-sans text-sm tracking-tight">
+        <div className="flex flex-col justify-end tracking-tight">
+          <h1 className="montserrat text-5xl">{user.username}</h1>
+          <h2 className="open-sans text-xs my-2">
             All your info is right here!
           </h2>
         </div>
+      </div>
+      <div className={`flex flex-col justify-start items-start`}>
+        <button
+          onClick={toggleDarkMode}
+          className={`overflow-hidden  p-1.5 rounded-full w-10 h-10 border ${
+            isDarkMode
+              ? "bg-copy-lighter/10 hover:bg-copy/20 border-copy-lighter hover:border-copy"
+              : " bg-copy-light hover:bg-copy-lighter/50 border-copyLight hover:border-black"
+          } transition-all`}
+        >
+          <span
+            className={`flex flex-col gap-2 justify-center items-center ${
+              isDarkMode ? "" : "-translate-y-9"
+            } transition-all ease-in-out`}
+          >
+            <Moon size={"100%"} className={`pb-0.5`} weight="duotone" />
+            <Sun size={"100%"} weight="duotone" />{" "}
+          </span>
+        </button>
       </div>
     </section>
   );
@@ -70,7 +95,7 @@ export default function ProfilePage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
       className={`w-screen h-screen px-5 pt-4 ${
-        isDarkMode ? "bg-bg1 text-copy" : "text-copyLight"
+        isDarkMode ? " text-copy" : "text-copyLight"
       }`}
     >
       <div className={`w-full h-full`}>
@@ -79,7 +104,7 @@ export default function ProfilePage() {
         {preferencesSection}
         <button
           onClick={handleLogout}
-          className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className={`mt-9 p-2 border-2 border-red-500 rounded-lg text-red-500 text-sm hover:bg-red-500/20 `}
         >
           Logout
         </button>
