@@ -131,14 +131,14 @@ export default function ChatPage() {
             type="submit"
             className={` ${
               isLoading ? "cursor-not-allowed" : "cursor-pointer"
-            }  w-11 h-10 grid place-content-center border place-self-center transition-colors ${
+            }  w-11 h-10 grid place-content-center  place-self-center bg-clip-border  transition-colors ${
               isDarkMode
-                ? "bg-foregroundLight hover:bg-foregroundLight/70 border-accent2  text-copyLight"
+                ? "bg-foregroundLight hover:bg-foregroundLight/70  text-copyLight"
                 : "bg-foregroundLight/50 hover:bg-foregroundLight/70  text-copyLight"
             }
             ${
               isLoading &&
-              `bg-gradient-to-br ${
+              `border-2 bg-gradient-to-br   ${
                 isDarkMode
                   ? "from-accent2 to-accent2lt"
                   : "from-blue-400 to-accent2lt"

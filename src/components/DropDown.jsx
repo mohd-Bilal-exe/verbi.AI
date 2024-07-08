@@ -12,10 +12,10 @@ const DropDown = ({ setSelected, title, place }) => {
       ? title === "tone"
         ? [
             { code: "professional", name: "💼 Professional" },
-            { code: "casual", name: "😊 Casual" },
             { code: "friendly", name: "😄 Friendly" },
             { code: "informative", name: "🧐 Informative" },
             { code: "formal", name: "🎩 Formal" },
+            { code: "casual", name: "😊 Casual" },
             { code: "respectful", name: "🙏 Respectful" },
             { code: "supportive", name: "🤗 Supportive" },
             { code: "motivational", name: "🚀 Motivational" },

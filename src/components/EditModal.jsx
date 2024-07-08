@@ -132,7 +132,7 @@ export default function EditModal({ attributes, onClose }) {
         {attributes === "nature" && <Tone type="nature" update={setNature} />}
         <button
           onClick={handleSave}
-          className="mt-4 p-2 bg-red-500 text-white rounded"
+          className="mt-4 p-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
         >
           Save and Close
         </button>

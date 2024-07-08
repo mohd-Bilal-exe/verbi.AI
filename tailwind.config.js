@@ -23,8 +23,8 @@ export default {
         accent2: "#4361ee",
         accent2lt: "#4895ef",
 
-        background: "#19181b",
-        foreground: "#252329",
+        background: "#181a1b",
+        foreground: "#242628",
         border: "#3e3b45",
 
         copy: "#fbfbfb",
