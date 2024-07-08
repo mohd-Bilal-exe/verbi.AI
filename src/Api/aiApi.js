@@ -1,14 +1,31 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+  GoogleGenerativeAI,
+  HarmCategory,
+  HarmBlockThreshold,
+} from "@google/generative-ai";
 
 // Access your API key as an environment variable
 const genAI = new GoogleGenerativeAI("AIzaSyA3kJyE6wCBi7mf81rKxhwROlo-Q5HCEgU");
 const generationConfig = {
-  temperature: 1.5,
+  temperature: 2,
   topP: 0.95,
-  topK: 50,
+  topK: 64,
   maxOutputTokens: 8192,
   responseMimeType: "text/plain",
 };
+
+// Define safety settings
+const safetySettings = [
+  {
+    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+  },
+  {
+    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+    threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+  },
+];
+
 // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 const Gemini = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -20,18 +37,18 @@ const rememberMe = (sessionId, username, nickname, about, tone, nature) => {
     sessions[sessionId] = { history: [] };
   }
 
-  console.log("session is ", sessionId);
-
   sessions[sessionId].userDetails = { username, nickname, about, tone, nature };
 
-  const literrallyMe = `Remember that my name is ${username}, 
-  but you should address me as ${nickname}. 
-  Here is a bit about me: ${about}. 
-  When responding to me, make sure to use a ${tone} tone. 
-  Additionally, keep in mind that I prefer to be interacted with a ${nature} manner.`;
-  console.log(tone);
-  console.log(nature);
-  console.log(literrallyMe);
+  const literrallyMe = `Hey Gemini,
+
+Just a quick reminder:
+
+- My name is ${username}, but you can call me ${nickname}.
+- A little about me: ${about}.
+- When you're responding, please use a ${tone} tone.
+- Also, keep in mind that I prefer interactions to be ${nature}.
+
+Thanks!`;
   sessions[sessionId].history.push({
     role: "user",
     parts: [
@@ -40,14 +57,6 @@ const rememberMe = (sessionId, username, nickname, about, tone, nature) => {
       },
     ],
   });
-};
-
-// Function to forget user details in a session
-const forgetMe = (sessionId) => {
-  if (!sessions[sessionId]) {
-    return;
-  }
-  delete sessions[sessionId].userDetails;
 };
 
 // Refactored chat function to be used in a front-end context
@@ -61,11 +70,11 @@ const chat = async (sessionId, message) => {
     if (!sessions[sessionId]) {
       sessions[sessionId] = { history: [] };
     }
-    console.log(sessions);
     let chatHistory = sessions[sessionId].history;
     const chatSession = await Gemini.startChat({
       history: chatHistory,
       generationConfig,
+      safetySettings,
     });
 
     const msg = message || "Hi"; // Default message if none provided

@@ -249,9 +249,15 @@ export default function ProfilePage() {
             >
               <m.span
                 key="tone"
-                className="text-xs mt-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between text-xs mt-2 smartphone:text-sm laptop:text-xs"
               >
                 {user.tone}
+                <button
+                  onClick={() => handleEdit("tone")}
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                >
+                  <EditIcon />
+                </button>
               </m.span>
             </m.div>
           </m.div>
@@ -286,9 +292,15 @@ export default function ProfilePage() {
             >
               <m.span
                 key="nature"
-                className="text-xs mt-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between text-xs mt-2 smartphone:text-sm laptop:text-xs"
               >
                 {user.nature}
+                <button
+                  onClick={() => handleEdit("nature")}
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                >
+                  <EditIcon />
+                </button>
               </m.span>
             </m.div>
           </div>

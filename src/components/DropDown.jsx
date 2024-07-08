@@ -3,12 +3,34 @@ import { CaretDown } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const DropDown = ({ setSelected, title }) => {
+const DropDown = ({ setSelected, title, place }) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(title);
 
   const Lists =
-    title === "tone"
+    place === "editModal"
+      ? title === "tone"
+        ? [
+            { code: "professional", name: "💼 Professional" },
+            { code: "casual", name: "😊 Casual" },
+            { code: "friendly", name: "😄 Friendly" },
+            { code: "informative", name: "🧐 Informative" },
+            { code: "formal", name: "🎩 Formal" },
+            { code: "respectful", name: "🙏 Respectful" },
+            { code: "supportive", name: "🤗 Supportive" },
+            { code: "motivational", name: "🚀 Motivational" },
+          ]
+        : [
+            { code: "sarcastic", name: "😏 Sarcastic" },
+            { code: "witty", name: "😄 Witty" },
+            { code: "thoughtful", name: "🤔 Thoughtful" },
+            { code: "creative", name: "🌟 Creative" },
+            { code: "humorous", name: "😂 Humorous" },
+            { code: "inspirational", name: "🌈 Inspirational" },
+            { code: "reflective", name: "🪞 Reflective" },
+            { code: "whimsical", name: "🦄 Whimsical" },
+          ]
+      : title === "tone"
       ? [
           { code: "professional", name: "💼 Professional" },
           { code: "casual", name: "😊 Casual" },
@@ -41,7 +63,9 @@ const DropDown = ({ setSelected, title }) => {
           animate={open ? "open" : "closed"}
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-50%" }}
-          className="grid grid-cols-2 place-content-center p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%]  w-48 h-fit"
+          className={` grid  place-content-center p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] ${
+            place === "editModal" ? "w-[320px] grid-cols-3" : "w-48 grid-cols-2"
+          }  h-fit`}
         >
           {Lists.map((item) => (
             <Option
@@ -78,6 +102,7 @@ const Option = ({ text, code, setSelected, setMessage, setOpen }) => {
 DropDown.propTypes = {
   setSelected: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  place: PropTypes.string,
 };
 
 Option.propTypes = {
