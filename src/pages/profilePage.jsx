@@ -42,7 +42,7 @@ export default function ProfilePage() {
     >
       <div className="flex items-center gap-4">
         <span
-          className={`w-28 h-28 border border-double rounded-full grid place-content-center text-7xl ${
+          className={`w-28 h-28 smartphone:size-24 border border-double rounded-full grid place-content-center text-7xl smartphone:text-6xl ${
             isDarkMode
               ? "bg-foregroundLight/20 border-yellow-600"
               : "bg-foreground/50 border-yellow-600"
@@ -57,10 +57,10 @@ export default function ProfilePage() {
           </h2>
         </div>
       </div>
-      <div className="flex flex-col justify-between items-start">
+      <div className="flex flex-col justify-between items-center">
         <button
           onClick={toggleDarkMode}
-          className={`overflow-hidden p-1.5 rounded-full w-10 h-10 border ${
+          className={`overflow-hidden p-1.5 rounded-full w-10 h-10 smartphone:size-7 border ${
             isDarkMode
               ? "bg-copy-lighter/10 hover:bg-copy/20 border-copy-lighter hover:border-copy"
               : "bg-copy-light hover:bg-copy-lighter/50 border-copyLight hover:border-black"
@@ -68,7 +68,7 @@ export default function ProfilePage() {
         >
           <span
             className={`flex flex-col gap-2 justify-center items-center ${
-              isDarkMode ? "" : "-translate-y-9"
+              isDarkMode ? "" : "-translate-y-9 smartphone:-translate-y-6"
             } transition-all ease-in-out`}
           >
             <Moon size={"100%"} className="pb-0.5" weight="duotone" />
@@ -76,8 +76,8 @@ export default function ProfilePage() {
           </span>
         </button>
         <button
-          onClick={() => handleEdit("Name")}
-          className="flex justify-center items-center p-1.5 rounded-full w-10 h-10 hover:text-blue-500 transition-all"
+          onClick={() => handleEdit("username")}
+          className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
         >
           <EditIcon />
         </button>
@@ -98,7 +98,8 @@ export default function ProfilePage() {
     };
 
     return (
-      <section
+      <m.section
+        layout
         key="otherInfo"
         className={`my-8 rounded-xl bg-gradient-to-tl ${
           isDarkMode
@@ -106,52 +107,94 @@ export default function ProfilePage() {
             : "from-foreground/10 to-foreground/20"
         }`}
       >
-        <div className="flex flex-col p-3">
-          <div className={`my-1 `}>
+        <m.div layout className="flex flex-col p-3">
+          <m.div layout className={`my-1`}>
             <span
               onClick={toggleNicknameExpand}
-              className={`flex justify-between items-center`}
+              className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold cursor-pointer">Nickname</h2>
-              <span
+              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+                Nickname
+              </h2>
+              <m.span
                 className={`mx-2 ${
                   isNicknameExpanded ? "rotate-90" : ""
                 } transition-all`}
               >
                 <ArrowDown />
-              </span>
+              </m.span>
             </span>
-            {isNicknameExpanded && (
-              <span className="text-xs">{user.nickname}</span>
-            )}
-          </div>
+            <m.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: isNicknameExpanded ? 1 : 0,
+                height: isNicknameExpanded ? "auto" : 0,
+              }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <m.span
+                key="nickname"
+                className="text-xs flex justify-between mt-2 ml-2 smartphone:text-sm laptop:text-xs"
+              >
+                {user.nickname}
+                <button
+                  onClick={() => handleEdit("nickname")}
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                >
+                  <EditIcon />
+                </button>
+              </m.span>
+            </m.div>
+          </m.div>
           <div
             className={`w-11/12 h-[1px] mx-3 bg-black/10 place-self-center`}
           ></div>
-          <div className="my-1 ">
+          <div className="my-1">
             <span
               onClick={toggleAboutExpand}
-              className={`flex justify-between items-center`}
+              className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold cursor-pointer">About</h2>
-              <span
+              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+                About
+              </h2>
+              <m.span
                 className={`mx-2 ${
                   isAboutExpanded ? "rotate-90" : ""
                 } transition-all`}
               >
-                <ArrowDown />{" "}
-              </span>
+                <ArrowDown />
+              </m.span>
             </span>
-            {isAboutExpanded && (
-              <span className=" text-xs">
-                {user.about == ""
-                  ? "Wopsie! You havent added an About yet "
+            <m.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: isAboutExpanded ? 1 : 0,
+                height: isAboutExpanded ? "auto" : 0,
+              }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <m.span
+                key="about"
+                className="text-xs flex justify-between  mt-2 ml-2 smartphone:text-sm laptop:text-xs"
+              >
+                {user.about === ""
+                  ? "Wopsie! You haven't added an About yet"
                   : user.about}
-              </span>
-            )}
+                <button
+                  onClick={() => handleEdit("about")}
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                >
+                  <EditIcon />
+                </button>
+              </m.span>
+            </m.div>
           </div>
-        </div>
-      </section>
+        </m.div>
+      </m.section>
     );
   };
 
@@ -168,7 +211,8 @@ export default function ProfilePage() {
     };
 
     return (
-      <section
+      <m.section
+        layout
         key="preferences"
         className={`my-8 rounded-xl bg-gradient-to-tl ${
           isDarkMode
@@ -176,44 +220,80 @@ export default function ProfilePage() {
             : "from-foreground/10 to-foreground/20"
         }`}
       >
-        <div className="flex flex-col p-3">
-          <div className={`my-1 `}>
+        <m.div layout className="flex flex-col p-3">
+          <m.div layout className={`my-1`}>
             <span
               onClick={toggleToneExpand}
-              className={`flex justify-between items-center`}
+              className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold cursor-pointer">Tone</h2>
-              <span
+              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+                Tone
+              </h2>
+              <m.span
                 className={`mx-2 ${
                   isToneExpanded ? "rotate-90" : ""
                 } transition-all`}
               >
                 <ArrowDown />
-              </span>
+              </m.span>
             </span>
-            {isToneExpanded && <span className="text-xs">{user.tone}</span>}
-          </div>
+            <m.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: isToneExpanded ? 1 : 0,
+                height: isToneExpanded ? "auto" : 0,
+              }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <m.span
+                key="tone"
+                className="text-xs mt-2 smartphone:text-sm laptop:text-xs"
+              >
+                {user.tone}
+              </m.span>
+            </m.div>
+          </m.div>
           <div
             className={`w-11/12 h-[1px] mx-3 bg-black/10 place-self-center`}
           ></div>
-          <div className="my-1 ">
+          <div className="my-1">
             <span
               onClick={toggleNatureExpand}
-              className={`flex justify-between items-center`}
+              className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold cursor-pointer">Nature</h2>
-              <span
+              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+                Nature
+              </h2>
+              <m.span
                 className={`mx-2 ${
                   isNatureExpanded ? "rotate-90" : ""
                 } transition-all`}
               >
                 <ArrowDown />
-              </span>
+              </m.span>
             </span>
-            {isNatureExpanded && <span className="text-xs">{user.nature}</span>}
+            <m.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: isNatureExpanded ? 1 : 0,
+                height: isNatureExpanded ? "auto" : 0,
+              }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <m.span
+                key="nature"
+                className="text-xs mt-2 smartphone:text-sm laptop:text-xs"
+              >
+                {user.nature}
+              </m.span>
+            </m.div>
           </div>
-        </div>
-      </section>
+        </m.div>
+      </m.section>
     );
   };
 
@@ -224,11 +304,11 @@ export default function ProfilePage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={`w-screen h-screen flex justify-center px-5 pt-4 ${
+      className={`w-screen h-screen flex justify-center px-5  ${
         isDarkMode ? "text-copy" : "text-copyLight"
       }`}
     >
-      <div className="w-3/4 h-full">
+      <div className="lg:w-3/4 smartphone:w-full ">
         {profileSection}
         <OtherInfoSection />
         <PreferencesSection />

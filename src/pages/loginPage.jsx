@@ -251,33 +251,22 @@ export default function LoginPage() {
         id: "about",
         component: (
           <div
-            key={"awsm"}
+            key={"gemma3"}
             className="group w-full h-full px-6 flex flex-col justify-center text-white"
           >
-            <m.h1
-              key={"awsm4"}
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className={`text`}
-            >
-              Awesome!{" "}
-            </m.h1>
-            <h1 className="text-2xl font-bold ">
-              I&apos;ll call you {nickname}. 🎉
+            <h1 key={"gemma4"} className={`text`}>
+              Here to change about??
             </h1>
             <h2 className="text-sm smartphone:text-xs group-hover:translate-x-1 transition-all tracking-tighter mb-6">
-              Now, tell me all about yourself. Don&apos;t hold back! 🚀
+              Okay then, Let me know about you.
             </h2>
             <textarea
               value={about}
-              onChange={(e) => {
-                setAbout(e.target.value);
-              }}
+              onChange={(e) => setAbout(e.target.value)}
               placeholder={
                 "Tell me stuff about you like what you do,\nyour hobbies, dreams, favorite ice cream flavor... you know, the usual!🍦"
               }
-              className="w-full  resize-none bg-transparent p-2 outline-none border-b border-white placeholder:text-white placeholder:text-xs placeholder:pt-1 smartphone:placeholder:pt-1  text-white"
+              className="w-full resize-none bg-transparent p-2 outline-none border-b border-white placeholder:text-white placeholder:text-xs placeholder:pt-1 smartphone:placeholder:pt-1 text-white"
             />
           </div>
         ),

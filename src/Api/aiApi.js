@@ -42,6 +42,14 @@ const rememberMe = (sessionId, username, nickname, about, tone, nature) => {
   });
 };
 
+// Function to forget user details in a session
+const forgetMe = (sessionId) => {
+  if (!sessions[sessionId]) {
+    return;
+  }
+  delete sessions[sessionId].userDetails;
+};
+
 // Refactored chat function to be used in a front-end context
 const chat = async (sessionId, message) => {
   try {
