@@ -9,6 +9,7 @@ export const ADD_TRANSLATION = "ADD_TRANSLATION";
 export const GLOBAL_HISTORY = "GLOBAL_HISTORY";
 export const CHAT_HISTORY = "CHAT_HISTORY";
 export const CURRENT_CHAT = "CURRENT_CHAT";
+export const DELETE_CHAT_HISTORY = "DELETE_CHAT_HISTORY";
 export const DELETE_HISTORY = "DELETE_HISTORY";
 export const addChatHistory = (sessionID, history) => ({
   type: CHAT_HISTORY,
@@ -67,7 +68,10 @@ export const isLogin = (isLoggedIn) => ({
 });
 
 export const deleteHistory = () => ({
-  type: "DELETE_HISTORY",
+  type: DELETE_HISTORY,
+});
+export const deletechatHistory = () => ({
+  type: DELETE_CHAT_HISTORY,
 });
 
 export const logoutUser = () => ({

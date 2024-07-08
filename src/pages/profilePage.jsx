@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { m } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { darkMode, logoutUser } from "../Redux/Actions";
+import { darkMode, deletechatHistory, logoutUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { Moon, Sun } from "@phosphor-icons/react";
 import { ArrowDown, EditIcon } from "../components/SvgIcons";
@@ -10,6 +10,8 @@ import EditModal from "../components/EditModal";
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetails);
+  const [clearIsclicked, setClearIsclicked] = useState(false);
+
   const isDarkMode = useSelector((state) => state.darkMode);
   const navigate = useNavigate();
   const [editSection, setEditSection] = useState(null);
@@ -26,7 +28,10 @@ export default function ProfilePage() {
     dispatch(logoutUser());
     navigate("/login");
   };
-
+  const handleChatclear = () => {
+    dispatch(deletechatHistory());
+    setClearIsclicked(true);
+  };
   const closeModal = () => {
     setEditSection(null);
   };
@@ -34,7 +39,7 @@ export default function ProfilePage() {
   const profileSection = (
     <section
       key="profile"
-      className={`flex justify-between my-8 p-4 rounded-xl bg-gradient-to-tl ${
+      className={`flex justify-between my-4 smartphone:my-8  p-4 rounded-xl bg-gradient-to-tl ${
         isDarkMode
           ? "from-foreground to-Lightcopy-lighter/30"
           : "from-foreground/10 to-foreground/20"
@@ -101,7 +106,7 @@ export default function ProfilePage() {
       <m.section
         layout
         key="otherInfo"
-        className={`my-8 rounded-xl bg-gradient-to-tl ${
+        className={`my-4 smartphone:my-8  rounded-xl bg-gradient-to-tl ${
           isDarkMode
             ? "from-foreground to-Lightcopy-lighter/30"
             : "from-foreground/10 to-foreground/20"
@@ -141,7 +146,7 @@ export default function ProfilePage() {
                 {user.nickname}
                 <button
                   onClick={() => handleEdit("nickname")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -186,7 +191,7 @@ export default function ProfilePage() {
                   : user.about}
                 <button
                   onClick={() => handleEdit("about")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -214,7 +219,7 @@ export default function ProfilePage() {
       <m.section
         layout
         key="preferences"
-        className={`my-8 rounded-xl bg-gradient-to-tl ${
+        className={`my-4 smartphone:my-8  rounded-xl bg-gradient-to-tl ${
           isDarkMode
             ? "from-foreground to-Lightcopy-lighter/30"
             : "from-foreground/10 to-foreground/20"
@@ -254,7 +259,7 @@ export default function ProfilePage() {
                 {user.tone}
                 <button
                   onClick={() => handleEdit("tone")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -297,7 +302,7 @@ export default function ProfilePage() {
                 {user.nature}
                 <button
                   onClick={() => handleEdit("nature")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -324,12 +329,27 @@ export default function ProfilePage() {
         {profileSection}
         <OtherInfoSection />
         <PreferencesSection />
-        <button
-          onClick={handleLogout}
-          className="mt-9 p-2 border-2 border-red-500 rounded-lg text-red-500 text-sm hover:bg-red-500/20"
+        <section
+          className={`my-4 h-fit smartphone:my-8 rounded-xl flex justify-between`}
         >
-          Logout
-        </button>
+          <button
+            onClick={handleChatclear}
+            className={` p-1 px-2 border-2 ${
+              isDarkMode
+                ? "text-copy border-copy-light hover:bg-copy/20"
+                : "text-copyLight border-Lightcopy-light hover:bg-copyLight/20"
+            }  rounded-lg text-copy text-xs `}
+          >
+            {clearIsclicked ? "Done" : "Clear Chat"}
+          </button>
+          <button
+            onClick={handleLogout}
+            className=" p-1 px-2 tracking-wide border-2 border-red-500 rounded-lg text-red-500 text-xs hover:bg-red-500/20"
+          >
+            Logout
+          </button>
+        </section>
+
         {editSection && (
           <EditModal attributes={editSection} onClose={closeModal} />
         )}

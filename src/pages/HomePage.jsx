@@ -61,7 +61,7 @@ export default function HomePage() {
     },
   };
   return (
-    <m.section className="w-screen h-screen relative overflow-x-hidden px-1 flex flex-col items-center">
+    <m.section className="w-screen h-screen relative overflow-x-hidden px-1 smartphone:pt-14 flex flex-col items-center">
       <m.div
         variants={parentVariants}
         initial="initial"
@@ -79,7 +79,10 @@ export default function HomePage() {
               to={gridItem.path}
               className={`group w-full h-full flex flex-row justify-between rounded-xl  ${gridItem.classes}`}
             >
-              <div id="texts" className={`w-fit flex flex-col text-2xl mt-10`}>
+              <div
+                id="texts"
+                className={`w-fit flex flex-col text-2xl mt-10 drop-shadow-xl`}
+              >
                 <h1
                   className={`group-hover:translate-x-2 transition-transform duration-300 ml-5 montserrat tracking-wider font-medium transform-gpu`}
                 >

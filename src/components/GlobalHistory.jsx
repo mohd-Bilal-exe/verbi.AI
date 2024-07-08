@@ -72,7 +72,7 @@ export default function GlobalHistory() {
           Clear History <ClearIcon />
         </button>
         <button
-          disabled={globalHistory.length === 0}
+          disabled={globalHistory.length === 0 && !isExpanded}
           className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 p-2 rounded-lg open-sans ${
             isExpanded ? "bg-black/20" : ""
           } `}
@@ -177,8 +177,10 @@ export default function GlobalHistory() {
             </m.div>
           ))
         ) : (
-          <p className={`text-2xl text-copy montserrat tracking-tight my-auto`}>
-            No history available
+          <p
+            className={`text-xl text-copy text-center px-10 montserrat tracking-tight my-auto`}
+          >
+            No history, You have&apos;nt done anything yet
           </p>
         )}
       </div>

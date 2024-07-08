@@ -10,6 +10,7 @@ import {
   CHAT_HISTORY,
   CURRENT_CHAT,
   DELETE_HISTORY,
+  DELETE_CHAT_HISTORY,
 } from "./Actions";
 
 const initialState = {
@@ -93,6 +94,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         globalHistory: [],
+      };
+    case DELETE_CHAT_HISTORY:
+      return {
+        ...state,
+        currentChat: [],
       };
     case CHAT_HISTORY: {
       // Find the existing session in chatHistory

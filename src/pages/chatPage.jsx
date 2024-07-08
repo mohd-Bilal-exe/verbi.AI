@@ -1,3 +1,5 @@
+// Inside your ChatPage component
+
 import { useEffect, useRef, useState } from "react";
 import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +15,8 @@ export default function ChatPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [text, setText] = useState("");
   const textAreaRef = useRef(null);
-  const dispatch = useDispatch();
   const chatBoxRef = useRef(null);
-  //const [currentSesh, setCurrentSesh] = useState([]);
+  const dispatch = useDispatch();
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -46,8 +47,7 @@ export default function ChatPage() {
         text: `${text} \n`,
         timestamp: Date.now(),
       };
-
-      //setCurrentSesh((prevSesh) => [...prevSesh, userMessage]);
+      setText(""); // Clear the input field after sending message
       dispatch(currentChat(id, userMessage));
       setIsLoading(true);
 
@@ -58,18 +58,24 @@ export default function ChatPage() {
         text: result.text,
         timestamp: Date.now(),
       };
-      //setCurrentSesh((prevSesh) => [...prevSesh, aiMessage]);
       dispatch(currentChat(id, aiMessage));
 
       if (result.error) {
         console.error("Chat Error:", result.error);
       }
-      setText(""); // Clear the input field after sending message
     } catch (error) {
       console.error("Error:", error);
       setIsLoading(false);
     }
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault(); // Prevent inserting newline
+      handleSendMessage(e);
+    }
+  };
+
   return (
     <m.div
       key="chatPage"
@@ -103,8 +109,8 @@ export default function ChatPage() {
             text.length > 35 ? "rounded-3xl" : "rounded-full"
           } h-fit w-full mx-3 overflow-hidden transition-all ${
             isDarkMode
-              ? "bg-foregroundLight/10 border-primary-light"
-              : "bg-background/10 border-primary-dark text-background"
+              ? "bg-foregroundLight/80 placeholder:text text-copyLight "
+              : "bg-background/70 border-primary-dark text-copy"
           }`}
         >
           <textarea
@@ -112,11 +118,12 @@ export default function ChatPage() {
             placeholder="Type your message..."
             className={`bg-transparent outline-none w-11/12 my-1 ml-4 pl-2 text-clip resize-none placeholder:pl-1 placeholder:py- overflow-y-auto ${
               isDarkMode
-                ? "placeholder:text-copy-lighter text-copy-light caret-accent2lt"
-                : "placeholder:text-copyLight text-foreground caret-accent2"
+                ? "placeholder:text-copyLight  caret-accent2"
+                : "placeholder:text-copy  caret-accent2lt"
             }
             `}
             onChange={handleTextChange}
+            onKeyDown={handleKeyDown} // Handle Enter key press
             value={text}
           />
           <button
@@ -124,11 +131,20 @@ export default function ChatPage() {
             type="submit"
             className={` ${
               isLoading ? "cursor-not-allowed" : "cursor-pointer"
-            }  w-11 h-10 grid place-content-center place-self-center transition-colors ${
+            }  w-11 h-10 grid place-content-center border place-self-center transition-colors ${
               isDarkMode
-                ? "bg-foregroundLight hover:bg-foregroundLight/70  text-copyLight"
-                : "bg-foreground/60 hover:bg-foreground/70 text-copy"
-            } rounded-full`}
+                ? "bg-foregroundLight hover:bg-foregroundLight/70 border-accent2  text-copyLight"
+                : "bg-foregroundLight/50 hover:bg-foregroundLight/70  text-copyLight"
+            }
+            ${
+              isLoading &&
+              `bg-gradient-to-br ${
+                isDarkMode
+                  ? "from-accent2 to-accent2lt"
+                  : "from-blue-400 to-accent2lt"
+              }`
+            }
+            rounded-full`}
           >
             <m.span
               initial={isLoading ? { rotate: 0 } : { rotate: 0 }}

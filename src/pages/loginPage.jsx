@@ -143,7 +143,7 @@ export default function LoginPage() {
               }}
               className={`w-fit bg-transparent p-2 outline-none border-b ${
                 errors.username ? "border-red-400 " : "border-white"
-              }  placeholder:text-copy-lighter text-white`}
+              }  placeholder:text-white placeholder:text-sm text-white`}
             />
             {errors.username && (
               <span className="text-red-400 text-sm w-fit ">
@@ -192,7 +192,7 @@ export default function LoginPage() {
               }}
               className={`w-fit bg-transparent p-2 outline-none border-b ${
                 errors.nickname ? "border-red-400 " : "border-white"
-              }  placeholder:text-copy-lighter text-white`}
+              }  placeholder:text-white placeholder:text-sm text-white`}
             />
             {errors.nickname && (
               <span className="text-red-500 text-sm transition-all">
@@ -349,9 +349,7 @@ export default function LoginPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
-      className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-lg flex justify-center items-center p-3 smartphone:pb-24 ${
-        isDarkMode ? "bg-background" : "bg-backgroundLight"
-      } `}
+      className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-lg flex justify-center items-center p-3 smartphone:pb-24 bg-background `}
     >
       <div
         className={`relative rounded-lg w-1/2 h-[422px] smartphone:w-full  overflow-hidden flex bg-gradient-to-br ${
