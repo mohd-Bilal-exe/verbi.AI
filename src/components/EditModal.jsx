@@ -89,7 +89,6 @@ const Avatar = ({ avatar, update }) => {
       "😀",
       "😎",
       "😒",
-      "😘",
       "😜",
       "😄",
       "😁",
@@ -115,13 +114,13 @@ const Avatar = ({ avatar, update }) => {
   return (
     <div
       key={"avatar"}
-      className="group w-full h-full px-6 flex flex-col justify-center text-white"
+      className="group  w-full h-full px-6 flex flex-col justify-center text-white"
     >
-      <h2 className="text-sm smartphone:text-xs group-hover:translate-x-1 transition-all tracking-tighter mb-6">
+      <h2 className="text-2xl group-hover:translate-x-1 transition-all tracking-tighter mb-6">
         Choose you new avatar.
       </h2>
       <div
-        className={`w-full h-32 grid grid-cols-8 smartphone:grid-cols-6  bg-black/20 p-2 overflow-y-auto rounded-2xl text-4xl `}
+        className={` w-full smartphone:h-64 h-42  grid grid-cols-8 smartphone:grid-cols-5 smartphone:gap-4  bg-black/20 p-2 overflow-y-auto rounded-2xl text-4xl `}
       >
         {emojis.map((emoji, index) => {
           return (
@@ -132,7 +131,7 @@ const Avatar = ({ avatar, update }) => {
               }}
               className={`smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${
                 avatar === emojis[index] && "backdrop-brightness-150"
-              }  p-1 rounded-xl transition-all cursor-pointer`}
+              }  p-1 rounded-xl transition-all cursor-pointer text-center grid place-content-center`}
             >
               {emoji}
             </span>
