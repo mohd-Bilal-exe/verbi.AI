@@ -90,7 +90,7 @@ export default function ChatPage() {
       <div
         id="chatBox"
         ref={chatBoxRef}
-        className="scroll-smooth overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
+        className="scroll-smooth scrollbar-thumb-rounded  overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
       >
         {chatHistory &&
           chatHistory.map((message, index) => (
@@ -109,8 +109,8 @@ export default function ChatPage() {
             text.length > 35 ? "rounded-3xl" : "rounded-full"
           } h-fit w-full mx-3 overflow-hidden transition-all ${
             isDarkMode
-              ? "bg-foregroundLight/80 placeholder:text text-copyLight "
-              : "bg-background/70 border-primary-dark text-copy"
+              ? "bg-foregroundLight/20  text-copy "
+              : "bg-background/10 border-primary-dark text-copyLight"
           }`}
         >
           <textarea
@@ -118,8 +118,8 @@ export default function ChatPage() {
             placeholder="Type your message..."
             className={`bg-transparent outline-none w-11/12 my-1 ml-4 pl-2 text-clip resize-none placeholder:pl-1 placeholder:py- overflow-y-auto ${
               isDarkMode
-                ? "placeholder:text-copyLight  caret-accent2"
-                : "placeholder:text-copy  caret-accent2lt"
+                ? "placeholder:text-copy  caret-accent2"
+                : "placeholder:text-copyLight  caret-accent2lt"
             }
             `}
             onChange={handleTextChange}
@@ -135,14 +135,6 @@ export default function ChatPage() {
               isDarkMode
                 ? "bg-foregroundLight hover:bg-foregroundLight/70  text-copyLight"
                 : "bg-foregroundLight/50 hover:bg-foregroundLight/70  text-copyLight"
-            }
-            ${
-              isLoading &&
-              `border-2 bg-gradient-to-br   ${
-                isDarkMode
-                  ? "from-accent2 to-accent2lt"
-                  : "from-blue-400 to-accent2lt"
-              }`
             }
             rounded-full`}
           >

@@ -65,7 +65,7 @@ export default function HomePage() {
     },
   };
   return (
-    <m.section className="w-screen h-screen relative overflow-x-hidden px-1 smartphone:pt-14 flex flex-col items-center">
+    <m.section className="w-screen h-screen transform-gpu  relative overflow-x-hidden px-1 smartphone:pt-14 flex flex-col items-center">
       <m.div
         variants={parentVariants}
         initial="initial"

@@ -40,10 +40,10 @@ export default function GlobalHistory() {
       }
       transition={{
         delay: isExpanded ? 0 : 0.6,
-        duration: 0.5,
+        duration: 0.2,
         type: "spring",
       }}
-      className={`backdrop-blur-lg transition-transform backdrop-brightness-50 ${
+      className={`transform-gpu backdrop-blur-lg transition-all backdrop-brightness-50 ${
         isExpanded
           ? "absolute bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
           : "absolute bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
