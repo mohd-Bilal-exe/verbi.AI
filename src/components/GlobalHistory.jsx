@@ -32,7 +32,7 @@ export default function GlobalHistory() {
     <m.section
       key={"GlobalHistory"}
       layout
-      initial={{ y: 200, opacity: 0 }}
+      initial={{ y: 0, opacity: 0 }}
       animate={
         isExpanded
           ? { y: 0, opacity: 1, height: "90vh", width: "100%" }
@@ -74,8 +74,8 @@ export default function GlobalHistory() {
         <button
           disabled={globalHistory.length === 0 && !isExpanded}
           className={`group w-fit h-8 flex justify-center items-center self-end mr-4 mb-2 p-2 rounded-lg open-sans ${
-            isExpanded ? "bg-black/20" : ""
-          } `}
+            globalHistory.length === 0 ? "cursor-not-allowed" : "cursor-pointer"
+          } ${isExpanded ? "bg-black/20" : ""} `}
           onClick={() => handleExpandClick(!isExpanded)}
         >
           {isExpanded ? (

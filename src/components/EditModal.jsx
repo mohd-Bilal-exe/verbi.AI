@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUser } from "../Redux/Actions";
@@ -12,7 +12,7 @@ const Name = ({ type, name, setName }) => {
   return (
     <div
       key={"gemma3"}
-      className="group w-full h-full px-6 flex flex-col justify-center"
+      className="group w-full h-full px-6 flex flex-row justify-center"
     >
       <div className={`w-full h-full flex flex-col justify-center`}>
         <div className="w-full flex flex-col justify-center gap-1 mt-10 mb-3 text-copy">
@@ -27,8 +27,7 @@ const Name = ({ type, name, setName }) => {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Start typing your name..."
-          className={`w-1/2 bg-transparent p-2 outline-none border-b placeholder:text-sm  placeholder:text-copy-light text-white`}
+          className={`w-1/2 bg-transparent p-2 outline-none border-b text-copy`}
         />
       </div>
     </div>
@@ -83,6 +82,70 @@ Tone.propTypes = {
   update: PropTypes.func.isRequired,
 };
 
+const Avatar = ({ avatar, update }) => {
+  const emojis = useMemo(
+    () => [
+      "😊",
+      "😀",
+      "😎",
+      "😒",
+      "😘",
+      "😜",
+      "😄",
+      "😁",
+      "😂",
+      "😢",
+      "😡",
+      "🤔",
+      "🤗",
+      "😷",
+      "🤠",
+      "😇",
+      "🤓",
+      "😈",
+      "🤖",
+      "🦄",
+      "🐱",
+      "🐶",
+      "🐼",
+      "🐨",
+    ],
+    []
+  );
+  return (
+    <div
+      key={"avatar"}
+      className="group w-full h-full px-6 flex flex-col justify-center text-white"
+    >
+      <h2 className="text-sm smartphone:text-xs group-hover:translate-x-1 transition-all tracking-tighter mb-6">
+        Choose you new avatar.
+      </h2>
+      <div
+        className={`w-full h-32 grid grid-cols-8 smartphone:grid-cols-6  bg-black/20 p-2 overflow-y-auto rounded-2xl text-4xl `}
+      >
+        {emojis.map((emoji, index) => {
+          return (
+            <span
+              key={index}
+              onClick={() => {
+                update(emojis[index]);
+              }}
+              className={`smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${
+                avatar === emojis[index] && "backdrop-brightness-150"
+              }  p-1 rounded-xl transition-all cursor-pointer`}
+            >
+              {emoji}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+Avatar.propTypes = {
+  avatar: PropTypes.string.isRequired,
+  update: PropTypes.func.isRequired,
+};
 export default function EditModal({ attributes, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetails);
@@ -92,6 +155,7 @@ export default function EditModal({ attributes, onClose }) {
   const [about, setAbout] = useState(user.about);
   const [tone, setTone] = useState(user.tone);
   const [nature, setNature] = useState(user.nature);
+  const [avatar, setAvatar] = useState(user.avatar);
 
   const handleSave = () => {
     if (attributes === "username") {
@@ -104,6 +168,8 @@ export default function EditModal({ attributes, onClose }) {
       handleClick(dispatch, attributes, tone);
     } else if (attributes === "nature") {
       handleClick(dispatch, attributes, nature);
+    } else if (attributes === "avatar") {
+      handleClick(dispatch, attributes, avatar);
     }
     onClose();
   };
@@ -130,6 +196,10 @@ export default function EditModal({ attributes, onClose }) {
         {attributes === "about" && <About about={about} setAbout={setAbout} />}
         {attributes === "tone" && <Tone type="tone" update={setTone} />}
         {attributes === "nature" && <Tone type="nature" update={setNature} />}
+        {attributes === "avatar" && (
+          <Avatar avatar={avatar} update={setAvatar} />
+        )}
+
         <button
           onClick={handleSave}
           className="mt-4 p-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"

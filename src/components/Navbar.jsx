@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { m } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useSelector } from "react-redux";
 
 // Extracted SVG icons
@@ -121,22 +121,27 @@ const Navbar = () => {
                   ? `${listItem.title}`
                   : null}
               </h1>
-              {selected === listItem.path && (
-                <m.div
-                  layout
-                  layoutId="underline"
-                  transition={{
-                    type: "spring",
-                    ease: "easeInOut",
-                    duration: 0.5,
-                  }}
-                  className={`absolute bottom-0 w-20 h-1 rounded-full ${
-                    isDarkMode
-                      ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_25px_#ffffff] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
-                      : "bg-copyLight shadow-[0px_-5px_20px_#252329] laptop:shadow-[0px_-2px_30px_#252329]"
-                  } transition-opacity duration-500 transform-gpu`}
-                />
-              )}
+              <AnimatePresence>
+                {selected === listItem.path && (
+                  <m.div
+                    layout
+                    layoutId="underline"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      type: "spring",
+                      ease: "easeInOut",
+                      duration: 1,
+                    }}
+                    className={`absolute bottom-0 w-20 h-1 rounded-full ${
+                      isDarkMode
+                        ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_25px_#ffffff] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
+                        : "bg-copyLight shadow-[0px_-5px_20px_#252329] laptop:shadow-[0px_-2px_30px_#252329]"
+                    } transition-opacity duration-500 transform-gpu`}
+                  />
+                )}
+              </AnimatePresence>
             </Link>
           </m.li>
         ))}

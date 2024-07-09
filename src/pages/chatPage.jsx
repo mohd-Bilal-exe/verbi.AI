@@ -82,7 +82,7 @@ export default function ChatPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, type: "spring" }}
+      transition={{ duration: 0.8, type: "spring" }}
       className={`w-full h-screen pt-5 laptop:py-1 flex flex-col items-center ${
         isDarkMode ? "bg-bg1/10 text-white" : "text-bg1"
       }`}

@@ -37,7 +37,7 @@ function App() {
               isDarkMode
                 ? "bg-background scrollbar-dark"
                 : "bg-backgroundLight scrollbar-custom"
-            } transition-colors`}
+            } transition-colors open-sans`}
           >
             <Routes>
               <Route

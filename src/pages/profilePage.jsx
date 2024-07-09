@@ -39,7 +39,7 @@ export default function ProfilePage() {
   const profileSection = (
     <section
       key="profile"
-      className={`flex justify-between my-4 smartphone:my-8  p-4 rounded-xl bg-gradient-to-tl ${
+      className={`flex justify-between my-4 smartphone:my-8  p-4 rounded-xl open-sans  bg-gradient-to-tl ${
         isDarkMode
           ? "from-foreground to-Lightcopy-lighter/30"
           : "from-foreground/10 to-foreground/20"
@@ -47,13 +47,19 @@ export default function ProfilePage() {
     >
       <div className="flex items-center gap-4">
         <span
-          className={`w-28 h-28 smartphone:size-24 border border-double rounded-full grid place-content-center text-7xl smartphone:text-6xl ${
+          className={`relative w-28 h-28 smartphone:size-24 border border-double rounded-full grid place-content-center text-7xl smartphone:text-6xl ${
             isDarkMode
               ? "bg-foregroundLight/20 border-yellow-600"
               : "bg-foreground/50 border-yellow-600"
           }`}
         >
           {user.avatar}
+          <button
+            onClick={() => handleEdit("avatar")}
+            className=" absolute bottom-0 right-2 flex justify-center items-center p-1 pl-1.5  rounded-full size-6 bg-slate-950/60 text-copy  hover:text-blue-500 transition-all"
+          >
+            <EditIcon />
+          </button>
         </span>
         <div className="flex flex-col justify-end tracking-tight">
           <h1 className="montserrat text-5xl">{user.username}</h1>
@@ -146,7 +152,7 @@ export default function ProfilePage() {
                 {user.nickname}
                 <button
                   onClick={() => handleEdit("nickname")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -191,7 +197,7 @@ export default function ProfilePage() {
                   : user.about}
                 <button
                   onClick={() => handleEdit("about")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -259,7 +265,7 @@ export default function ProfilePage() {
                 {user.tone}
                 <button
                   onClick={() => handleEdit("tone")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -302,7 +308,7 @@ export default function ProfilePage() {
                 {user.nature}
                 <button
                   onClick={() => handleEdit("nature")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -320,7 +326,7 @@ export default function ProfilePage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, type: "spring" }}
+      transition={{ duration: 0.8, type: "spring" }}
       className={`w-screen h-screen flex justify-center px-5  ${
         isDarkMode ? "text-copy" : "text-copyLight"
       }`}

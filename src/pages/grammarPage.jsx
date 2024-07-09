@@ -56,7 +56,7 @@ const GrammarPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, type: "spring" }}
+      transition={{ duration: 0.8, type: "spring" }}
       className={`w-screen h-screen ${
         isDarkMode ? "text-copy" : "text-copyLight"
       }`}
