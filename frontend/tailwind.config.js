@@ -22,7 +22,8 @@ export default {
       colors: {
         accent2: "#4361ee",
         accent2lt: "#4895ef",
-
+        geminiPrimary: "#1981FE",
+        geminiSecondary: "#B195FE",
         background: "#181a1b",
         foreground: "#242628",
         border: "#3e3b45",
