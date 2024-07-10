@@ -19,13 +19,34 @@ const GrammarPage = () => {
   const handleGrammarCheck = async () => {
     setLoading(true);
     try {
-      const response = await grammarCheck(ipText, customInstructions);
-      setOpText(response);
+      //const response = await grammarCheck(ipText, customInstructions);
+      const response = await fetch(
+        "https://verbi-ai.onrender.com/AI/grammarCheck",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt: ipText,
+            instructions: customInstructions,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const responseData = await response.json();
+      setOpText(responseData.text);
+
       const grammarObj = {
         ipText: ipText,
         time: formatTimefunc(Date.now()),
-        opText: response,
+        opText: responseData.text,
       };
+
       dispatch(
         globalHistory({
           type: "Grammar Check",

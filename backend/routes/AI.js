@@ -25,9 +25,12 @@ const sessions = {};
 // Grammar Check Route
 router.post("/grammarCheck", async (req, res) => {
   try {
-    const prompt = req.body.prompt
-      ? `Check the grammar of the following text and provide corrections if any: "${req.body.prompt}"`
-      : "";
+    const prompt = `Check the grammar of the following text and provide corrections if any: "${
+      req.body.prompt
+    }" \n \n ${
+      customInstructions &&
+      `answer according to the following instructions : ${req.body.customInstructions}`
+    } `;
     const result = await Gemini.generateContent(prompt);
     const response = await result.response;
     let text = await response.text();
