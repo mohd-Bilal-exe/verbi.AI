@@ -1,0 +1,14 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build artifacts
+build/
+dist/
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore shell file and its text
+*get_backend_code_context.ps1
+*get_backend_code_context.txt
