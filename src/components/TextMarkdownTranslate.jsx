@@ -24,7 +24,10 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
       transition: { duration: history ? 0.1 : 0.5 },
     },
   };
-  var key = Math.random();
+
+  // Unique key for each rendered Markdown component
+  let key = 0;
+
   return (
     <m.div
       variants={parentVariants}
@@ -38,13 +41,13 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.p
               key={key++}
               variants={fadeInUpVariants}
-              className={`text-base mb-2 open-sans ${
+              className={`text-base mb-2 ${
                 isDarkMode
                   ? history
                     ? "text-dark"
                     : "text-light"
                   : "text-dark"
-              }`}
+              } open-sans`}
               {...props}
             />
           ),
@@ -52,13 +55,13 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.h1
               key={key++}
               variants={fadeInUpVariants}
-              className={`text-3xl font-bold mb-4 playfair ${
+              className={`text-3xl font-bold mb-4 ${
                 isDarkMode
                   ? history
                     ? "text-dark"
                     : "text-light"
                   : "text-dark"
-              }`}
+              } playfair`}
               {...props}
             />
           ),
@@ -66,13 +69,13 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.h2
               key={key++}
               variants={fadeInUpVariants}
-              className={`text-2xl font-semibold mb-3 montserrat ${
+              className={`text-2xl font-semibold mb-3 ${
                 isDarkMode
                   ? history
                     ? "text-dark"
                     : "text-light"
                   : "text-dark"
-              }`}
+              } montserrat`}
               {...props}
             />
           ),
@@ -80,13 +83,13 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.h3
               key={key++}
               variants={fadeInUpVariants}
-              className={`text-xl font-medium mb-2 montserrat ${
+              className={`text-xl font-medium mb-2 ${
                 isDarkMode
                   ? history
                     ? "text-dark"
                     : "text-light"
                   : "text-gray-700"
-              }`}
+              } montserrat`}
               {...props}
             />
           ),
@@ -122,13 +125,13 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.li
               key={key++}
               variants={fadeInUpVariants}
-              className={`text-sm mb-1 ml-4 open-sans ${
+              className={`text-sm mb-1 ml-4 ${
                 isDarkMode
                   ? history
                     ? "text-dark"
                     : "text-light"
                   : "text-dark"
-              }`}
+              } open-sans`}
               {...props}
             />
           ),
@@ -136,13 +139,13 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.strong
               key={key++}
               variants={fadeInUpVariants}
-              className={`text-lg tracking-wide m-1 font-bold montserrat ${
+              className={`text-lg tracking-wide m-1 font-bold ${
                 isDarkMode
                   ? history
                     ? "text-dark"
                     : "text-light"
                   : "text-dark"
-              }`}
+              } montserrat`}
               {...props}
             />
           ),
@@ -169,7 +172,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
 
 TextMarkdownTranslate.propTypes = {
   plainText: PropTypes.string.isRequired,
-  history: PropTypes.bool.isRequired,
+  history: PropTypes.bool,
 };
 
 export default TextMarkdownTranslate;

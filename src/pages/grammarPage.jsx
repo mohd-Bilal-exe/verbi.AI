@@ -16,6 +16,7 @@ const GrammarPage = () => {
   const [customInstructions, setCustomInstructions] = useState("");
   const dispatch = useDispatch();
   const formatTimefunc = (keys) => formatTime(keys);
+
   const handleGrammarCheck = async () => {
     setLoading(true);
     try {
@@ -62,10 +63,10 @@ const GrammarPage = () => {
       }`}
     >
       <div
-        className={`w-full h-full flex flex-col justify-start items-start lg:flex-row gap-1 pt-16 smartphone:pt-5  px-3`}
+        className={`w-full h-full flex flex-col justify-start items-start lg:flex-row gap-1 pt-16 smartphone:pt-5 px-3`}
       >
         <div
-          className={`w-full flex flex-col border border-copy-lighter shadow-lg  rounded-xl smartphone:h-1/3 h-3/4 overflow-hidden`}
+          className={`w-full flex flex-col border border-copy-lighter shadow-lg rounded-xl smartphone:h-1/3 h-3/4 overflow-hidden`}
         >
           <textarea
             name="ipText"
@@ -77,32 +78,27 @@ const GrammarPage = () => {
               isDarkMode
                 ? "bg-foreground/30 placeholder:text-copy-light"
                 : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-            } `}
+            } montserrat`}
           ></textarea>
           <input
             type="text"
             placeholder="Add your custom instructions"
             onChange={(e) => setCustomInstructions(e.target.value)}
-            className={`w-full placeholder:pl-2 pl-2  border-t border-copy-lighter p-0.5 outline-none ${
+            className={`w-full placeholder:pl-2 pl-2 border-t border-copy-lighter p-0.5 outline-none ${
               isDarkMode
                 ? "bg-foreground/30 placeholder:text-copy-light"
                 : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-            }`}
+            } open-sans`}
           />
         </div>
         <div
-          className={`w-1/6 h-3/4 smartphone:w-full smartphone:h-fit smartphone:py-4  ${
+          className={`w-1/6 h-3/4 smartphone:w-full smartphone:h-fit smartphone:py-4 ${
             isDarkMode ? "" : ""
-          } h-1/6  flex flex-col smartphone:flex-row-reverse  gap-4 items-center justify-center`}
+          } h-1/6 flex flex-col smartphone:flex-row-reverse gap-4 items-center justify-center`}
         >
           <DoButton
             loading={loading}
             func={handleGrammarCheck}
-            classes={`bg-gradient-to-br  ${
-              isDarkMode
-                ? "from-yellow-400 to-orange-500"
-                : "from-yellow-200 to-orange-300"
-            }`}
             text="Check Now"
           />
         </div>
@@ -115,7 +111,7 @@ const GrammarPage = () => {
               isDarkMode
                 ? "bg-foreground/10 placeholder:text-copy-light"
                 : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-            }`}
+            } playfair`}
           >
             {MemoizedMarkdown}
           </m.div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, m } from "framer-motion";
 import TextMarkdownTranslate from "./TextMarkdownTranslate";
@@ -12,6 +12,15 @@ export default function GlobalHistory() {
   const isDarkMode = useSelector((state) => state.darkMode);
   const [isExpanded, setIsExpanded] = useState(false);
   const [expandedItems, setExpandedItems] = useState({});
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  // Effect to monitor changes in globalHistory to determine animation necessity
+  useEffect(() => {
+    // Only set shouldAnimate to true if globalHistory has items and we are not already expanded
+    if (globalHistory.length > 0 && !isExpanded) {
+      setShouldAnimate(true);
+    }
+  }, [globalHistory, isExpanded]);
 
   const handleClearHistory = () => {
     dispatch(deleteHistory());
@@ -31,22 +40,21 @@ export default function GlobalHistory() {
   return (
     <m.section
       key={"GlobalHistory"}
-      layout
-      initial={{ y: 0, opacity: 0 }}
       animate={
         isExpanded
-          ? { y: 0, opacity: 1, height: "90vh", width: "100%" }
-          : { y: 0, opacity: 1, height: "30vh", width: "90%" }
+          ? { y: 0, height: "90vh", width: "100%" }
+          : { y: 0, height: "30vh", width: "90%" }
       }
       transition={{
-        delay: isExpanded ? 0 : 0.6,
-        duration: 0.2,
+        duration: 0.3,
+        ease: "easeInOut",
         type: "spring",
       }}
-      className={`transform-gpu backdrop-blur-lg transition-all backdrop-brightness-50 ${
+      initial={shouldAnimate ? { opacity: 0 } : false} // Only animate initial opacity if shouldAnimate is true
+      className={`transform-gpu absolute backdrop-blur-lg transition-all backdrop-brightness-50 ${
         isExpanded
-          ? "absolute bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
-          : "absolute bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
+          ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
+          : "bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
       } pt-5 border-t flex flex-col justify-start items-center gap-2 ${
         isDarkMode
           ? "bg-foregroundLight/10 border-copy/20"
@@ -61,7 +69,7 @@ export default function GlobalHistory() {
         <button
           disabled={globalHistory.length === 0}
           onClick={handleClearHistory}
-          className={`group w-fit h-8 flex justify-center items-center self-end ml-4 mb-2 p-2 rounded-lg  transition-all duration-300 ${
+          className={`group w-fit h-8 flex justify-center items-center self-end ml-4 mb-2 p-2 rounded-lg transition-all duration-300 ${
             isExpanded ? "bg-black/20" : ""
           } ${
             globalHistory.length === 0
@@ -109,7 +117,7 @@ export default function GlobalHistory() {
                 handleExpandClick(true);
                 handleExpandClickDiv(history.id);
               }}
-              initial={{ opacity: 0 }}
+              initial={{ opacity: shouldAnimate ? 0 : 1 }} // Only animate initial opacity if shouldAnimate is true
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
@@ -180,7 +188,7 @@ export default function GlobalHistory() {
           <p
             className={`text-xl text-copy text-center px-10 montserrat tracking-tight my-auto`}
           >
-            No history, You have&apos;nt done anything yet
+            No history, You haven&apos;nt done anything yet
           </p>
         )}
       </div>

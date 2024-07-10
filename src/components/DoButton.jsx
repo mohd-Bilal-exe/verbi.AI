@@ -3,19 +3,19 @@ import { CircleNotch } from "@phosphor-icons/react";
 import { m } from "framer-motion";
 import { useSelector } from "react-redux";
 
-const DoButton = ({ loading, func, classes, text }) => {
+const DoButton = ({ loading, func, text }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
 
   return (
     <button
       onClick={func}
-      className={`w-24 h-10 text-sm rounded-xl flex flex-col items-center justify-center gap-2 ${
-        isDarkMode
-          ? "bg-backgroundLight text-copyLight"
-          : "bg-background/90 text-copy"
+      className={`w-24 h-10 text-sm rounded-xl flex flex-col items-center justify-center gap-2 }text-copyLight ${
+        loading ? `cursor-not-allowed bg-gradient-to-tr  ` : ` cursor-pointer`
       } ${
-        loading ? `cursor-not-allowed ${classes}` : "cursor-pointer"
-      } overflow-hidden transition-colors duration-700 delay-1000`}
+        isDarkMode
+          ? "bg-backgroundLight/10 from-geminiPrimary to-geminiSecondary "
+          : "bg-background/90 from-geminiPrimarylt to-geminiSecondarylt "
+      } text-copyLight overflow-hidden transition-colors duration-700 delay-1000`}
       disabled={loading}
       aria-label="Check Grammar Now"
     >
@@ -30,20 +30,32 @@ const DoButton = ({ loading, func, classes, text }) => {
         }}
         className="w-full h-fit flex flex-col items-center"
       >
-        <m.span
-          initial={{ rotate: 0 }}
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 0.8,
-            type: "spring",
-            repeat: Infinity,
-            repeatType: "loop",
-          }}
-          className="my-2.5 flex justify-center items-center w-6 h-6"
+        <span className={`my-2.5 flex justify-center items-center w-6 h-6`}>
+          {loading && (
+            <m.span
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{
+                duration: 0.8,
+                type: "spring",
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className=""
+            >
+              <CircleNotch className="w-6 h-6" weight="bold" />
+            </m.span>
+          )}
+        </span>
+        <span
+          className={`py-2.5  font-semibold tracking-wider montserrat bg-gradient-to-tr  ${
+            isDarkMode
+              ? "from-geminiPrimary to-geminiSecondary"
+              : "from-geminiPrimarylt to-geminiSecondarylt"
+          } text-transparent bg-clip-text`}
         >
-          <CircleNotch className="w-6 h-6" weight="bold" />
-        </m.span>
-        <span className="py-2.5 tracking-wider montserrat">{text}</span>
+          {` ${text} `}
+        </span>
       </m.span>
     </button>
   );
@@ -52,7 +64,6 @@ const DoButton = ({ loading, func, classes, text }) => {
 DoButton.propTypes = {
   loading: PropTypes.bool.isRequired,
   func: PropTypes.func.isRequired,
-  classes: PropTypes.string,
   text: PropTypes.string.isRequired,
 };
 

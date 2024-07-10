@@ -103,16 +103,7 @@ const TranslatePage = () => {
             isDarkMode ? "" : ""
           } h-1/6  flex flex-col smartphone:flex-row-reverse  gap-4 items-center justify-center`}
         >
-          <DoButton
-            loading={loading}
-            func={handleTranslate}
-            text="Translate"
-            classes={`bg-gradient-to-br  ${
-              isDarkMode
-                ? "from-green-400 to-teal-500"
-                : "from-green-300 to-teal-400"
-            }`}
-          />
+          <DoButton loading={loading} func={handleTranslate} text="Translate" />
           <SelectDropdown
             selectedLang={selectedLang}
             setSelectedLang={setSelectedLang}

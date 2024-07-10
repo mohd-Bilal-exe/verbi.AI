@@ -53,8 +53,8 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
       <button
         onClick={toggleDropdown}
         className={`w-11/12 min-w-32 m-2 px-2 py-1 rounded-lg ${
-          !isDarkMode ? "bg-foreground/30" : "bg-foregroundLight/30"
-        } flex justify-between items-center`}
+          !isDarkMode ? "bg-foreground/30" : "bg-foregroundLight/10"
+        } flex justify-between items-center text-xs`}
       >
         <span>{selectedLang}</span>
         <CaretCircleDown
@@ -124,7 +124,7 @@ const SelectDropdown = ({ selectedLang, setSelectedLang, isDropdownOpen }) => {
                   onChange={(e) => {
                     setSelectedLang(e.target.value);
                   }}
-                  className={`w-full outline-none pl-1 rounded-l-md ${
+                  className={`w-full outline-none pl-1 text-sm placeholder:text-sm  rounded-l-md ${
                     !isDarkMode
                       ? "bg-foreground/10 placeholder:text-copyLight"
                       : "bg-foregroundLight/10 placeholder:text-copy"

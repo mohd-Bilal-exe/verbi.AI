@@ -171,7 +171,7 @@ TextMarkdown.propTypes = {
   plainText: PropTypes.string.isRequired,
 };
 
-// Set displayName explicitly for the component
+// Seting displayName explicitly for the component
 TextMarkdown.displayName = "TextMarkdown";
 
 export default TextMarkdown;
