@@ -40,6 +40,7 @@ export default function GlobalHistory() {
   return (
     <m.section
       key={"GlobalHistory"}
+      initial={shouldAnimate ? { y: 200, opacity: 0 } : false}
       animate={
         isExpanded
           ? { y: 0, height: "90vh", width: "100%" }
@@ -50,7 +51,7 @@ export default function GlobalHistory() {
         ease: "easeInOut",
         type: "spring",
       }}
-      initial={shouldAnimate ? { opacity: 0 } : false} // Only animate initial opacity if shouldAnimate is true
+      // Only animate initial opacity if shouldAnimate is true
       className={`transform-gpu absolute backdrop-blur-lg transition-all backdrop-brightness-50 ${
         isExpanded
           ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
