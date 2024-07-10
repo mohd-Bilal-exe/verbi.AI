@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Gemini } = require("../api/gemini"); // Adjust the path as necessary
+const { HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
 
 const generationConfig = {
   temperature: 2,
