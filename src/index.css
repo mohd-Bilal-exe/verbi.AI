@@ -19,14 +19,10 @@
 .open-sans {
   font-family: "Open Sans", sans-serif;
 }
-
-/* Define your scrollbar colors as CSS variables */
 :root {
   --scrollbar-thumb: #555555;
   --scrollbar-track: #f1f1f100;
 }
-
-/* Custom Scrollbar Styling */
 .scrollbar-thumb-rounded {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
