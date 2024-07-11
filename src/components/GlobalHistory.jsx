@@ -52,7 +52,7 @@ export default function GlobalHistory() {
         type: "spring",
       }}
       // Only animate initial opacity if shouldAnimate is true
-      className={`scrollbar-thumb-rounded transform-gpu absolute backdrop-blur-lg transition-all backdrop-brightness-50 ${
+      className={` transform-gpu absolute backdrop-blur-lg transition-all backdrop-brightness-50 ${
         isExpanded
           ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
           : "bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
@@ -105,7 +105,9 @@ export default function GlobalHistory() {
         </button>
       </div>
       <div
-        className={`w-full flex gap-2 flex-col-reverse justify-start items-center`}
+        className={`w-full flex gap-2 flex-col-reverse justify-start items-center ${
+          isExpanded && "scrollbar-thumb-rounded overflow-y-auto"
+        } `}
       >
         {globalHistory && globalHistory.length > 0 ? (
           globalHistory.map((history) => (
