@@ -115,7 +115,7 @@ const TranslatePage = () => {
             isDarkMode
               ? "bg-foreground/30 placeholder:text-copy-light"
               : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-          } border h-3/4`}
+          } border h-3/4 scrollbar-thumb-rounded`}
         >
           {MemoizedMarkdown}
         </div>

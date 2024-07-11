@@ -107,11 +107,11 @@ const GrammarPage = () => {
           className={`relative w-full h-3/4 smartphone:w-full smartphone:h-2/5`}
         >
           <m.div
-            className={`w-full h-full scroll-smooth z-30 backdrop-blur border border-copy-lighter shadow-lg rounded-xl p-2 overflow-y-auto ${
+            className={`w-full h-full scroll-smooth z-30 backdrop-blur border border-copy-lighter shadow-lg rounded-xl p-2  overflow-y-auto ${
               isDarkMode
                 ? "bg-foreground/10 placeholder:text-copy-light"
                 : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-            } playfair`}
+            } playfair scrollbar-thumb-rounded`}
           >
             {MemoizedMarkdown}
           </m.div>

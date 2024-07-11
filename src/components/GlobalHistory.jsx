@@ -52,7 +52,7 @@ export default function GlobalHistory() {
         type: "spring",
       }}
       // Only animate initial opacity if shouldAnimate is true
-      className={`transform-gpu absolute backdrop-blur-lg transition-all backdrop-brightness-50 ${
+      className={`scrollbar-thumb-rounded transform-gpu absolute backdrop-blur-lg transition-all backdrop-brightness-50 ${
         isExpanded
           ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
           : "bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
