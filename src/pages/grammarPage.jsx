@@ -66,7 +66,7 @@ const GrammarPage = () => {
         className={`w-full h-full flex flex-col justify-start items-start lg:flex-row gap-1 pt-16 smartphone:pt-5 px-3`}
       >
         <div
-          className={`w-full flex flex-col border border-copy-lighter shadow-lg rounded-xl smartphone:h-1/3 h-3/4 overflow-hidden`}
+          className={`w-full flex flex-col border border-copy-lighter shadow-lg rounded-xl smartphone:h-1/3 h-3/4 overflow-hidden select-text`}
         >
           <textarea
             name="ipText"
@@ -111,7 +111,7 @@ const GrammarPage = () => {
               isDarkMode
                 ? "bg-foreground/10 placeholder:text-copy-light"
                 : "bg-foregroundLight/30 placeholder:text-Lightcopy-light"
-            } playfair scrollbar-thumb-rounded`}
+            } playfair scrollbar-thumb-rounded `}
           >
             {MemoizedMarkdown}
           </m.div>

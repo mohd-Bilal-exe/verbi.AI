@@ -33,7 +33,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
       variants={parentVariants}
       initial="initial"
       animate="animate"
-      className="w-full h-full"
+      className="w-full h-full select-text"
     >
       <Markdown
         components={{

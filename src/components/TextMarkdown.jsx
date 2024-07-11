@@ -55,7 +55,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
           </span>
         </m.p>
       ) : (
-        <div className={`flex flex-col`}>
+        <div className={`flex flex-col select-text`}>
           <Markdown
             key={keys}
             components={{

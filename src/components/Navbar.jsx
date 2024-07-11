@@ -23,9 +23,9 @@ const Navbar = () => {
       switch (path) {
         case "/chat":
           return <ChatIcon />;
-        case "/translate":
+        case "/Translate":
           return <TranslateIcon />;
-        case "/grammarcheck":
+        case "/GrammarCheck":
           return <GrammarCheckIcon />;
         default:
           return <EverythingIcon isDarkMode={isDarkMode} />;
@@ -37,21 +37,22 @@ const Navbar = () => {
   const listItems = [
     {
       id: 1,
-      title: location.pathname.slice(1),
+      title:
+        location.pathname.charAt(1).toUpperCase() + location.pathname.slice(2),
       path:
         location.pathname === "/"
-          ? "home"
-          : location.pathname === "/profile"
-          ? "profile"
+          ? "Home"
+          : location.pathname === "/Profile"
+          ? "Profile"
           : location.pathname,
     },
     {
       id: 2,
-      title: "home",
+      title: "Home",
       path: "/",
       ico: <HomeIcon isDarkMode={isDarkMode} />,
     },
-    { id: 4, title: "Profile", path: "/profile", ico: <ProfileIcon /> },
+    { id: 4, title: "Profile", path: "/Profile", ico: <ProfileIcon /> },
   ];
 
   const [dynamicIcon, setDynamicIcon] = useState(setIcon(location.pathname));
@@ -97,7 +98,7 @@ const Navbar = () => {
                 }  hover:scale-105  ${
                   listItem.id === 1 ? "transition-colors" : "transition-all"
                 }
-                ${listItem.title === "chat" ? "translate-x-1" : ""}
+                ${listItem.title === "Chat" ? "translate-x-1" : ""}
                 ease-in-out duration-500`}
               >
                 {listItem.id === 1 ? dynamicIcon : listItem.ico}
@@ -112,12 +113,12 @@ const Navbar = () => {
                 }`}
               >
                 {listItem.id != 1 &&
-                (listItem.title == "home" || listItem.title == "Profile")
+                (listItem.title == "Home" || listItem.title == "Profile")
                   ? listItem.title
                   : null}
                 {listItem.id == 1 &&
                 listItem.path == location.pathname &&
-                listItem.title !== "profile"
+                listItem.title !== "Profile"
                   ? `${listItem.title}`
                   : null}
               </h1>

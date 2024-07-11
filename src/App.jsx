@@ -50,10 +50,10 @@ function App() {
                   )
                 }
               />
-              <Route path="/chat" element={<ChatPage />} />
-              <Route path="/grammarcheck" element={<GrammarPage />} />
+              <Route path="/Chat" element={<ChatPage />} />
+              <Route path="/GrammarCheck" element={<GrammarPage />} />
               <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/translate" element={<TranslatePage />} />
+              <Route path="/Translate" element={<TranslatePage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/home" element={<Navigate to="/" />} />
             </Routes>
