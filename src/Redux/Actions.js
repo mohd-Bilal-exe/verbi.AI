@@ -69,7 +69,7 @@ export const deleteHistory = () => ({
   type: DELETE_HISTORY,
 });
 export const deleteChatHistory = () => ({
-  type: DELETE_CHAT_HISTORY,
+  type: DELETE_HISTORY,
 });
 export const addChatsHistory = (sessionID, msg) => ({
   type: HISTORY_CHAT_UPDATE,

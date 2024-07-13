@@ -346,7 +346,7 @@ export default function ProfilePage() {
                 : "text-copyLight border-Lightcopy-light hover:bg-copyLight/20"
             }  rounded-lg text-copy text-xs `}
           >
-            {clearIsclicked ? "Done" : "Clear Chat"}
+            {clearIsclicked ? "Done" : "Clear All Chats"}
           </button>
           <button
             onClick={handleLogout}

@@ -106,7 +106,8 @@ const userReducer = (state = initialState, action) => {
     case DELETE_HISTORY:
       return {
         ...state,
-        globalHistory: [],
+        chatHistory: {},
+        currentChat: [],
       };
 
     case DELETE_CHAT_HISTORY:
