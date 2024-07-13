@@ -9,7 +9,7 @@ const DoButton = ({ loading, func, text }) => {
   return (
     <button
       onClick={func}
-      className={`w-24 h-10 text-sm rounded-xl flex flex-col items-center justify-center gap-2 }text-copyLight ${
+      className={`w-28 h-10 text-sm rounded-xl flex flex-col items-center justify-center gap-2 }text-copyLight ${
         loading ? `cursor-not-allowed bg-gradient-to-tr  ` : ` cursor-pointer`
       } ${
         isDarkMode
