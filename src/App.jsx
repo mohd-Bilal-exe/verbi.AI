@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import ProfilePage from "./pages/profilePage";
 import TranslatePage from "./pages/TranslatePage";
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginPage from "./pages/loginPage";
 import { useEffect } from "react";
 import { rememberMe } from "./Api/aiApi";
@@ -14,19 +14,6 @@ import HomePage from "./pages/HomePage";
 function App() {
   const isDarkMode = useSelector((state) => state.darkMode);
   const userDetails = useSelector((state) => state.userDetails);
-
-  useEffect(() => {
-    if (Object.keys(userDetails).length > 0) {
-      rememberMe(
-        userDetails.id,
-        userDetails.username,
-        userDetails.nickname,
-        userDetails.about,
-        userDetails.tone,
-        userDetails.nature
-      );
-    }
-  }, [userDetails]);
 
   return (
     <LazyMotion features={domAnimation}>

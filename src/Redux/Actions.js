@@ -11,16 +11,14 @@ export const CHAT_HISTORY = "CHAT_HISTORY";
 export const CURRENT_CHAT = "CURRENT_CHAT";
 export const DELETE_CHAT_HISTORY = "DELETE_CHAT_HISTORY";
 export const DELETE_HISTORY = "DELETE_HISTORY";
+export const CREATE_NEW_CHAT = "CREATE_NEW_CHAT";
+export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
+export const HISTORY_CHAT_UPDATE = "HISTORY_CHAT_UPDATE";
+export const SET_CURRENT_CHAT_ID = "SET_CURRENT_CHAT_ID";
 export const addChatHistory = (sessionID, history) => ({
   type: CHAT_HISTORY,
   payload: { sessionID, history },
 });
-export const currentChat = (sessionID, chatObject) => {
-  return {
-    type: CURRENT_CHAT,
-    payload: { sessionID, chatObject },
-  };
-};
 export const darkMode = (isOn) => ({
   type: DARK_MODE,
   payload: { isOn },
@@ -70,10 +68,37 @@ export const isLogin = (isLoggedIn) => ({
 export const deleteHistory = () => ({
   type: DELETE_HISTORY,
 });
-export const deletechatHistory = () => ({
+export const deleteChatHistory = () => ({
   type: DELETE_CHAT_HISTORY,
 });
-
+export const addChatsHistory = (sessionID, msg) => ({
+  type: HISTORY_CHAT_UPDATE,
+  payload: { sessionID, msg },
+});
 export const logoutUser = () => ({
   type: LOGOUT_USER,
+});
+export const createNewChat = (sessionID) => ({
+  type: CREATE_NEW_CHAT,
+  payload: sessionID,
+});
+
+export const setCurrentChatId = (sessionID) => ({
+  type: SET_CURRENT_CHAT_ID,
+  payload: sessionID,
+});
+
+export const setCurrentChat = (sessionId) => ({
+  type: SET_CURRENT_CHAT,
+  payload: sessionId,
+});
+
+export const currentChat = (sessionID, chatObject) => ({
+  type: CURRENT_CHAT,
+  payload: { sessionID, chatObject },
+});
+
+export const chatHistory = (sessionID, history) => ({
+  type: CHAT_HISTORY,
+  payload: { sessionID, history },
 });

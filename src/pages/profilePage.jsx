@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { m } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { darkMode, deletechatHistory, logoutUser } from "../Redux/Actions";
+import { darkMode, deleteChatHistory, logoutUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { Moon, Sun } from "@phosphor-icons/react";
 import { ArrowDown, EditIcon } from "../components/SvgIcons";
@@ -29,7 +29,7 @@ export default function ProfilePage() {
     navigate("/login");
   };
   const handleChatclear = () => {
-    dispatch(deletechatHistory());
+    dispatch(deleteChatHistory());
     setClearIsclicked(true);
   };
   const closeModal = () => {

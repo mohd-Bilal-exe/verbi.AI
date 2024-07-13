@@ -29,27 +29,30 @@ const safetySettings = [
 // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 const Gemini = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-const sessions = {};
+var session = {
+  sessionId: null,
+  chatHistory: [],
+};
+
+const setSession = (sessionID, sessionArray) => {
+  session.sessionId = sessionID;
+  session.chatHistory = sessionArray.map((chat) => ({
+    role: chat.role,
+    parts: chat.parts,
+  }));
+  console.log("Session is ", session);
+};
 
 // Function to remember user details in a session
-const rememberMe = (sessionId, username, nickname, about, tone, nature) => {
-  if (!sessions[sessionId]) {
-    sessions[sessionId] = { history: [] };
-  }
-
-  sessions[sessionId].userDetails = { username, nickname, about, tone, nature };
-
+const rememberMe = (username, nickname, about, tone, nature) => {
   const literrallyMe = `Hey Gemini,
-
-Just a quick reminder:
-
+Remember this
 - My name is ${username}, but you can call me ${nickname}.
 - A little about me: ${about}.
 - When you're responding, please use a ${tone} tone.
 - Also, keep in mind that I prefer interactions to be ${nature}.
-
 Thanks!`;
-  sessions[sessionId].history.push({
+  session.chatHistory.push({
     role: "user",
     parts: [
       {
@@ -60,30 +63,20 @@ Thanks!`;
 };
 
 // Refactored chat function to be used in a front-end context
-const chat = async (sessionId, message) => {
+const chat = async (message) => {
+  console.log("Session is ", session);
   try {
-    if (!sessionId) {
-      throw new Error("Session ID is required");
-    }
-
-    // Initialize session history if not present
-    if (!sessions[sessionId]) {
-      sessions[sessionId] = { history: [] };
-    }
-    let chatHistory = sessions[sessionId].history;
     const chatSession = await Gemini.startChat({
-      history: chatHistory,
+      history: session.chatHistory,
       generationConfig,
       safetySettings,
     });
-
-    const msg = message || "Hi"; // Default message if none provided
+    const msg = message;
     const result = await chatSession.sendMessage(msg);
     const text = await result.response.text();
-
     // Update chat history in the session
-    chatHistory.push({ role: "user", parts: [{ text: msg }] });
-    chatHistory.push({ role: "model", parts: [{ text }] });
+    session.chatHistory.push({ role: "user", parts: [{ text: msg }] });
+    session.chatHistory.push({ role: "model", parts: [{ text: text }] });
     return { text };
   } catch (error) {
     console.error(error);
@@ -123,4 +116,4 @@ const grammarCheck = async (inputText, customInstructions) => {
   }
 };
 
-export { chat, translate, grammarCheck, rememberMe };
+export { chat, translate, grammarCheck, rememberMe, setSession };
