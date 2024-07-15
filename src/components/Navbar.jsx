@@ -69,7 +69,7 @@ const Navbar = () => {
         isDarkMode
           ? "bg-foreground/60 laptop:bg-foreground border-border text-copy"
           : "bg-foregroundLight border-borderLight text-copyLight"
-      }`}
+      } z-50`}
     >
       <ul
         className={`flex justify-between items-center px-5 pt-2 gap-1 w-screen desktop:w-3/4 laptop:w-3/4 backdrop-blur transform-gpu  ${

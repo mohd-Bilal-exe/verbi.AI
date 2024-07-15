@@ -306,31 +306,18 @@ export const AddIcon = () => {
 };
 export const ExpandSidebarIcon = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-      <defs>
-        <mask id="ipTExpandLeft0">
-          <g
-            fill="none"
-            stroke="#fff"
-            strokeLinejoin="round"
-            strokeWidth={2.05}
-          >
-            <path
-              fill="#737373"
-              d="M6 9a3 3 0 0 1 3-3h30a3 3 0 0 1 3 3v30a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z"
-            ></path>
-            <path
-              strokeLinecap="round"
-              d="M32 6v36M16 20l4 4l-4 4M26 6h12M26 42h12"
-            ></path>
-          </g>
-        </mask>
-      </defs>
-      <path
-        fill="currentColor"
-        d="M0 0h48v48H0z"
-        mask="url(#ipTExpandLeft0)"
-      ></path>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.45}
+        color="currentColor"
+      >
+        <path d="M22 12c0-3.75 0-5.625-.955-6.939a5 5 0 0 0-1.106-1.106C18.625 3 16.749 3 13 3h-2c-3.75 0-5.625 0-6.939.955A5 5 0 0 0 2.955 5.06C2 6.375 2 8.251 2 12s0 5.625.955 6.939a5 5 0 0 0 1.106 1.106C5.375 21 7.251 21 11 21h2c3.75 0 5.625 0 6.939-.955a5 5 0 0 0 1.106-1.106C22 17.625 22 15.749 22 12m-7.5-8.5v17M19 7h-1.5m1.5 4h-1.5"></path>
+        <path d="m8 10l1.227 1.057c.515.445.773.667.773.943s-.258.498-.773.943L8 14"></path>
+      </g>
     </svg>
   );
 };
@@ -398,5 +385,20 @@ export const ArrowDown = () => {
         d="m10 17l5-5l-5-5"
       ></path>
     </m.svg>
+  );
+};
+export const DeleteIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <path
+        fill="currentColor"
+        fillOpacity={0.35}
+        d="M292.7 840h438.6l24.2-512h-487z"
+      ></path>
+      <path
+        fill="currentColor"
+        d="M864 256H736v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32m-504-72h304v72H360zm371.3 656H292.7l-24.2-512h487z"
+      ></path>
+    </svg>
   );
 };

@@ -13,8 +13,8 @@ import { CircleNotch } from "@phosphor-icons/react";
 import { m } from "framer-motion";
 import { AddIcon } from "./SvgIcons";
 
-export const CreateChatButton = () => {
-  const isDarkMode = useSelector((state) => state.isDarkMode);
+export const CreateChatButton = ({ setSidebarOpen }) => {
+  const isDarkMode = useSelector((state) => state.darkMode);
   const userDetails = useSelector((state) => state.userDetails);
   const dispatch = useDispatch();
   const handleCreateChat = () => {
@@ -37,6 +37,7 @@ export const CreateChatButton = () => {
     dispatch(currentChat(id, userMessage));
     dispatch(addChatTitle(id, "New Chat"));
     dispatch(addChatsHistory(id, userMessage));
+    setSidebarOpen(false);
   };
 
   return (
@@ -44,9 +45,9 @@ export const CreateChatButton = () => {
       onClick={handleCreateChat}
       className={`w-full h-full flex justify-center items-center  rounded-full bg-gradient-to-tr group  ${
         isDarkMode
-          ? " from-geminiPrimary to-geminiSecondary  "
-          : " from-geminiPrimarylt to-geminiSecondarylt "
-      } text-copyLight`}
+          ? " from-geminiPrimary to-geminiSecondary text-copyLight "
+          : " from-geminiPrimarylt to-geminiSecondarylt text-copyLight "
+      } `}
     >
       <AddIcon />
     </button>
