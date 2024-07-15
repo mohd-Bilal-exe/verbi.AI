@@ -1,11 +1,52 @@
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addChatsHistory,
+  createNewChat,
+  currentChat,
+  deleteChatHistory,
+  setCurrentChatId,
+} from "../Redux/Actions";
+import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import { CircleNotch } from "@phosphor-icons/react";
 import { m } from "framer-motion";
-import { useSelector } from "react-redux";
 
-const DoButton = ({ loading, func, text }) => {
+export const CreateChatButton = () => {
+  const userDetails = useSelector((state) => state.userDetails);
+  const dispatch = useDispatch();
+  const handleCreateChat = () => {
+    const id = uuidv4();
+    const rememberMeMessage = `Hey Gemini,
+      Remember this
+    - My name is ${userDetails.username}, but you can call me ${userDetails.nickname}.
+    - A little about me: ${userDetails.about}.
+    - When you're responding, please use a ${userDetails.tone} tone.
+    - Also, keep in mind that I prefer interactions to be ${userDetails.nature}.
+    Thanks!`;
+    dispatch(createNewChat(id));
+    dispatch(setCurrentChatId(id));
+    dispatch(deleteChatHistory());
+    const userMessage = {
+      role: "user",
+      parts: [{ text: rememberMeMessage }],
+      timestamp: Date.now(),
+    };
+    dispatch(currentChat(id, userMessage));
+    dispatch(addChatsHistory(id, userMessage));
+  };
+
+  return (
+    <button
+      onClick={handleCreateChat}
+      className="mb-2 p-2 bg-green-500 text-white"
+    >
+      New chat
+    </button>
+  );
+};
+
+export const DoButton = ({ loading, func, text }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
-
   return (
     <button
       onClick={func}
@@ -66,5 +107,3 @@ DoButton.propTypes = {
   func: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
 };
-
-export default DoButton;

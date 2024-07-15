@@ -6,7 +6,7 @@ import { getLanguagesWithFlags } from "../Api/langAPI";
 import formatTime from "../utilities/dateString";
 import { globalHistory } from "../Redux/Actions";
 import { grammarCheck } from "../Api/aiApi";
-import DoButton from "../components/DoButton";
+import { DoButton } from "../components/Buttons";
 
 const GrammarPage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);

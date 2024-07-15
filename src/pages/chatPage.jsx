@@ -108,7 +108,7 @@ export default function ChatPage() {
         ref={chatBoxRef}
         className="scroll-smooth scrollbar-thumb-rounded overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
       >
-        {chatHistory &&
+        {chatHistory.length > 0 ? (
           chatHistory
             .slice(1)
             .map((message, index) => (
@@ -118,7 +118,14 @@ export default function ChatPage() {
                 role={message.role}
                 plainText={message.parts[0].text}
               />
-            ))}
+            ))
+        ) : (
+          <div className={`w-full  h-full  grid place-content-center  `}>
+            {" "}
+            Create new chat <br />
+            From the side bar to continue
+          </div>
+        )}
       </div>
       <div className="fixed bottom-16 smartphone:w-full w-1/3 flex justify-center items-center">
         <form

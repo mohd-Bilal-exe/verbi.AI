@@ -4,13 +4,13 @@ import { addUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { rememberMe } from "../Api/aiApi";
 import { useState, useCallback, useMemo } from "react";
-import DropDown from "../components/DropDown";
 import { v4 as uuidv4 } from "uuid";
 import {
   ArrowCircleLeft,
   ArrowCircleRight,
   CheckCircle,
 } from "@phosphor-icons/react";
+import { StyleDropDown } from "../components/Dropdowns";
 
 export default function LoginPage() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -298,8 +298,8 @@ export default function LoginPage() {
               </h2>
             </div>
             <div className="w-full flex gap-2 items-center justify-center text-white">
-              <DropDown setSelected={setTone} title={"tone"} />
-              <DropDown setSelected={setNature} title={"nature"} />
+              <StyleDropDown setSelected={setTone} title={"tone"} />
+              <StyleDropDown setSelected={setNature} title={"nature"} />
             </div>
           </div>
         ),

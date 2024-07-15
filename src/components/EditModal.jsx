@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUser } from "../Redux/Actions";
-import DropDown from "./DropDown";
+import { StyleDropDown } from "./Dropdowns";
 
 const handleClick = (dispatch, key, update) => {
   dispatch(changeUser(key, update));
@@ -72,7 +72,7 @@ About.propTypes = {
 const Tone = ({ type, update }) => {
   return (
     <div className={`w-full h-full grid place-content-center`}>
-      <DropDown title={type} setSelected={update} place="editModal" />{" "}
+      <StyleDropDown title={type} setSelected={update} place="editModal" />{" "}
     </div>
   );
 };

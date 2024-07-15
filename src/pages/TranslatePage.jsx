@@ -3,11 +3,11 @@ import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { translate } from "../Api/aiApi";
 import TextMarkdownTranslate from "../components/TextMarkdownTranslate";
-import SelectDropdown from "../components/SelectDropdown";
 import { getLanguagesWithFlags } from "../Api/langAPI";
 import formatTime from "../utilities/dateString";
 import { addTranslations, globalHistory } from "../Redux/Actions";
-import DoButton from "../components/DoButton";
+import { DoButton } from "../components/Buttons";
+import { LangDropDown } from "../components/Dropdowns";
 
 const TranslatePage = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -104,7 +104,7 @@ const TranslatePage = () => {
           } h-1/6  flex flex-col smartphone:flex-row-reverse  gap-4 items-center justify-center`}
         >
           <DoButton loading={loading} func={handleTranslate} text="Translate" />
-          <SelectDropdown
+          <LangDropDown
             selectedLang={selectedLang}
             setSelectedLang={setSelectedLang}
             isDropdownOpenn={!loading}
