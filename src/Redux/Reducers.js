@@ -16,6 +16,7 @@ import {
   SET_CURRENT_CHAT,
   DELETE_GLOBAL_HISTORY,
   DELETE_CURRENT_CHAT,
+  ADD_CHAT_TITLE,
 } from "./Actions";
 
 const initialState = {
@@ -123,6 +124,17 @@ const userReducer = (state = initialState, action) => {
         chatHistory: {
           ...state.chatHistory,
           [action.payload]: { history: [] },
+        },
+      };
+    case ADD_CHAT_TITLE:
+      return {
+        ...state,
+        chatHistory: {
+          ...state.chatHistory,
+          [action.payload.sessionID]: {
+            ...state.chatHistory[action.payload.sessionID],
+            title: action.payload.title,
+          },
         },
       };
     case CHAT_HISTORY: {

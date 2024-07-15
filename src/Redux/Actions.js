@@ -12,12 +12,13 @@ export const CURRENT_CHAT = "CURRENT_CHAT";
 export const DELETE_CHAT_HISTORY = "DELETE_CHAT_HISTORY";
 export const DELETE_HISTORY = "DELETE_HISTORY";
 export const DELETE_CURRENT_CHAT = "DELETE_CURRENT_CHAT";
-
+export const DELETE_CURRENT_CHAT_HISTORY = "DELETE_CURRENT_CHAT_HISTORY";
 export const CREATE_NEW_CHAT = "CREATE_NEW_CHAT";
 export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
 export const HISTORY_CHAT_UPDATE = "HISTORY_CHAT_UPDATE";
 export const SET_CURRENT_CHAT_ID = "SET_CURRENT_CHAT_ID";
 export const DELETE_GLOBAL_HISTORY = "DELETE_GLOBAL_HISTORY";
+export const ADD_CHAT_TITLE = "ADD_CHAT_TITLE";
 export const addChatHistory = (sessionID, history) => ({
   type: CHAT_HISTORY,
   payload: { sessionID, history },
@@ -71,6 +72,9 @@ export const isLogin = (isLoggedIn) => ({
 export const deleteHistory = () => ({
   type: DELETE_GLOBAL_HISTORY,
 });
+export const deleteCurrentchatHistory = () => ({
+  type: DELETE_CURRENT_CHAT,
+});
 export const deleteChatHistory = () => ({
   type: DELETE_CHAT_HISTORY,
 });
@@ -84,6 +88,11 @@ export const logoutUser = () => ({
 export const createNewChat = (sessionID) => ({
   type: CREATE_NEW_CHAT,
   payload: sessionID,
+});
+
+export const addChatTitle = (sessionID, title) => ({
+  type: ADD_CHAT_TITLE,
+  payload: { sessionID, title },
 });
 
 export const setCurrentChatId = (sessionID) => ({

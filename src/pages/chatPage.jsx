@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { m } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { addChatsHistory, currentChat } from "../Redux/Actions";
+import { addChatsHistory, addChatTitle, currentChat } from "../Redux/Actions";
 import TextMarkdown from "../components/TextMarkdown";
-import { chat, setSession } from "../Api/aiApi";
+import { chat, generateChatTitle, setSession } from "../Api/aiApi";
 import { ArrowUp, CircleNotch } from "@phosphor-icons/react";
 import ChatHistory from "../components/ChatHistory";
 import { CreateChatButton } from "../components/Buttons";
+import { ExpandSidebarIcon } from "../components/SvgIcons";
 
 export default function ChatPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -86,6 +87,14 @@ export default function ChatPage() {
     setSidebarOpen(!sidebarIsOpen);
   };
 
+  const handleChatTitle = async () => {
+    const title = await generateChatTitle(chatHistory[1].parts[0].text);
+    console.log(title);
+    dispatch(addChatTitle(id, title));
+  };
+  if (chatHistory.length > 1 && chatHistory.length <= 2) {
+    handleChatTitle();
+  }
   return (
     <m.div
       key="chatPage"
@@ -99,11 +108,14 @@ export default function ChatPage() {
     >
       <button
         onClick={handleSidebarExpansion}
-        className="absolute top-5 left-5 bg-black p-2"
+        className="absolute w-6 h-6 top-3 left-3 "
       >
-        Expand Sidebar id is {id}
+        <ExpandSidebarIcon />
       </button>
-      {sidebarIsOpen && <ChatHistory />}
+      <AnimatePresence>
+        {sidebarIsOpen && <ChatHistory setSidebarOpen={setSidebarOpen} />}
+      </AnimatePresence>
+
       <div
         id="chatBox"
         ref={chatBoxRef}
@@ -121,8 +133,14 @@ export default function ChatPage() {
               />
             ))
         ) : (
-          <div className={`w-full  h-full  grid place-content-center  `}>
-            <CreateChatButton />
+          <div className="w-full h-full grid place-content-center">
+            <div className="flex flex-col justify-center items-center text-center tracking-tight text-sm">
+              <h1 className={`text-3xl my-0.5`}>Welcome!</h1>
+              <h1>Let&#39;s Start a New Conversation</h1>
+              <h2>Click the button below</h2>
+              <h2>and let&apos;s begin chatting.</h2>
+              <CreateChatButton />
+            </div>
           </div>
         )}
       </div>

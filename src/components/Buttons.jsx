@@ -1,17 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   addChatsHistory,
+  addChatTitle,
   createNewChat,
   currentChat,
-  deleteChatHistory,
+  deleteCurrentchatHistory,
   setCurrentChatId,
 } from "../Redux/Actions";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
 import { CircleNotch } from "@phosphor-icons/react";
 import { m } from "framer-motion";
+import { AddIcon } from "./SvgIcons";
 
 export const CreateChatButton = () => {
+  const isDarkMode = useSelector((state) => state.isDarkMode);
   const userDetails = useSelector((state) => state.userDetails);
   const dispatch = useDispatch();
   const handleCreateChat = () => {
@@ -25,23 +28,27 @@ export const CreateChatButton = () => {
     Thanks!`;
     dispatch(createNewChat(id));
     dispatch(setCurrentChatId(id));
-    //dispatch(deleteChatHistory());
-// add current chat delete 
+    dispatch(deleteCurrentchatHistory());
     const userMessage = {
       role: "user",
       parts: [{ text: rememberMeMessage }],
       timestamp: Date.now(),
     };
     dispatch(currentChat(id, userMessage));
+    dispatch(addChatTitle(id, "New Chat"));
     dispatch(addChatsHistory(id, userMessage));
   };
 
   return (
     <button
       onClick={handleCreateChat}
-      className="mb-2 p-2 bg-green-500 text-white"
+      className={`w-full h-full flex justify-center items-center  rounded-full bg-gradient-to-tr group  ${
+        isDarkMode
+          ? " from-geminiPrimary to-geminiSecondary  "
+          : " from-geminiPrimarylt to-geminiSecondarylt "
+      } text-copyLight`}
     >
-      New chat
+      <AddIcon />
     </button>
   );
 };

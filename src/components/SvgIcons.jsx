@@ -278,6 +278,62 @@ export const CollapseIcon = () => {
     </m.svg>
   );
 };
+export const AddIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      className={` group-hover:scale-110`}
+    >
+      <g fill="none">
+        <circle
+          cx={12}
+          cy={12}
+          r={9}
+          fill="currentColor"
+          fillOpacity={0.45}
+        ></circle>
+        <path
+          stroke="currentColor"
+          strokeLinecap="square"
+          strokeLinejoin="round"
+          strokeWidth={1.25}
+          d="M12 8v8m4-4H8"
+        ></path>
+      </g>
+    </svg>
+  );
+};
+export const ExpandSidebarIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+      <defs>
+        <mask id="ipTExpandLeft0">
+          <g
+            fill="none"
+            stroke="#fff"
+            strokeLinejoin="round"
+            strokeWidth={2.05}
+          >
+            <path
+              fill="#737373"
+              d="M6 9a3 3 0 0 1 3-3h30a3 3 0 0 1 3 3v30a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z"
+            ></path>
+            <path
+              strokeLinecap="round"
+              d="M32 6v36M16 20l4 4l-4 4M26 6h12M26 42h12"
+            ></path>
+          </g>
+        </mask>
+      </defs>
+      <path
+        fill="currentColor"
+        d="M0 0h48v48H0z"
+        mask="url(#ipTExpandLeft0)"
+      ></path>
+    </svg>
+  );
+};
 export const ExpandIcon = () => {
   return (
     <m.svg
