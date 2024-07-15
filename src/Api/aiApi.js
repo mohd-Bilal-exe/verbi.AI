@@ -3,9 +3,9 @@ import {
   HarmCategory,
   HarmBlockThreshold,
 } from "@google/generative-ai";
-
-// Access your API key as an environment variable
-const genAI = new GoogleGenerativeAI("AIzaSyA3kJyE6wCBi7mf81rKxhwROlo-Q5HCEgU");
+import.meta.env; // Ensure Vite processes this import
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apiKey);
 const generationConfig = {
   temperature: 2,
   topP: 0.95,

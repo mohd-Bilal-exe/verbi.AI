@@ -9,11 +9,13 @@ import {
   GLOBAL_HISTORY,
   CHAT_HISTORY,
   CURRENT_CHAT,
-  DELETE_HISTORY,
   DELETE_CHAT_HISTORY,
   HISTORY_CHAT_UPDATE,
   CREATE_NEW_CHAT,
   SET_CURRENT_CHAT_ID,
+  SET_CURRENT_CHAT,
+  DELETE_GLOBAL_HISTORY,
+  DELETE_CURRENT_CHAT,
 } from "./Actions";
 
 const initialState = {
@@ -103,10 +105,9 @@ const userReducer = (state = initialState, action) => {
         ],
       };
 
-    case DELETE_HISTORY:
+    case DELETE_CURRENT_CHAT:
       return {
         ...state,
-        chatHistory: {},
         currentChat: [],
       };
 
@@ -114,6 +115,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         currentChat: [],
+        chatHistory: {},
       };
     case CREATE_NEW_CHAT:
       return {
@@ -151,14 +153,19 @@ const userReducer = (state = initialState, action) => {
         },
       };
     }
-    case "SET_CURRENT_CHAT": {
+    case SET_CURRENT_CHAT: {
       const selectedChat = state.chatHistory[action.payload];
       return {
         ...state,
         currentChat: selectedChat ? selectedChat.history : [],
       };
     }
-
+    case DELETE_GLOBAL_HISTORY: {
+      return {
+        ...state,
+        globalHistory: [],
+      };
+    }
     default:
       return state;
   }

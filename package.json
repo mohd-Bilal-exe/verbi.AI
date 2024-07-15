@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
+    "dotenv-webpack": "^8.1.0",
     "firebase": "^10.12.3",
     "framer-motion": "^11.2.10",
     "react": "^18.2.0",
@@ -41,5 +42,11 @@
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
     "vite": "^5.2.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
   }
 }

@@ -6,6 +6,7 @@ import TextMarkdown from "../components/TextMarkdown";
 import { chat, setSession } from "../Api/aiApi";
 import { ArrowUp, CircleNotch } from "@phosphor-icons/react";
 import ChatHistory from "../components/ChatHistory";
+import { CreateChatButton } from "../components/Buttons";
 
 export default function ChatPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -121,9 +122,7 @@ export default function ChatPage() {
             ))
         ) : (
           <div className={`w-full  h-full  grid place-content-center  `}>
-            {" "}
-            Create new chat <br />
-            From the side bar to continue
+            <CreateChatButton />
           </div>
         )}
       </div>

@@ -11,10 +11,13 @@ export const CHAT_HISTORY = "CHAT_HISTORY";
 export const CURRENT_CHAT = "CURRENT_CHAT";
 export const DELETE_CHAT_HISTORY = "DELETE_CHAT_HISTORY";
 export const DELETE_HISTORY = "DELETE_HISTORY";
+export const DELETE_CURRENT_CHAT = "DELETE_CURRENT_CHAT";
+
 export const CREATE_NEW_CHAT = "CREATE_NEW_CHAT";
 export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
 export const HISTORY_CHAT_UPDATE = "HISTORY_CHAT_UPDATE";
 export const SET_CURRENT_CHAT_ID = "SET_CURRENT_CHAT_ID";
+export const DELETE_GLOBAL_HISTORY = "DELETE_GLOBAL_HISTORY";
 export const addChatHistory = (sessionID, history) => ({
   type: CHAT_HISTORY,
   payload: { sessionID, history },
@@ -26,11 +29,11 @@ export const darkMode = (isOn) => ({
 export const fetchTask = () => ({});
 export const globalHistory = (history) => ({
   type: GLOBAL_HISTORY,
-  payload: history, //should be predefined object with history fileds like type, time and info object.
+  payload: history, // Predefined object with history fileds like type, time and info object.
 });
 export const addTranslations = (translations) => ({
   type: ADD_TRANSLATION,
-  payload: translations, //SHOULD BE PREDEFINED OBJECT WITH TRANSLATIONS
+  payload: translations, // PREDEFINED OBJECT WITH TRANSLATIONS
 });
 
 export const addUser = (
@@ -66,10 +69,10 @@ export const isLogin = (isLoggedIn) => ({
 });
 
 export const deleteHistory = () => ({
-  type: DELETE_HISTORY,
+  type: DELETE_GLOBAL_HISTORY,
 });
 export const deleteChatHistory = () => ({
-  type: DELETE_HISTORY,
+  type: DELETE_CHAT_HISTORY,
 });
 export const addChatsHistory = (sessionID, msg) => ({
   type: HISTORY_CHAT_UPDATE,
