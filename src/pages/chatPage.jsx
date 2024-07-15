@@ -108,7 +108,7 @@ export default function ChatPage() {
     >
       <button
         onClick={handleSidebarExpansion}
-        className="absolute w-6 h-6 top-3 left-3 "
+        className="absolute w-6 h-6 smartphone:size-7 top-3 left-3 "
       >
         <ExpandSidebarIcon />
       </button>
