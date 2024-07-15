@@ -25,7 +25,7 @@ export const CreateChatButton = () => {
     Thanks!`;
     dispatch(createNewChat(id));
     dispatch(setCurrentChatId(id));
-    dispatch(deleteChatHistory());
+    //dispatch(deleteChatHistory());
     const userMessage = {
       role: "user",
       parts: [{ text: rememberMeMessage }],
