@@ -44,7 +44,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/home" element={<Navigate to="/" />} />
             </Routes>
-            <Navbar />
+            {location.pathname === "/profile" && <Navbar />}
           </div>
         </BrowserRouter>
       </AnimatePresence>
