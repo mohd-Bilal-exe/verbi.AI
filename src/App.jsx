@@ -5,10 +5,9 @@ import Navbar from "./components/Navbar";
 import ProfilePage from "./pages/profilePage";
 import TranslatePage from "./pages/TranslatePage";
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import LoginPage from "./pages/loginPage";
 import { useEffect } from "react";
-import { rememberMe } from "./Api/aiApi";
 import HomePage from "./pages/HomePage";
 
 function App() {
@@ -44,7 +43,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/home" element={<Navigate to="/" />} />
             </Routes>
-            {location.pathname === "/profile" && <Navbar />}
+            {location.pathname !== "/login" && <Navbar />}
           </div>
         </BrowserRouter>
       </AnimatePresence>
