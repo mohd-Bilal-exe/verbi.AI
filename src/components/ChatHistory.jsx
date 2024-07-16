@@ -89,7 +89,7 @@ export default function ChatHistory({ setSidebarOpen }) {
             }`}
           >
             <span
-              className={`cursor-pointer`}
+              className={`cursor-pointer h-full w-full `}
               onClick={() => handleChatClick(sessionId)}
             >
               {chat.title}{" "}
