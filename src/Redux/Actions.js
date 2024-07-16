@@ -43,12 +43,12 @@ export const addUser = (
   nickname,
   about,
   avatar,
-  tone,
-  nature
+  Tone,
+  Nature
 ) => {
   return (dispatch) => {
     try {
-      const newUser = { id, username, nickname, about, avatar, tone, nature };
+      const newUser = { id, username, nickname, about, avatar, Tone, Nature };
 
       // Dispatch the action to update the global state
       dispatch({ type: ADD_USER, payload: newUser });

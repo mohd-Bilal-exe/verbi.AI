@@ -23,8 +23,8 @@ export const CreateChatButton = ({ setSidebarOpen }) => {
       Remember this
     - My name is ${userDetails.username}, but you can call me ${userDetails.nickname}.
     - A little about me: ${userDetails.about}.
-    - When you're responding, please use a ${userDetails.tone} tone.
-    - Also, keep in mind that I prefer interactions to be ${userDetails.nature}.
+    - When you're responding, please use a ${userDetails.Tone} tone.
+    - Also, keep in mind that I prefer interactions to be ${userDetails.Nature}.
     Thanks!`;
     dispatch(createNewChat(id));
     dispatch(setCurrentChatId(id));
