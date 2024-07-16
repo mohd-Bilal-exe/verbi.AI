@@ -45,7 +45,7 @@ const setSession = (sessionID, sessionArray) => {
 //Functiob to generate chat title
 
 const generateChatTitle = async (msg) => {
-  const prompt = `Generate a professional and concise chat title for a chat where the first message is: "${msg}". Provide only the title.`;
+  const prompt = `Generate a chat title for a chat where the first message is: "${msg}". Provide only the title.`;
   const result = await Gemini.generateContent(prompt);
   const response = await result.response.text();
   return response;
