@@ -73,7 +73,11 @@ export const deleteHistory = () => ({
   type: DELETE_GLOBAL_HISTORY,
 });
 export const deleteCurrentchatHistory = () => ({
+  type: DELETE_CURRENT_CHAT_HISTORY,
+});
+export const deleteCurrentChat = (sessionID) => ({
   type: DELETE_CURRENT_CHAT,
+  payload: sessionID,
 });
 export const deleteChatHistory = () => ({
   type: DELETE_CHAT_HISTORY,

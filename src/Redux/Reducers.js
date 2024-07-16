@@ -17,6 +17,7 @@ import {
   DELETE_GLOBAL_HISTORY,
   DELETE_CURRENT_CHAT,
   ADD_CHAT_TITLE,
+  DELETE_CURRENT_CHAT_HISTORY,
 } from "./Actions";
 
 const initialState = {
@@ -106,12 +107,24 @@ const userReducer = (state = initialState, action) => {
         ],
       };
 
-    case DELETE_CURRENT_CHAT:
+    case DELETE_CURRENT_CHAT: {
+      const sessionID = action.payload;
+      console.log("Session ID to delete:", sessionID); // Debugging log
+      console.log("Chat keys:", Object.keys(state.chatHistory)); // Debugging log
+      const { [sessionID]: chatToDelete, ...remainingChats } =
+        state.chatHistory;
+      console.log("remainingChats", remainingChats); // Debugging log
+      return {
+        ...state,
+        chatHistory: remainingChats,
+        currentChat: [],
+      };
+    }
+    case DELETE_CURRENT_CHAT_HISTORY:
       return {
         ...state,
         currentChat: [],
       };
-
     case DELETE_CHAT_HISTORY:
       return {
         ...state,

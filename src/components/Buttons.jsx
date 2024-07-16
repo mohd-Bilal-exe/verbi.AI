@@ -53,7 +53,9 @@ export const CreateChatButton = ({ setSidebarOpen }) => {
     </button>
   );
 };
-
+CreateChatButton.propTypes = {
+  setSidebarOpen: PropTypes.func.isRequired,
+};
 export const DoButton = ({ loading, func, text }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
   return (
