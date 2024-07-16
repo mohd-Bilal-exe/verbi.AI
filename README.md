@@ -7,7 +7,7 @@
 
 # CURRENTLY UNDER DEVELOPMENT
 
-[Visit Verbi.ai](https://verbiai.netlify.app/)
+[Visit Verbi.ai](https://verbi-ai.vercel.app/)
 
 ## Technologies Used
 
