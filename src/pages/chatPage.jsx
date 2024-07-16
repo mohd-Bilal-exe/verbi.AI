@@ -112,7 +112,20 @@ export default function ChatPage() {
         <ExpandSidebarIcon />
       </button>
       <AnimatePresence>
-        {sidebarIsOpen && <ChatHistory setSidebarOpen={setSidebarOpen} />}
+        {sidebarIsOpen && (
+          <>
+            {" "}
+            <ChatHistory setSidebarOpen={setSidebarOpen} />{" "}
+            <m.div
+              initial={{ opacity: 0, x: -200 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -200 }}
+              className={`transition duration-75 ease-linear absolute top-0 left-0 z-20 w-full h-full backdrop-brightness-50  `}
+            >
+              {" "}
+            </m.div>
+          </>
+        )}
       </AnimatePresence>
 
       <div
@@ -145,17 +158,17 @@ export default function ChatPage() {
         )}
       </div>
 
-      <div className="fixed bottom-16 smartphone:w-full w-1/3 flex justify-center items-center">
+      <div className="fixed bottom-16 z-10 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
           className={`flex items-center justify-between p-2 ${
             Chat.length <= 0 && "opacity-0 "
           } ${
             text.length > 35 ? "rounded-3xl" : "rounded-full"
-          } h-fit w-full mx-3 overflow-hidden transition-all ${
+          } h-fit w-full mx-3 overflow-hidden transition-all border  ${
             isDarkMode
-              ? "bg-foregroundLight/20 text-copy"
-              : "bg-background/10 border-primary-dark text-copyLight"
+              ? "bg-foreground border-border  text-copy"
+              : " bg-foregroundLight border-borderLight text-copyLight"
           }`}
         >
           <textarea

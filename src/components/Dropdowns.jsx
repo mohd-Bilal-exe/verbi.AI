@@ -185,6 +185,7 @@ export const StyleDropDown = ({ setSelected, title, place }) => {
             { code: "Informative", name: "🧐 Informative" },
             { code: "Formal", name: "🎩 Formal" },
             { code: "Casual", name: "😊 Casual" },
+            { code: "Humorous", name: "😂 Humorous" },
             { code: "Respectful", name: "🙏 Respectful" },
             { code: "Supportive", name: "🤗 Supportive" },
             { code: "Motivational", name: "🚀 Motivational" },
