@@ -71,7 +71,7 @@ export default function ChatHistory({ setSidebarOpen }) {
       {Object.keys(chats).length === 0 ? (
         <span
           className={`${
-            isDarkMode ? " text-copyLight" : " text-copy"
+            isDarkMode ? " text-copy" : " text-copyLight"
           } mx-4 flex flex-col text-sm  `}
         >
           <span className={`text-2xl my-1 `}>Oops! </span> It looks like
