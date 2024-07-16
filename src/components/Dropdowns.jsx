@@ -178,39 +178,39 @@ export const StyleDropDown = ({ setSelected, title, place }) => {
 
   const Lists =
     place === "editModal"
-      ? title === "tone"
+      ? title === "Tone"
         ? [
-            { code: "professional", name: "💼 Professional" },
-            { code: "friendly", name: "😄 Friendly" },
-            { code: "informative", name: "🧐 Informative" },
-            { code: "formal", name: "🎩 Formal" },
-            { code: "casual", name: "😊 Casual" },
-            { code: "respectful", name: "🙏 Respectful" },
-            { code: "supportive", name: "🤗 Supportive" },
-            { code: "motivational", name: "🚀 Motivational" },
+            { code: "Professional", name: "💼 Professional" },
+            { code: "Friendly", name: "😄 Friendly" },
+            { code: "Informative", name: "🧐 Informative" },
+            { code: "Formal", name: "🎩 Formal" },
+            { code: "Casual", name: "😊 Casual" },
+            { code: "Respectful", name: "🙏 Respectful" },
+            { code: "Supportive", name: "🤗 Supportive" },
+            { code: "Motivational", name: "🚀 Motivational" },
           ]
         : [
-            { code: "sarcastic", name: "😏 Sarcastic" },
-            { code: "witty", name: "😄 Witty" },
-            { code: "thoughtful", name: "🤔 Thoughtful" },
-            { code: "creative", name: "🌟 Creative" },
-            { code: "humorous", name: "😂 Humorous" },
-            { code: "inspirational", name: "🌈 Inspirational" },
-            { code: "reflective", name: "🪞 Reflective" },
-            { code: "whimsical", name: "🦄 Whimsical" },
+            { code: "Sarcastic", name: "😏 Sarcastic" },
+            { code: "Witty", name: "😄 Witty" },
+            { code: "Thoughtful", name: "🤔 Thoughtful" },
+            { code: "Creative", name: "🌟 Creative" },
+            { code: "Humorous", name: "😂 Humorous" },
+            { code: "Inspirational", name: "🌈 Inspirational" },
+            { code: "Reflective", name: "🪞 Reflective" },
+            { code: "Whimsical", name: "🦄 Whimsical" },
           ]
-      : title === "tone"
+      : title === "Tone"
       ? [
-          { code: "professional", name: "💼 Professional" },
-          { code: "casual", name: "😊 Casual" },
-          { code: "friendly", name: "😄 Friendly" },
-          { code: "informative", name: "🧐 Informative" },
+          { code: "Professional", name: "💼 Professional" },
+          { code: "Casual", name: "😊 Casual" },
+          { code: "Friendly", name: "😄 Friendly" },
+          { code: "Informative", name: "🧐 Informative" },
         ]
       : [
-          { code: "sarcastic", name: "😏 Sarcastic" },
-          { code: "witty", name: "😄 Witty" },
-          { code: "thoughtful", name: "🤔 Thoughtful" },
-          { code: "creative", name: "🌟 Creative" },
+          { code: "Sarcastic", name: "😏 Sarcastic" },
+          { code: "Witty", name: "😄 Witty" },
+          { code: "Thoughtful", name: "🤔 Thoughtful" },
+          { code: "Creative", name: "🌟 Creative" },
         ];
 
   return (
@@ -233,7 +233,7 @@ export const StyleDropDown = ({ setSelected, title, place }) => {
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-50%" }}
           className={` grid  place-content-center p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] ${
-            place === "editModal" ? "w-[320px] grid-cols-3" : "w-48 grid-cols-2"
+            place === "editModal" ? "w-[350px] grid-cols-3" : "w-56 grid-cols-2"
           }  h-fit`}
         >
           {Lists.map((item) => (

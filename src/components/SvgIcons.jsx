@@ -283,7 +283,7 @@ export const AddIcon = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      className={` group-hover:scale-110`}
+      className={` group-hover:scale-110 transition-all`}
     >
       <g fill="none">
         <circle
@@ -291,13 +291,13 @@ export const AddIcon = () => {
           cy={12}
           r={9}
           fill="currentColor"
-          fillOpacity={0.45}
+          fillOpacity={0.35}
         ></circle>
         <path
           stroke="currentColor"
           strokeLinecap="square"
           strokeLinejoin="round"
-          strokeWidth={1.25}
+          strokeWidth={1.35}
           d="M12 8v8m4-4H8"
         ></path>
       </g>

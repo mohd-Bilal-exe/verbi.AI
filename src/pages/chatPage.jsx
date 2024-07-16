@@ -136,7 +136,7 @@ export default function ChatPage() {
               <h1>Let&#39;s Start a New Conversation</h1>
               <h2>Click the button below</h2>
               <h2>and let&apos;s begin chatting.</h2>
-              <div className="h-9 w-9 my-4">
+              <div className="h-10 w-10 smartphone:size-16 my-4">
                 {" "}
                 <CreateChatButton />
               </div>

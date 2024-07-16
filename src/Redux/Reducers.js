@@ -109,11 +109,9 @@ const userReducer = (state = initialState, action) => {
 
     case DELETE_CURRENT_CHAT: {
       const sessionID = action.payload;
-      console.log("Session ID to delete:", sessionID); // Debugging log
-      console.log("Chat keys:", Object.keys(state.chatHistory)); // Debugging log
       const { [sessionID]: chatToDelete, ...remainingChats } =
         state.chatHistory;
-      console.log("remainingChats", remainingChats); // Debugging log
+      console.log("Deleted chats", chatToDelete);
       return {
         ...state,
         chatHistory: remainingChats,

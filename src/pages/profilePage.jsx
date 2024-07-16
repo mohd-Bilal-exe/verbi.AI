@@ -23,7 +23,6 @@ export default function ProfilePage() {
   const toggleDarkMode = () => {
     dispatch(darkMode(!isDarkMode));
   };
-
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate("/login");
@@ -56,7 +55,7 @@ export default function ProfilePage() {
           {user.avatar}
           <button
             onClick={() => handleEdit("avatar")}
-            className=" absolute bottom-0 right-2 flex justify-center items-center p-1 pl-1.5  rounded-full size-6 bg-slate-950/60 text-copy  hover:text-blue-500 transition-all"
+            className=" absolute bottom-0 right-0 flex justify-center items-center p-1 pl-1.5  rounded-full size-7 bg-slate-950/60 text-copy  hover:text-blue-500 transition-all"
           >
             <EditIcon />
           </button>
@@ -152,7 +151,7 @@ export default function ProfilePage() {
                 {user.nickname}
                 <button
                   onClick={() => handleEdit("nickname")}
-                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -197,7 +196,7 @@ export default function ProfilePage() {
                   : user.about}
                 <button
                   onClick={() => handleEdit("about")}
-                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -264,8 +263,8 @@ export default function ProfilePage() {
               >
                 {user.tone}
                 <button
-                  onClick={() => handleEdit("tone")}
-                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
+                  onClick={() => handleEdit("Tone")}
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -307,8 +306,8 @@ export default function ProfilePage() {
               >
                 {user.nature}
                 <button
-                  onClick={() => handleEdit("nature")}
-                  className="flex justify-center items-center p-1  rounded-full size-5  hover:text-blue-500 transition-all"
+                  onClick={() => handleEdit("Nature")}
+                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>

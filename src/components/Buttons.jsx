@@ -43,7 +43,7 @@ export const CreateChatButton = ({ setSidebarOpen }) => {
   return (
     <button
       onClick={handleCreateChat}
-      className={`w-full h-full flex justify-center items-center  rounded-full bg-gradient-to-tr group  ${
+      className={`w-full h-full flex justify-center items-center  rounded-full bg-gradient-to-tr group transition-all   ${
         isDarkMode
           ? " from-geminiPrimary to-geminiSecondary text-copyLight "
           : " from-geminiPrimarylt to-geminiSecondarylt text-copyLight "
