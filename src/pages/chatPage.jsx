@@ -112,7 +112,17 @@ export default function ChatPage() {
         <ExpandSidebarIcon />
       </button>
       <AnimatePresence>
-        {sidebarIsOpen && <ChatHistory setSidebarOpen={setSidebarOpen} />}
+        {sidebarIsOpen && (
+          <>
+            {" "}
+            <ChatHistory setSidebarOpen={setSidebarOpen} />{" "}
+            <m.div
+              className={`absolute top-0 left-0 w-full h-full backdrop-brightness-50  `}
+            >
+              {" "}
+            </m.div>
+          </>
+        )}
       </AnimatePresence>
 
       <div
@@ -152,10 +162,8 @@ export default function ChatPage() {
             Chat.length <= 0 && "opacity-0 "
           } ${
             text.length > 35 ? "rounded-3xl" : "rounded-full"
-          } h-fit w-full mx-3 overflow-hidden transition-all ${
-            isDarkMode
-              ? "bg-foregroundLight/20 text-copy"
-              : "bg-background/10 border-primary-dark text-copyLight"
+          } h-fit w-full mx-3 overflow-hidden transition-all  ${
+            isDarkMode ? "bg-zinc-700 text-copy" : " bg-zinc-300 text-copyLight"
           }`}
         >
           <textarea

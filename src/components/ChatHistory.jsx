@@ -10,7 +10,7 @@ import { m } from "framer-motion";
 import { DeleteIcon, ExpandSidebarIcon } from "./SvgIcons";
 
 const container = {
-  hidden: { x: -100, opacity: 0 },
+  hidden: { x: -50, opacity: 0 },
   visible: {
     x: 0,
     opacity: 1,
@@ -48,8 +48,8 @@ export default function ChatHistory({ setSidebarOpen }) {
       variants={container}
       initial="hidden"
       animate="visible"
-      exit={{ x: -100, opacity: 0 }}
-      transition={{ duration: 0.3, ease: "easeInOut", type: "tween" }}
+      exit={{ x: -50, opacity: 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
       className="absolute top-0 left-0 w-1/5 smartphone:w-3/5 h-full pb-24  overflow-y-auto flex flex-col items-center  gap-2 backdrop-blur-xl backdrop-brightness-75 z-20"
     >
       <m.div
@@ -59,7 +59,7 @@ export default function ChatHistory({ setSidebarOpen }) {
       >
         <button
           className={`w-6 h-6 smartphone:size-8 rounded-lg rotate-180  ${
-            isDarkMode ? "text-copy" : "text-copyLight"
+            isDarkMode ? "text-copy" : "text-copy-lighter"
           } `}
           onClick={() => setSidebarOpen(false)}
         >
