@@ -49,7 +49,9 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
           className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2"
         >
-          <span className={`w-4/5 text-wrap`}>{plainText} </span>
+          <span className={`w-4/5 text-wrap overflow-x-hidden`}>
+            {plainText}{" "}
+          </span>
           <span className={`w-fit z-10 scale-75 text-xs place-self-end`}>
             {formatTimefunc(keys)}
           </span>

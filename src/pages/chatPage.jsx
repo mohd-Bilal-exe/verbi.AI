@@ -117,7 +117,10 @@ export default function ChatPage() {
             {" "}
             <ChatHistory setSidebarOpen={setSidebarOpen} />{" "}
             <m.div
-              className={`absolute top-0 left-0 w-full h-full backdrop-brightness-50  `}
+              initial={{ opacity: 0, x: -200 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -200 }}
+              className={`transition duration-75 ease-linear absolute top-0 left-0 z-20 w-full h-full backdrop-brightness-50  `}
             >
               {" "}
             </m.div>
@@ -155,15 +158,17 @@ export default function ChatPage() {
         )}
       </div>
 
-      <div className="fixed bottom-16 smartphone:w-full w-1/3 flex justify-center items-center">
+      <div className="fixed bottom-16 z-10 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
           className={`flex items-center justify-between p-2 ${
             Chat.length <= 0 && "opacity-0 "
           } ${
             text.length > 35 ? "rounded-3xl" : "rounded-full"
-          } h-fit w-full mx-3 overflow-hidden transition-all  ${
-            isDarkMode ? "bg-zinc-700 text-copy" : " bg-zinc-300 text-copyLight"
+          } h-fit w-full mx-3 overflow-hidden transition-all border  ${
+            isDarkMode
+              ? "bg-foreground border-border  text-copy"
+              : " bg-foregroundLight border-borderLight text-copyLight"
           }`}
         >
           <textarea

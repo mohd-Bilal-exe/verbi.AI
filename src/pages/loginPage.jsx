@@ -339,8 +339,8 @@ export default function LoginPage() {
   );
   const handleNext = useCallback(() => {
     if (validateStep()) {
-      setCurrentStep(currentStep + 1);
       setPosition(position - 422);
+      setCurrentStep(currentStep + 1);
     }
   }, [currentStep, validateStep, position]);
 
