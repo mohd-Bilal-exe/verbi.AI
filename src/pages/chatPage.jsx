@@ -188,10 +188,10 @@ export default function ChatPage() {
             type="submit"
             className={`${
               isLoading ? "cursor-not-allowed" : "cursor-pointer"
-            } w-11 h-10 grid place-content-center place-self-center bg-clip-border transition-colors ${
+            } w-11 h-10 grid place-content-center place-self-center bg-clip-border transition-colors border ${
               isDarkMode
-                ? "bg-foregroundLight hover:bg-foregroundLight/70 text-copyLight"
-                : "bg-foregroundLight/50 hover:bg-foregroundLight/70 text-copyLight"
+                ? "bg-foregroundLight border-border  hover:bg-foregroundLight/70 text-copyLight"
+                : "bg-foreground/20 border-border hover:bg-foregroundLight/70 text-copyLight"
             } rounded-full`}
           >
             <m.span
