@@ -26,12 +26,15 @@ export default function LoginPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleNext();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleNext();
+      }
+    },
+    [handleNext]
+  );
   const validateStep = useCallback(() => {
     const newErrors = { ...errors };
     if (currentStep === 0) {
@@ -313,7 +316,7 @@ export default function LoginPage() {
         ),
       },
     ],
-    [username, nickname, about, errors, emojis, avatar]
+    [username, nickname, about, errors, emojis, avatar, handleKeyDown]
   );
   const sidebar = useMemo(
     () => (

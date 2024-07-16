@@ -34,7 +34,6 @@ export default function ChatHistory({ setSidebarOpen }) {
   const dispatch = useDispatch();
 
   const handleChatDelete = (currentId) => {
-    console.log();
     dispatch(deleteCurrentChat(currentId));
   };
 

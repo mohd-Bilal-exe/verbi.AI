@@ -259,9 +259,9 @@ export default function ProfilePage() {
             >
               <m.span
                 key="tone"
-                className="flex justify-between text-xs mt-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between text-xs mt-2 ml-2 smartphone:text-sm laptop:text-xs"
               >
-                {user.tone}
+                {user.Tone}
                 <button
                   onClick={() => handleEdit("Tone")}
                   className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
@@ -302,9 +302,9 @@ export default function ProfilePage() {
             >
               <m.span
                 key="nature"
-                className="flex justify-between text-xs mt-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between text-xs mt-2 ml-2 smartphone:text-sm laptop:text-xs"
               >
-                {user.nature}
+                {user.Nature}
                 <button
                   onClick={() => handleEdit("Nature")}
                   className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
