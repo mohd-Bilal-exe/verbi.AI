@@ -163,9 +163,9 @@ export default function EditModal({ attributes, onClose }) {
       handleClick(dispatch, attributes, nickname);
     } else if (attributes === "about") {
       handleClick(dispatch, attributes, about);
-    } else if (attributes === "tone") {
+    } else if (attributes === "Tone") {
       handleClick(dispatch, attributes, tone);
-    } else if (attributes === "nature") {
+    } else if (attributes === "Nature") {
       handleClick(dispatch, attributes, nature);
     } else if (attributes === "avatar") {
       handleClick(dispatch, attributes, avatar);
@@ -193,8 +193,8 @@ export default function EditModal({ attributes, onClose }) {
           <Name type={attributes} name={nickname} setName={setNickname} />
         )}
         {attributes === "about" && <About about={about} setAbout={setAbout} />}
-        {attributes === "tone" && <Tone type="tone" update={setTone} />}
-        {attributes === "nature" && <Tone type="nature" update={setNature} />}
+        {attributes === "Tone" && <Tone type="Tone" update={setTone} />}
+        {attributes === "Nature" && <Tone type="Nature" update={setNature} />}
         {attributes === "avatar" && (
           <Avatar avatar={avatar} update={setAvatar} />
         )}

@@ -26,7 +26,12 @@ export default function LoginPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleNext();
+    }
+  };
   const validateStep = useCallback(() => {
     const newErrors = { ...errors };
     if (currentStep === 0) {
@@ -47,7 +52,7 @@ export default function LoginPage() {
       if (validateStep()) {
         dispatch(addUser(id, username, nickname, about, avatar, tone, nature));
         rememberMe(id, username, nickname, about, tone, nature);
-        navigate("/profile");
+        navigate("/Profile");
       }
     },
     [
@@ -137,6 +142,7 @@ export default function LoginPage() {
               required
               value={username}
               placeholder="Start typing your name..."
+              onKeyDown={handleKeyDown}
               onChange={(e) => {
                 setUsername(e.target.value);
                 setErrors((prevErrors) => ({ ...prevErrors, username: "" }));
@@ -186,6 +192,7 @@ export default function LoginPage() {
               type="text"
               value={nickname}
               placeholder="Type your nickname here..."
+              onKeyDown={handleKeyDown}
               onChange={(e) => {
                 setNickname(e.target.value);
                 setErrors((prevErrors) => ({ ...prevErrors, nickname: "" }));
@@ -225,7 +232,7 @@ export default function LoginPage() {
               Choose an avatar 🚀
             </h2>
             <div
-              className={`w-full h-32 grid grid-cols-8 smartphone:grid-cols-6  bg-black/20 p-2 overflow-y-auto rounded-2xl text-4xl `}
+              className={`w-full h-32 grid grid-cols-8 smartphone:grid-cols-6  bg-black/20 p-2 overflow-y-auto rounded-2xl text-4xl scrollbar-thumb-rounded`}
             >
               {emojis.map((emoji, index) => {
                 return (
@@ -271,6 +278,7 @@ export default function LoginPage() {
             </h2>
             <textarea
               value={about}
+              onKeyDown={handleKeyDown}
               onChange={(e) => {
                 setAbout(e.target.value);
               }}
@@ -298,8 +306,8 @@ export default function LoginPage() {
               </h2>
             </div>
             <div className="w-full flex gap-2 items-center justify-center text-white">
-              <StyleDropDown setSelected={setTone} title={"tone"} />
-              <StyleDropDown setSelected={setNature} title={"nature"} />
+              <StyleDropDown setSelected={setTone} title={"Tone"} />
+              <StyleDropDown setSelected={setNature} title={"Nature"} />
             </div>
           </div>
         ),

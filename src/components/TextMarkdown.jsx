@@ -29,13 +29,13 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
         role === "user"
           ? "place-self-end laptop:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
           : "place-self-start w-11/12 smartphone:w-11/12  my-3 p-3"
-      } ${
+      } bg-gradient-to-br  ${
         isDarkMode
           ? role === "user"
-            ? "bg-accent2/80"
+            ? "from-accent2 to-accent2lt"
             : "bg-foreground"
           : role === "user"
-          ? "bg-accent2lt text-copy"
+          ? "from-blue-400 to-accent2lt text-copy"
           : "bg-foreground/10"
       } rounded-md`}
       variants={parentVariants}

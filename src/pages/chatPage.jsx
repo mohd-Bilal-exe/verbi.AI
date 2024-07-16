@@ -11,7 +11,7 @@ import { ExpandSidebarIcon } from "../components/SvgIcons";
 
 export default function ChatPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
-  const chatHistory = useSelector((state) => state.currentChat);
+  const Chat = useSelector((state) => state.currentChat);
   const id = useSelector((state) => state.currentChatID);
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarIsOpen, setSidebarOpen] = useState(false);
@@ -32,11 +32,11 @@ export default function ChatPage() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [chatHistory]);
+  }, [Chat]);
 
   useEffect(() => {
-    setSession(id, chatHistory);
-  }, [chatHistory, id]);
+    setSession(id, Chat);
+  }, [Chat, id]);
 
   useEffect(() => {
     if (textAreaRef.current) {
@@ -88,11 +88,10 @@ export default function ChatPage() {
   };
 
   const handleChatTitle = async () => {
-    const title = await generateChatTitle(chatHistory[1].parts[0].text);
-    console.log(title);
+    const title = await generateChatTitle(Chat[1].parts[0].text);
     dispatch(addChatTitle(id, title));
   };
-  if (chatHistory.length > 1 && chatHistory.length <= 2) {
+  if (Chat.length == 2) {
     handleChatTitle();
   }
   return (
@@ -108,7 +107,7 @@ export default function ChatPage() {
     >
       <button
         onClick={handleSidebarExpansion}
-        className="absolute w-6 h-6 smartphone:size-7 top-3 left-3 "
+        className="absolute w-6 h-6 smartphone:size-7 top-3 left-3 backdrop-blur-lg "
       >
         <ExpandSidebarIcon />
       </button>
@@ -121,33 +120,37 @@ export default function ChatPage() {
         ref={chatBoxRef}
         className="scroll-smooth scrollbar-thumb-rounded overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
       >
-        {chatHistory.length > 0 ? (
-          chatHistory
-            .slice(1)
-            .map((message, index) => (
-              <TextMarkdown
-                key={index}
-                keys={message.timestamp}
-                role={message.role}
-                plainText={message.parts[0].text}
-              />
-            ))
+        {Chat.length > 0 ? (
+          Chat.slice(1).map((message, index) => (
+            <TextMarkdown
+              key={index}
+              keys={message.timestamp}
+              role={message.role}
+              plainText={message.parts[0].text}
+            />
+          ))
         ) : (
           <div className="w-full h-full grid place-content-center">
             <div className="flex flex-col justify-center items-center text-center tracking-tight text-sm">
-              <h1 className={`text-3xl my-0.5`}>Welcome!</h1>
+              <h1 className={`text-6xl my-0.5`}>Welcome!</h1>
               <h1>Let&#39;s Start a New Conversation</h1>
               <h2>Click the button below</h2>
               <h2>and let&apos;s begin chatting.</h2>
-              <CreateChatButton />
+              <div className="h-10 w-10 smartphone:size-16 my-4">
+                {" "}
+                <CreateChatButton />
+              </div>
             </div>
           </div>
         )}
       </div>
+
       <div className="fixed bottom-16 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
           className={`flex items-center justify-between p-2 ${
+            Chat.length <= 0 && "opacity-0 "
+          } ${
             text.length > 35 ? "rounded-3xl" : "rounded-full"
           } h-fit w-full mx-3 overflow-hidden transition-all ${
             isDarkMode

@@ -51,8 +51,7 @@ export default function GlobalHistory() {
         ease: "easeInOut",
         type: "spring",
       }}
-      // Only animate initial opacity if shouldAnimate is true
-      className={` transform-gpu absolute backdrop-blur-lg transition-all backdrop-brightness-50 ${
+      className={` transform-gpu absolute backdrop-blur-lg   backdrop-brightness-50 ${
         isExpanded
           ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
           : "bottom-2 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
@@ -120,7 +119,7 @@ export default function GlobalHistory() {
                 handleExpandClick(true);
                 handleExpandClickDiv(history.id);
               }}
-              initial={{ opacity: shouldAnimate ? 0 : 1 }} // Only animate initial opacity if shouldAnimate is true
+              initial={{ opacity: shouldAnimate ? 0 : 1 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
@@ -189,9 +188,9 @@ export default function GlobalHistory() {
           ))
         ) : (
           <p
-            className={`text-xl text-copy text-center px-10 montserrat tracking-tight my-auto`}
+            className={`text-xl text-copy text-center smartphone:px-9 montserrat tracking-tight smartphone:my-auto`}
           >
-            No history, You haven&apos;nt done anything yet
+            No history <br /> You have&apos;nt done anything yet.
           </p>
         )}
       </div>

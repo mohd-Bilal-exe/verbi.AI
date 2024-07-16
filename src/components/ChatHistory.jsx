@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { setCurrentChat, setCurrentChatId } from "../Redux/Actions";
+import {
+  deleteCurrentChat,
+  setCurrentChat,
+  setCurrentChatId,
+} from "../Redux/Actions";
 import { CreateChatButton } from "./Buttons";
 import { m } from "framer-motion";
 import { DeleteIcon, ExpandSidebarIcon } from "./SvgIcons";
@@ -29,6 +33,11 @@ export default function ChatHistory({ setSidebarOpen }) {
   const selectedID = useSelector((state) => state.currentChatID);
   const dispatch = useDispatch();
 
+  const handleChatDelete = (currentId) => {
+    console.log();
+    dispatch(deleteCurrentChat(currentId));
+  };
+
   const handleChatClick = (currentId) => {
     dispatch(setCurrentChat(currentId));
     dispatch(setCurrentChatId(currentId));
@@ -41,7 +50,7 @@ export default function ChatHistory({ setSidebarOpen }) {
       animate="visible"
       exit={{ x: -100, opacity: 0 }}
       transition={{ duration: 0.3, ease: "easeInOut", type: "tween" }}
-      className="absolute border-r top-0 left-0 w-1/5 smartphone:w-3/5 h-full pb-24  overflow-y-auto flex flex-col items-center  gap-2 backdrop-blur-xl backdrop-brightness-75 z-40"
+      className="absolute top-0 left-0 w-1/5 smartphone:w-3/5 h-full pb-24  overflow-y-auto flex flex-col items-center  gap-2 backdrop-blur-xl backdrop-brightness-75 z-20"
     >
       <m.div
         className={`w-full h-fit  p-2 flex justify-between ${
@@ -62,27 +71,42 @@ export default function ChatHistory({ setSidebarOpen }) {
       </m.div>
 
       {Object.keys(chats).length === 0 ? (
-        <span className="text-gray-500">No chat history available.</span>
+        <span
+          className={`${
+            isDarkMode ? "text-copy" : "text-copyLight "
+          } mx-4 flex flex-col text-sm `}
+        >
+          <span className={`text-2xl my-1 `}>Oops! </span> It looks like
+          there&apos;s no chat history available.
+        </span>
       ) : (
         Object.entries(chats).map(([sessionId, chat]) => (
           <m.span
             variants={item}
             key={sessionId}
-            onClick={() => handleChatClick(sessionId)}
-            className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2 cursor-pointer rounded-xl text-sm font-semibold flex ${
+            className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2  rounded-xl text-sm font-semibold flex ${
               sessionId === selectedID
                 ? "bg-backgroundLight/80 text-copyLight"
                 : ""
             }`}
           >
-            {chat.title}
+            <span
+              className={`cursor-pointer`}
+              onClick={() => handleChatClick(sessionId)}
+            >
+              {chat.title}{" "}
+            </span>
+
             <div
               className={`absolute right-0 top-0 z-30 flex justify-end  bg-gradient-to-l ${
                 sessionId === selectedID ? "from-backgroundLight/80 " : ""
               }  h-full w-16`}
             >
               {sessionId === selectedID && (
-                <button className={`w-4 h-4 my-auto mr-1 text-red-800`}>
+                <button
+                  onClick={() => handleChatDelete(sessionId)}
+                  className={`w-4 h-4 my-auto mr-1 text-red-800`}
+                >
                   <DeleteIcon />
                 </button>
               )}
