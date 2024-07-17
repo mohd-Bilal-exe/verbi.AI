@@ -7,46 +7,61 @@ import TranslatePage from "./pages/TranslatePage";
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import { useSelector } from "react-redux";
 import LoginPage from "./pages/loginPage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import HomePage from "./pages/HomePage";
+import WelcomeScreen from "./components/WelcomeScreen";
 
 function App() {
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowWelcomeScreen(false);
+    }, 2800); // Display the welcome screen for 2.8 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const isDarkMode = useSelector((state) => state.darkMode);
   const userDetails = useSelector((state) => state.userDetails);
 
   return (
     <LazyMotion features={domAnimation}>
-      <AnimatePresence>
-        <BrowserRouter>
-          <div
-            className={` background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${
-              isDarkMode
-                ? "bg-background scrollbar-dark"
-                : "bg-backgroundLight scrollbar-custom"
-            } transition-colors open-sans`}
-          >
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  Object.keys(userDetails).length > 0 ? (
-                    <HomePage />
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route path="/Chat" element={<ChatPage />} />
-              <Route path="/GrammarCheck" element={<GrammarPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/Translate" element={<TranslatePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/home" element={<Navigate to="/" />} />
-            </Routes>
+      <BrowserRouter>
+        <div
+          className={`background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${
+            isDarkMode
+              ? "bg-background scrollbar-dark"
+              : "bg-backgroundLight scrollbar-custom"
+          } transition-colors open-sans`}
+        >
+          <AnimatePresence>
+            {showWelcomeScreen ? (
+              <WelcomeScreen />
+            ) : (
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    Object.keys(userDetails).length > 0 ? (
+                      <HomePage />
+                    ) : (
+                      <Navigate to="/login" />
+                    )
+                  }
+                />
+                <Route path="/Chat" element={<ChatPage />} />
+                <Route path="/GrammarCheck" element={<GrammarPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/Translate" element={<TranslatePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/home" element={<Navigate to="/" />} />
+              </Routes>
+            )}
             {location.pathname !== "/login" && <Navbar />}
-          </div>
-        </BrowserRouter>
-      </AnimatePresence>
+          </AnimatePresence>
+        </div>
+      </BrowserRouter>
     </LazyMotion>
   );
 }
