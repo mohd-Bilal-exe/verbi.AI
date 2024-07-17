@@ -19,6 +19,10 @@
 .open-sans {
   font-family: "Open Sans", sans-serif;
 }
+.borel {
+  font-family: "Borel", cursive;
+}
+
 :root {
   --scrollbar-thumb: #555555;
   --scrollbar-track: #f1f1f100;

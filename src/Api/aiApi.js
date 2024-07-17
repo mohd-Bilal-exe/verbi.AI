@@ -22,11 +22,10 @@ const safetySettings = [
   },
   {
     category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-    threshold: HarmBlockThreshold.BLOCK_ONLY_HIGH,
+    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
   },
 ];
 
-// The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
 const Gemini = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 var session = {
@@ -69,9 +68,7 @@ Thanks!`;
   });
 };
 
-// Refactored chat function to be used in a front-end context
 const chat = async (message) => {
-  console.log("Session is ", session);
   try {
     const chatSession = await Gemini.startChat({
       history: session.chatHistory,
@@ -81,7 +78,7 @@ const chat = async (message) => {
     const msg = message;
     const result = await chatSession.sendMessage(msg);
     const text = await result.response.text();
-    // Update chat history in the session
+    // Update chat history for the session
     session.chatHistory.push({ role: "user", parts: [{ text: msg }] });
     session.chatHistory.push({ role: "model", parts: [{ text: text }] });
     return { text };
