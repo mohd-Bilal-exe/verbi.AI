@@ -14,7 +14,7 @@ export default function HomePage() {
       content: "Fine-tune your sentences with precision.",
       path: "/grammarcheck",
       linkClasses: "col-span-2",
-      imgSrc: "/grammar1.png",
+      imgSrc: "/grammar1.webp",
       imgClass: "w-40 h-40 smartphone:size-32 my-auto self-end drop-shadow-2xl",
       classes: `bg-gradient-to-br shadow-2xl ${
         isDarkMode
@@ -28,7 +28,7 @@ export default function HomePage() {
       content: "Translate to any language with ease.",
       path: "/translate",
       linkClasses: "smartphone:col-span-2",
-      imgSrc: "/tra.png",
+      imgSrc: "/tra.webp",
       imgClass:
         "w-20 h-20 my-auto mr-4 smartphone:mb-4 self-end drop-shadow-2xl",
       classes: `bg-gradient-to-br shadow-2xl ${
@@ -43,7 +43,7 @@ export default function HomePage() {
       content: "Have conversations with Gemini.✨",
       path: "/chat",
       linkClasses: "smartphone:col-span-2",
-      imgSrc: "/chat.png",
+      imgSrc: "/chat.webp",
       imgClass: "w-28 h-28 my-auto self-end drop-shadow-2xl",
       classes: `bg-gradient-to-br shadow-2xl ${
         isDarkMode
