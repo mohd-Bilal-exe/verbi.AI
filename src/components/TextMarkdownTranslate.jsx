@@ -101,7 +101,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ul: ({ ...props }) => (
             <m.ul
               key={keys++}
-              className={`list-disc list-inside mb-4 ${
+              className={`list-disc list-inside overflow-auto  mb-4 ${
                 isDarkMode ? "text-lightBg1" : "text-gray-800"
               }`}
               variants={fadeInUpVariants}
@@ -111,7 +111,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ol: ({ ...props }) => (
             <m.ol
               key={keys++}
-              className={`list-decimal list-inside mb-4 ${
+              className={`list-decimal list-inside overflow-auto  mb-4 ${
                 isDarkMode ? "text-copy" : "text-copyLight"
               }`}
               variants={fadeInUpVariants}
@@ -121,7 +121,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           li: ({ ...props }) => (
             <m.li
               key={`${keys++}a`}
-              className={`text-sm mb-1 ml-4 open-sans ${
+              className={`text-sm mb-1 ml-4 overflow-auto  open-sans ${
                 isDarkMode ? "text-copy" : "text-copyLight"
               }`}
               variants={fadeInUpVariants}

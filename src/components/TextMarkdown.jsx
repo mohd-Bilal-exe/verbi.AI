@@ -126,7 +126,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
               ul: ({ ...props }) => (
                 <m.ul
                   key={keys++}
-                  className={`list-disc list-inside mb-4 ${
+                  className={`list-disc list-inside overflow-auto mb-4 ${
                     isDarkMode ? "text-lightBg1" : "text-gray-800"
                   }`}
                   variants={fadeInUpVariants}
@@ -136,7 +136,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
               ol: ({ ...props }) => (
                 <m.ol
                   key={keys++}
-                  className={`list-decimal list-inside mb-4 ${
+                  className={`list-decimal list-inside overflow-auto mb-4 ${
                     isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   variants={fadeInUpVariants}
@@ -146,7 +146,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
               li: ({ ...props }) => (
                 <m.li
                   key={`${keys++}a`}
-                  className={`text-sm mb-1 ml-4 open-sans ${
+                  className={`text-sm mb-1 ml-4 overflow-auto open-sans ${
                     isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   variants={fadeInUpVariants}
@@ -184,7 +184,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                     }`}
                   >
                     <h1 className={`text-sm`}>
-                      {transformString(props.children.props.children)}
+                      {transformString(props.children.props.className)}
                     </h1>
                     <button
                       onClick={() =>
