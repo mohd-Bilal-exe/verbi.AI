@@ -2,10 +2,31 @@ import { m } from "framer-motion";
 import Markdown from "react-markdown";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+import { Copy } from "@phosphor-icons/react";
 
 const TextMarkdownTranslate = ({ plainText, history }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
-
+  const handleCopyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  };
+  const transformString = (str) => {
+    if (!str) return str; // Handle null or undefined input
+    let result = str
+      .split("")
+      .map((char, index) => {
+        if (index === 0 || index === 9) return char.toUpperCase();
+        return char;
+      })
+      .join("");
+    return result;
+  };
   const parentVariants = {
     initial: {
       opacity: 0,
@@ -26,7 +47,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
   };
 
   // Unique key for each rendered Markdown component
-  let key = 0;
+  let keys = 0;
 
   return (
     <m.div
@@ -39,124 +60,138 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
         components={{
           p: ({ ...props }) => (
             <m.p
-              key={key++}
               variants={fadeInUpVariants}
-              className={`text-base mb-2 ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-dark"
-              } open-sans`}
+              key={keys++}
+              className={`text-base mb-2 open-sans ${
+                isDarkMode ? "text-lightBg1" : "text-lightMainContent"
+              }`}
               {...props}
             />
           ),
           h1: ({ ...props }) => (
             <m.h1
-              key={key++}
+              key={keys++}
               variants={fadeInUpVariants}
-              className={`text-3xl font-bold mb-4 ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-dark"
-              } playfair`}
+              className={`text-3xl font-bold mb-4 playfair ${
+                isDarkMode ? "text-lightBg1" : "text-gray-300"
+              }`}
               {...props}
             />
           ),
           h2: ({ ...props }) => (
             <m.h2
-              key={key++}
+              key={keys++}
               variants={fadeInUpVariants}
-              className={`text-2xl font-semibold mb-3 ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-dark"
-              } montserrat`}
+              className={`text-2xl font-semibold mb-3 montserrat ${
+                isDarkMode ? "text-lightBg1" : "text-lightHeading"
+              }`}
               {...props}
             />
           ),
           h3: ({ ...props }) => (
             <m.h3
-              key={key++}
+              key={keys++}
               variants={fadeInUpVariants}
-              className={`text-xl font-medium mb-2 ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-gray-700"
-              } montserrat`}
+              className={`text-xl font-medium mb-2 montserrat ${
+                isDarkMode ? "text-lightBg1" : "text-gray-700"
+              }`}
               {...props}
             />
           ),
           ul: ({ ...props }) => (
             <m.ul
-              key={key++}
-              variants={fadeInUpVariants}
+              key={keys++}
               className={`list-disc list-inside mb-4 ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-gray-800"
+                isDarkMode ? "text-lightBg1" : "text-gray-800"
               }`}
+              variants={fadeInUpVariants}
               {...props}
             />
           ),
           ol: ({ ...props }) => (
             <m.ol
-              key={key++}
-              variants={fadeInUpVariants}
+              key={keys++}
               className={`list-decimal list-inside mb-4 ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-gray-800"
+                isDarkMode ? "text-copy" : "text-copyLight"
               }`}
+              variants={fadeInUpVariants}
               {...props}
             />
           ),
           li: ({ ...props }) => (
             <m.li
-              key={key++}
+              key={`${keys++}a`}
+              className={`text-sm mb-1 ml-4 open-sans ${
+                isDarkMode ? "text-copy" : "text-copyLight"
+              }`}
               variants={fadeInUpVariants}
-              className={`text-sm mb-1 ml-4 ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-dark"
-              } open-sans`}
               {...props}
             />
           ),
           strong: ({ ...props }) => (
             <m.strong
-              key={key++}
+              key={keys++}
               variants={fadeInUpVariants}
-              className={`text-lg tracking-wide m-1 font-bold ${
-                isDarkMode
-                  ? history
-                    ? "text-dark"
-                    : "text-light"
-                  : "text-dark"
-              } montserrat`}
+              className={`text-lg tracking-widest m-1 font-bold montserrat ${
+                isDarkMode ? "text-copy" : "text-copyLight"
+              }`}
               {...props}
             />
           ),
           a: ({ ...props }) => (
             <m.a
-              key={key++}
+              key={keys++}
               target="_blank"
               className={`underline ${
+                isDarkMode ? "text-blue-400  p-1 rounded" : "text-blue-600"
+              }`}
+              variants={fadeInUpVariants}
+              {...props}
+            />
+          ),
+          pre: ({ ...props }) => (
+            <div>
+              <div
+                className={`flex justify-between p-3 rounded-t-lg ${
+                  isDarkMode
+                    ? "bg-backgroundLight/10 text-copy"
+                    : "bg-gray-100 text-copyLight"
+                }`}
+              >
+                <h1 className={`text-sm`}>
+                  {transformString(props.children.props.className)}
+                </h1>
+                <button
+                  onClick={() =>
+                    handleCopyToClipboard(props.children.props.children)
+                  }
+                  className={`flex gap-1 p-1 px-2 justify-center items-center text-sm rounded ${
+                    isDarkMode ? "text-copy" : "text-copyLight"
+                  }`}
+                >
+                  <Copy weight="duotone" />
+                  Copy code
+                </button>
+              </div>
+              <m.pre
+                key={keys++}
+                variants={fadeInUpVariants}
+                {...props}
+                className={`overflow-x-auto rounded-b-lg p-2 ${
+                  isDarkMode
+                    ? "bg-black/40 text-copy"
+                    : "bg-gray-100 text-copyLight"
+                }`}
+              />
+            </div>
+          ),
+          code: ({ ...props }) => (
+            <m.code
+              key={keys++}
+              className={`font-mono text-xs ${
                 isDarkMode
-                  ? "text-blue-100 bg-blue-500/50 p-1 rounded"
-                  : "text-blue-500"
+                  ? "bg-gray-800 text-copy p-1 rounded"
+                  : "bg-gray-200 text-copyLight p-1 rounded"
               }`}
               variants={fadeInUpVariants}
               {...props}
@@ -172,6 +207,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
 
 TextMarkdownTranslate.propTypes = {
   plainText: PropTypes.string.isRequired,
+  children: PropTypes.object,
   history: PropTypes.bool,
 };
 

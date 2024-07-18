@@ -13,7 +13,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        console.log("Copied to clipboard!", text);
+        alert("Copied to clipboard!");
       })
       .catch((err) => {
         console.error("Failed to copy text: ", err);
@@ -184,7 +184,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                     }`}
                   >
                     <h1 className={`text-sm`}>
-                      {transformString(props.children.props.className)}
+                      {transformString(props.children.props.children)}
                     </h1>
                     <button
                       onClick={() =>
@@ -239,6 +239,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
 
 TextMarkdown.propTypes = {
   keys: PropTypes.number.isRequired,
+  children: PropTypes.object,
   role: PropTypes.string.isRequired,
   plainText: PropTypes.string.isRequired,
 };
