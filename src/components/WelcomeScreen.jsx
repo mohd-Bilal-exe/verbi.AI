@@ -13,7 +13,7 @@ export default function WelcomeScreen() {
         isDarkMode ? "bg-background text-copy" : "bg-backgroundLight"
       } `}
     >
-      <div className="w-full h-36 flex  flex-col justify-end items-center overflow-hidden">
+      <div className="w-full h-32 smartphone:h-28 mb-10 smartphone:mb-24 flex  flex-col justify-end items-center overflow-hidden">
         <div className="relative w-fit h-fit ">
           <h1 className="borel text-5xl font-bold">
             <m.span
@@ -36,7 +36,7 @@ export default function WelcomeScreen() {
             </m.span>
           </h1>
         </div>
-        <div className="flex mt-5 space-x-1">
+        <div className="flex items-center justify-center z-50 mt-0 ml-2 space-x-1">
           {words.map((word, index) => (
             <m.h5
               key={word}
@@ -48,7 +48,9 @@ export default function WelcomeScreen() {
                 delay: 1.15 + index * 0.25,
               }}
               className={`${
-                isDarkMode ? "bg-background text-copy" : "bg-backgroundLight"
+                isDarkMode
+                  ? "bg-background text-copy"
+                  : "bg-backgroundLight text-copyLight"
               }`}
             >
               {word}

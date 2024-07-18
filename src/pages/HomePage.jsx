@@ -3,6 +3,7 @@ import { m } from "framer-motion";
 import GlobalHistory from "../components/GlobalHistory";
 import { useSelector } from "react-redux";
 import { ArrowCircleRight } from "@phosphor-icons/react";
+import TopNav from "../components/TopNav";
 
 export default function HomePage() {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -66,13 +67,14 @@ export default function HomePage() {
   };
 
   return (
-    <m.section className="w-screen h-screen transform-gpu relative overflow-x-hidden px-1 smartphone:pt-14 flex flex-col items-center">
+    <m.section className="w-screen h-screen transform-gpu relative overflow-hidden px-1  flex flex-col items-center">
+      <TopNav />
       <m.div
         variants={parentVariants}
         initial="initial"
         animate="animate"
         id="optionsContainer"
-        className="w-11/12 smartphone:w-full h-3/5 lg:px-20 lg:py-6  smartphone:px-3 smartphone:py-5 grid grid-cols-2 gap-2 transform-gpu"
+        className="w-11/12 smartphone:w-full h-3/5 lg:px-20 lg:pb-6  smartphone:px-3 smartphone:py-5 grid grid-cols-2 gap-2 transform-gpu"
       >
         {gridItems.map((gridItem) => (
           <Link

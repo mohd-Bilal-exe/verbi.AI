@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowWelcomeScreen(false);
-    }, 2800); // Display the welcome screen for 2.8 seconds
+    }, 2600); // Display the welcome screen for 2.6 seconds
 
     return () => clearTimeout(timer);
   }, []);
