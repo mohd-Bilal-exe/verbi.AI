@@ -88,7 +88,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   variants={fadeInUpVariants}
                   key={keys++}
                   className={`text-base mb-2 open-sans ${
-                    isDarkMode ? "text-lightBg1" : "text-lightMainContent"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   {...props}
                 />
@@ -98,7 +98,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-3xl font-bold mb-4 playfair ${
-                    isDarkMode ? "text-lightBg1" : "text-gray-300"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   {...props}
                 />
@@ -108,7 +108,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-2xl font-semibold mb-3 montserrat ${
-                    isDarkMode ? "text-lightBg1" : "text-lightHeading"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   {...props}
                 />
@@ -118,7 +118,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   key={keys++}
                   variants={fadeInUpVariants}
                   className={`text-xl font-medium mb-2 montserrat ${
-                    isDarkMode ? "text-lightBg1" : "text-gray-700"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   {...props}
                 />
@@ -127,7 +127,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.ul
                   key={keys++}
                   className={`list-disc list-inside overflow-auto mb-4 ${
-                    isDarkMode ? "text-lightBg1" : "text-gray-800"
+                    isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   variants={fadeInUpVariants}
                   {...props}
