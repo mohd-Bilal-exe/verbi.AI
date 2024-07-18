@@ -4,10 +4,32 @@ import Markdown from "react-markdown";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import formatTime from "../utilities/dateString";
+import { Copy } from "@phosphor-icons/react";
 
 const TextMarkdown = React.memo(({ keys, role, plainText }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
   const formatTimefunc = (keys) => formatTime(keys);
+  const handleCopyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log("Copied to clipboard!", text);
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
+  };
+  const transformString = (str) => {
+    if (!str) return str; // Handle null or undefined input
+    let result = str
+      .split("")
+      .map((char, index) => {
+        if (index === 0 || index === 9) return char.toUpperCase();
+        return char;
+      })
+      .join("");
+    return result;
+  };
   const parentVariants = {
     initial: {
       opacity: 0.5,
@@ -147,6 +169,54 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   target="_blank"
                   className={`underline ${
                     isDarkMode ? "text-blue-400  p-1 rounded" : "text-blue-600"
+                  }`}
+                  variants={fadeInUpVariants}
+                  {...props}
+                />
+              ),
+              pre: ({ ...props }) => (
+                <div>
+                  <div
+                    className={`flex justify-between p-3 rounded-t-lg ${
+                      isDarkMode
+                        ? "bg-backgroundLight/10 text-copy"
+                        : "bg-gray-100 text-copyLight"
+                    }`}
+                  >
+                    <h1 className={`text-sm`}>
+                      {transformString(props.children.props.className)}
+                    </h1>
+                    <button
+                      onClick={() =>
+                        handleCopyToClipboard(props.children.props.children)
+                      }
+                      className={`flex gap-1 p-1 px-2 justify-center items-center text-sm rounded ${
+                        isDarkMode ? "text-copy" : "text-copyLight"
+                      }`}
+                    >
+                      <Copy weight="duotone" />
+                      Copy code
+                    </button>
+                  </div>
+                  <m.pre
+                    key={keys++}
+                    variants={fadeInUpVariants}
+                    {...props}
+                    className={`overflow-x-auto rounded-b-lg p-2 ${
+                      isDarkMode
+                        ? "bg-black/40 text-copy"
+                        : "bg-gray-100 text-copyLight"
+                    }`}
+                  />
+                </div>
+              ),
+              code: ({ ...props }) => (
+                <m.code
+                  key={keys++}
+                  className={`font-mono text-xs ${
+                    isDarkMode
+                      ? "bg-gray-800 text-copy p-1 rounded"
+                      : "bg-gray-200 text-copyLight p-1 rounded"
                   }`}
                   variants={fadeInUpVariants}
                   {...props}
