@@ -3,6 +3,7 @@ import { m } from "framer-motion";
 import GlobalHistory from "../components/GlobalHistory";
 import { useSelector } from "react-redux";
 import { ArrowCircleRight } from "@phosphor-icons/react";
+import TopNav from "../components/TopNav";
 
 export default function HomePage() {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -18,8 +19,8 @@ export default function HomePage() {
       imgClass: "w-40 h-40 smartphone:size-32 my-auto self-end drop-shadow-2xl",
       classes: `bg-gradient-to-br shadow-2xl ${
         isDarkMode
-          ? "from-yellow-400 to-orange-500 shadow-orange-500/20 laptop:shadow-orange-500/10"
-          : "from-yellow-200 to-orange-300 shadow-orange-300/20 laptop:shadow-orange-300/10"
+          ? "from-yellow-400 to-orange-500 shadow-orange-500/20 lg:shadow-orange-500/10"
+          : "from-yellow-200 to-orange-300 shadow-orange-300/20 lg:shadow-orange-300/10"
       }`,
     },
     {
@@ -33,8 +34,8 @@ export default function HomePage() {
         "w-20 h-20 my-auto mr-4 smartphone:mb-4 self-end drop-shadow-2xl",
       classes: `bg-gradient-to-br shadow-2xl ${
         isDarkMode
-          ? "from-green-400 to-teal-500 shadow-teal-500/50 laptop:shadow-teal-500/10"
-          : "from-green-300 to-teal-400 shadow-teal-400/50 laptop:shadow-teal-400/10"
+          ? "from-green-400 to-teal-500 shadow-teal-500/50 lg:shadow-teal-500/10"
+          : "from-green-300 to-teal-400 shadow-teal-400/50 lg:shadow-teal-400/10"
       }`,
     },
     {
@@ -47,8 +48,8 @@ export default function HomePage() {
       imgClass: "w-28 h-28 my-auto self-end drop-shadow-2xl",
       classes: `bg-gradient-to-br shadow-2xl ${
         isDarkMode
-          ? "from-accent2 to-accent2lt shadow-accent2lt/50 laptop:shadow-accent2lt/10"
-          : "from-blue-400 to-accent2lt shadow-accent2lt/50 laptop:shadow-accent2lt/10"
+          ? "from-accent2 to-accent2lt shadow-accent2lt/50 lg:shadow-accent2lt/10"
+          : "from-blue-400 to-accent2lt shadow-accent2lt/50 lg:shadow-accent2lt/10"
       }`,
     },
   ];
@@ -66,13 +67,14 @@ export default function HomePage() {
   };
 
   return (
-    <m.section className="w-screen h-screen transform-gpu relative overflow-x-hidden px-1 smartphone:pt-14 flex flex-col items-center">
+    <m.section className="w-screen h-screen transform-gpu relative overflow-hidden px-1  flex flex-col items-center">
+      <TopNav />
       <m.div
         variants={parentVariants}
         initial="initial"
         animate="animate"
         id="optionsContainer"
-        className="w-11/12 smartphone:w-full h-3/5 laptop:px-20 laptop:py-6 desktop:px-20 smartphone:px-3 smartphone:py-5 grid grid-cols-2 gap-2 transform-gpu"
+        className="w-11/12 smartphone:w-full h-3/5 lg:px-20 lg:pb-6  smartphone:px-3 smartphone:py-5 grid grid-cols-2 gap-2 transform-gpu"
       >
         {gridItems.map((gridItem) => (
           <Link
@@ -80,7 +82,7 @@ export default function HomePage() {
             to={gridItem.path}
             className={`relative w-full h-full ${gridItem.linkClasses}`}
           >
-            <m.div
+            <div
               className={`group w-full h-full flex flex-row justify-between rounded-xl hover:rounded-md transition-all transform-gpu ${gridItem.classes}`}
             >
               <div className="w-fit h-full flex flex-col justify-center  text-2xl desktop:text-3xl drop-shadow-xl">
@@ -102,7 +104,7 @@ export default function HomePage() {
                   loading="lazy"
                 />
               </div>
-            </m.div>
+            </div>
           </Link>
         ))}
       </m.div>

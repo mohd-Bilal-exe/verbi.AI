@@ -70,7 +70,7 @@ const TranslatePage = () => {
       }`}
     >
       <div
-        className={`w-full h-full flex flex-col justify-start items-start lg:flex-row gap-1 pt-16 smartphone:pt-5  px-3`}
+        className={`w-full h-full flex flex-col justify-start items-start lg:flex-row lg:px-10 gap-1 pt-16 smartphone:pt-5  px-3`}
       >
         <div
           className={`w-full flex flex-col border border-copy-lighter shadow-lg  rounded-xl smartphone:h-1/3 h-3/4 overflow-hidden`}

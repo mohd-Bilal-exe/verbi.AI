@@ -101,7 +101,7 @@ export default function ChatPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, type: "spring" }}
-      className={`relative w-full h-screen pt-5 laptop:py-1 flex flex-col items-center ${
+      className={`relative w-full h-screen pt-5 lg:py-1 flex flex-col items-center ${
         isDarkMode ? "bg-bg1/10 text-white" : "text-bg1"
       }`}
     >
@@ -131,7 +131,7 @@ export default function ChatPage() {
       <div
         id="chatBox"
         ref={chatBoxRef}
-        className="scroll-smooth scrollbar-thumb-rounded overflow-scroll w-11/12 laptop:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
+        className="scroll-smooth scrollbar-thumb-rounded overflow-scroll w-11/12 lg:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
       >
         {Chat.length > 0 ? (
           Chat.slice(1).map((message, index) => (

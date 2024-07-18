@@ -23,9 +23,9 @@ const Navbar = () => {
       switch (path) {
         case "/chat":
           return <ChatIcon />;
-        case "/Translate":
+        case "/translate":
           return <TranslateIcon />;
-        case "/GrammarCheck":
+        case "/grammarcheck":
           return <GrammarCheckIcon />;
         default:
           return <EverythingIcon isDarkMode={isDarkMode} />;

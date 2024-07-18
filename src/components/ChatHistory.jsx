@@ -82,9 +82,7 @@ export default function ChatHistory({ setSidebarOpen }) {
           <m.span
             variants={item}
             key={sessionId}
-            className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2   rounded-xl text-sm font-semibold flex ${
-              isDarkMode ? " text-copyLight" : " text-copy"
-            }  ${
+            className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2   rounded-xl text-sm font-semibold flex text-copy  ${
               sessionId === selectedID &&
               (isDarkMode
                 ? "bg-backgroundLight/80 text-copyLight"

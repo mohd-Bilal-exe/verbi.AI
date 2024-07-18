@@ -326,11 +326,11 @@ export default function ProfilePage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, type: "spring" }}
-      className={`w-screen h-screen flex justify-center px-5  ${
+      className={`w-screen h-screen flex flex-col justify-start items-center px-5 lg:pt-3 pt-2  ${
         isDarkMode ? "text-copy" : "text-copyLight"
       }`}
     >
-      <div className="lg:w-3/4 smartphone:w-full ">
+      <div className="lg:w-3/5 smartphone:w-full ">
         {profileSection}
         <OtherInfoSection />
         <PreferencesSection />
