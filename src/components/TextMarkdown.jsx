@@ -49,7 +49,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
     <m.div
       className={`h-fit text-wrap  ${
         role === "user"
-          ? "place-self-end lg:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
+          ? "place-self-end lg:w-2/5 mt-1 smartphone:min-w-48  smartphone:max-w-52  "
           : "place-self-start w-full  my-3 p-3 smartphone:p-2"
       } bg-gradient-to-br  ${
         isDarkMode

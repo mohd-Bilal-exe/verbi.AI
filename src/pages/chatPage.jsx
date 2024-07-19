@@ -16,6 +16,7 @@ export default function ChatPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarIsOpen, setSidebarOpen] = useState(false);
   const [text, setText] = useState("");
+  const [Error, setError] = useState("");
   const textAreaRef = useRef(null);
   const chatBoxRef = useRef(null);
   const dispatch = useDispatch();
@@ -65,8 +66,13 @@ export default function ChatPage() {
         parts: [{ text: result.text }],
         timestamp: Date.now(),
       };
-      dispatch(currentChat(id, aiMessage));
-      dispatch(addChatsHistory(id, aiMessage));
+      if (!result.error) {
+        dispatch(currentChat(id, aiMessage));
+        dispatch(addChatsHistory(id, aiMessage));
+      } else {
+        console.log("from error boundry", result.error);
+        setError(result.error);
+      }
       if (result.error) {
         console.error("Chat Error:", result.error);
       }
@@ -159,6 +165,15 @@ export default function ChatPage() {
               </div>
             </div>
           </div>
+        )}
+        {Error !== "" && (
+          <p
+            id="errorMSG"
+            className={`w-fit place-self-center  border p-2 rounded-lg border-red-500 bg-red-500/10`}
+          >
+            {Error}
+            <h1>Please refresh the page and try again.</h1>
+          </p>
         )}
       </div>
 
