@@ -49,8 +49,8 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
     <m.div
       className={`h-fit text-wrap  ${
         role === "user"
-          ? "place-self-end laptop:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
-          : "place-self-start w-11/12 smartphone:w-11/12  my-3 p-3"
+          ? "place-self-end lg:w-2/5 smartphone:min-w-48  smartphone:max-w-52  "
+          : "place-self-start w-full  my-3 p-3 smartphone:p-2"
       } bg-gradient-to-br  ${
         isDarkMode
           ? role === "user"
@@ -71,17 +71,19 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
           className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2"
         >
-          <span className={`w-4/5 text-wrap overflow-x-hidden`}>
+          <span className={`w-11/12 text-wrap overflow-x-hidden`}>
             {plainText}{" "}
           </span>
-          <span className={`w-fit z-10 scale-75 text-xs place-self-end`}>
+          <span
+            className={`w-fit z-10 scale-75 text-xs place-self-end items-end`}
+          >
             {formatTimefunc(keys)}
           </span>
         </m.p>
       ) : (
         <div className={`flex flex-col select-text`}>
           <Markdown
-            key={keys}
+            key={keys++}
             components={{
               p: ({ ...props }) => (
                 <m.p
@@ -126,9 +128,9 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
               ul: ({ ...props }) => (
                 <m.ul
                   key={keys++}
-                  className={`list-disc list-inside overflow-auto mb-4 ${
+                  className={`list-disc list-inside  overflow-auto mb-4 ${
                     isDarkMode ? "text-copy" : "text-copyLight"
-                  }`}
+                  } pl-0 ml-0`}
                   variants={fadeInUpVariants}
                   {...props}
                 />
@@ -138,7 +140,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                   key={keys++}
                   className={`list-decimal list-inside overflow-auto mb-4 ${
                     isDarkMode ? "text-copy" : "text-copyLight"
-                  }`}
+                  } pl-0 ml-0`}
                   variants={fadeInUpVariants}
                   {...props}
                 />
@@ -146,7 +148,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
               li: ({ ...props }) => (
                 <m.li
                   key={`${keys++}a`}
-                  className={`text-sm mb-1 ml-4 overflow-auto open-sans ${
+                  className={`text-sm mb-1 ml-4  overflow-auto  open-sans ${
                     isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   variants={fadeInUpVariants}
@@ -157,7 +159,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.strong
                   key={keys++}
                   variants={fadeInUpVariants}
-                  className={`text-lg tracking-widest m-1 font-bold montserrat ${
+                  className={`text-md tracking-widest m-1 font-bold montserrat ${
                     isDarkMode ? "text-copy" : "text-copyLight"
                   }`}
                   {...props}
@@ -167,9 +169,12 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.a
                   key={keys++}
                   target="_blank"
+                  href={props.href}
                   className={`underline ${
-                    isDarkMode ? "text-blue-400  p-1 rounded" : "text-blue-600"
-                  }`}
+                    isDarkMode
+                      ? "text-blue-400  rounded bg-gray-800 hover:bg-gray-700"
+                      : "text-blue-600 rounded bg-gray-200 hover:bg-gray-300"
+                  } transition-colors duration-300 ease-in-out`}
                   variants={fadeInUpVariants}
                   {...props}
                 />
@@ -213,10 +218,8 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
               code: ({ ...props }) => (
                 <m.code
                   key={keys++}
-                  className={`font-mono text-xs ${
-                    isDarkMode
-                      ? "bg-gray-800 text-copy p-1 rounded"
-                      : "bg-gray-200 text-copyLight p-1 rounded"
+                  className={`font-mono  ${
+                    isDarkMode ? " text-red-500 " : " text-red-400 "
                   }`}
                   variants={fadeInUpVariants}
                   {...props}
@@ -240,6 +243,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
 TextMarkdown.propTypes = {
   keys: PropTypes.number.isRequired,
   children: PropTypes.object,
+  href: PropTypes.string,
   role: PropTypes.string.isRequired,
   plainText: PropTypes.string.isRequired,
 };

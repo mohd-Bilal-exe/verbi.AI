@@ -67,12 +67,12 @@ const Navbar = () => {
       id="container"
       className={`fixed backdrop-blur-lg border-t bottom-0 w-screen h-fit flex items-center justify-center montserrat ${
         isDarkMode
-          ? "bg-foreground/60 laptop:bg-foreground border-border text-copy"
+          ? "bg-foreground/60 lg:bg-foreground border-border text-copy"
           : "bg-foregroundLight border-borderLight text-copyLight"
-      } z-30`}
+      } transition-all duration-300  z-30`}
     >
       <ul
-        className={`flex justify-between items-center px-5 pt-2 gap-1 w-screen desktop:w-3/4 laptop:w-3/4 backdrop-blur transform-gpu  ${
+        className={`flex justify-between items-center px-5 pt-2 gap-1 w-screen desktop:w-3/4 lg:w-3/4 backdrop-blur transform-gpu  ${
           isDarkMode ? " bg-lightBg2/10" : "bg-bg3/10"
         }`}
       >
@@ -99,7 +99,7 @@ const Navbar = () => {
                   listItem.id === 1 ? "transition-colors" : "transition-all"
                 }
                 ${listItem.title === "Chat" ? "translate-x-1" : ""}
-                ease-in-out duration-500`}
+                ease-in-out duration-300`}
               >
                 {listItem.id === 1 ? dynamicIcon : listItem.ico}
               </span>
@@ -127,18 +127,19 @@ const Navbar = () => {
                   <m.div
                     layout
                     layoutId="underline"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 5 }}
                     transition={{
                       type: "spring",
-                      ease: "easeInOut",
-                      duration: 1,
+                      stiffness: 300,
+                      damping: 30,
+                      duration: 0.5,
                     }}
                     className={`absolute bottom-0 w-20 h-1 rounded-full ${
                       isDarkMode
-                        ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_25px_#ffffff] laptop:shadow-[0px_-2px_30px_#4cc9f0]"
-                        : "bg-copyLight shadow-[0px_-5px_20px_#252329] laptop:shadow-[0px_-2px_30px_#252329]"
+                        ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_25px_#ffffff] lg:shadow-[0px_-2px_30px_#4cc9f0]"
+                        : "bg-copyLight shadow-[0px_-5px_20px_#252329] lg:shadow-[0px_-2px_30px_#252329]"
                     } transition-opacity duration-500 transform-gpu`}
                   />
                 )}

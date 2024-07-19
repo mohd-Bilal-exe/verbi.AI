@@ -54,7 +54,9 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
       variants={parentVariants}
       initial="initial"
       animate="animate"
-      className="w-full h-full select-text"
+      className={`w-full h-full select-text ${
+        history ? "text-copyLight" : isDarkMode ? "text-copy" : "text-copyLight"
+      } `}
     >
       <Markdown
         components={{
@@ -62,9 +64,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.p
               variants={fadeInUpVariants}
               key={keys++}
-              className={`text-base mb-2 open-sans ${
-                isDarkMode ? "text-lightBg1" : "text-lightMainContent"
-              }`}
+              className={`text-base mb-2 open-sans `}
               {...props}
             />
           ),
@@ -72,9 +72,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.h1
               key={keys++}
               variants={fadeInUpVariants}
-              className={`text-3xl font-bold mb-4 playfair ${
-                isDarkMode ? "text-lightBg1" : "text-gray-300"
-              }`}
+              className={`text-3xl font-bold mb-4 playfair`}
               {...props}
             />
           ),
@@ -82,9 +80,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.h2
               key={keys++}
               variants={fadeInUpVariants}
-              className={`text-2xl font-semibold mb-3 montserrat ${
-                isDarkMode ? "text-lightBg1" : "text-lightHeading"
-              }`}
+              className={`text-2xl font-semibold mb-3 montserrat `}
               {...props}
             />
           ),
@@ -92,18 +88,14 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.h3
               key={keys++}
               variants={fadeInUpVariants}
-              className={`text-xl font-medium mb-2 montserrat ${
-                isDarkMode ? "text-lightBg1" : "text-gray-700"
-              }`}
+              className={`text-xl font-medium mb-2 montserrat `}
               {...props}
             />
           ),
           ul: ({ ...props }) => (
             <m.ul
               key={keys++}
-              className={`list-disc list-inside overflow-auto  mb-4 ${
-                isDarkMode ? "text-lightBg1" : "text-gray-800"
-              }`}
+              className={`list-disc list-inside overflow-auto  mb-4 `}
               variants={fadeInUpVariants}
               {...props}
             />
@@ -111,9 +103,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           ol: ({ ...props }) => (
             <m.ol
               key={keys++}
-              className={`list-decimal list-inside overflow-auto  mb-4 ${
-                isDarkMode ? "text-copy" : "text-copyLight"
-              }`}
+              className={`list-decimal list-inside overflow-auto  mb-4 `}
               variants={fadeInUpVariants}
               {...props}
             />
@@ -121,9 +111,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           li: ({ ...props }) => (
             <m.li
               key={`${keys++}a`}
-              className={`text-sm mb-1 ml-4 overflow-auto  open-sans ${
-                isDarkMode ? "text-copy" : "text-copyLight"
-              }`}
+              className={`text-sm mb-1 ml-4 overflow-auto  open-sans `}
               variants={fadeInUpVariants}
               {...props}
             />
@@ -132,9 +120,7 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.strong
               key={keys++}
               variants={fadeInUpVariants}
-              className={`text-lg tracking-widest m-1 font-bold montserrat ${
-                isDarkMode ? "text-copy" : "text-copyLight"
-              }`}
+              className={`text-lg tracking-widest m-1 font-bold montserrat `}
               {...props}
             />
           ),

@@ -33,7 +33,7 @@ function App() {
             isDarkMode
               ? "bg-background scrollbar-dark"
               : "bg-backgroundLight scrollbar-custom"
-          } transition-colors open-sans`}
+          } transition-colors duration-300  open-sans`}
         >
           <AnimatePresence>
             {showWelcomeScreen ? (

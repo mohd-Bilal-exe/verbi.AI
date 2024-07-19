@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addChatsHistory, addChatTitle, currentChat } from "../Redux/Actions";
 import TextMarkdown from "../components/TextMarkdown";
 import { chat, generateChatTitle, setSession } from "../Api/aiApi";
-import { ArrowUp, CircleNotch } from "@phosphor-icons/react";
+import { ArrowUp } from "@phosphor-icons/react";
 import ChatHistory from "../components/ChatHistory";
 import { CreateChatButton } from "../components/Buttons";
-import { ExpandSidebarIcon } from "../components/SvgIcons";
+import { ExpandSidebarIcon, GeminiIcon } from "../components/SvgIcons";
 
 export default function ChatPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -131,16 +131,20 @@ export default function ChatPage() {
       <div
         id="chatBox"
         ref={chatBoxRef}
-        className="scroll-smooth scrollbar-thumb-rounded overflow-scroll w-11/12 lg:w-1/2 h-full mb-32 flex flex-col overflow-x-hidden overflow-y-auto px-2"
+        className="scroll-smooth scrollbar-thumb-rounded overflow-scroll w-11/12 lg:w-3/5 h-full mb-32 overflow-x-hidden overflow-y-auto px-2"
       >
         {Chat.length > 0 ? (
           Chat.slice(1).map((message, index) => (
-            <TextMarkdown
-              key={index}
-              keys={message.timestamp}
-              role={message.role}
-              plainText={message.parts[0].text}
-            />
+            <div key={`container${index}`} className={`group flex flex-col`}>
+              {message.role === "model" && <GeminiIcon />}
+
+              <TextMarkdown
+                key={index}
+                keys={message.timestamp}
+                role={message.role}
+                plainText={message.parts[0].text}
+              />
+            </div>
           ))
         ) : (
           <div className="w-full h-full grid place-content-center">
@@ -204,7 +208,7 @@ export default function ChatPage() {
               }}
             >
               {isLoading ? (
-                <CircleNotch className="w-8 h-8" weight="bold" />
+                <GeminiIcon className="w-8 h-8" weight="bold" />
               ) : (
                 <ArrowUp className="w-8 h-8" weight="bold" />
               )}

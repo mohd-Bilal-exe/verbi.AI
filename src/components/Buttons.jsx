@@ -9,9 +9,8 @@ import {
 } from "../Redux/Actions";
 import { v4 as uuidv4 } from "uuid";
 import PropTypes from "prop-types";
-import { CircleNotch } from "@phosphor-icons/react";
 import { m } from "framer-motion";
-import { AddIcon } from "./SvgIcons";
+import { AddIcon, GeminiIcon } from "./SvgIcons";
 
 export const CreateChatButton = ({ setSidebarOpen }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
@@ -64,9 +63,7 @@ export const DoButton = ({ loading, func, text }) => {
       className={`w-28 h-10 text-sm rounded-xl flex flex-col items-center justify-center gap-2 }text-copyLight ${
         loading ? `cursor-not-allowed bg-gradient-to-tr  ` : ` cursor-pointer`
       } ${
-        isDarkMode
-          ? "bg-backgroundLight/10 from-geminiPrimary to-geminiSecondary "
-          : "bg-background/90 from-geminiPrimarylt to-geminiSecondarylt "
+        isDarkMode ? "bg-backgroundLight/10  " : "bg-background/90  "
       } text-copyLight overflow-hidden transition-colors duration-700 delay-1000`}
       disabled={loading}
       aria-label="Check Grammar Now"
@@ -95,7 +92,7 @@ export const DoButton = ({ loading, func, text }) => {
               }}
               className=""
             >
-              <CircleNotch className="w-6 h-6" weight="bold" />
+              <GeminiIcon />
             </m.span>
           )}
         </span>
