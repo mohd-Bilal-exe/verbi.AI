@@ -115,7 +115,7 @@ export default function LoginPage() {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="overflow-hidden bg-gradient-to-br from-blue-300 from-10% via-purple-300 to-red-300 transition-all duration-700 text-transparent bg-clip-text"
+                  className="overflow-hidden bg-gradient-to-tr from-blue-400 from-10% via-purple-300 to-red-300 transition-all duration-700 text-transparent bg-clip-text"
                 >
                   Gemini
                 </m.span>
