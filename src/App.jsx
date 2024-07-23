@@ -1,18 +1,21 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import ChatPage from "./pages/chatPage";
 import GrammarPage from "./pages/grammarPage";
 import Navbar from "./components/Navbar";
 import ProfilePage from "./pages/profilePage";
 import TranslatePage from "./pages/TranslatePage";
-import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
-import { useSelector } from "react-redux";
 import LoginPage from "./pages/loginPage";
-import { useEffect, useState } from "react";
 import HomePage from "./pages/HomePage";
 import WelcomeScreen from "./components/WelcomeScreen";
 
 function App() {
   const [showWelcomeScreen, setShowWelcomeScreen] = useState(true);
+  const isDarkMode = useSelector((state) => state.darkMode);
+  const userDetails = useSelector((state) => state.userDetails);
+  const isLoggedin = useSelector((state) => state.isLoggedIn);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,9 +25,6 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  const isDarkMode = useSelector((state) => state.darkMode);
-  const userDetails = useSelector((state) => state.userDetails);
-
   return (
     <LazyMotion features={domAnimation}>
       <BrowserRouter>
@@ -33,32 +33,40 @@ function App() {
             isDarkMode
               ? "bg-background scrollbar-dark"
               : "bg-backgroundLight scrollbar-custom"
-          } transition-colors duration-300  open-sans`}
+          } transition-colors duration-300 open-sans`}
         >
           <AnimatePresence>
             {showWelcomeScreen ? (
               <WelcomeScreen />
             ) : (
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    Object.keys(userDetails).length > 0 ? (
-                      <HomePage />
-                    ) : (
-                      <Navigate to="/login" />
-                    )
-                  }
-                />
-                <Route path="/Chat" element={<ChatPage />} />
-                <Route path="/GrammarCheck" element={<GrammarPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/Translate" element={<TranslatePage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/home" element={<Navigate to="/" />} />
-              </Routes>
+              <>
+                <Routes location={location} key={location.pathname}>
+                  <Route
+                    path="/"
+                    element={
+                      Object.keys(userDetails).length > 0 ? (
+                        <HomePage />
+                      ) : (
+                        <Navigate to="/login" />
+                      )
+                    }
+                  />
+                  {isLoggedin ? (
+                    <>
+                      <Route path="/Chat" element={<ChatPage />} />
+                      <Route path="/GrammarCheck" element={<GrammarPage />} />
+                      <Route path="/profile" element={<ProfilePage />} />
+                      <Route path="/Translate" element={<TranslatePage />} />
+                      <Route path="/home" element={<Navigate to="/" />} />
+                    </>
+                  ) : (
+                    <Route path="*" element={<Navigate to="/login" />} />
+                  )}
+                  <Route path="/login" element={<LoginPage />} />
+                </Routes>
+                {location.pathname !== "/login" && <Navbar />}
+              </>
             )}
-            {location.pathname !== "/login" && <Navbar />}
           </AnimatePresence>
         </div>
       </BrowserRouter>

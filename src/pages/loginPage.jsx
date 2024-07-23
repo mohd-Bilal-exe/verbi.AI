@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../Redux/Actions";
 import { useNavigate } from "react-router-dom";
 import { rememberMe } from "../Api/aiApi";
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
   ArrowCircleLeft,
@@ -26,6 +26,19 @@ export default function LoginPage() {
   const isDarkMode = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Disable the back button functionality
+  useEffect(() => {
+    const handlePopState = () => {
+      navigate(0); // Reload the page, effectively stopping the back navigation
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [navigate]);
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -241,7 +254,7 @@ export default function LoginPage() {
                     onClick={() => {
                       setAvatar(emojis[index]);
                     }}
-                    className={`smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${
+                    className={` grid place-content-center smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${
                       avatar === emojis[index] && "backdrop-brightness-150"
                     }  p-1 rounded-xl transition-all cursor-pointer`}
                   >

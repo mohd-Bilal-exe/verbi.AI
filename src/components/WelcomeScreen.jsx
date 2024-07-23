@@ -10,7 +10,9 @@ export default function WelcomeScreen() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
       className={`w-screen h-screen absolute top-0 left-0 backdrop-blur-xl grid place-content-center  z-50 ${
-        isDarkMode ? "bg-background text-copy" : "bg-backgroundLight"
+        isDarkMode
+          ? "bg-background text-copy"
+          : "bg-backgroundLight text-copyLight"
       } `}
     >
       <div className="w-full h-32 smartphone:h-28 mb-10 smartphone:mb-24 flex  flex-col justify-end items-center overflow-hidden">
@@ -24,15 +26,15 @@ export default function WelcomeScreen() {
                 isDarkMode ? "bg-background text-copy" : "bg-backgroundLight"
               }`}
             >
-              verbi
+              verbi.
             </m.span>
             <m.span
-              className="inline-block z-50"
+              className={`inline-block z-50 `}
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.4, ease: "easeInOut", delay: 0.65 }}
             >
-              .AI
+              AI
             </m.span>
           </h1>
         </div>
