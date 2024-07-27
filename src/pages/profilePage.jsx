@@ -38,24 +38,22 @@ export default function ProfilePage() {
   const profileSection = (
     <section
       key="profile"
-      className={`flex justify-between my-4 smartphone:my-8  p-4 rounded-xl open-sans  bg-gradient-to-tl ${
-        isDarkMode
-          ? "from-foreground to-Lightcopy-lighter/30"
-          : "from-foreground/10 to-foreground/20"
-      }`}
+      className={`flex justify-between my-4 smartphone:my-8  p-4 rounded-xl open-sans  bg-gradient-to-tl ${isDarkMode
+        ? "from-foreground to-Lightcopy-lighter/30"
+        : "from-foreground/10 to-foreground/20"
+        }`}
     >
       <div className="flex items-center gap-4">
         <span
-          className={`relative w-28 h-28 smartphone:size-24 border border-double rounded-full grid place-content-center text-7xl smartphone:text-6xl ${
-            isDarkMode
-              ? "bg-foregroundLight/20 border-yellow-600"
-              : "bg-foreground/50 border-yellow-600"
-          }`}
+          className={`relative w-28 h-28 smartphone:size-24 border border-double rounded-full grid place-content-center text-7xl smartphone:text-6xl ${isDarkMode
+            ? "bg-foregroundLight/20 border-yellow-600"
+            : "bg-foreground/50 border-yellow-600"
+            }`}
         >
           {user.avatar}
           <button
             onClick={() => handleEdit("avatar")}
-            className=" absolute bottom-0 right-0 flex justify-center items-center p-1 pl-1.5  rounded-full size-7 bg-slate-950/60 text-copy  hover:text-blue-500 transition-all"
+            className=" absolute bottom-0 right-0 flex justify-center items-center p-1 pl-1.5  rounded-full size-7 bg-gray-950/60 text-copy  hover:text-blue-500 transition-all"
           >
             <EditIcon />
           </button>
@@ -70,16 +68,14 @@ export default function ProfilePage() {
       <div className="flex flex-col justify-between items-center">
         <button
           onClick={toggleDarkMode}
-          className={`overflow-hidden p-1.5 rounded-full w-10 h-10 smartphone:size-7 border ${
-            isDarkMode
-              ? "bg-copy-lighter/10 hover:bg-copy/20 border-copy-lighter hover:border-copy"
-              : "bg-copy-light hover:bg-copy-lighter/50 border-copyLight hover:border-black"
-          } transition-all`}
+          className={`overflow-hidden p-1.5 rounded-full w-10 h-10 smartphone:size-7 border ${isDarkMode
+            ? "bg-copy-lighter/10 hover:bg-copy/20 border-copy-lighter hover:border-copy"
+            : "bg-copy-light hover:bg-copy-lighter/50 border-copyLight hover:border-black"
+            } transition-all`}
         >
           <span
-            className={`flex flex-col gap-2 justify-center items-center ${
-              isDarkMode ? "" : "-translate-y-9 smartphone:-translate-y-6"
-            } transition-all ease-in-out`}
+            className={`flex flex-col gap-2 justify-center items-center ${isDarkMode ? "" : "-translate-y-9 smartphone:-translate-y-6"
+              } transition-all ease-in-out`}
           >
             <Moon size={"100%"} className="pb-0.5" weight="duotone" />
             <Sun size={"100%"} weight="duotone" />
@@ -87,7 +83,7 @@ export default function ProfilePage() {
         </button>
         <button
           onClick={() => handleEdit("username")}
-          className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 hover:backdrop-brightness-50 transition-all"
+          className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500  transition-all"
         >
           <EditIcon />
         </button>
@@ -111,11 +107,10 @@ export default function ProfilePage() {
       <m.section
         layout
         key="otherInfo"
-        className={`my-4 smartphone:my-8  rounded-xl bg-gradient-to-tl ${
-          isDarkMode
-            ? "from-foreground to-Lightcopy-lighter/30"
-            : "from-foreground/10 to-foreground/20"
-        }`}
+        className={`quicksand  my-4 smartphone:my-8  rounded-xl bg-gradient-to-tl ${isDarkMode
+          ? "from-foreground to-Lightcopy-lighter/30"
+          : "from-foreground/10 to-foreground/20"
+          }`}
       >
         <m.div layout className="flex flex-col p-3">
           <m.div layout className={`my-1`}>
@@ -127,9 +122,8 @@ export default function ProfilePage() {
                 Nickname
               </h2>
               <m.span
-                className={`mx-2 ${
-                  isNicknameExpanded ? "rotate-90" : ""
-                } transition-all`}
+                className={`mx-2 ${isNicknameExpanded ? "rotate-90" : ""
+                  } transition-all`}
               >
                 <ArrowDown />
               </m.span>
@@ -170,9 +164,8 @@ export default function ProfilePage() {
                 About
               </h2>
               <m.span
-                className={`mx-2 ${
-                  isAboutExpanded ? "rotate-90" : ""
-                } transition-all`}
+                className={`mx-2 ${isAboutExpanded ? "rotate-90" : ""
+                  } transition-all`}
               >
                 <ArrowDown />
               </m.span>
@@ -224,11 +217,10 @@ export default function ProfilePage() {
       <m.section
         layout
         key="preferences"
-        className={`my-4 smartphone:my-8  rounded-xl bg-gradient-to-tl ${
-          isDarkMode
-            ? "from-foreground to-Lightcopy-lighter/30"
-            : "from-foreground/10 to-foreground/20"
-        }`}
+        className={`quicksand my-4 smartphone:my-8  rounded-xl bg-gradient-to-tl ${isDarkMode
+          ? "from-foreground to-Lightcopy-lighter/30"
+          : "from-foreground/10 to-foreground/20"
+          }`}
       >
         <m.div layout className="flex flex-col p-3">
           <m.div layout className={`my-1`}>
@@ -240,9 +232,8 @@ export default function ProfilePage() {
                 Tone
               </h2>
               <m.span
-                className={`mx-2 ${
-                  isToneExpanded ? "rotate-90" : ""
-                } transition-all`}
+                className={`mx-2 ${isToneExpanded ? "rotate-90" : ""
+                  } transition-all`}
               >
                 <ArrowDown />
               </m.span>
@@ -283,9 +274,8 @@ export default function ProfilePage() {
                 Nature
               </h2>
               <m.span
-                className={`mx-2 ${
-                  isNatureExpanded ? "rotate-90" : ""
-                } transition-all`}
+                className={`mx-2 ${isNatureExpanded ? "rotate-90" : ""
+                  } transition-all`}
               >
                 <ArrowDown />
               </m.span>
@@ -326,9 +316,8 @@ export default function ProfilePage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, type: "spring" }}
-      className={`w-screen h-screen flex flex-col justify-start items-center px-5 lg:pt-3 pt-2  ${
-        isDarkMode ? "text-copy" : "text-copyLight"
-      }`}
+      className={`w-screen h-screen flex flex-col justify-start items-center px-5 lg:pt-3 pt-2  ${isDarkMode ? "text-copy" : "text-copyLight"
+        }`}
     >
       <div className="lg:w-3/5 smartphone:w-full ">
         {profileSection}
@@ -339,11 +328,10 @@ export default function ProfilePage() {
         >
           <button
             onClick={handleChatclear}
-            className={` p-1 px-2 border-2 ${
-              isDarkMode
-                ? "text-copy border-copy-light hover:bg-copy/20"
-                : "text-copyLight border-Lightcopy-light hover:bg-copyLight/20"
-            }  rounded-lg text-copy text-xs `}
+            className={` p-1 px-2 border-2 ${isDarkMode
+              ? "text-copy border-copy-light hover:bg-copy/20"
+              : "text-copyLight border-Lightcopy-light hover:bg-copyLight/20"
+              }  rounded-lg text-copy text-xs `}
           >
             {clearIsclicked ? "Done" : "Clear All Chats"}
           </button>

@@ -51,39 +51,33 @@ export default function GlobalHistory() {
         ease: "easeInOut",
         type: "spring",
       }}
-      className={` transform-gpu absolute backdrop-blur-lg   backdrop-brightness-50 ${
-        isExpanded
+      className={` transform-gpu absolute backdrop-blur-lg   backdrop-brightness-50 ${isExpanded
           ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
           : "-bottom-5 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
-      } pt-3 border-t flex flex-col justify-start items-center gap-2 ${
-        isDarkMode
+        } pt-3 border-t flex flex-col justify-start items-center gap-2 ${isDarkMode
           ? "bg-foregroundLight/10 border-copy/20"
           : "bg-foreground/30 border-copyLight/20"
-      }`}
+        }`}
     >
       <div
-        className={`w-full h-fit flex justify-between ${
-          isDarkMode ? "text-white" : "text-copy"
-        }`}
+        className={`w-full h-fit flex justify-between ${isDarkMode ? "text-white" : "text-copy"
+          }`}
       >
         <button
           disabled={globalHistory.length === 0}
           onClick={handleClearHistory}
-          className={`group w-fit h-8 flex justify-center items-center self-end ml-6 px-2 rounded-lg transition-all duration-300 ${
-            isExpanded ? "bg-black/20" : ""
-          } ${
-            globalHistory.length === 0
+          className={`group w-fit h-8 flex justify-center items-center self-end ml-6 px-2 rounded-lg transition-all duration-300 ${isExpanded ? "bg-black/20" : ""
+            } ${globalHistory.length === 0
               ? "cursor-not-allowed"
               : "cursor-pointer hover:text-red-500"
-          } text-sm open-sans`}
+            } text-sm open-sans`}
         >
           Clear History <ClearIcon />
         </button>
         <button
           disabled={globalHistory.length === 0 && !isExpanded}
-          className={`group w-fit h-8 flex justify-center items-center self-end mr-4 px-2 rounded-lg open-sans ${
-            globalHistory.length === 0 ? "cursor-not-allowed" : "cursor-pointer"
-          } ${isExpanded ? "bg-black/20" : ""} `}
+          className={`group w-fit h-8 flex justify-center items-center self-end mr-4 px-2 rounded-lg open-sans ${globalHistory.length === 0 ? "cursor-not-allowed" : "cursor-pointer"
+            } ${isExpanded ? "bg-black/20" : ""} `}
           onClick={() => handleExpandClick(!isExpanded)}
         >
           {isExpanded ? (
@@ -104,17 +98,15 @@ export default function GlobalHistory() {
         </button>
       </div>
       <div
-        className={`w-full flex gap-1 flex-col-reverse justify-start items-center ${
-          isExpanded && "scrollbar-thumb-rounded overflow-y-auto"
-        } `}
+        className={`w-full flex gap-1 flex-col-reverse justify-start items-center ${isExpanded && "scrollbar-thumb-rounded overflow-y-auto"
+          } `}
       >
         {globalHistory && globalHistory.length > 0 ? (
           globalHistory.map((history) => (
             <m.div
               key={`${history.id}-${history.type}`}
-              className={`w-11/12 flex flex-col justify-start rounded-lg p-2 cursor-pointer ${
-                isDarkMode ? "bg-foregroundLight/60" : "bg-foregroundLight/60"
-              }`}
+              className={`w-11/12 flex flex-col justify-start rounded-lg p-2 cursor-pointer ${isDarkMode ? "bg-foregroundLight/60" : "bg-foregroundLight/60"
+                }`}
               onClick={() => {
                 handleExpandClick(true);
                 handleExpandClickDiv(history.id);
@@ -190,7 +182,7 @@ export default function GlobalHistory() {
           <p
             className={`text-lg lg:-mt-2  text-copy text-center smartphone:px-9 montserrat tracking-tight smartphone:my-auto`}
           >
-            No history <br /> You have&apos;nt done anything yet.
+            Looks like you haven&apos;t done anything yet.
           </p>
         )}
       </div>
