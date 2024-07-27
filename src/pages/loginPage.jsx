@@ -160,9 +160,8 @@ export default function LoginPage() {
                 setUsername(e.target.value);
                 setErrors((prevErrors) => ({ ...prevErrors, username: "" }));
               }}
-              className={`w-fit bg-transparent p-2 outline-none border-b ${
-                errors.username ? "border-red-400 " : "border-white"
-              }  placeholder:text-white placeholder:text-sm text-white`}
+              className={`w-fit bg-transparent p-2 outline-none border-b ${errors.username ? "border-red-400 " : "border-white"
+                }  placeholder:text-white placeholder:text-sm text-white`}
             />
             {errors.username && (
               <span className="text-red-400 text-sm w-fit ">
@@ -210,9 +209,8 @@ export default function LoginPage() {
                 setNickname(e.target.value);
                 setErrors((prevErrors) => ({ ...prevErrors, nickname: "" }));
               }}
-              className={`w-fit bg-transparent p-2 outline-none border-b ${
-                errors.nickname ? "border-red-400 " : "border-white"
-              }  placeholder:text-white placeholder:text-sm text-white`}
+              className={`w-fit bg-transparent p-2 outline-none border-b ${errors.nickname ? "border-red-400 " : "border-white"
+                }  placeholder:text-white placeholder:text-sm text-white`}
             />
             {errors.nickname && (
               <span className="text-red-500 text-sm transition-all">
@@ -254,9 +252,8 @@ export default function LoginPage() {
                     onClick={() => {
                       setAvatar(emojis[index]);
                     }}
-                    className={` grid place-content-center smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${
-                      avatar === emojis[index] && "backdrop-brightness-150"
-                    }  p-1 rounded-xl transition-all cursor-pointer`}
+                    className={` grid place-content-center smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${avatar === emojis[index] && "backdrop-brightness-150"
+                      }  p-1 rounded-xl transition-all cursor-pointer`}
                   >
                     {emoji}
                   </span>
@@ -315,7 +312,7 @@ export default function LoginPage() {
                 Last step, {nickname}! 🏁
               </h1>
               <h2 className="text-sm smartphone:text-xs group-hover:translate-x-1 transition-all tracking-tighter mb-4">
-                Pick what you want to customize next. 🎨
+                Pick what you want to customize next. This will decide what our conversations will be like. 🎨 <br /><span className={`text-xs`}>{"(You can further customize this in the profile page)"}</span>
               </h2>
             </div>
             <div className="w-full flex gap-2 items-center justify-center text-white">
@@ -337,9 +334,8 @@ export default function LoginPage() {
           <m.div
             key={index}
             layout
-            className={`w-1 h-1 mx-auto rounded-full transition-all ease-in-out ${
-              currentStep === step ? "my-1 " : ""
-            }`}
+            className={`w-1 h-1 mx-auto rounded-full transition-all ease-in-out ${currentStep === step ? "my-1 " : ""
+              }`}
             animate={{
               scale: currentStep === step ? 1.8 : 1,
               backgroundColor: currentStep === step ? "#F0F0F0" : "#CCCCCC",
@@ -373,11 +369,10 @@ export default function LoginPage() {
       className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-lg flex justify-center items-center p-3 smartphone:pb-24 bg-background `}
     >
       <div
-        className={`relative rounded-lg w-1/2 h-[422px] smartphone:w-full  overflow-hidden flex bg-gradient-to-br ${
-          isDarkMode
-            ? "from-foregroundLight/20 to-foregroundLight/30  text-copyLight"
-            : "from-foreground/30 to-foreground/20 text-copyLight"
-        } `}
+        className={`relative rounded-lg w-1/2 h-[422px] smartphone:w-full  overflow-hidden flex bg-gradient-to-br ${isDarkMode
+          ? "from-foregroundLight/20 to-foregroundLight/30  text-copyLight"
+          : "from-foreground/30 to-foreground/20 text-copyLight"
+          } `}
       >
         <m.div
           initial={{ y: 0 }}

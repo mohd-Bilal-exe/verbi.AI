@@ -26,7 +26,7 @@ const initialState = {
   userDetails: {},
   chatHistory: [],
   currentChat: [],
-  currentChatId: "",
+  currentChatID: "",
   translationHistory: [],
   globalHistory: [],
 };

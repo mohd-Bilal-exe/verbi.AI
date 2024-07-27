@@ -29,6 +29,23 @@
   font-family: "Borel", cursive;
 }
 
+.img1 {
+  background-image: url("/public/grammar1.webp");
+  background-size: cover;
+  background-position: center;
+}
+.img2 {
+  background-image: url("/public/tra.webp");
+  background-size: 96%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.img3 {
+  background-image: url("/public/chat.webp");
+  background-size: cover;
+  background-position: center;
+}
+
 :root {
   --scrollbar-thumb: #555555;
   --scrollbar-track: #f1f1f100;

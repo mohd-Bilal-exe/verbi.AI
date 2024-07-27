@@ -51,14 +51,12 @@ export default function ChatHistory({ setSidebarOpen }) {
       className="transition duration-75 ease-linear absolute top-0 z-30 left-0 w-1/5 smartphone:w-3/5 h-full pb-24  overflow-y-auto flex flex-col items-center  gap-2 backdrop-blur-lg backdrop-brightness-75"
     >
       <m.div
-        className={`w-full h-fit  p-3 mb-3 flex justify-between ${
-          isDarkMode ? "bg-backgroundLight/10" : "bg-background/20"
-        }`}
+        className={`w-full h-fit  p-3 mb-3 flex justify-between ${isDarkMode ? "bg-backgroundLight/10" : "bg-background/20"
+          }`}
       >
         <button
-          className={`w-6 h-6 smartphone:size-8 rounded-lg rotate-180  ${
-            isDarkMode ? "text-copy" : "text-copy-lighter"
-          } `}
+          className={`w-6 h-6 smartphone:size-8 rounded-lg rotate-180  ${isDarkMode ? "text-copy" : "text-copy-lighter"
+            } `}
           onClick={() => setSidebarOpen(false)}
         >
           <ExpandSidebarIcon />
@@ -67,27 +65,25 @@ export default function ChatHistory({ setSidebarOpen }) {
           <CreateChatButton setSidebarOpen={setSidebarOpen} />
         </div>
       </m.div>
-
+      <span>Chats</span>
       {Object.keys(chats).length === 0 ? (
         <span
-          className={`${
-            isDarkMode ? " text-copy" : " text-copyLight"
-          } mx-4 flex flex-col text-sm  `}
+          className={`${isDarkMode ? " text-copy" : " text-copyLight"
+            } mx-4 flex flex-col text-sm  `}
         >
           <span className={`text-2xl my-1 `}>Oops! </span> It looks like
-          there&apos;s no chat history available.
+          you have&apos;nt started chatting yet.
         </span>
       ) : (
         Object.entries(chats).map(([sessionId, chat]) => (
           <m.span
             variants={item}
             key={sessionId}
-            className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2   rounded-xl text-sm font-semibold flex text-copy  ${
-              sessionId === selectedID &&
+            className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2   rounded-xl text-sm font-semibold flex text-copy  ${sessionId === selectedID &&
               (isDarkMode
                 ? "bg-backgroundLight/80 text-copyLight"
                 : "bg-background/80 text-copy")
-            }`}
+              }`}
           >
             <span
               className={`cursor-pointer h-full w-full `}
@@ -97,12 +93,11 @@ export default function ChatHistory({ setSidebarOpen }) {
             </span>
 
             <div
-              className={`absolute right-0 top-0 z-30 flex justify-end  bg-gradient-to-l ${
-                sessionId === selectedID &&
+              className={`absolute right-0 top-0 z-30 flex justify-end  bg-gradient-to-l ${sessionId === selectedID &&
                 (isDarkMode
                   ? "from-backgroundLight text-copyLight"
                   : "from-background text-copy")
-              }  h-full w-16`}
+                }  h-full w-16`}
             >
               {sessionId === selectedID && (
                 <button

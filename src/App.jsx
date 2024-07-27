@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowWelcomeScreen(false);
-    }, 2600); // Display the welcome screen for 2.6 seconds
+    }, 2000); // Display the welcome screen for 2 seconds
 
     return () => clearTimeout(timer);
   }, []);
@@ -29,11 +29,10 @@ function App() {
     <LazyMotion features={domAnimation}>
       <BrowserRouter>
         <div
-          className={`background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${
-            isDarkMode
+          className={`background-grid w-screen h-min-screen overflow-x-hidden overflow-y-auto flex flex-col justify-center ${isDarkMode
               ? "bg-background scrollbar-dark"
               : "bg-backgroundLight scrollbar-custom"
-          } transition-colors duration-300 open-sans`}
+            } transition-colors duration-300 open-sans`}
         >
           <AnimatePresence>
             {showWelcomeScreen ? (
