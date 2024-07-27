@@ -91,7 +91,7 @@ export default function HomePage() {
                   />
                 </h2>
               </div>
-              <div className="flex  absolute h-2/5 w-1/5  bottom-10 right-0 group-hover:scale-110 transition-all duration-300">
+              <div className={`flex  absolute h-2/5 w-1/5  bottom-10 right-0 group-hover:scale-110 transition-all duration-300 `}>
                 {gridItem.icon}
               </div>
             </div>
