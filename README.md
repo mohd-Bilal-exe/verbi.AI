@@ -5,7 +5,6 @@
 - Features AI chat, AI grammatical checks, AI translation with custom prompts, and a beautifully animated UI.
 - Experience seamless communication and language support.
 
-# CURRENTLY UNDER DEVELOPMENT
 
 [Visit verbi.AI](https://verbi-ai.vercel.app/)
 
