@@ -1,3 +1,4 @@
+// Fuction for getting languages with flags
 export const getLanguagesWithFlags = async () => {
   try {
     const response = await fetch("https://restcountries.com/v3.1/all");

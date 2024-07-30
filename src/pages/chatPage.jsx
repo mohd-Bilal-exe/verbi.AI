@@ -9,22 +9,32 @@ import ChatHistory from "../components/ChatHistory";
 import { CreateChatButton } from "../components/Buttons";
 import { ExpandSidebarIcon, GeminiIcon } from "../components/SvgIcons";
 
+
 export default function ChatPage() {
+
+  // Retrieve state variables from Redux store
   const isDarkMode = useSelector((state) => state.darkMode);
   const Chat = useSelector((state) => state.currentChat);
   const id = useSelector((state) => state.currentChatID);
+
+  // Set up state variables
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarIsOpen, setSidebarOpen] = useState(false);
   const [text, setText] = useState("");
   const [Error, setError] = useState("");
+
+  // Set up refs
   const textAreaRef = useRef(null);
   const chatBoxRef = useRef(null);
+  // Set up dispatch
   const dispatch = useDispatch();
 
+  // Handle text change
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
 
+  // Scroll to bottom of chat box
   const scrollToBottom = () => {
     if (chatBoxRef.current) {
       chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
@@ -35,10 +45,12 @@ export default function ChatPage() {
     scrollToBottom();
   }, [Chat]);
 
+  // Set chat session on page load
   useEffect(() => {
     setSession(id, Chat);
   }, [Chat, id]);
 
+  // Update chat box height on text change
   useEffect(() => {
     if (textAreaRef.current) {
       textAreaRef.current.style.height = "15px";
@@ -46,6 +58,7 @@ export default function ChatPage() {
     }
   }, [text]);
 
+  // Handle sending message
   const handleSendMessage = async (e) => {
     e.preventDefault();
     try {
@@ -66,6 +79,7 @@ export default function ChatPage() {
         parts: [{ text: result.text }],
         timestamp: Date.now(),
       };
+      // Update state variables if no error
       if (!result.error) {
         dispatch(currentChat(id, aiMessage));
         dispatch(addChatsHistory(id, aiMessage));
@@ -82,6 +96,7 @@ export default function ChatPage() {
     }
   };
 
+  // Handle key down event
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -89,17 +104,22 @@ export default function ChatPage() {
     }
   };
 
+  // Handle sidebar expansion
   const handleSidebarExpansion = () => {
     setSidebarOpen(!sidebarIsOpen);
   };
 
+  // Handle chat title generation
   const handleChatTitle = async () => {
     const title = await generateChatTitle(Chat[1].parts[0].text);
     dispatch(addChatTitle(id, title));
   };
+
+  // Generate chat title when user types their first message
   if (Chat.length == 2) {
     handleChatTitle();
   }
+  // Render chat page
   return (
     <m.div
       key="chatPage"

@@ -7,14 +7,14 @@ import.meta.env; // Ensure Vite processes this import
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 const generationConfig = {
-  temperature: 2,
+  temperature: 1.5,
   topP: 0.95,
-  topK: 64,
+  topK: 80,
   maxOutputTokens: 8192,
   responseMimeType: "text/plain",
 };
 
-// Define safety settings
+// Safety settings for the Gemini
 const safetySettings = [
   {
     category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
@@ -33,6 +33,7 @@ var session = {
   chatHistory: [],
 };
 
+//Function to set sessionId and chatHistory
 const setSession = (sessionID, sessionArray) => {
   session.sessionId = sessionID;
   session.chatHistory = sessionArray.map((chat) => ({
@@ -41,15 +42,15 @@ const setSession = (sessionID, sessionArray) => {
   }));
 };
 
-//Functiob to generate chat title
-
+//Function to generate chat title
 const generateChatTitle = async (msg) => {
   const prompt = `Generate a creative chat title for a chat where the first message is: "${msg}". Provide only the title.`;
   const result = await Gemini.generateContent(prompt);
   const response = await result.response.text();
   return response;
 };
-// Function to remember user details in a session
+
+// Function to remember user details in a chat
 const rememberMe = (username, nickname, about, tone, nature) => {
   const literrallyMe = `Hey Gemini,
 Remember this
@@ -67,7 +68,7 @@ Thanks!`;
     ],
   });
 };
-
+// Function for chat response
 const chat = async (message) => {
   try {
     const chatSession = await Gemini.startChat({
@@ -90,7 +91,7 @@ const chat = async (message) => {
     };
   }
 };
-
+// Function for translation
 const translate = async (inputText, lang, customInstructions) => {
   try {
     const prompt = `Translate the text: "${inputText}" into ${lang} ${
@@ -104,7 +105,7 @@ const translate = async (inputText, lang, customInstructions) => {
     return "Translation error occurred. Please try again later.";
   }
 };
-
+// Function for grammar check
 const grammarCheck = async (inputText, customInstructions) => {
   try {
     const prompt = `Check the grammar of the following text and provide corrections if any: "${inputText}" \n \n ${
@@ -119,7 +120,7 @@ const grammarCheck = async (inputText, customInstructions) => {
     return "Grammar check error occurred. Please try again later.";
   }
 };
-
+// Exports
 export {
   chat,
   translate,
