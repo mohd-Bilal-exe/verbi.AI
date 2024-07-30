@@ -107,9 +107,8 @@ export default function ChatPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, type: "spring" }}
-      className={`relative w-full h-screen pt-5 lg:py-1 flex flex-col items-center ${
-        isDarkMode ? "bg-bg1/10 text-white" : "text-bg1"
-      }`}
+      className={`relative w-full h-screen pt-5 lg:py-1 flex flex-col items-center ${isDarkMode ? "bg-bg1/10 text-white" : "text-bg1"
+        }`}
     >
       <button
         onClick={handleSidebarExpansion}
@@ -180,24 +179,20 @@ export default function ChatPage() {
       <div className="fixed bottom-16 z-10 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
-          className={`flex items-center justify-between p-2 ${
-            Chat.length <= 0 && "opacity-0 "
-          } ${
-            text.length > 35 ? "rounded-3xl" : "rounded-full"
-          } h-fit w-full mx-3 overflow-hidden transition-all border  ${
-            isDarkMode
+          className={`flex items-center justify-between p-2 ${Chat.length <= 0 && "opacity-0 "
+            } ${text.length > 35 ? "rounded-3xl" : "rounded-full"
+            } h-fit w-full mx-3 overflow-hidden transition-all border  ${isDarkMode
               ? "bg-foreground border-border  text-copy"
               : " bg-foregroundLight border-borderLight text-copyLight"
-          }`}
+            }`}
         >
           <textarea
             ref={textAreaRef}
             placeholder="Type your message..."
-            className={`bg-transparent outline-none w-11/12 my-1 ml-4 pl-2 text-clip resize-none placeholder:pl-1 placeholder:py- overflow-y-auto ${
-              isDarkMode
-                ? "placeholder:text-copy caret-accent2"
-                : "placeholder:text-copyLight caret-accent2lt"
-            }`}
+            className={`bg-transparent outline-none w-11/12 my-1 ml-4 pl-2 text-clip resize-none placeholder:pl-1 placeholder:py- overflow-y-auto ${isDarkMode
+              ? "placeholder:text-copy caret-accent2"
+              : "placeholder:text-copyLight caret-accent2lt"
+              }`}
             onChange={handleTextChange}
             onKeyDown={handleKeyDown}
             value={text}
@@ -205,20 +200,18 @@ export default function ChatPage() {
           <button
             disabled={isLoading}
             type="submit"
-            className={`${
-              isLoading ? "cursor-not-allowed" : "cursor-pointer"
-            } w-11 h-10 grid place-content-center place-self-center bg-clip-border transition-colors border ${
-              isDarkMode
+            className={`${isLoading ? "cursor-not-allowed" : "cursor-pointer"
+              } w-11 h-10 grid place-content-center place-self-center bg-clip-border transition-colors border ${isDarkMode
                 ? "bg-foregroundLight border-border  hover:bg-foregroundLight/70 text-copyLight"
                 : "bg-foreground/20 border-border hover:bg-foregroundLight/70 text-copyLight"
-            } rounded-full`}
+              } rounded-full`}
           >
             <m.span
               initial={isLoading ? { rotate: 0 } : { rotate: 0 }}
               animate={isLoading ? { rotate: 360 } : { rotate: 0 }}
               transition={{
                 duration: !isLoading ? 0.5 : 0.8,
-                ease: "easeInOut",
+                ease: "easeIn",
                 repeat: isLoading ? Infinity : 0,
               }}
             >

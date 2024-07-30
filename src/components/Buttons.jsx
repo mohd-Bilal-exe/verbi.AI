@@ -42,29 +42,26 @@ export const CreateChatButton = ({ setSidebarOpen }) => {
   return (
     <button
       onClick={handleCreateChat}
-      className={`w-full h-full flex justify-center items-center  rounded-full bg-gradient-to-tr group transition-all   ${
-        isDarkMode
+      className={`w-full h-full flex justify-center items-center  rounded-full bg-gradient-to-tr group transition-all   ${isDarkMode
           ? " from-geminiPrimary to-geminiSecondary text-copyLight "
           : " from-geminiPrimarylt to-geminiSecondarylt text-copyLight "
-      } `}
+        } `}
     >
       <AddIcon />
     </button>
   );
 };
 CreateChatButton.propTypes = {
-  setSidebarOpen: PropTypes.func.isRequired,
+  setSidebarOpen: PropTypes.func,
 };
 export const DoButton = ({ loading, func, text }) => {
   const isDarkMode = useSelector((state) => state.darkMode);
   return (
     <button
       onClick={func}
-      className={`w-28 h-10 text-sm rounded-xl flex flex-col items-center justify-center gap-2 }text-copyLight ${
-        loading ? `cursor-not-allowed bg-gradient-to-tr  ` : ` cursor-pointer`
-      } ${
-        isDarkMode ? "bg-backgroundLight/10  " : "bg-background/90  "
-      } text-copyLight overflow-hidden transition-colors duration-700 delay-1000`}
+      className={`w-28 h-10 text-sm rounded-xl flex flex-col items-center justify-center gap-2 }text-copyLight ${loading ? `cursor-not-allowed bg-gradient-to-tr  ` : ` cursor-pointer`
+        } ${isDarkMode ? "bg-backgroundLight/10  " : "bg-background/90  "
+        } text-copyLight overflow-hidden transition-colors duration-700 delay-1000`}
       disabled={loading}
       aria-label="Check Grammar Now"
     >
@@ -97,11 +94,10 @@ export const DoButton = ({ loading, func, text }) => {
           )}
         </span>
         <span
-          className={`py-2.5  font-semibold tracking-wider montserrat bg-gradient-to-tr  ${
-            isDarkMode
+          className={`py-2.5  font-semibold tracking-wider montserrat bg-gradient-to-tr  ${isDarkMode
               ? "from-geminiPrimary to-geminiSecondary"
               : "from-geminiPrimarylt to-geminiSecondarylt"
-          } text-transparent bg-clip-text`}
+            } text-transparent bg-clip-text`}
         >
           {` ${text} `}
         </span>
