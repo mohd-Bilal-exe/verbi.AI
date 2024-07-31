@@ -196,7 +196,7 @@ export default function ChatPage() {
         )}
       </div>
 
-      <div className="fixed bottom-24 smartphone:bottom-16 z-10 smartphone:w-full w-1/3 flex justify-center items-center">
+      <div className="fixed bottom-16  z-10 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
           className={`flex items-center justify-between p-2 ${Chat.length <= 0 && "opacity-0 "
