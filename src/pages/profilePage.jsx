@@ -45,7 +45,7 @@ export default function ProfilePage() {
     >
       <div className="flex items-center gap-4">
         <span
-          className={`relative w-28 h-28 smartphone:size-24 border border-double rounded-full grid place-content-center text-7xl smartphone:text-6xl ${isDarkMode
+          className={`relative w-36 h-36 smartphone:size-24 border border-double rounded-full grid place-content-center text-8xl smartphone:text-6xl ${isDarkMode
             ? "bg-foregroundLight/20 border-yellow-600"
             : "bg-foreground/50 border-yellow-600"
             }`}
@@ -59,8 +59,8 @@ export default function ProfilePage() {
           </button>
         </span>
         <div className="flex flex-col justify-end tracking-tight">
-          <h1 className="montserrat text-5xl">{user.username}</h1>
-          <h2 className="open-sans text-xs my-2">
+          <h1 className="montserrat text-5xl lg:text-6xl ">{user.username}</h1>
+          <h2 className="open-sans text-xs lg:text-lg  m-2">
             All your info is right here!
           </h2>
         </div>
@@ -83,7 +83,7 @@ export default function ProfilePage() {
         </button>
         <button
           onClick={() => handleEdit("username")}
-          className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500  transition-all"
+          className="flex justify-center items-center p-1  rounded-full size-7 lg:size-8  hover:text-blue-500  transition-all"
         >
           <EditIcon />
         </button>
@@ -113,12 +113,12 @@ export default function ProfilePage() {
           }`}
       >
         <m.div layout className="flex flex-col p-3">
-          <m.div layout className={`my-1`}>
+          <m.div layout className={`my-1 lg:my-2 ml-2`}>
             <span
               onClick={toggleNicknameExpand}
               className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+              <h2 className="text-lg font-semibold smartphone:text-lg lg:text-3xl">
                 Nickname
               </h2>
               <m.span
@@ -140,12 +140,12 @@ export default function ProfilePage() {
             >
               <m.span
                 key="nickname"
-                className="text-xs flex justify-between mt-2 ml-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between font-medium  mt-2 ml-3 smartphone:text-sm lg:text-lg"
               >
                 {user.nickname}
                 <button
                   onClick={() => handleEdit("nickname")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-7  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -155,12 +155,12 @@ export default function ProfilePage() {
           <div
             className={`w-11/12 h-[1px] mx-3 bg-black/10 place-self-center`}
           ></div>
-          <div className="my-1">
+          <div className="my-1 lg:my-2 ml-2">
             <span
               onClick={toggleAboutExpand}
               className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+              <h2 className="text-lg font-semibold smartphone:text-lg lg:text-3xl">
                 About
               </h2>
               <m.span
@@ -182,14 +182,14 @@ export default function ProfilePage() {
             >
               <m.span
                 key="about"
-                className="text-xs flex justify-between  mt-2 ml-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between  font-medium  mt-2 ml-3 smartphone:text-sm lg:text-lg"
               >
                 {user.about === ""
                   ? "Wopsie! You haven't added an About yet"
                   : user.about}
                 <button
                   onClick={() => handleEdit("about")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-7  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -223,12 +223,12 @@ export default function ProfilePage() {
           }`}
       >
         <m.div layout className="flex flex-col p-3">
-          <m.div layout className={`my-1`}>
+          <m.div layout className={`my-1 lg:my-2 ml-2`}>
             <span
               onClick={toggleToneExpand}
               className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+              <h2 className="text-lg font-semibold smartphone:text-lg lg:text-3xl">
                 Tone
               </h2>
               <m.span
@@ -250,12 +250,12 @@ export default function ProfilePage() {
             >
               <m.span
                 key="tone"
-                className="flex justify-between text-xs mt-2 ml-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between font-medium  mt-2 ml-3 smartphone:text-sm lg:text-lg"
               >
                 {user.Tone}
                 <button
                   onClick={() => handleEdit("Tone")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-7  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -265,12 +265,12 @@ export default function ProfilePage() {
           <div
             className={`w-11/12 h-[1px] mx-3 bg-black/10 place-self-center`}
           ></div>
-          <div className="my-1">
+          <div className="my-1 lg:my-2 ml-2">
             <span
               onClick={toggleNatureExpand}
               className={`flex justify-between items-center cursor-pointer`}
             >
-              <h2 className="text-lg font-semibold smartphone:text-base laptop:text-lg">
+              <h2 className="text-lg font-semibold smartphone:text-lg lg:text-3xl">
                 Nature
               </h2>
               <m.span
@@ -292,12 +292,12 @@ export default function ProfilePage() {
             >
               <m.span
                 key="nature"
-                className="flex justify-between text-xs mt-2 ml-2 smartphone:text-sm laptop:text-xs"
+                className="flex justify-between font-medium  mt-2 ml-3 smartphone:text-sm lg:text-lg"
               >
                 {user.Nature}
                 <button
                   onClick={() => handleEdit("Nature")}
-                  className="flex justify-center items-center p-1  rounded-full size-6  hover:text-blue-500 transition-all"
+                  className="flex justify-center items-center p-1  rounded-full size-7  hover:text-blue-500 transition-all"
                 >
                   <EditIcon />
                 </button>
@@ -324,20 +324,20 @@ export default function ProfilePage() {
         <OtherInfoSection />
         <PreferencesSection />
         <section
-          className={`my-4 h-fit smartphone:my-8 rounded-xl flex justify-between`}
+          className={`my-4 h-fit smartphone:my-8 rounded-xl flex justify-between text-xs lg:text-sm`}
         >
           <button
             onClick={handleChatclear}
             className={` p-1 px-2 border-2 ${isDarkMode
               ? "text-copy border-copy-light hover:bg-copy/20"
               : "text-copyLight border-Lightcopy-light hover:bg-copyLight/20"
-              }  rounded-lg text-copy text-xs `}
+              }  rounded-lg  `}
           >
             {clearIsclicked ? "Done" : "Clear All Chats"}
           </button>
           <button
             onClick={handleLogout}
-            className=" p-1 px-2 tracking-wide border-2 border-red-500 rounded-lg text-red-500 text-xs hover:bg-red-500/20"
+            className=" p-1 px-2 tracking-wide border-2 border-red-500 rounded-lg text-red-500  hover:bg-red-500/20"
           >
             Logout
           </button>

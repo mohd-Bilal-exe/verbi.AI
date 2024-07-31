@@ -127,12 +127,12 @@ export default function ChatPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8, type: "spring" }}
-      className={`relative w-full h-screen pt-5 lg:py-1 flex flex-col items-center ${isDarkMode ? "bg-bg1/10 text-white" : "text-bg1"
+      className={`relative w-full h-screen pt-5 lg:py-1 flex flex-col items-center ${isDarkMode ? "bg-bg1/10 text-copy" : "text-copyLight"
         }`}
     >
       <button
         onClick={handleSidebarExpansion}
-        className="absolute w-6 h-6 smartphone:size-7 top-3 left-3 backdrop-blur-lg "
+        className="absolute w-8 h-8 smartphone:size-7 top-3 left-3 backdrop-blur-lg "
       >
         <ExpandSidebarIcon />
       </button>
@@ -196,7 +196,7 @@ export default function ChatPage() {
         )}
       </div>
 
-      <div className="fixed bottom-16 z-10 smartphone:w-full w-1/3 flex justify-center items-center">
+      <div className="fixed bottom-24 smartphone:bottom-16 z-10 smartphone:w-full w-1/3 flex justify-center items-center">
         <form
           onSubmit={handleSendMessage}
           className={`flex items-center justify-between p-2 ${Chat.length <= 0 && "opacity-0 "

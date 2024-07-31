@@ -79,11 +79,11 @@ export default function HomePage() {
             <div
               className={`group w-full h-full flex flex-row justify-between items-center rounded-xl hover:rounded-md transition-all transform-gpu ${gridItem.classes}`}
             >
-              <div className="w-4/5  h-full flex flex-col justify-center text-2xl desktop:text-3xl drop-shadow-xl">
-                <h1 className="group-hover:translate-x-2 transition-transform duration-300 ml-5 montserrat tracking-wider font-medium transform-gpu">
+              <div className="w-4/5  h-full flex flex-col justify-center gap-1 drop-shadow-xl overflow-hidden">
+                <h1 className="lg:text-5xl text-2xl  group-hover:translate-x-2 transition-transform duration-300 ml-5 montserrat tracking-wider font-medium transform-gpu">
                   {gridItem.title}
                 </h1>
-                <h2 className="open-sans font-medium flex gap-1 items-center ml-6 w-fit smartphone:w-4/5 text-xs group-hover:translate-x-5 smartphone:group-hover:translate-x-1 transition-transform duration-300 transform-gpu">
+                <h2 className="open-sans  flex gap-1 items-center ml-8 w-fit smartphone:w-4/5 text-xs lg:text-sm tracking-wide  group-hover:translate-x-5 smartphone:group-hover:translate-x-1 transition-transform duration-300 transform-gpu">
                   {gridItem.content}
                   <ArrowCircleRight
                     className="group-hover:-rotate-45 smartphone:group-hover:rotate-0 group-hover:translate-x-2 group-hover:scale-110 h-7 w-7 transition-transform duration-300 transform-gpu"
@@ -91,7 +91,7 @@ export default function HomePage() {
                   />
                 </h2>
               </div>
-              <div className={`flex  absolute h-2/5 w-1/5  bottom-10 right-0 group-hover:scale-110 transition-all duration-300 `}>
+              <div className={`flex justify-end  absolute pr-3 b g-white  h-2/5 w-1/5  bottom-10 right-0 group-hover:scale-110 transition-all duration-300 `}>
                 {gridItem.icon}
               </div>
             </div>
