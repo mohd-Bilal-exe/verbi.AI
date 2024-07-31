@@ -315,7 +315,7 @@ export default function ProfilePage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, type: "spring" }}
+      transition={{ duration: 0.5, type: "spring" }}
       className={`w-screen h-screen flex flex-col justify-start items-center px-5 lg:pt-3 pt-2  ${isDarkMode ? "text-copy" : "text-copyLight"
         }`}
     >
