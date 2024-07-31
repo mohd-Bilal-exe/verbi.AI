@@ -82,12 +82,12 @@ const Navbar = () => {
           >
             <Link
               to={listItem.path}
-              className="w-full text-xs flex flex-col gap-1 justify-center items-center"
+              className="w-full text-xs flex flex-col  justify-center items-center"
               onClick={() => setSelected(listItem.path)}
             >
               <span
                 key={listItem.id}
-                className={`h-7 w-7 lg:size-10 ${selected !== listItem.path
+                className={`h-7 w-7 lg:size-8 ${selected !== listItem.path
                   ? "translate-y-1 "
                   : isDarkMode
                     ? "text-copy scale-110"
@@ -100,7 +100,7 @@ const Navbar = () => {
                 {listItem.id === 1 ? dynamicIcon : listItem.ico}
               </span>
               <h1
-                className={`mb-1 lg:text-sm tracking-tightest ${selected === listItem.path
+                className={`mb-1 tracking-tightest ${selected === listItem.path
                   ? "translate-y-0"
                   : "translate-y-10"
                   } transition-all ease-in-out duration-700 ${isDarkMode ? "text-copy" : "text-copyLight"
