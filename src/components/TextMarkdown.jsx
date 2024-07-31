@@ -69,7 +69,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
           className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2"
         >
-          <span className={`w-11/12 text-lg smartphone:text-base  text-wrap overflow-x-hidden`}>
+          <span className={`w-11/12 text-xl smartphone:text-base  text-wrap overflow-x-hidden`}>
             {plainText}{" "}
           </span>
           <span
@@ -87,7 +87,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.p
                   variants={fadeInUpVariants}
                   key={keys++}
-                  className={`text-lg mb-2 open-sans ${isDarkMode ? "text-copy" : "text-copyLight"
+                  className={`text-xl smartphone:text-base mb-2 open-sans ${isDarkMode ? "text-copy" : "text-copyLight"
                     }`}
                   {...props}
                 />

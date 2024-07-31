@@ -16,7 +16,8 @@ const container = {
     x: 0,
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.18,
+      ease: "easeInOut"
     },
   },
 };
@@ -39,7 +40,6 @@ export default function ChatHistory({ setSidebarOpen }) {
   const handleChatDelete = (currentId) => {
     setDeleteId(currentId);
     setDeleteModalOpen(true);
-    //dispatch(deleteCurrentChat(currentId));
   };
 
   const handleChatClick = (currentId) => {
@@ -64,17 +64,17 @@ export default function ChatHistory({ setSidebarOpen }) {
             }`}
         >
           <button
-            className={`w-6 h-6 smartphone:size-8 rounded-lg rotate-180  ${isDarkMode ? "text-copy" : "text-copy-lighter"
+            className={`size-8 rounded-lg rotate-180  ${isDarkMode ? "text-copy" : "text-copy-light"
               } `}
             onClick={() => setSidebarOpen(false)}
           >
             <ExpandSidebarIcon />
           </button>
-          <div className={`w-6 h-6 smartphone:size-8`}>
+          <div className={`size-8`}>
             <CreateChatButton setSidebarOpen={setSidebarOpen} />
           </div>
         </m.div>
-        <span className={`${isDarkMode ? "text-copy" : "text-copy-light"}`}>Chats</span>
+        <span className={`text-xl text-copy`}>Chats</span>
         {Object.keys(chats).length === 0 ? (
           <span
             className={`${isDarkMode ? " text-copy" : " text-copyLight"
@@ -88,7 +88,7 @@ export default function ChatHistory({ setSidebarOpen }) {
             <m.span
               variants={item}
               key={sessionId}
-              className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2   rounded-xl text-sm font-semibold flex text-copy  ${sessionId === selectedID &&
+              className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2 py-3   rounded-xl text-sm lg:text-base font-semibold flex text-copy  ${sessionId === selectedID &&
                 (isDarkMode
                   ? "bg-backgroundLight/80 text-copyLight"
                   : "bg-background/80 text-copy")
@@ -106,12 +106,12 @@ export default function ChatHistory({ setSidebarOpen }) {
                   (isDarkMode
                     ? "from-backgroundLight text-copyLight"
                     : "from-background text-copy")
-                  }  h-full w-16`}
+                  }  h-full w-20`}
               >
                 {sessionId === selectedID && (
                   <button
                     onClick={() => handleChatDelete(sessionId)}
-                    className={`w-4 h-4 my-auto mr-1 text-red-800`}
+                    className={`size-5 my-auto mr-1 text-red-600`}
                   >
                     <DeleteIcon />
                   </button>

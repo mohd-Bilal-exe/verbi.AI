@@ -36,8 +36,8 @@ function App() {
       <BrowserRouter>
         <div
           className={`background-grid w-screen h-min-screen   overflow-x-hidden overflow-y-auto flex flex-col justify-center ${isDarkMode
-            ? "bg-background scrollbar-dark"
-            : "bg-backgroundLight scrollbar-custom"
+            ? "bg-background scrollbar-dark selection:bg-copy-light selection:text-copyLight"
+            : "bg-backgroundLight scrollbar-custom selection:bg-copyLight selection:text-copy-light"
             } transition-colors duration-300 open-sans`}
         >
           <AnimatePresence>

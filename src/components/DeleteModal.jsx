@@ -29,7 +29,7 @@ export default function DeleteModal({ setDeleteModalOpen, deleteId, setSidebarOp
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.1 }}
-            className="fixed inset-0 backdrop-blur-lg grid place-items-center text-black z-50"
+            className="fixed inset-0 backdrop-blur-lg grid place-items-center  z-50"
         >
             <m.div
                 initial={{ scale: 0.8 }}
@@ -37,15 +37,15 @@ export default function DeleteModal({ setDeleteModalOpen, deleteId, setSidebarOp
                 exit={{ scale: 0.8 }}
                 transition={{ duration: 0.1 }}
                 className={`w-11/12 max-w-md p-6 rounded-xl flex flex-col gap-4 ${isDarkMode
-                    ? "bg-backgroundLight/10 text-white"
-                    : "bg-white/80 text-gray-900"
+                    ? "bg-backgroundLight/10 text-copy"
+                    : "bg-backgroundLight/80 text-copyLight"
                     } shadow-lg`}
             >
                 <h2 className="text-2xl font-semibold">
                     Are you sure you want to delete this chat?
                 </h2>
-                <p className="text-sm">
-                    This action cannot be undone. All messages in this chat will be permanently deleted.
+                <p className="text-sm font-medium tracking-wide">
+                    This action cannot be undone. <br /> All messages in this chat will be permanently deleted.
                 </p>
                 <div className="flex justify-between gap-4">
                     <button
