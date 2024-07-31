@@ -1,3 +1,7 @@
+/**
+ * The TranslatePage component allows users to input text and
+ * translates it to the selected language.
+ */
 import { useState, useMemo, useEffect } from "react";
 import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,15 +13,29 @@ import { addTranslations, globalHistory } from "../Redux/Actions";
 import { DoButton } from "../components/Buttons";
 import { LangDropDown } from "../components/Dropdowns";
 
+
 const TranslatePage = () => {
+  // Retrieve the dark mode state from the Redux store
   const isDarkMode = useSelector((state) => state.darkMode);
+
+  // Store the input text and the output text
   const [ipText, setIpText] = useState("");
   const [opText, setOpText] = useState("");
+
+  // Store the loading state and the custom instructions
   const [loading, setLoading] = useState(false);
   const [selectedLang, setSelectedLang] = useState("English");
   const [customInstructions, setCustomInstructions] = useState("");
+
+  // Retrieve the dispatch function from the Redux store
   const dispatch = useDispatch();
+
+  // Formats the time using the formatTime function
   const formatTimefunc = (keys) => formatTime(keys);
+
+  /**
+   * Handles the translation by sending a request to the API and updating the state.
+   */
   const handleTranslate = async () => {
     setLoading(true);
     try {
@@ -50,9 +68,13 @@ const TranslatePage = () => {
       setLoading(false);
     }
   };
+
+  // Fetch the languages with flags when the component mounts
   useEffect(() => {
     getLanguagesWithFlags();
   }, []);
+
+  // Memoize the TextMarkdownTranslate component to avoid unnecessary re-renders
   const MemoizedMarkdown = useMemo(
     () => <TextMarkdownTranslate plainText={opText} />,
     [opText]
@@ -71,6 +93,7 @@ const TranslatePage = () => {
       <div
         className={`w-full h-full flex flex-col-reverse justify-start smartphone:justify-end  items-start lg:flex-row lg:px-10 gap-1 pt-16 smartphone:pt-5  px-3`}
       >
+        {/* Input text area */}
         <div
           className={`w-full flex flex-col border border-copy-lighter shadow-lg  rounded-xl smartphone:h-1/3 h-3/4 overflow-hidden`}
         >
@@ -95,6 +118,7 @@ const TranslatePage = () => {
               }`}
           />
         </div>
+        {/* Translation controls */}
         <div
           className={`w-1/6 h-3/4 smartphone:w-full smartphone:h-fit smartphone:py-4  ${isDarkMode ? "" : ""
             } h-1/6  flex flex-col smartphone:flex-row-reverse  gap-4 items-center justify-center`}
@@ -106,6 +130,7 @@ const TranslatePage = () => {
             isDropdownOpenn={!loading}
           />
         </div>
+        {/* Translated text area */}
         <div
           className={`w-full  smartphone:w-full smartphone:h-2/5  scroll-smooth  border border-copy-lighter shadow-lg  rounded-xl p-2 overflow-y-auto  ${isDarkMode
             ? "bg-foreground/30 placeholder:text-copy-light"

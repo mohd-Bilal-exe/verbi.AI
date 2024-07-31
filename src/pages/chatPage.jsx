@@ -132,7 +132,7 @@ export default function ChatPage() {
     >
       <button
         onClick={handleSidebarExpansion}
-        className="absolute size-8 top-3 left-3 backdrop-blur-lg "
+        className="absolute size-7 top-3 left-3 backdrop-blur-lg "
       >
         <ExpandSidebarIcon />
       </button>

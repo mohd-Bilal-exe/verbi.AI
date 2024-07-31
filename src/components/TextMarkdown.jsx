@@ -69,7 +69,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
           className="relative flex flex-row min-h-5 h-fit  my-1 ml-3 mr-2"
         >
-          <span className={`w-11/12 text-xl smartphone:text-base  text-wrap overflow-x-hidden`}>
+          <span className={`w-11/12 text-base smartphone:text-base  text-wrap overflow-x-hidden`}>
             {plainText}{" "}
           </span>
           <span
@@ -87,7 +87,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.p
                   variants={fadeInUpVariants}
                   key={keys++}
-                  className={`text-xl smartphone:text-base mb-2 open-sans ${isDarkMode ? "text-copy" : "text-copyLight"
+                  className={`text-lg smartphone:text-base mb-2 open-sans ${isDarkMode ? "text-copy" : "text-copyLight"
                     }`}
                   {...props}
                 />
@@ -96,7 +96,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.h1
                   key={keys++}
                   variants={fadeInUpVariants}
-                  className={`text-3xl font-bold mb-4 playfair ${isDarkMode ? "text-copy" : "text-copyLight"
+                  className={`text-2xl font-bold mb-4 playfair ${isDarkMode ? "text-copy" : "text-copyLight"
                     }`}
                   {...props}
                 />
@@ -105,7 +105,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.h2
                   key={keys++}
                   variants={fadeInUpVariants}
-                  className={`text-2xl font-semibold mb-3 montserrat ${isDarkMode ? "text-copy" : "text-copyLight"
+                  className={`text-xl font-semibold mb-3 montserrat ${isDarkMode ? "text-copy" : "text-copyLight"
                     }`}
                   {...props}
                 />
@@ -114,7 +114,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
                 <m.h3
                   key={keys++}
                   variants={fadeInUpVariants}
-                  className={`text-xl font-medium mb-2 montserrat ${isDarkMode ? "text-copy" : "text-copyLight"
+                  className={`text-lg font-medium mb-2 montserrat ${isDarkMode ? "text-copy" : "text-copyLight"
                     }`}
                   {...props}
                 />

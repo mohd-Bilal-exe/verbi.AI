@@ -1,3 +1,8 @@
+/**
+ * The grammarPage component allows users to input text and
+ * check grammar of the text.
+ */
+
 import { useState, useMemo, useEffect } from "react";
 import { m } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,26 +12,44 @@ import formatTime from "../utilities/dateString";
 import { globalHistory } from "../Redux/Actions";
 import { grammarCheck } from "../Api/aiApi";
 import { DoButton } from "../components/Buttons";
-
 const GrammarPage = () => {
+  // Retrieves the dark mode state from the Redux store
   const isDarkMode = useSelector((state) => state.darkMode);
+
+  // Stores the input text and the output text
   const [ipText, setIpText] = useState("");
   const [opText, setOpText] = useState("");
+
+  // Stores the loading state and the custom instructions
   const [loading, setLoading] = useState(false);
   const [customInstructions, setCustomInstructions] = useState("");
+
+  // Retrieves the dispatch function from the Redux store
   const dispatch = useDispatch();
+
+  // Formats the time using the formatTime function
   const formatTimefunc = (keys) => formatTime(keys);
 
+  /**
+   * Handles the grammar check by sending a request to the API and updating the state.
+   */
   const handleGrammarCheck = async () => {
     setLoading(true);
     try {
+      // Send a request to the grammar check API and retrieve the response
       const response = await grammarCheck(ipText, customInstructions);
+
+      // Update the output text with the response
       setOpText(response);
+
+      // Create an object with the input text, formatted time, and response
       const grammarObj = {
         ipText: ipText,
         time: formatTimefunc(Date.now()),
         opText: response,
       };
+
+      // Dispatch an action to add the grammar check result to the Redux store
       dispatch(
         globalHistory({
           type: "Grammar Check",
@@ -42,10 +65,12 @@ const GrammarPage = () => {
     }
   };
 
+  // Fetches the languages with flags when the component mounts
   useEffect(() => {
     getLanguagesWithFlags();
   }, []);
 
+  // Memoizes the TextMarkdownTranslate component
   const MemoizedMarkdown = useMemo(
     () => <TextMarkdownTranslate plainText={opText} />,
     [opText]

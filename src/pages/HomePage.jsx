@@ -9,6 +9,7 @@ import { ChatIcon2, GrammarCheckIcon, TranslateIcon } from "../components/SvgIco
 export default function HomePage() {
   const isDarkMode = useSelector((state) => state.darkMode);
 
+  // Array of objects representing the grid items on the home page.
   const gridItems = [
     {
       id: 1,
@@ -48,21 +49,22 @@ export default function HomePage() {
     },
   ];
 
+  // Animation variants for the parent container.
   const parentVariants = {
     initial: {
-      opacity: 0,
+      opacity: 0, // Initial opacity.
     },
     animate: {
-      opacity: 1,
+      opacity: 1, // Final opacity.
       transition: {
-        duration: 0.5,
+        duration: 0.5, // Duration of the animation.
       },
     },
   };
 
   return (
     <m.section className="w-screen h-screen transform-gpu relative overflow-hidden px-1  flex flex-col items-center">
-      <TopNav />
+      <TopNav /> {/* Top navigation bar. */}
       <m.div
         variants={parentVariants}
         initial="initial"
@@ -81,10 +83,10 @@ export default function HomePage() {
             >
               <div className="w-4/5  h-full flex flex-col justify-center gap-1 drop-shadow-xl overflow-hidden">
                 <h1 className="lg:text-3xl text-2xl  group-hover:translate-x-2 transition-transform duration-300 ml-5 montserrat tracking-wider font-medium transform-gpu">
-                  {gridItem.title}
+                  {gridItem.title} {/* Title of the grid item. */}
                 </h1>
                 <h2 className="open-sans  flex gap-1 items-center ml-8 w-fit smartphone:w-4/5 text-xs lg:text-sm tracking-wide  group-hover:translate-x-5 smartphone:group-hover:translate-x-1 transition-transform duration-300 transform-gpu">
-                  {gridItem.content}
+                  {gridItem.content} {/* Description of the grid item. */}
                   <ArrowCircleRight
                     className="group-hover:-rotate-45 smartphone:group-hover:rotate-0 group-hover:translate-x-2 group-hover:scale-110 h-7 w-7 transition-transform duration-300 transform-gpu"
                     weight="duotone"
@@ -98,7 +100,7 @@ export default function HomePage() {
           </Link>
         ))}
       </m.div>
-      <GlobalHistory />
+      <GlobalHistory />{/* Global history component. */}
     </m.section>
   );
 }

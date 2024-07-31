@@ -12,25 +12,33 @@ import {
 } from "@phosphor-icons/react";
 import { StyleDropDown } from "../components/Dropdowns";
 
+/**
+ * The LoginPage component is the main component for the login page.
+ * It renders a multi-step form for users to input their information.
+ * The form consists of username, nickname, avatar, and about fields.
+ * The form also allows users to choose a tone and nature for the chat.
+ * This component uses the framer-motion library for animations.
+ */
 export default function LoginPage() {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [username, setUsername] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [about, setAbout] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [tone, setTone] = useState("");
-  const [nature, setNature] = useState("");
-  const [errors, setErrors] = useState({});
-  const id = useMemo(() => uuidv4(), []); // To ensure id remains the same
-  const [position, setPosition] = useState(0);
-  const isDarkMode = useSelector((state) => state.darkMode);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // State variables
+  const [currentStep, setCurrentStep] = useState(0); // Tracks the current step of the form
+  const [username, setUsername] = useState(""); // User input for username
+  const [nickname, setNickname] = useState(""); // User input for nickname
+  const [about, setAbout] = useState(""); // User input for about section
+  const [avatar, setAvatar] = useState(""); // User input for avatar
+  const [tone, setTone] = useState(""); // User input for tone
+  const [nature, setNature] = useState(""); // User input for nature
+  const [errors, setErrors] = useState({}); // Error messages for form validation
+  const id = useMemo(() => uuidv4(), []); // Unique ID for each user
+  const [position, setPosition] = useState(0); // Tracks the position of the form steps
+  const isDarkMode = useSelector((state) => state.darkMode); // Tracks the dark mode state
+  const dispatch = useDispatch(); // Redux dispatch function
+  const navigate = useNavigate(); // React Router navigate function
 
   // Disable the back button functionality
   useEffect(() => {
     const handlePopState = () => {
-      navigate(0); // Reload the page, effectively stopping the back navigation
+      navigate(0); // Reload the page
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -39,17 +47,21 @@ export default function LoginPage() {
       window.removeEventListener("popstate", handlePopState);
     };
   }, [navigate]);
+
+  // Handle key press events
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleNext();
     }
   };
+
+  // Validate the current step of the form
   const validateStep = useCallback(() => {
     const newErrors = { ...errors };
     if (currentStep === 0) {
       if (!username) newErrors.username = "Name is required";
-      else delete newErrors.username; // Clear error if field is valid
+      else delete newErrors.username;
     }
     if (currentStep === 1) {
       if (!nickname) newErrors.nickname = "Nickname is required";
@@ -59,6 +71,7 @@ export default function LoginPage() {
     return Object.keys(newErrors).length === 0;
   }, [currentStep, username, nickname, errors]);
 
+  // Submit the form
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -81,6 +94,8 @@ export default function LoginPage() {
       navigate,
     ]
   );
+
+  // List of emojis for avatar selection
   const emojis = useMemo(
     () => [
       "😊",
@@ -111,8 +126,10 @@ export default function LoginPage() {
     []
   );
 
+  // Array of form steps
   const steps = useMemo(
     () => [
+      // First step: username input
       {
         id: "username",
         component: (
@@ -171,6 +188,7 @@ export default function LoginPage() {
           </div>
         ),
       },
+      // Second step: nickname input
       {
         id: "nickname",
         component: (
@@ -220,6 +238,7 @@ export default function LoginPage() {
           </div>
         ),
       },
+      // Third step: avatar selection
       {
         id: "avatar",
         component: (
@@ -263,7 +282,7 @@ export default function LoginPage() {
           </div>
         ),
       },
-
+      // Fourth step: about section input
       {
         id: "about",
         component: (
@@ -300,6 +319,7 @@ export default function LoginPage() {
           </div>
         ),
       },
+      // Fifth step: customization options
       {
         id: "Miscellaneous",
         component: (
@@ -325,6 +345,8 @@ export default function LoginPage() {
     ],
     [username, nickname, about, errors, emojis, avatar, handleKeyDown]
   );
+
+  // Generate the sidebar component
   const sidebar = useMemo(
     () => (
       <div
@@ -346,6 +368,8 @@ export default function LoginPage() {
     ),
     [currentStep]
   );
+
+  // Handle the next step button click
   const handleNext = useCallback(() => {
     if (validateStep()) {
       setPosition(position - 422);
@@ -353,12 +377,15 @@ export default function LoginPage() {
     }
   }, [currentStep, validateStep, position]);
 
+  // Handle the previous step button click
   const handlePrev = useCallback(() => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
       setPosition(position + 422);
     }
   }, [currentStep, position]);
+
+  // Render the login page
   return (
     <m.section
       key={"LoginPage"}

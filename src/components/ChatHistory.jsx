@@ -64,17 +64,17 @@ export default function ChatHistory({ setSidebarOpen }) {
             }`}
         >
           <button
-            className={`size-8 rounded-lg rotate-180  ${isDarkMode ? "text-copy" : "text-copy-light"
+            className={`size-7 rounded-lg rotate-180  ${isDarkMode ? "text-copy" : "text-copy-light"
               } `}
             onClick={() => setSidebarOpen(false)}
           >
             <ExpandSidebarIcon />
           </button>
-          <div className={`size-8`}>
+          <div className={`size-7`}>
             <CreateChatButton setSidebarOpen={setSidebarOpen} />
           </div>
         </m.div>
-        <span className={`text-xl text-copy`}>Chats</span>
+        <span className={`text-lg mb-3 text-copy`}>All Chats</span>
         {Object.keys(chats).length === 0 ? (
           <span
             className={`${isDarkMode ? " text-copy" : " text-copyLight"
@@ -88,7 +88,7 @@ export default function ChatHistory({ setSidebarOpen }) {
             <m.span
               variants={item}
               key={sessionId}
-              className={`relative w-11/12 h-fit max-h-14 overflow-clip  p-2 py-3   rounded-xl text-sm lg:text-base font-semibold flex text-copy  ${sessionId === selectedID &&
+              className={`relative w-11/12 h-fit max-h-24 overflow-clip  p-2 py-2   rounded-xl text-xs  font-semibold flex text-copy  ${sessionId === selectedID &&
                 (isDarkMode
                   ? "bg-backgroundLight/80 text-copyLight"
                   : "bg-background/80 text-copy")
