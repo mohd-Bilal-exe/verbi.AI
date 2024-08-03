@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { rememberMe } from "../Api/aiApi";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 import {
   ArrowCircleLeft,
   ArrowCircleRight,
@@ -29,11 +31,14 @@ export default function LoginPage() {
   const [tone, setTone] = useState(""); // User input for tone
   const [nature, setNature] = useState(""); // User input for nature
   const [errors, setErrors] = useState({}); // Error messages for form validation
+  const [showConfetti, setShowConfetti] = useState(false) // Confetti animation state
   const id = useMemo(() => uuidv4(), []); // Unique ID for each user
   const [position, setPosition] = useState(0); // Tracks the position of the form steps
   const isDarkMode = useSelector((state) => state.darkMode); // Tracks the dark mode state
   const dispatch = useDispatch(); // Redux dispatch function
   const navigate = useNavigate(); // React Router navigate function
+  const { width, height } = useWindowSize() // Window size
+
 
   // Disable the back button functionality
   useEffect(() => {
@@ -78,7 +83,7 @@ export default function LoginPage() {
       if (validateStep()) {
         dispatch(addUser(id, username, nickname, about, avatar, tone, nature));
         rememberMe(id, username, nickname, about, tone, nature);
-        navigate("/Profile");
+        setShowConfetti(true);
       }
     },
     [
@@ -395,6 +400,22 @@ export default function LoginPage() {
       transition={{ duration: 0.5, type: "spring" }}
       className={`w-screen h-screen absolute top-0 left-0 z-50 backdrop-blur-lg flex justify-center items-center p-3 smartphone:pb-24 bg-background `}
     >
+      {showConfetti && (
+        <Confetti
+          width={width}
+          height={height}
+          numberOfPieces={1000}
+          gravity={0.3}
+          initialVelocityX={15}
+          initialVelocityY={30}
+          recycle={false}
+          onConfettiComplete={() => {
+            setShowConfetti(false);
+            navigate("/Profile");
+          }}
+        />
+
+      )}
       <div
         className={`relative rounded-lg w-1/2 h-[422px] smartphone:w-full  overflow-hidden flex bg-gradient-to-br ${isDarkMode
           ? "from-foregroundLight/20 to-foregroundLight/30  text-copyLight"
