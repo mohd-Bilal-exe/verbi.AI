@@ -21,6 +21,7 @@ import { StyleDropDown } from "../components/Dropdowns";
  * The form also allows users to choose a tone and nature for the chat.
  * This component uses the framer-motion library for animations.
  */
+
 export default function LoginPage() {
   // State variables
   const [currentStep, setCurrentStep] = useState(0); // Tracks the current step of the form
@@ -33,6 +34,7 @@ export default function LoginPage() {
   const [errors, setErrors] = useState({}); // Error messages for form validation
   const [showConfetti, setShowConfetti] = useState(false) // Confetti animation state
   const [openDropdown, setOpenDropdown] = useState(null); // Dropdown state
+  const [formSubmit, setFormSubmit] = useState(false) // Form submit state
   const id = useMemo(() => uuidv4(), []); // Unique ID for each user
   const [position, setPosition] = useState(0); // Tracks the position of the form steps
   const isDarkMode = useSelector((state) => state.darkMode); // Tracks the dark mode state
@@ -99,6 +101,7 @@ export default function LoginPage() {
       if (validateStep()) {
         dispatch(addUser(id, username, nickname, about, avatar, tone, nature));
         rememberMe(id, username, nickname, about, tone, nature);
+        setFormSubmit(true);
         setShowConfetti(true);
       }
     },
@@ -434,7 +437,7 @@ export default function LoginPage() {
         />
 
       )}
-      <div
+      {!formSubmit ? (<div
         className={`relative rounded-lg w-1/2 h-[422px] smartphone:w-full  overflow-hidden flex bg-gradient-to-br ${isDarkMode
           ? "from-foregroundLight/20 to-foregroundLight/30  text-copyLight"
           : "from-foreground/30 to-foreground/20 text-copyLight"
@@ -488,7 +491,50 @@ export default function LoginPage() {
             )}
           </button>
         </div>
-      </div>
+      </div>) : (formSubmitScreen(isDarkMode))}
+
     </m.section>
   );
 }
+const formSubmitScreen = (isDarkMode) => {
+  return (
+    <m.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
+      className={`flex flex-col justify-center items-center ${isDarkMode ? "text-copy" : "text-copyLight"}`}
+    >
+      <m.div
+        id="checkSvg"
+        className="w-44 h-44"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.5, type: "spring" }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+          <path
+            fill="currentColor"
+            fillRule="evenodd"
+            d="M13.637 1.198a1 1 0 0 1 .134 1.408l-8.04 9.73l-.003.002a1.922 1.922 0 0 1-1.5.693a1.923 1.923 0 0 1-1.499-.748l-.001-.002L.21 9.045a1 1 0 1 1 1.578-1.228l2.464 3.167l7.976-9.652a1 1 0 0 1 1.408-.134Z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </m.div>
+      <h1 className="text-5xl mt-4">You&apos;re all set!</h1>
+      <p className="text-lg mt-2">Your language skills just got a boost. Let&apos;s
+        {" "}<span className={`bg-gradient-to-br shadow-2xl ${isDarkMode
+          ? "from-yellow-400 to-orange-500 shadow-orange-500/20 lg:shadow-orange-500/10"
+          : "from-yellow-200 to-orange-300 shadow-orange-300/20 lg:shadow-orange-300/10"
+          } bg-clip-text text-transparent`}>check</span>,{" "}
+        <span className={`bg-gradient-to-br shadow-2xl ${isDarkMode
+          ? "from-green-400 to-teal-500 shadow-teal-500/50 lg:shadow-teal-500/10"
+          : "from-green-300 to-teal-400 shadow-teal-400/50 lg:shadow-teal-400/10"
+          } bg-clip-text text-transparent`}>translate</span> and{" "}
+        <span className={`bg-gradient-to-br shadow-2xl ${isDarkMode
+          ? "from-accent2 to-accent2lt shadow-accent2lt/50 lg:shadow-accent2lt/10"
+          : "from-blue-400 to-accent2lt shadow-accent2lt/50 lg:shadow-accent2lt/10"
+          } bg-clip-text text-transparent`}>chat!</span></p>
+    </m.div>
+  )
+}
+
