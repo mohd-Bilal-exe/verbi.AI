@@ -521,7 +521,7 @@ const formSubmitScreen = (isDarkMode) => {
         </svg>
       </m.div>
       <h1 className="text-5xl mt-4">You&apos;re all set!</h1>
-      <p className="text-lg mt-2">Your language skills just got a boost. Let&apos;s
+      <p className="text-lg mt-2 text-center">Your language skills just got a boost. <br /> Let&apos;s
         {" "}<span className={`bg-gradient-to-br shadow-2xl ${isDarkMode
           ? "from-yellow-400 to-orange-500 shadow-orange-500/20 lg:shadow-orange-500/10"
           : "from-yellow-200 to-orange-300 shadow-orange-300/20 lg:shadow-orange-300/10"
