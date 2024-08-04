@@ -12,6 +12,9 @@ import {
 } from "@phosphor-icons/react";
 import { useSelector } from "react-redux";
 import { getLanguagesWithFlags } from "../Api/langAPI";
+
+
+
 export const LangDropDown = ({
   selectedLang,
   setSelectedLang,
@@ -58,15 +61,13 @@ export const LangDropDown = ({
     <div className="relative w-fit">
       <button
         onClick={toggleDropdown}
-        className={`w-11/12 min-w-32 m-2 px-2 py-1 rounded-lg ${
-          !isDarkMode ? "bg-foreground/30" : "bg-foregroundLight/10"
-        } flex justify-between items-center text-xs`}
+        className={`w-11/12 min-w-32 m-2 px-2 py-1 rounded-lg ${!isDarkMode ? "bg-foreground/30" : "bg-foregroundLight/10"
+          } flex justify-between items-center text-xs`}
       >
         <span>{selectedLang}</span>
         <CaretCircleDown
-          className={`ml-2 transform transition-transform ${
-            isDropdownOpenState ? "rotate-180" : "rotate-0"
-          } ease-in-out duration-300`}
+          className={`ml-2 transform transition-transform ${isDropdownOpenState ? "rotate-180" : "rotate-0"
+            } ease-in-out duration-300`}
           size={20}
           weight="duotone"
         />
@@ -84,15 +85,13 @@ export const LangDropDown = ({
                 <button
                   key={index}
                   onClick={() => handleLanguageSelect(languageList.language)}
-                  className={`p-2 flex items-center gap-1 w-fit text-center rounded-md hover:bg-neutral-600 bg-gradient-to-br ${
-                    selectedLang === languageList.language
-                      ? `${
-                          isDarkMode
-                            ? "from-green-400/10 to-teal-500/10"
-                            : "from-green-300/10 to-teal-400/10"
-                        }`
-                      : ""
-                  } transition-all duration-300 `}
+                  className={`p-2 flex items-center gap-1 w-fit text-center rounded-md hover:bg-neutral-600 bg-gradient-to-br ${selectedLang === languageList.language
+                    ? `${isDarkMode
+                      ? "from-green-400/10 to-teal-500/10"
+                      : "from-green-300/10 to-teal-400/10"
+                    }`
+                    : ""
+                    } transition-all duration-300 `}
                 >
                   <span>
                     <img
@@ -117,9 +116,8 @@ export const LangDropDown = ({
               <button
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
-                className={`rounded-full bg-green-400/60 text-black hover:bg-teal-500/60 transition-all duration-300 ${
-                  currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                }`}
+                className={`rounded-full bg-green-400/60 text-black hover:bg-teal-500/60 transition-all duration-300 ${currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
+                  }`}
               >
                 <ArrowCircleLeft size={25} weight="duotone" />
               </button>
@@ -130,16 +128,14 @@ export const LangDropDown = ({
                   onChange={(e) => {
                     setSelectedLang(e.target.value);
                   }}
-                  className={`w-full outline-none pl-1 text-sm placeholder:text-sm  rounded-l-md ${
-                    !isDarkMode
-                      ? "bg-foreground/10 placeholder:text-copyLight"
-                      : "bg-foregroundLight/10 placeholder:text-copy"
-                  }`}
+                  className={`w-full outline-none pl-1 text-sm placeholder:text-sm  rounded-l-md ${!isDarkMode
+                    ? "bg-foreground/10 placeholder:text-copyLight"
+                    : "bg-foregroundLight/10 placeholder:text-copy"
+                    }`}
                 />
                 <button
-                  className={` rounded-r-md ${
-                    !isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
-                  }`}
+                  className={` rounded-r-md ${!isDarkMode ? "bg-foreground/10" : "bg-foregroundLight/10"
+                    }`}
                   onClick={() => setIsDropdownOpenState(false)}
                 >
                   <Check weight="duotone" size={25} />
@@ -150,11 +146,10 @@ export const LangDropDown = ({
                 disabled={
                   currentPage === Math.ceil(langList.length / itemsPerPage)
                 }
-                className={`rounded-full bg-green-400/60 text-black hover:bg-teal-500/60 transition-all duration-300 ${
-                  currentPage === Math.ceil(langList.length / itemsPerPage)
-                    ? "cursor-not-allowed"
-                    : "cursor-pointer"
-                }`}
+                className={`rounded-full bg-green-400/60 text-black hover:bg-teal-500/60 transition-all duration-300 ${currentPage === Math.ceil(langList.length / itemsPerPage)
+                  ? "cursor-not-allowed"
+                  : "cursor-pointer"
+                  }`}
               >
                 <ArrowCircleRight size={25} weight="duotone" />
               </button>
@@ -172,42 +167,43 @@ LangDropDown.propTypes = {
   isDropdownOpen: PropTypes.bool,
 };
 
-export const StyleDropDown = ({ setSelected, title, place }) => {
-  const [open, setOpen] = useState(false);
+export const StyleDropDown = ({ setSelected, title, place, openDropdown, setOpenDropdown }) => {
+  const isOpen = openDropdown === title;
+
   const [message, setMessage] = useState(title);
 
   const Lists =
     place === "editModal"
       ? title === "Tone"
         ? [
-            { code: "Professional", name: "💼 Professional" },
-            { code: "Friendly", name: "😄 Friendly" },
-            { code: "Informative", name: "🧐 Informative" },
-            { code: "Formal", name: "🎩 Formal" },
-            { code: "Casual", name: "😊 Casual" },
-            { code: "Humorous", name: "😂 Humorous" },
-            { code: "Respectful", name: "🙏 Respectful" },
-            { code: "Supportive", name: "🤗 Supportive" },
-            { code: "Motivational", name: "🚀 Motivational" },
-          ]
+          { code: "Professional", name: "💼 Professional" },
+          { code: "Friendly", name: "😄 Friendly" },
+          { code: "Informative", name: "🧐 Informative" },
+          { code: "Formal", name: "🎩 Formal" },
+          { code: "Casual", name: "😊 Casual" },
+          { code: "Humorous", name: "😂 Humorous" },
+          { code: "Respectful", name: "🙏 Respectful" },
+          { code: "Supportive", name: "🤗 Supportive" },
+          { code: "Motivational", name: "🚀 Motivational" },
+        ]
         : [
-            { code: "Sarcastic", name: "😏 Sarcastic" },
-            { code: "Witty", name: "😄 Witty" },
-            { code: "Thoughtful", name: "🤔 Thoughtful" },
-            { code: "Creative", name: "🌟 Creative" },
-            { code: "Humorous", name: "😂 Humorous" },
-            { code: "Inspirational", name: "🌈 Inspirational" },
-            { code: "Reflective", name: "🪞 Reflective" },
-            { code: "Whimsical", name: "🦄 Whimsical" },
-          ]
+          { code: "Sarcastic", name: "😏 Sarcastic" },
+          { code: "Witty", name: "😄 Witty" },
+          { code: "Thoughtful", name: "🤔 Thoughtful" },
+          { code: "Creative", name: "🌟 Creative" },
+          { code: "Humorous", name: "😂 Humorous" },
+          { code: "Inspirational", name: "🌈 Inspirational" },
+          { code: "Reflective", name: "🪞 Reflective" },
+          { code: "Whimsical", name: "🦄 Whimsical" },
+        ]
       : title === "Tone"
-      ? [
+        ? [
           { code: "Professional", name: "💼 Professional" },
           { code: "Casual", name: "😊 Casual" },
           { code: "Friendly", name: "😄 Friendly" },
           { code: "Informative", name: "🧐 Informative" },
         ]
-      : [
+        : [
           { code: "Sarcastic", name: "😏 Sarcastic" },
           { code: "Witty", name: "😄 Witty" },
           { code: "Thoughtful", name: "🤔 Thoughtful" },
@@ -216,10 +212,10 @@ export const StyleDropDown = ({ setSelected, title, place }) => {
 
   return (
     <div className="w-fit h-fit relative">
-      <motion.div animate={open ? "open" : "closed"} className="relative">
+      <motion.div animate={isOpen ? "open" : "closed"} className="relative">
         <button
           type="button" // Set type to "button" to prevent form submission
-          onClick={() => setOpen((pv) => !pv)}
+          onClick={() => setOpenDropdown(isOpen ? null : title)}
           className="w-32 flex items-center justify-between gap-1 transition-all px-2 py-2 rounded-lg text-copyLight bg-gradient-to-br from-copy to-copy-light"
         >
           <span className="font-medium text-xs">{message}</span>
@@ -230,17 +226,16 @@ export const StyleDropDown = ({ setSelected, title, place }) => {
 
         <motion.ul
           initial={wrapperVariants.closed}
-          animate={open ? "open" : "closed"}
+          animate={isOpen ? "open" : "closed"}
           variants={wrapperVariants}
           style={{ originY: "top", translateX: "-50%" }}
-          className={` grid  place-content-center p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] ${
-            place === "editModal" ? "w-[350px] grid-cols-3" : "w-56 grid-cols-2"
-          }  h-fit`}
+          className={` grid  place-content-center p-2 rounded-lg bg-white shadow-xl absolute top-[120%] left-[50%] ${place === "editModal" ? "w-[350px] grid-cols-3" : "w-56 grid-cols-2"
+            }  h-fit`}
         >
           {Lists.map((item) => (
             <Option
               key={item.code}
-              setOpen={setOpen}
+              setOpenDropdown={setOpenDropdown}
               setSelected={setSelected}
               setMessage={setMessage}
               text={item.name}
@@ -253,14 +248,14 @@ export const StyleDropDown = ({ setSelected, title, place }) => {
   );
 };
 
-const Option = ({ text, code, setSelected, setMessage, setOpen }) => {
+const Option = ({ text, code, setSelected, setMessage, setOpenDropdown }) => {
   return (
     <motion.li
       variants={itemVariants}
       onClick={() => {
         setSelected(code);
         setMessage(text);
-        setOpen(false);
+        setOpenDropdown(null);
       }}
       className="flex items-center justify-center p-2 w-fit text-xs font-medium whitespace-nowrap rounded-md hover:bg-indigo-100 text-slate-700 hover:text-indigo-500 transition-colors cursor-pointer"
     >
@@ -273,6 +268,8 @@ StyleDropDown.propTypes = {
   setSelected: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   place: PropTypes.string,
+  openDropdown: PropTypes.string.isRequired,
+  setOpenDropdown: PropTypes.func.isRequired,
 };
 
 Option.propTypes = {
@@ -280,7 +277,7 @@ Option.propTypes = {
   code: PropTypes.string.isRequired,
   setSelected: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,
-  setOpen: PropTypes.func.isRequired,
+  setOpenDropdown: PropTypes.func.isRequired,
 };
 
 const wrapperVariants = {

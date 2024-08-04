@@ -32,6 +32,7 @@ export default function LoginPage() {
   const [nature, setNature] = useState(""); // User input for nature
   const [errors, setErrors] = useState({}); // Error messages for form validation
   const [showConfetti, setShowConfetti] = useState(false) // Confetti animation state
+  const [openDropdown, setOpenDropdown] = useState(null); // Dropdown state
   const id = useMemo(() => uuidv4(), []); // Unique ID for each user
   const [position, setPosition] = useState(0); // Tracks the position of the form steps
   const isDarkMode = useSelector((state) => state.darkMode); // Tracks the dark mode state
@@ -91,8 +92,6 @@ export default function LoginPage() {
     }
   }, [handleNext]);
 
-
-
   // Submit the form
   const onSubmit = useCallback(
     (e) => {
@@ -146,6 +145,11 @@ export default function LoginPage() {
     ],
     []
   );
+
+
+  const handleSetOpenDropdown = (dropdown) => {
+    setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
+  };
 
   // Array of form steps
   const steps = useMemo(
@@ -357,14 +361,26 @@ export default function LoginPage() {
               </h2>
             </div>
             <div className="w-full flex gap-2 items-center justify-center text-white">
-              <StyleDropDown setSelected={setTone} title={"Tone"} />
-              <StyleDropDown setSelected={setNature} title={"Nature"} />
+              <StyleDropDown
+                setSelected={setTone}
+                title="Tone"
+                place="login"
+                openDropdown={openDropdown}
+                setOpenDropdown={handleSetOpenDropdown}
+              />
+              <StyleDropDown
+                setSelected={setNature}
+                title="Nature"
+                place="login"
+                openDropdown={openDropdown}
+                setOpenDropdown={handleSetOpenDropdown}
+              />
             </div>
           </div>
         ),
       },
     ],
-    [username, nickname, about, errors, emojis, avatar, handleKeyDown]
+    [username, nickname, about, errors, emojis, avatar, handleKeyDown, openDropdown]
   );
 
   // Generate the sidebar component
