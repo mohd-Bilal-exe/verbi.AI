@@ -70,9 +70,15 @@ About.propTypes = {
 };
 
 const Tone = ({ type, update }) => {
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const handleSetOpenDropdown = (dropdown) => {
+    setOpenDropdown((prev) => (prev === dropdown ? null : dropdown));
+  };
   return (
     <div className={`w-full h-full grid place-content-center`}>
-      <StyleDropDown title={type} setSelected={update} place="editModal" />{" "}
+      <StyleDropDown title={type} setSelected={update} place="editModal"
+        openDropdown={openDropdown}
+        setOpenDropdown={handleSetOpenDropdown} />{" "}
     </div>
   );
 };
@@ -129,9 +135,8 @@ const Avatar = ({ avatar, update }) => {
               onClick={() => {
                 update(emojis[index]);
               }}
-              className={`smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${
-                avatar === emojis[index] && "backdrop-brightness-150"
-              }  p-1 rounded-xl transition-all cursor-pointer text-center grid place-content-center`}
+              className={`smartphone:focus:backdrop-brightness-150 hover:backdrop-brightness-150 hover:scale-110 ${avatar === emojis[index] && "backdrop-brightness-150"
+                }  p-1 rounded-xl transition-all cursor-pointer text-center grid place-content-center`}
             >
               {emoji}
             </span>
@@ -176,15 +181,13 @@ export default function EditModal({ attributes, onClose }) {
   return (
     <section className="absolute z-50 top-0 left-0 w-screen h-screen backdrop-blur-lg backdrop-brightness-50 flex justify-center items-center">
       <div
-        className={`relative rounded-lg ${
-          attributes === "tone" || attributes === "nature"
+        className={`relative rounded-lg ${attributes === "tone" || attributes === "nature"
             ? "w-2/5 pt-5"
             : " w-1/2 h-[422px] smartphone:w-11/12 overflow-hidden"
-        }    flex flex-col bg-gradient-to-br ${
-          isDarkMode
+          }    flex flex-col bg-gradient-to-br ${isDarkMode
             ? "from-foregroundLight/20 to-foregroundLight/30  text-copyLight"
             : "from-foreground/30 to-foreground/20 text-copyLight"
-        }`}
+          }`}
       >
         {attributes === "username" && (
           <Name type={attributes} name={name} setName={setName} />
