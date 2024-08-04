@@ -53,14 +53,6 @@ export default function LoginPage() {
     };
   }, [navigate]);
 
-  // Handle key press events
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleNext();
-    }
-  };
-
   // Validate the current step of the form
   const validateStep = useCallback(() => {
     const newErrors = { ...errors };
@@ -75,6 +67,31 @@ export default function LoginPage() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }, [currentStep, username, nickname, errors]);
+
+  // Handle the next step button click
+  const handleNext = useCallback(() => {
+    if (validateStep()) {
+      setPosition(position - 422);
+      setCurrentStep(currentStep + 1);
+    }
+  }, [currentStep, validateStep, position]);
+
+  // Handle the previous step button click
+  const handlePrev = useCallback(() => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+      setPosition(position + 422);
+    }
+  }, [currentStep, position]);
+  // Handle key press events
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleNext();
+    }
+  }, [handleNext]);
+
+
 
   // Submit the form
   const onSubmit = useCallback(
@@ -96,7 +113,6 @@ export default function LoginPage() {
       avatar,
       tone,
       nature,
-      navigate,
     ]
   );
 
@@ -374,21 +390,7 @@ export default function LoginPage() {
     [currentStep]
   );
 
-  // Handle the next step button click
-  const handleNext = useCallback(() => {
-    if (validateStep()) {
-      setPosition(position - 422);
-      setCurrentStep(currentStep + 1);
-    }
-  }, [currentStep, validateStep, position]);
 
-  // Handle the previous step button click
-  const handlePrev = useCallback(() => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-      setPosition(position + 422);
-    }
-  }, [currentStep, position]);
 
   // Render the login page
   return (

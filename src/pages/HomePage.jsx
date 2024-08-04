@@ -15,7 +15,7 @@ export default function HomePage() {
       id: 1,
       title: "Grammar Check",
       content: "Fine-tune your sentences with precision.",
-      path: "/grammarcheck",
+      path: "/GrammarCheck",
       linkClasses: "col-span-2",
       icon: <GrammarCheckIcon />,
       classes: `bg-gradient-to-br shadow-2xl ${isDarkMode
@@ -27,7 +27,7 @@ export default function HomePage() {
       id: 2,
       title: "Translate",
       content: "Translate to any language with ease.",
-      path: "/translate",
+      path: "/Translate",
       linkClasses: "smartphone:col-span-2",
       icon: <TranslateIcon />,
       classes: `bg-gradient-to-br shadow-2xl ${isDarkMode
@@ -39,7 +39,7 @@ export default function HomePage() {
       id: 3,
       title: "Chat",
       content: "Have conversations with Gemini.✨",
-      path: "/chat",
+      path: "/Chat",
       linkClasses: "smartphone:col-span-2",
       icon: <ChatIcon2 />,
       classes: `bg-gradient-to-br shadow-2xl ${isDarkMode

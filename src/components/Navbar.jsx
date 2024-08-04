@@ -1,9 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, m } from "framer-motion";
 import { useSelector } from "react-redux";
-
-// Extracted SVG icons
 import {
   ChatIcon,
   TranslateIcon,
@@ -21,11 +19,11 @@ const Navbar = () => {
   const setIcon = useCallback(
     (path) => {
       switch (path) {
-        case "/chat":
+        case "/Chat":
           return <ChatIcon />;
-        case "/translate":
+        case "/Translate":
           return <TranslateIcon />;
-        case "/grammarcheck":
+        case "/GrammarCheck":
           return <GrammarCheckIcon />;
         default:
           return <EverythingIcon isDarkMode={isDarkMode} />;
@@ -34,17 +32,17 @@ const Navbar = () => {
     [isDarkMode]
   );
 
-  const listItems = [
+  const dynamicIcon = useMemo(() => setIcon(location.pathname), [location.pathname, setIcon]);
+
+  useEffect(() => {
+    setSelected(location.pathname);
+  }, [location.pathname]);
+
+  const listItems = useMemo(() => [
     {
       id: 1,
-      title:
-        location.pathname.charAt(1).toUpperCase() + location.pathname.slice(2),
-      path:
-        location.pathname === "/"
-          ? "Home"
-          : location.pathname === "/Profile"
-            ? "Profile"
-            : location.pathname,
+      title: location.pathname.slice(1),
+      path: location.pathname === "/" ? "Home" : location.pathname === "/Profile" ? "Profile" : location.pathname,
     },
     {
       id: 2,
@@ -52,15 +50,13 @@ const Navbar = () => {
       path: "/",
       ico: <HomeIcon isDarkMode={isDarkMode} />,
     },
-    { id: 4, title: "Profile", path: "/Profile", ico: <ProfileIcon /> },
-  ];
-
-  const [dynamicIcon, setDynamicIcon] = useState(setIcon(location.pathname));
-
-  useEffect(() => {
-    setDynamicIcon(setIcon(location.pathname));
-    setSelected(location.pathname);
-  }, [location.pathname, setIcon]);
+    {
+      id: 4,
+      title: "Profile",
+      path: "/Profile",
+      ico: <ProfileIcon />,
+    },
+  ], [location.pathname, isDarkMode]);
 
   return (
     <div
@@ -68,11 +64,10 @@ const Navbar = () => {
       className={`fixed backdrop-blur-lg border-t bottom-0 w-screen h-fit flex items-center justify-center montserrat ${isDarkMode
         ? "bg-foreground/60 lg:bg-foreground border-border text-copy"
         : "bg-foregroundLight border-borderLight text-copyLight"
-        } transition-all duration-300  z-30`}
+        } transition-all duration-300 z-30`}
     >
       <ul
-        className={`flex justify-between items-center px-5 pt-2 gap-1 w-screen lg:w-3/4 backdrop-blur transform-gpu  ${isDarkMode ? " bg-lightBg2/10" : "bg-bg3/10"
-          }`}
+        className={`flex justify-between items-center px-5 pt-2 gap-1 w-screen lg:w-3/4 backdrop-blur transform-gpu ${isDarkMode ? "bg-lightBg2/10" : "bg-bg3/10"}`}
       >
         {listItems.map((listItem) => (
           <m.li
@@ -82,39 +77,23 @@ const Navbar = () => {
           >
             <Link
               to={listItem.path}
-              className="w-full text-xs flex flex-col  justify-center items-center"
+              className="w-full text-xs flex flex-col justify-center items-center"
               onClick={() => setSelected(listItem.path)}
             >
               <span
                 key={listItem.id}
                 className={`h-7 w-7 lg:size-8 ${selected !== listItem.path
-                  ? "translate-y-1 "
-                  : isDarkMode
-                    ? "text-copy scale-110"
-                    : "text-copyLight scale-110"
-                  }  hover:scale-105  ${listItem.id === 1 ? "transition-colors" : "transition-all"
-                  }
-                ${listItem.title === "Chat" ? "translate-x-1" : ""}
-                ease-in-out duration-300`}
+                  ? "translate-y-1"
+                  : "scale-110"
+                  } hover:scale-105 transition-all duration-300 ease-in-out ${listItem.id === 1 ? "transition-colors" : ""} ${listItem.title === "Chat" ? "translate-x-1" : ""}`}
               >
                 {listItem.id === 1 ? dynamicIcon : listItem.ico}
               </span>
               <h1
-                className={`mb-1 tracking-tightest ${selected === listItem.path
-                  ? "translate-y-0"
-                  : "translate-y-10"
-                  } transition-all ease-in-out duration-700 ${isDarkMode ? "text-copy" : "text-copyLight"
-                  }`}
+                className={`mb-1 tracking-tightest ${selected === listItem.path ? "translate-y-0" : "translate-y-10"} transition-all ease-in-out duration-700 ${isDarkMode ? "text-copy" : "text-copyLight"}`}
               >
-                {listItem.id != 1 &&
-                  (listItem.title == "Home" || listItem.title == "Profile")
-                  ? listItem.title
-                  : null}
-                {listItem.id == 1 &&
-                  listItem.path == location.pathname &&
-                  listItem.title !== "Profile"
-                  ? `${listItem.title}`
-                  : null}
+                {listItem.id !== 1 && (listItem.title === "Home" || listItem.title === "Profile") ? listItem.title : null}
+                {listItem.id === 1 && listItem.path === location.pathname && listItem.title !== "Profile" ? `${listItem.title}` : null}
               </h1>
               <AnimatePresence>
                 {selected === listItem.path && (
@@ -125,13 +104,11 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 5 }}
-                    transition={{ duration: 0.5 }}
-
+                    transition={{ duration: 0.8 }}
                     className={`absolute bottom-0 w-20 h-1 rounded-full ${isDarkMode
                       ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_30px_#ffffff]"
                       : "bg-copyLight shadow-[0px_-5px_20px_#252329]"
                       } transition-opacity duration-500 transform-gpu`}
-
                   />
                 )}
               </AnimatePresence>
