@@ -413,7 +413,7 @@ export default function LoginPage() {
           recycle={false}
           onConfettiComplete={() => {
             setShowConfetti(false);
-            navigate("/Profile");
+            navigate("/");
           }}
         />
 

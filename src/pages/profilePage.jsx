@@ -52,7 +52,7 @@ export default function ProfilePage() {
     dispatch(logoutUser());
 
     // Navigate the user to the login page.
-    navigate("/login");
+    navigate("/Login");
   };
 
   /**

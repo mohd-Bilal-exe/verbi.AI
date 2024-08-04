@@ -104,7 +104,7 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 5 }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.6, type: "spring" }}
                     className={`absolute bottom-0 w-20 h-1 rounded-full ${isDarkMode
                       ? "bg-gradient-to-r from-copy to-copy-light shadow-[0px_-5px_30px_#ffffff]"
                       : "bg-copyLight shadow-[0px_-5px_20px_#252329]"

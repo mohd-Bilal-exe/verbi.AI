@@ -45,7 +45,7 @@ function App() {
               <WelcomeScreen />
             ) : (
               <>
-                <Routes location={location} key={location.pathname}>
+                <Routes location={location} >
                   <Route
                     path="/"
                     element={
@@ -60,16 +60,17 @@ function App() {
                     <>
                       <Route path="/Chat" element={<ChatPage />} />
                       <Route path="/GrammarCheck" element={<GrammarPage />} />
-                      <Route path="/profile" element={<ProfilePage />} />
+                      <Route path="/Profile" element={<ProfilePage />} />
                       <Route path="/Translate" element={<TranslatePage />} />
-                      <Route path="/home" element={<Navigate to="/" />} />
+                      <Route path="/Home" element={<Navigate to="/" />} />
+                      <Route path="/Login" element={<LoginPage />} />
                     </>
                   ) : (
-                    <Route path="*" element={<Navigate to="/login" />} />
+                    <Route path="/Login" element={<LoginPage />} />
                   )}
-                  <Route path="/login" element={<LoginPage />} />
+
                 </Routes>
-                {location.pathname !== "/login" && <Navbar />}
+                <Navbar />
               </>
             )}
           </AnimatePresence>
