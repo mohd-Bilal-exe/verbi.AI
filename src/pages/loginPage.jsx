@@ -422,10 +422,10 @@ export default function LoginPage() {
         <Confetti
           width={width}
           height={height}
-          numberOfPieces={1000}
-          gravity={0.3}
-          initialVelocityX={15}
-          initialVelocityY={30}
+          numberOfPieces={width > 720 ? 1000 : 500}
+          gravity={0.25}
+          initialVelocityX={3}
+          initialVelocityY={5}
           recycle={false}
           onConfettiComplete={() => {
             setShowConfetti(false);
