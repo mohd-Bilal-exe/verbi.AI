@@ -6,28 +6,47 @@ import PropTypes from "prop-types";
 import formatTime from "../utilities/dateString";
 import { Copy } from "@phosphor-icons/react";
 
+// Memorized chat component for displaying user messages and AI responses(Formatted using React Markdown).
 const TextMarkdown = React.memo(({ keys, role, plainText }) => {
-  const isDarkMode = useSelector((state) => state.darkMode);
-  const formatTimefunc = (keys) => formatTime(keys);
+  const isDarkMode = useSelector((state) => state.darkMode);  // Get the dark mode state from the Redux store
+  // A function that formats the time using the formatTime function.
+  const formatTimefunc = (keys) => formatTime(keys);  // Function to format the timeStamps
+
+  // A function that copies the provided text to the clipboard.
   const handleCopyToClipboard = (text) => {
+    navigator.clipboard  // Access the Clipboard API
+      .writeText(text)  // Write the text to the clipboard
     navigator.clipboard
       .writeText(text)
       .then(() => {
+        alert("Copied to clipboard!");  // Display a success alert
         alert("Copied to clipboard!");
       })
       .catch((err) => {
+        console.error("Failed to copy text: ", err);  // Log any error that occurs
         console.error("Failed to copy text: ", err);
       });
   };
+  // Function that capitalizes the first and tenth characters of a string.
   const transformString = (str) => {
+    // If the input is null or undefined, return it as is.
+    if (!str) return str;
+
+    // Split the string into an array of characters.
     if (!str) return str; // Handle null or undefined input
     let result = str
       .split("")
+      // Map over each character, capitalizing the first and tenth characters.
       .map((char, index) => {
+        // If the index is 0 or 9, capitalize the character.
         if (index === 0 || index === 9) return char.toUpperCase();
+        // Otherwise, return the character as is.
         return char;
       })
+      // Join the array of characters back into a string.
       .join("");
+
+    // Return the transformed string.
     return result;
   };
   const parentVariants = {
@@ -44,7 +63,7 @@ const TextMarkdown = React.memo(({ keys, role, plainText }) => {
     initial: { opacity: 0, y: 10 },
     animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
-
+  // Rendering the component
   return (
     <m.div
       className={`h-fit text-wrap  ${role === "user"

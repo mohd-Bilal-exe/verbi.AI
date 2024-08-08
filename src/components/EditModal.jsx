@@ -4,10 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeUser } from "../Redux/Actions";
 import { StyleDropDown } from "./Dropdowns";
 
+/**
+ * Dispatches the 'changeUser' action to update a user's information
+ *
+ * @param {Object} dispatch - The Redux dispatch function
+ * @param {string} key - The key of the user's information to be updated
+ * @param {any} update - The new value for the user's information
+ */
 const handleClick = (dispatch, key, update) => {
+  // Dispatch the 'changeUser' action to update the user's information
+  // with the provided key and new value
   dispatch(changeUser(key, update));
 };
 
+// Components to be rendered in the EditModal
 const Name = ({ type, name, setName }) => {
   return (
     <div
@@ -161,6 +171,7 @@ export default function EditModal({ attributes, onClose }) {
   const [nature, setNature] = useState(user.nature);
   const [avatar, setAvatar] = useState(user.avatar);
 
+  //Handles save and set attributes by calling handleClick function
   const handleSave = () => {
     if (attributes === "username") {
       handleClick(dispatch, attributes, name);
@@ -177,13 +188,13 @@ export default function EditModal({ attributes, onClose }) {
     }
     onClose();
   };
-
+  // Render component according to the attribute on EditModal load
   return (
     <section className="absolute z-50 top-0 left-0 w-screen h-screen backdrop-blur-lg backdrop-brightness-50 flex justify-center items-center">
       <div
         className={`relative rounded-lg ${attributes === "tone" || attributes === "nature"
-            ? "w-2/5 pt-5"
-            : " w-1/2 h-[422px] smartphone:w-11/12 overflow-hidden"
+          ? "w-2/5 pt-5"
+          : " w-1/2 h-[422px] smartphone:w-11/12 overflow-hidden"
           }    flex flex-col bg-gradient-to-br ${isDarkMode
             ? "from-foregroundLight/20 to-foregroundLight/30  text-copyLight"
             : "from-foreground/30 to-foreground/20 text-copyLight"

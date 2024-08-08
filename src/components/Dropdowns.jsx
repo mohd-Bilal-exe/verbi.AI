@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { getLanguagesWithFlags } from "../Api/langAPI";
 
 
-
+// Language DropDown component to render the languages for an Api
 export const LangDropDown = ({
   selectedLang,
   setSelectedLang,
@@ -22,17 +22,20 @@ export const LangDropDown = ({
 }) => {
   const [langList, setLanglist] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Adjust this number based on your preference
+  const isDarkMode = useSelector((state) => state.darkMode);
+  const itemsPerPage = 6; // Number of languages per page
 
   useEffect(() => {
+    // Fetches the languages with flags from the API and updates the state with the response.
     const fetchLanguages = async () => {
+      // Fetches the languages with flags from the API
       const response = await getLanguagesWithFlags();
+      // Updates the state with the response
       setLanglist(response);
     };
     fetchLanguages();
   }, [isDropdownOpen]);
 
-  const isDarkMode = useSelector((state) => state.darkMode);
   const [isDropdownOpenState, setIsDropdownOpenState] = useState(false);
 
   const toggleDropdown = () => {

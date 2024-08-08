@@ -4,27 +4,44 @@ import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { Copy } from "@phosphor-icons/react";
 
+// Memorized chat component AI responses(Formatted using React Markdown) in translate/GrammarCheck pages.
 const TextMarkdownTranslate = ({ plainText, history }) => {
-  const isDarkMode = useSelector((state) => state.darkMode);
+  const isDarkMode = useSelector((state) => state.darkMode);  // Get the dark mode state from the Redux store.
+  // A function that copies the provided text to the clipboard.
   const handleCopyToClipboard = (text) => {
+    navigator.clipboard  // Access the Clipboard API
+      .writeText(text)  // Write the text to the clipboard
     navigator.clipboard
       .writeText(text)
       .then(() => {
+        alert("Copied to clipboard!");  // Display a success alert
         alert("Copied to clipboard!");
       })
       .catch((err) => {
+        console.error("Failed to copy text: ", err);  // Log any error that occurs
         console.error("Failed to copy text: ", err);
       });
   };
+  // Function that capitalizes the first and tenth characters of a string.
   const transformString = (str) => {
+    // If the input is null or undefined, return it as is.
+    if (!str) return str;
+
+    // Split the string into an array of characters.
     if (!str) return str; // Handle null or undefined input
     let result = str
       .split("")
+      // Map over each character, capitalizing the first and tenth characters.
       .map((char, index) => {
+        // If the index is 0 or 9, capitalize the character.
         if (index === 0 || index === 9) return char.toUpperCase();
+        // Otherwise, return the character as is.
         return char;
       })
+      // Join the array of characters back into a string.
       .join("");
+
+    // Return the transformed string.
     return result;
   };
   const parentVariants = {
@@ -48,15 +65,14 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
 
   // Unique key for each rendered Markdown component
   let keys = 0;
-
+  // Render the component
   return (
     <m.div
       variants={parentVariants}
       initial="initial"
       animate="animate"
-      className={`w-full h-full select-text ${
-        history ? "text-copyLight" : isDarkMode ? "text-copy" : "text-copyLight"
-      } `}
+      className={`w-full h-full select-text ${history ? "text-copyLight" : isDarkMode ? "text-copy" : "text-copyLight"
+        } `}
     >
       <Markdown
         components={{
@@ -128,9 +144,8 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
             <m.a
               key={keys++}
               target="_blank"
-              className={`underline ${
-                isDarkMode ? "text-blue-400  p-1 rounded" : "text-blue-600"
-              }`}
+              className={`underline ${isDarkMode ? "text-blue-400  p-1 rounded" : "text-blue-600"
+                }`}
               variants={fadeInUpVariants}
               {...props}
             />
@@ -138,11 +153,10 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
           pre: ({ ...props }) => (
             <div>
               <div
-                className={`flex justify-between p-3 rounded-t-lg ${
-                  isDarkMode
-                    ? "bg-backgroundLight/10 text-copy"
-                    : "bg-gray-100 text-copyLight"
-                }`}
+                className={`flex justify-between p-3 rounded-t-lg ${isDarkMode
+                  ? "bg-backgroundLight/10 text-copy"
+                  : "bg-gray-100 text-copyLight"
+                  }`}
               >
                 <h1 className={`text-sm`}>
                   {transformString(props.children.props.className)}
@@ -151,9 +165,8 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
                   onClick={() =>
                     handleCopyToClipboard(props.children.props.children)
                   }
-                  className={`flex gap-1 p-1 px-2 justify-center items-center text-sm rounded ${
-                    isDarkMode ? "text-copy" : "text-copyLight"
-                  }`}
+                  className={`flex gap-1 p-1 px-2 justify-center items-center text-sm rounded ${isDarkMode ? "text-copy" : "text-copyLight"
+                    }`}
                 >
                   <Copy weight="duotone" />
                   Copy code
@@ -163,22 +176,20 @@ const TextMarkdownTranslate = ({ plainText, history }) => {
                 key={keys++}
                 variants={fadeInUpVariants}
                 {...props}
-                className={`overflow-x-auto rounded-b-lg p-2 ${
-                  isDarkMode
-                    ? "bg-black/40 text-copy"
-                    : "bg-gray-100 text-copyLight"
-                }`}
+                className={`overflow-x-auto rounded-b-lg p-2 ${isDarkMode
+                  ? "bg-black/40 text-copy"
+                  : "bg-gray-100 text-copyLight"
+                  }`}
               />
             </div>
           ),
           code: ({ ...props }) => (
             <m.code
               key={keys++}
-              className={`font-mono text-xs ${
-                isDarkMode
-                  ? "bg-gray-800 text-copy p-1 rounded"
-                  : "bg-gray-200 text-copyLight p-1 rounded"
-              }`}
+              className={`font-mono text-xs ${isDarkMode
+                ? "bg-gray-800 text-copy p-1 rounded"
+                : "bg-gray-200 text-copyLight p-1 rounded"
+                }`}
               variants={fadeInUpVariants}
               {...props}
             />

@@ -22,6 +22,8 @@ const variants = {
     },
   },
 };
+
+// Chat SVG Icons 
 export const ChatIcon2 = () => {
   return (
     <m.svg
@@ -50,6 +52,8 @@ export const ChatIcon = () => {
     </m.svg >
   );
 };
+
+// Gemini SVG Icon
 export const GeminiIcon = () => {
   return (
     <svg
@@ -80,6 +84,7 @@ export const GeminiIcon = () => {
   );
 };
 
+// Translate SVG Icon
 export const TranslateIcon = () => {
   return (
     <m.svg
@@ -94,6 +99,8 @@ export const TranslateIcon = () => {
     </m.svg>
   );
 };
+
+// GrammarCheck SVG Icon
 export const GrammarCheckIcon = () => {
   return (
     <m.svg
@@ -117,6 +124,7 @@ export const GrammarCheckIcon = () => {
   );
 };
 
+// Home SVG Icon
 export const HomeIcon = () => {
   return (
     <m.svg
@@ -148,6 +156,8 @@ export const HomeIcon = () => {
     </m.svg>
   );
 };
+
+// Profile SVG Icon
 export const ProfileIcon = () => {
   return (
     <m.svg
@@ -182,6 +192,8 @@ export const ProfileIcon = () => {
     </m.svg>
   );
 };
+
+// Everything SVG Icon shows on the first place of the navbar
 export const EverythingIcon = ({ isDarkMode }) => {
   return (
     <m.svg
@@ -211,6 +223,8 @@ export const EverythingIcon = ({ isDarkMode }) => {
 EverythingIcon.propTypes = {
   isDarkMode: PropTypes.bool.isRequired,
 };
+
+// Clear History  SVG Icon
 export const ClearIcon = () => {
   return (
     <m.svg
@@ -252,6 +266,8 @@ export const ClearIcon = () => {
     </m.svg>
   );
 };
+
+// Collapse SVG Icon Global History
 export const CollapseIcon = () => {
   return (
     <m.svg
@@ -287,6 +303,8 @@ export const CollapseIcon = () => {
     </m.svg>
   );
 };
+
+// Add SVG Icon for Add chat
 export const AddIcon = () => {
   return (
     <svg
@@ -313,6 +331,8 @@ export const AddIcon = () => {
     </svg>
   );
 };
+
+// Expand Sidebar SVG Icon for chatHistory component
 export const ExpandSidebarIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -348,6 +368,7 @@ export const ExpandIcon = () => {
   );
 };
 
+// Edit SVG Icon for info in Profile page 
 export const EditIcon = () => {
   return (
     <m.svg
@@ -369,6 +390,8 @@ export const EditIcon = () => {
     </m.svg>
   );
 };
+
+// Arrow Down Icon for Profile page
 export const ArrowDown = () => {
   return (
     <m.svg
@@ -387,6 +410,8 @@ export const ArrowDown = () => {
     </m.svg>
   );
 };
+
+// Delete SVG Icon for Chat History component
 export const DeleteIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">

@@ -22,21 +22,32 @@ export default function GlobalHistory() {
     }
   }, [globalHistory, isExpanded]);
 
+  // Handles the clear history functionality.
   const handleClearHistory = () => {
+    // Dispatch the 'deleteHistory' action to clear the global history from the Redux store.
     dispatch(deleteHistory());
   };
 
+  // Handles the click event for the expand button.
   const handleExpandClick = (state) => {
+    // Set the isExpanded state to the provided state.
     setIsExpanded(state);
   };
 
+  /**
+   * Handles the click event for the expand button inside the div.
+   * Updates the state of expandedItems with the given id.
+   */
   const handleExpandClickDiv = (id) => {
+    // Update the state of expandedItems with the given id.
+    // If the id is already in the state object, toggle its value.
+    // Otherwise, add the id to the state object with a value of true.
     setExpandedItems((prevState) => ({
       ...prevState,
-      [id]: !prevState[id],
+      [id]: prevState[id] !== undefined ? !prevState[id] : true,
     }));
   };
-
+  // Render the component
   return (
     <m.section
       key={"GlobalHistory"}
@@ -52,8 +63,8 @@ export default function GlobalHistory() {
         type: "spring",
       }}
       className={` transform-gpu absolute backdrop-blur-lg   backdrop-brightness-50 ${isExpanded
-          ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
-          : "-bottom-5 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
+        ? "bottom-0 pb-16 overflow-y-auto overflow-x-hidden rounded-t-3xl"
+        : "-bottom-5 overflow-hidden smartphone:rounded-2xl rounded-t-2xl"
         } pt-3 border-t flex flex-col justify-start items-center gap-2 ${isDarkMode
           ? "bg-foregroundLight/10 border-copy/20"
           : "bg-foreground/30 border-copyLight/20"
