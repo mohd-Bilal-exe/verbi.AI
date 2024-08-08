@@ -96,7 +96,7 @@ const Navbar = () => {
             <Link
               to={listItem.path}
               className="w-full text-xs flex flex-col justify-center items-center"
-              onClick={() => setSelected(listItem.title)}
+              onClick={() => { listItem.id !== 1 && setSelected(listItem.title) }}
             >
               <span
                 className={`h-7 w-7 lg:size-8 ${selected !== listItem.title

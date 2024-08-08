@@ -3,14 +3,14 @@ import {
   HarmCategory,
   HarmBlockThreshold,
 } from "@google/generative-ai";
-import.meta.env; // Ensure Vite processes this import
+import.meta.env; // ENV
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 const generationConfig = {
-  temperature: 1.5,
+  temperature: 1.6,
   topP: 0.95,
   topK: 80,
-  maxOutputTokens: 8192,
+  maxOutputTokens: 5000,
   responseMimeType: "text/plain",
 };
 
@@ -57,8 +57,7 @@ Remember this
 - My name is ${username}, but you can call me ${nickname}.
 - A little about me: ${about}.
 - When you're responding, please use a ${tone} tone.
-- Also, keep in mind that I prefer interactions to be ${nature}.
-Thanks!`;
+- Also, keep in mind that I prefer interactions to be ${nature}.`;
   session.chatHistory.push({
     role: "user",
     parts: [
@@ -108,7 +107,7 @@ const translate = async (inputText, lang, customInstructions) => {
 // Function for grammar check
 const grammarCheck = async (inputText, customInstructions) => {
   try {
-    const prompt = `Check the grammar of the following text and provide corrections if any: "${inputText}" \n \n ${
+    const prompt = `Check the grammar of the following text and provide corrections if any: Text: "${inputText}" \n \n ${
       customInstructions &&
       `answer according to the following instructions : ${customInstructions}`
     } `;
